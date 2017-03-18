@@ -7,7 +7,7 @@ import {ResultsView} from './resultsView.js';
 
 let Tabs = [
         {
-        name: "Channel",
+        name: "Channel Design",
         },
         {
             name: "HE",
@@ -21,7 +21,7 @@ let Tabs = [
 class TabsSwitcher extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {tabs: Tabs, active: "Channel"};
+    this.state = {tabs: Tabs, active: "Channel Design"};
     this.changeView = this.changeView.bind(this);
   }
 
@@ -40,7 +40,7 @@ componentDidMount() {
 // render New View in main-window according to currently active element
   renderNewView() {
     let render_view;
-    if (this.state.active === "Channel") {
+    if (this.state.active === "Channel Design") {
         render_view = <ChannelView />
     } else if (this.state.active === "HE") {
         render_view = <HeView />
