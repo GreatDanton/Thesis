@@ -21,16 +21,29 @@ $color-active: #0a0a0a;
     transition: $transition-fast-linear;
     label {
         color: $color-inactive;
+        transition: $transition-fast-linear;
     }
 }
 
-.card-active {
+.card.active {
     color: $color-active;
     border: $border-active;
     box-shadow: $box-shadow-active;
     label {
         color: $color-active;
     }
+}
+
+.channel-thumbnail {
+    display: block;
+    margin: 0 auto;
+    height: 80px;
+    opacity: 0.3;
+    transition: $transition-fast-linear;
+}
+
+.channel-thumbnail.active {
+    opacity: 1;
 }
 
 .centered {

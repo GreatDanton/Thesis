@@ -6,17 +6,17 @@ import {RectangularChannel, TrapezoidChannel, CustomChannel} from './channelPara
 let Options = [
             {
                 id: "Rectangular",
-                img: "",
+                img: "images/rectangularChannel.svg",
                 render: <RectangularChannel />
             },
             {
                 id: "Trapezoid",
-                img: "",
+                img: "images/trapezoidChannel.svg",
                 render: <TrapezoidChannel />
             },
             {
                 id: "Custom",
-                img: "",
+                img: "images/customChannel.svg",
                 render: <CustomChannel />
             }
 ]
@@ -69,6 +69,7 @@ class ChannelOptions extends React.Component {
                 <div className="small-4 columns" key={index}
                 id={"card-" + option.id} onClick={this.onClick}>
                     <Card id={option.id} value={option.id}
+                    image={option.img}
                     active={this.state.selectedOption === option.id}
                     checked={this.state.selectedOption === option.id}
                     onChange={this.handleChange} />
@@ -94,11 +95,13 @@ class Card extends React.Component {
 
     render() {
         return (
-            <div className={this.props.active?'card card-active':'card'} >
+            <div className={this.props.active?'card active':'card'} >
 
                 <div className="centered">
-                    <label htmlFor={this.props.id}>{this.props.id}</label><br/>
-                    <img src={this.props.image} />
+                    <label htmlFor={this.props.id}>{this.props.id}</label>
+
+                    <img className={this.props.active?"channel-thumbnail active":"channel-thumbnail"}
+                     src={this.props.image} />
 
                     <input type="radio" id={this.props.id}
                      onChange={this.props.onChange} value={this.props.value}
