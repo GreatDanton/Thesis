@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {InputBox} from '../commonParts/inputBoxes.js';
 
 class RectangularChannel extends React.Component {
     constructor(props) {
@@ -10,7 +11,8 @@ class RectangularChannel extends React.Component {
         return (
             <div>
                 <div className="chart"></div>
-            <h1> RectangularChannel </h1>
+                <h1> RectangularChannel </h1>
+                <InputBox id="b" end="m" />
             </div>
         )
     }

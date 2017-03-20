@@ -33,8 +33,8 @@ class ChannelOptions extends React.Component {
 
     // on card click select correct radio button
     onClick(e) {
-        e.preventDefault(); // prevents double selecting
-        this.setState({selectedOption: e.currentTarget.id});
+        let id = e.currentTarget.id.split('-')[1]; // returns id part of 'card-id'
+        this.setState({selectedOption: id}, this.renderParams);
     }
 
     // change selectedOption to currently selected radio button
@@ -66,10 +66,12 @@ class ChannelOptions extends React.Component {
     render() {
         let cards = this.state.options.map((option, index) => {
             return (
-                <div className="small-4 columns" key={index} >
+                <div className="small-4 columns" key={index}
+                id={"card-" + option.id} onClick={this.onClick}>
                     <Card id={option.id} value={option.id}
+                    active={this.state.selectedOption === option.id}
                     checked={this.state.selectedOption === option.id}
-                    onChange={this.handleChange}/>
+                    onChange={this.handleChange} />
                 </div>
             );
         });
@@ -92,7 +94,8 @@ class Card extends React.Component {
 
     render() {
         return (
-            <div className="card">
+            <div className={this.props.active?'card card-active':'card'} >
+
                 <div className="centered">
                     <label htmlFor={this.props.id}>{this.props.id}</label><br/>
                     <img src={this.props.image} />

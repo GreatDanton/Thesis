@@ -1,3 +1,12 @@
+$border: 1px solid #c2c0c2;
+$border-active: 1px solid #8a8a8a;
+$box-shadow-active: 0 0 5px #cacaca;
+$transition-fast-linear: all 0.2s linear;
+$color-inactive: #888;
+$color-active: #0a0a0a;
+
+/* css */
+
 .btn-toolbar {
     border-radius: 0;
     border-top: none;
@@ -5,9 +14,23 @@
 }
 
 .card {
+    color: $color-inactive;
     width: 100%;
     padding: 1rem;
-    border: 1px solid #c2c0c2;
+    border: $border;
+    transition: $transition-fast-linear;
+    label {
+        color: $color-inactive;
+    }
+}
+
+.card-active {
+    color: $color-active;
+    border: $border-active;
+    box-shadow: $box-shadow-active;
+    label {
+        color: $color-active;
+    }
 }
 
 .centered {
@@ -19,4 +42,9 @@
         display: block;
         margin: 0 auto;
     }
+}
+
+.one-line {
+    display: flex;
+    width: 100%;
 }
