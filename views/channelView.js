@@ -24,6 +24,9 @@ class ChannelView extends React.Component {
             <h1> Channel Design </h1>
 
             <ChannelOptions />
+
+            <div id="channel-parameters"></div>
+
             </div>
         )
     }

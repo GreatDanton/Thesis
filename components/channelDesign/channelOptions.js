@@ -1,18 +1,23 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
+import {RectangularChannel, TrapezoidChannel, CustomChannel} from './channelParameters.js';
 
 let Options = [
             {
                 id: "Rectangular",
-                img: ""
+                img: "",
+                render: <RectangularChannel />
             },
             {
                 id: "Trapezoid",
-                img: ""
+                img: "",
+                render: <TrapezoidChannel />
             },
             {
                 id: "Custom",
-                img: ""
+                img: "",
+                render: <CustomChannel />
             }
 ]
 
@@ -32,15 +37,36 @@ class ChannelOptions extends React.Component {
         this.setState({selectedOption: e.currentTarget.id});
     }
 
+    // change selectedOption to currently selected radio button
     handleChange(e) {
-        this.setState({selectedOption: e.target.value});
+        this.setState({selectedOption: e.target.value}, this.renderParams);
     }
+
+    renderParams() {
+        let render;
+        this.state.options.map(option => {
+            if (option.id === this.state.selectedOption) {
+                render = option.render;
+            }
+        })
+
+        ReactDOM.render(
+            render, document.getElementById('channel-parameters')
+        )
+    }
+
+    componentDidMount() {
+        this.renderParams();
+    }
+
+    // use componentDidUnmount to save state (:, and componentWillMount to load states
+    // to local storage???
 
 
     render() {
         let cards = this.state.options.map((option, index) => {
             return (
-                <div className="small-4 columns" id={option.id} key={index} onClick={this.onClick}>
+                <div className="small-4 columns" key={index} >
                     <Card id={option.id} value={option.id}
                     checked={this.state.selectedOption === option.id}
                     onChange={this.handleChange}/>
