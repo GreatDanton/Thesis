@@ -3,7 +3,7 @@ $border-active: 1px solid #8a8a8a;
 $box-shadow-active: 0 0 5px #cacaca;
 $transition-fast-linear: all 0.2s linear;
 $color-inactive: #888;
-$color-active: #0a0a0a;
+$color-active: #333;
 
 /* css */
 
@@ -39,6 +39,7 @@ $color-active: #0a0a0a;
     margin: 0 auto;
     height: 80px;
     opacity: 0.3;
+    -webkit-user-drag: none;
     transition: $transition-fast-linear;
 }
 
@@ -57,7 +58,19 @@ $color-active: #0a0a0a;
     }
 }
 
-.one-line {
-    display: flex;
-    width: 100%;
+.row {
+    .text-right {
+        float: right;
+    }
+    .no-padding {
+        padding: 0;
+    }
+}
+
+label {
+    color: $color-active;
+}
+
+input[type="text"] {
+    font-size: 13px;
 }

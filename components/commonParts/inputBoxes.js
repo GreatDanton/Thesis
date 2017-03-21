@@ -8,10 +8,21 @@ class InputBox extends React.Component {
 
     render() {
         return (
-            <div className="one-line">
-                <label htmlFor={this.props.id}>{this.props.id}</label>
-                <input type="text" id={this.props.id} value={this.props.value}/> {this.props.end}
-            </div>
+            <form>
+                <div className="row">
+                    <div className="small-3 columns no-padding">
+                        <label className="text-right middle" htmlFor={this.props.id}>{this.props.id}</label>
+                    </div>
+                    <div className="small-7 columns">
+                        <input type="text" id={this.props.id} value={this.props.value}/>
+                    </div>
+                    <div className="small-2 columns no-padding">
+                        <label className="middle" htmlFor={this.props.id}>{ '['+(this.props.end)+']' } </label>
+                    </div>
+                </div>
+            </form>
+
+
         )
     }
 }

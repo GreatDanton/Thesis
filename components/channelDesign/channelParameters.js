@@ -10,9 +10,22 @@ class RectangularChannel extends React.Component {
     render() {
         return (
             <div>
-                <div className="chart"></div>
                 <h1> RectangularChannel </h1>
-                <InputBox id="b" end="m" />
+
+                <div className="row">
+                    <div className="small-9 columns">
+                       {/*place for chart = diagram*/}
+
+                    </div>
+
+                    <div className="small-3 columns">
+                        <InputBox id="b" end="m" />
+                        <InputBox id="h" end="m" />
+                        <br/>
+                        <InputBox id="ng" end="/" />
+                        <InputBox id="i" end="%" />
+                    </div>
+                </div>
             </div>
         )
     }
