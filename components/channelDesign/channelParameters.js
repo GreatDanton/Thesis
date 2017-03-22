@@ -77,9 +77,12 @@ class CustomChannel extends React.Component {
 
                 <div className="container-900">
                     <div className="col-50">
-                        <div className="row">
+                        <div className="row centered">
                             <InputBox id="x" />
                             <InputBox id="y" />
+                        </div>
+                        <div className="row centered">
+                            <div className="btn btn-primary"> Add </div>
                         </div>
                     </div>
                     <div className="col-50">

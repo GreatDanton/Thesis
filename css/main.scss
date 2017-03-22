@@ -8,10 +8,17 @@
     $color-inactive: #888;
     $color-active: #333;
     $font-family: 'Open Sans';
+    $p-font-size: 14px;
+    /* BTNS */
+    
+    $default-border-radius: 4px;
     /* css */
     
     * {
+        padding: 0;
+        margin: 0;
         box-sizing: border-box;
+        -webkit-box-sizing: border-box;
     }
     
     body {
@@ -28,6 +35,10 @@
         font-family: $font-family;
     }
     
+    p {
+        font-size: $p-font-size;
+    }
+    
     .toolbar {
         position: fixed;
         top: 0;
@@ -40,6 +51,7 @@
     .tab-group {
         display: flex;
         width: 100%;
+        font-size: $p-font-size;
     }
     
     .tab-item {
@@ -115,15 +127,6 @@
         }
     }
     
-    .row {
-        .text-right {
-            float: right;
-        }
-        .no-padding {
-            padding: 0;
-        }
-    }
-    
     .img-guide {
         display: block;
         margin: 20px auto;
@@ -141,10 +144,89 @@
         overflow-y: scroll;
     }
     
+    input[type="text"] {
+        font-size: 13px;
+        height: 30px;
+        color: $color-active;
+        border: $border;
+        box-shadow: none;
+        outline: none;
+        padding: 0 5px;
+        margin: 0 10px;
+        width: 100px;
+    }
+    
+    input:focus {
+        border: $border-active;
+        box-shadow: $box-shadow-active;
+    }
+    
+    label {
+        color: $color-active;
+        font-size: $p-font-size;
+    }
+    
+    .input-field {
+        margin: 10px 0;
+        label:nth-child(1) {
+            display: flex;
+            min-width: 30px;
+            line-height: 30px;
+            flex-flow: row-reverse;
+        }
+        label:nth-last-child(1) {
+            line-height: 30px;
+            min-width: 30px;
+        }
+    }
+    /* BUTTONS */
+    
+    .btn {
+        display: inline-block;
+        padding: 5px 15px;
+        margin-bottom: 0;
+        font-size: $p-font-size;
+        line-height: 1.4;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: default;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: $default-border-radius;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, .06);
+        -webkit-app-region: no-drag;
+        user-select: none;
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    }
+    
+    .btn-primary {
+        border-color: #388df8;
+        border-bottom-color: darken(#388df8, 15%);
+        background: linear-gradient(#6eb4f7, #1a82fb);
+        color: #fff;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+        &:active {
+            background: linear-gradient(darken(#6eb4f7, 10%), darken(#1a82fb, 10%));
+        }
+    }
+    /* UTILITIES */
+    
     .row {
         display: flex;
         width: 100%;
         flex-flow: row;
+    }
+    
+    .space-around {
+        justify-content: space-around;
+    }
+    
+    .row.centered {
+        justify-content: center;
     }
     
     .container-900 {
@@ -169,34 +251,8 @@
     .col-33 {
         width: 33.33333%;
     }
+    /* Margins */
     
-    input[type="text"] {
-        font-size: 13px;
-        height: 30px;
-        color: $color-active;
-        border: $border;
-        box-shadow: none;
-        outline: none;
-        padding: 0 5px;
-        margin: 0 10px;
-        width: 100px;
-    }
-    
-    input:focus {
-        border: $border-active;
-        box-shadow: $box-shadow-active;
-    }
-    
-    label {
-        color: $color-active;
-    }
-    
-    .input-field {
-        margin: 10px 0;
-        label:nth-child(1) {
-            display: flex;
-            min-width: 30px;
-            line-height: 30px;
-            flex-flow: row-reverse;
-        }
+    .margin-v-40 {
+        margin: 40px 0;
     }
