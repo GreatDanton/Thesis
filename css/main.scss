@@ -68,6 +68,7 @@
     .card {
         color: $color-inactive;
         width: 100%;
+        min-width: 150px;
         padding: 1rem;
         border: $border;
         transition: $transition-fast-linear;
@@ -123,18 +124,11 @@
         }
     }
     
-    label {
-        color: $color-active;
-    }
-    
-    input[type="text"] {
-        font-size: 13px;
-    }
-    
     .img-guide {
         display: block;
         margin: 20px auto;
         -webkit-user-drag: none;
+        max-width: 100%;
     }
     
     .img-level-guide {
@@ -145,4 +139,64 @@
     
     body {
         overflow-y: scroll;
+    }
+    
+    .row {
+        display: flex;
+        width: 100%;
+        flex-flow: row;
+    }
+    
+    .container-900 {
+        display: flex;
+        max-width: 900px;
+        flex-flow: row;
+        margin: 0 auto;
+    }
+    
+    .col-30 {
+        width: 30%;
+    }
+    
+    .col-70 {
+        width: 70%;
+    }
+    
+    .col-50 {
+        width: 50%;
+    }
+    
+    .col-33 {
+        width: 33.33333%;
+    }
+    
+    input[type="text"] {
+        font-size: 13px;
+        height: 30px;
+        color: $color-active;
+        border: $border;
+        box-shadow: none;
+        outline: none;
+        padding: 0 5px;
+        margin: 0 10px;
+        width: 100px;
+    }
+    
+    input:focus {
+        border: $border-active;
+        box-shadow: $box-shadow-active;
+    }
+    
+    label {
+        color: $color-active;
+    }
+    
+    .input-field {
+        margin: 10px 0;
+        label:nth-child(1) {
+            display: flex;
+            min-width: 30px;
+            line-height: 30px;
+            flex-flow: row-reverse;
+        }
     }

@@ -66,7 +66,7 @@ class ChannelOptions extends React.Component {
     render() {
         let cards = this.state.options.map((option, index) => {
             return (
-                <div className="small-4 columns" key={index}
+                <div className="col-33" key={index}
                 id={"card-" + option.id} onClick={this.onClick}>
                     <Card id={option.id} value={option.id}
                     image={option.img}
@@ -78,11 +78,13 @@ class ChannelOptions extends React.Component {
         });
 
         return (
+            <div className="container-900">
             <form className="channel-options">
-            <div className="row">
-                {cards}
-            </div>
+                <div className="row">
+                    {cards}
+                </div>
             </form>
+            </div>
         )
     }
 }
