@@ -78,7 +78,7 @@ class ChannelOptions extends React.Component {
         });
 
         return (
-            <form>
+            <form className="channel-options">
             <div className="row">
                 {cards}
             </div>

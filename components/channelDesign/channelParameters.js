@@ -14,17 +14,15 @@ class RectangularChannel extends React.Component {
     render() {
         return (
             <div>
-                <h2> RectangularChannel </h2>
-
                 <div className="row">
                     <div className="small-9 columns">
                        {/*place for chart = diagram*/}
                        <img className="img-guide" src="images/rectangularChannel_guide.svg" />
-                       <img className="img-guide" src="images/vertical_crossSection.svg" />
+                       <img className="img-level-guide" src="images/vertical_crossSection.svg" />
                     </div>
 
                     <div className="small-3 columns">
-                        <InputBox id="b" end="m" />
+                        <InputBox id="B" end="m" />
                         <InputBox id="h" end="m" />
                         <br/>
                         <InputBox id="ng" end="/" />
@@ -47,8 +45,22 @@ class TrapezoidChannel extends React.Component {
     render() {
         return (
             <div>
-                <div className="chart"></div>
-                <h2> Trapezoid Channel </h2>
+                <div className="row">
+                    <div className="small-9 columns">
+                       {/*place for chart = diagram*/}
+                       <img className="img-guide" src="images/trapezoidChannel_guide.svg" />
+                       <img className="img-level-guide" src="images/vertical_crossSection.svg" />
+                    </div>
+
+                    <div className="small-3 columns">
+                        <InputBox id="B" end="m" />
+                        <InputBox id="b" end="m" />
+                        <InputBox id="h" end="m" />
+                        <br/>
+                        <InputBox id="ng" end="/" />
+                        <InputBox id="i" end="%" />
+                    </div>
+                </div>
             </div>
         )
     }

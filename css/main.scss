@@ -1,5 +1,6 @@
     $tab-background: linear-gradient(#fcfcfc, #f1f1f1);
     $tab-box-shadow: inset 0 1px 0 #f5f4f5;
+    $tab-color-active: #1c90f3;
     $border: 1px solid #c2c0c2;
     $border-active: 1px solid #8a8a8a;
     $box-shadow-active: 0 0 5px #cacaca;
@@ -8,6 +9,10 @@
     $color-active: #333;
     $font-family: 'Open Sans';
     /* css */
+    
+    * {
+        box-sizing: border-box;
+    }
     
     body {
         font-family: $font-family;
@@ -52,11 +57,12 @@
     }
     
     .tab-item.active {
-        border-bottom: 3px solid rgba(54, 162, 235, 1);
+        border-bottom: 3px solid $tab-color-active;
+        color: $tab-color-active;
     }
     
     .main-body {
-        margin-top: 100px;
+        margin-top: 50px;
     }
     
     .card {
@@ -93,6 +99,10 @@
         opacity: 1;
     }
     
+    .channel-options {
+        padding: 40px 0 60px;
+    }
+    
     .centered {
         label {
             text-align: center;
@@ -122,9 +132,13 @@
     }
     
     .img-guide {
-        height: 250px;
         display: block;
-        margin: 0 auto;
+        margin: 20px auto;
+    }
+    
+    .img-level-guide {
+        display: block;
+        margin: 50px auto 0;
     }
     
     body {
