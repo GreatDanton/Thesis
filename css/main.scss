@@ -134,11 +134,13 @@
     .img-guide {
         display: block;
         margin: 20px auto;
+        -webkit-user-drag: none;
     }
     
     .img-level-guide {
         display: block;
         margin: 50px auto 0;
+        -webkit-user-drag: none;
     }
     
     body {

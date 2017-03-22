@@ -26,7 +26,7 @@ class RectangularChannel extends React.Component {
                         <InputBox id="h" end="m" />
                         <br/>
                         <InputBox id="ng" end="/" />
-                        <InputBox id="i" end="%" />
+                        <InputBox id="φ" end="%" />
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@ class TrapezoidChannel extends React.Component {
                         <InputBox id="h" end="m" />
                         <br/>
                         <InputBox id="ng" end="/" />
-                        <InputBox id="i" end="%" />
+                        <InputBox id="φ" end="%" />
                     </div>
                 </div>
             </div>

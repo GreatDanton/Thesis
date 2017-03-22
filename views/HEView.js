@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {HeDesign} from '../components/HeDesign/HeDesign.js'
+
 class HeView extends React.Component {
     constructor(props) {
         super(props);
@@ -7,7 +9,9 @@ class HeView extends React.Component {
 
     render() {
         return (
-            <h1> HE view </h1>
+            <div>
+                <HeDesign />
+            </div>
         )
     }
 }
