@@ -1,6 +1,10 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
+// custom imports
 import {InputBox} from '../commonParts/inputBoxes.js';
+
+
 
 class RectangularChannel extends React.Component {
     constructor(props) {
@@ -10,12 +14,13 @@ class RectangularChannel extends React.Component {
     render() {
         return (
             <div>
-                <h1> RectangularChannel </h1>
+                <h2> RectangularChannel </h2>
 
                 <div className="row">
                     <div className="small-9 columns">
                        {/*place for chart = diagram*/}
-
+                       <img className="img-guide" src="images/rectangularChannel_guide.svg" />
+                       <img className="img-guide" src="images/vertical_crossSection.svg" />
                     </div>
 
                     <div className="small-3 columns">
@@ -43,7 +48,7 @@ class TrapezoidChannel extends React.Component {
         return (
             <div>
                 <div className="chart"></div>
-                <h1> Trapezoid Channel </h1>
+                <h2> Trapezoid Channel </h2>
             </div>
         )
     }
@@ -58,10 +63,24 @@ class CustomChannel extends React.Component {
     render() {
         return (
             <div>
-                <h1> Custom channel </h1>
+                <h2> Custom channel </h2>
+
+                <div className="row">
+                    <div className="small-9 columns">
+                       {/*place for chart = diagram*/}
+                       <p> </p>
+                    </div>
+
+                    <div className="small-3 columns">
+                            <InputBox id="b" end="m" />
+                            <InputBox id="h" end="m" />
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
+
 export {RectangularChannel, TrapezoidChannel, CustomChannel};
+

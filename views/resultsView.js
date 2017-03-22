@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {LineChart} from '../components/commonParts/charts.js';
 
 class ResultsView extends React.Component {
     constructor(props) {
@@ -8,7 +9,10 @@ class ResultsView extends React.Component {
 
     render() {
         return (
-            <h1> ResultsView </h1>
+            <div>
+                <h1> ResultsView </h1>
+                <LineChart />
+            </div>
         )
     }
 }

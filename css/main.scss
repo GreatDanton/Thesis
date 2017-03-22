@@ -1,76 +1,132 @@
-$border: 1px solid #c2c0c2;
-$border-active: 1px solid #8a8a8a;
-$box-shadow-active: 0 0 5px #cacaca;
-$transition-fast-linear: all 0.2s linear;
-$color-inactive: #888;
-$color-active: #333;
-
-/* css */
-
-.btn-toolbar {
-    border-radius: 0;
-    border-top: none;
-    border-left: none;
-}
-
-.card {
-    color: $color-inactive;
-    width: 100%;
-    padding: 1rem;
-    border: $border;
-    transition: $transition-fast-linear;
-    label {
+    $tab-background: linear-gradient(#fcfcfc, #f1f1f1);
+    $tab-box-shadow: inset 0 1px 0 #f5f4f5;
+    $border: 1px solid #c2c0c2;
+    $border-active: 1px solid #8a8a8a;
+    $box-shadow-active: 0 0 5px #cacaca;
+    $transition-fast-linear: all 0.2s linear;
+    $color-inactive: #888;
+    $color-active: #333;
+    $font-family: 'Open Sans';
+    /* css */
+    
+    body {
+        font-family: $font-family;
+        color: $color-active;
+    }
+    
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: $font-family;
+    }
+    
+    .toolbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        box-shadow: $box-shadow-active;
+        border-bottom: $border;
+        z-index: 1;
+    }
+    
+    .tab-group {
+        display: flex;
+        width: 100%;
+    }
+    
+    .tab-item {
+        background: $tab-background;
+        border-bottom: 2px solid transparent;
+        border-right: $border;
+        box-shadow: $tab-box-shadow;
+        width: 100%;
+        padding: 5px 0;
+        text-align: center;
+        transition: $transition-fast-linear;
+        &:hover {
+            border-bottom: 3px solid rgba(54, 162, 235, 0.3);
+        }
+    }
+    
+    .tab-item.active {
+        border-bottom: 3px solid rgba(54, 162, 235, 1);
+    }
+    
+    .main-body {
+        margin-top: 100px;
+    }
+    
+    .card {
         color: $color-inactive;
+        width: 100%;
+        padding: 1rem;
+        border: $border;
+        transition: $transition-fast-linear;
+        label {
+            color: $color-inactive;
+            transition: $transition-fast-linear;
+        }
+    }
+    
+    .card.active {
+        color: $color-active;
+        border: $border-active;
+        box-shadow: $box-shadow-active;
+        label {
+            color: $color-active;
+        }
+    }
+    
+    .channel-thumbnail {
+        display: block;
+        margin: 0 auto;
+        height: 80px;
+        opacity: 0.3;
+        -webkit-user-drag: none;
         transition: $transition-fast-linear;
     }
-}
-
-.card.active {
-    color: $color-active;
-    border: $border-active;
-    box-shadow: $box-shadow-active;
+    
+    .channel-thumbnail.active {
+        opacity: 1;
+    }
+    
+    .centered {
+        label {
+            text-align: center;
+            display: block;
+        }
+        input[type="radio"] {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+    
+    .row {
+        .text-right {
+            float: right;
+        }
+        .no-padding {
+            padding: 0;
+        }
+    }
+    
     label {
         color: $color-active;
     }
-}
-
-.channel-thumbnail {
-    display: block;
-    margin: 0 auto;
-    height: 80px;
-    opacity: 0.3;
-    -webkit-user-drag: none;
-    transition: $transition-fast-linear;
-}
-
-.channel-thumbnail.active {
-    opacity: 1;
-}
-
-.centered {
-    label {
-        text-align: center;
-        display: block;
+    
+    input[type="text"] {
+        font-size: 13px;
     }
-    input[type="radio"] {
+    
+    .img-guide {
+        height: 250px;
         display: block;
         margin: 0 auto;
     }
-}
-
-.row {
-    .text-right {
-        float: right;
+    
+    body {
+        overflow-y: scroll;
     }
-    .no-padding {
-        padding: 0;
-    }
-}
-
-label {
-    color: $color-active;
-}
-
-input[type="text"] {
-    font-size: 13px;
-}

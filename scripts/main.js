@@ -6,6 +6,6 @@ import {Toolbar} from '../views/toolbar.js';
 import {TabsSwitcher} from '../views/tabsSwitcher.js';
 
 window.onload = function(){
-  ReactDOM.render(<Toolbar />, document.getElementById('toolbar'));
+/*  ReactDOM.render(<Toolbar />, document.getElementById('toolbar'));*/
   ReactDOM.render(<TabsSwitcher />, document.getElementById('tabs-switcher'));
 }
