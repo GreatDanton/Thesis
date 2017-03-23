@@ -76,17 +76,17 @@ class CustomChannel extends React.Component {
                 <h2> Custom channel </h2>
 
                 <div className="container-900">
-                    <div className="col-50">
+                    <div className="col-30">
                         <div className="row centered">
-                            <InputBox id="x" />
-                            <InputBox id="y" />
+                            <InputBox id="x" end="" />
+                            <InputBox id="y" end="" />
                         </div>
                         <div className="row centered">
                             <div className="btn btn-primary"> Add </div>
                         </div>
+                        <PointsTable />
                     </div>
-                    <div className="col-50">
-                        <img className="img-guide" src="images/powerplant_crossSection.svg" />
+                    <div className="col-70">
                     </div>
                 </div>
             </div>
@@ -94,6 +94,43 @@ class CustomChannel extends React.Component {
     }
 }
 
+class PointsTable extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <table className="zebra margin-u-40">
+                <thead>
+                    <tr>
+                        <th> x </th>
+                        <th> y </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <TableRow x={1} y={1} />
+                    <TableRow x={2} y={2} />
+                </tbody>
+            </table>
+        )
+    }
+}
+
+class TableRow extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <tr>
+                <td> {this.props.x} </td>
+                <td> {this.props.y} </td>
+            </tr>
+        )
+    }
+}
 
 export {RectangularChannel, TrapezoidChannel, CustomChannel};
 

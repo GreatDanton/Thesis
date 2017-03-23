@@ -9,6 +9,9 @@
     $color-active: #333;
     $font-family: 'Open Sans';
     $p-font-size: 14px;
+    /* Table */
+    
+    $background-light-blue: #d5ecff;
     /* BTNS */
     
     $default-border-radius: 4px;
@@ -255,4 +258,35 @@
     
     .margin-v-40 {
         margin: 40px 0;
+    }
+    
+    .margin-u-40 {
+        margin-top: 40px;
+    }
+    /* Table */
+    
+    table {
+        max-width: 100%;
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    thead {
+        text-align: left;
+    }
+    
+    th {
+        padding: 15px 5px;
+        border-bottom: $border-active !important;
+    }
+    
+    td {
+        padding: 5px;
+        border-bottom: $border;
+        border-left: none;
+        border-right: none;
+    }
+    
+    .zebra tbody tr:nth-child(odd) {
+        background: $background-light-blue;
     }
