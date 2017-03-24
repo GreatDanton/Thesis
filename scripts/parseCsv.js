@@ -17,7 +17,7 @@ function createMonthlyFlow(input_data) {
     // array of lines of data
     let linesOfData = input_data.split('\n');
 
-    let water_flow = {};
+    let waterFlow = {};
 
     // loop through data, create hash map of values
     for (let i of linesOfData) {
@@ -37,19 +37,111 @@ function createMonthlyFlow(input_data) {
             let year = parseInt(date_arr[2]);
 
             // initialize sub objects to get around undefined error
-            if (water_flow[year] === undefined) {
-                water_flow[year] = {};
+            if (waterFlow[year] === undefined) {
+                waterFlow[year] = {};
+                waterFlow[year]["yearlyFlow"] = 0;
             }
-            if (water_flow[year][month] === undefined) {
-                water_flow[year][month] = 0;
+            if (waterFlow[year][month] === undefined) {
+                waterFlow[year][month] = 0;
             }
 
             // create monthly flow for each year
-            water_flow[year][month] = water_flow[year][month] + flow;
+            waterFlow[year]["yearlyFlow"] = waterFlow[year]["yearlyFlow"] + flow;
+            waterFlow[year][month] = waterFlow[year][month] + flow;
         }
     }
 
-    return water_flow
+    return waterFlow
 }
 
-export {createMonthlyFlow};
+
+// get dry and wet years from waterFlow object
+// input: waterFlow object
+// returns object {dryYear: year, wetYear: year}
+function getExtremeFlow(waterFlow) {
+    let maxFlow = -1;
+    let minFlow = -1;
+    let wetYear;
+    let dryYear;
+
+    for (let key in waterFlow) {
+        // check for actual property of object and not something from prototype
+        if (waterFlow.hasOwnProperty(key)) {
+            // pick first value as min flow
+            if (minFlow === -1) {
+                minFlow = waterFlow[key]['yearlyFlow'];
+                dryYear = key;
+            }
+            // check if we have new min/max flow
+            if (waterFlow[key]['yearlyFlow'] < minFlow) {
+                minFlow = waterFlow[key]['yearlyFlow'];
+                dryYear = key;
+            }
+            if (waterFlow[key]['yearlyFlow'] > maxFlow)  {
+                maxFlow = waterFlow[key]['yearlyFlow'];
+                wetYear = key;
+            }
+        }
+    }
+
+    return {
+        'wetYear': wetYear,
+        'dryYear': dryYear
+    }
+}
+
+
+// creates data suitable for using in graphs
+// input: desired year and waterFlow object
+// output: array of data [1,2,3,4]
+function createGraphData(year, waterFlow) {
+    let chosenYear = waterFlow[year];
+    let months = [];
+    let graphData = [];
+
+    // Robust way to gather data from object
+    // get all months from waterFlow object of chosen year
+    for (let key in chosenYear) {
+        if (key !== 'yearlyFlow') {
+            months.push(parseInt(key));
+        }
+    }
+    // sort months array ascending
+    months = sortArrayAsc(months);
+
+    // create array of flow numbers for every month in chosen year
+    // if one of the months is missing assign 0 as it's flow number
+    for (let i = 0; i < months.length; i++) {
+        // if month data is missing assign 0 to it's monthly flow
+        if (i + 1 !== months[i] ) {
+            graphData.push(0);
+        } else {
+            graphData.push(chosenYear[months[i]]);
+        }
+    }
+
+    // add zeros for months missing
+    let addZero = 12 - graphData.length
+    for (let i = 0; i < addZero; i++) {
+        graphData.push(0);
+    }
+    console.log(graphData);
+    return graphData;
+}
+
+
+// sort given array ascending
+function sortArrayAsc(arr) {
+    arr.sort(function(a,b) {
+        return a - b;
+    });
+    return arr;
+}
+
+
+// export functions
+export {
+    createMonthlyFlow,
+    getExtremeFlow,
+    createGraphData
+};

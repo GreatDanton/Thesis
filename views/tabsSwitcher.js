@@ -7,13 +7,16 @@ import {ResultsView} from './resultsView.js';
 
 let Tabs = [
         {
-        name: "Channel Design",
+            name: "Channel Design",
+            render: <ChannelView />
         },
         {
             name: "HE",
+            render: <HeView />
         },
         {
             name: "Results",
+            render: <ResultsView />
         }
     ];
 
@@ -29,7 +32,6 @@ class TabsSwitcher extends React.Component {
   changeView(e) {
       let name = e.target.innerText;
       this.setState({active: name}, this.renderNewView);
-      // console.log(this.state.active);
   }
 
 // when component mounts, render correct view (according to currently active tab)
@@ -40,13 +42,11 @@ componentDidMount() {
 // render New View in main-window according to currently active element
   renderNewView() {
     let render_view;
-    if (this.state.active === "Channel Design") {
-        render_view = <ChannelView />
-    } else if (this.state.active === "HE") {
-        render_view = <HeView />
-    } else if (this.state.active === "Results") {
-        render_view = <ResultsView />
-    }
+    this.state.tabs.map(item => {
+      if (item.name === this.state.active) {
+        render_view = item.render;
+      }
+    })
 
     ReactDOM.render(
         render_view,
