@@ -140,11 +140,10 @@ function getAverageData(waterFlow) {
             monthlyData.push(graphData);
         }
     }
-
+    let numOfYears = monthlyData.length;
     var averageData = monthlyData.map((_, i) =>
-    monthlyData.reduce((p,_,j) => p + monthlyData[j][i], 0 ));
+    monthlyData.reduce((p,_,j) => p + monthlyData[j][i]/numOfYears, 0 ));
 
-    console.log(averageData);
     return averageData;
 }
 
