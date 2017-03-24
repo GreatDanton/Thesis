@@ -46,17 +46,19 @@ class TrapezoidChannel extends React.Component {
         return (
             <div>
                 <div className="container-900">
-                    <div className="col-30">
-                        <InputBox id="B" end="m" />
-                        <InputBox id="b" end="m" />
-                        <InputBox id="h" end="m" />
-                        <br/>
-                        <InputBox id="ng" end="/" />
-                        <InputBox id="φ" end="%" />
-                    </div>
-                    <div className="col-70">
-                       <img className="img-guide" src="images/trapezoidChannel_guide.svg" />
-                       <img className="img-level-guide" src="images/vertical_crossSection.svg" />
+                    <div className="row">
+                        <div className="col-30">
+                            <InputBox id="B" end="m" />
+                            <InputBox id="b" end="m" />
+                            <InputBox id="h" end="m" />
+                            <br/>
+                            <InputBox id="ng" end="/" />
+                            <InputBox id="φ" end="%" />
+                        </div>
+                        <div className="col-70">
+                            <img className="img-guide" src="images/trapezoidChannel_guide.svg" />
+                            <img className="img-level-guide" src="images/vertical_crossSection.svg" />
+                        </div>
                     </div>
                 </div>
             </div>
