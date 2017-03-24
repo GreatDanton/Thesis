@@ -110,22 +110,14 @@ function createGraphData(year, waterFlow) {
     months = sortArrayAsc(months);
 
     // create array of flow numbers for every month in chosen year
-    // if one of the months is missing assign 0 as it's flow number
-    for (let i = 0; i < months.length; i++) {
-        // if month data is missing assign 0 to it's monthly flow
-        if (i + 1 !== months[i] ) {
-            graphData.push(0);
+    for (let i = 0; i < 12; i++) {
+        if (months.indexOf(i+1) < 0) {
+            graphData.push(0); // if month data is missing assign 0
         } else {
-            graphData.push(chosenYear[months[i]]);
+            graphData.push(chosenYear[i+1]);
         }
     }
 
-    // add zeros for months missing
-    let addZero = 12 - graphData.length
-    for (let i = 0; i < addZero; i++) {
-        graphData.push(0);
-    }
-    console.log(graphData);
     return graphData;
 }
 
@@ -139,9 +131,28 @@ function sortArrayAsc(arr) {
 }
 
 
+// create average flow for each month based on all data
+function getAverageData(waterFlow) {
+    let monthlyData = [];
+    for (let year in waterFlow) {
+        if (waterFlow.hasOwnProperty(year))  {
+            let graphData = createGraphData(year, waterFlow);
+            monthlyData.push(graphData);
+        }
+    }
+
+    var averageData = monthlyData.map((_, i) =>
+    monthlyData.reduce((p,_,j) => p + monthlyData[j][i], 0 ));
+
+    console.log(averageData);
+    return averageData;
+}
+
+
 // export functions
 export {
     createMonthlyFlow,
     getExtremeFlow,
-    createGraphData
+    createGraphData,
+    getAverageData
 };
