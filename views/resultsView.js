@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {LineChart} from '../components/commonParts/charts.js';
+import {LineChart, BarChart} from '../components/commonParts/charts.js';
 import {createMonthlyFlow, getExtremeFlow, createGraphData, getAverageData} from '../scripts/parseCsv.js';
 
 
@@ -39,6 +39,7 @@ class ResultsView extends React.Component {
             </div>
 
                 <LineChart data={inputData} name={["2010", "custom"]} />
+                <BarChart data={inputData} name={["2010", "custom"]} />
             </div>
         )
     }
