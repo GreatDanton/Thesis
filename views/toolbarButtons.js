@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-class Toolbar extends React.Component {
+class ToolbarButtons extends React.Component {
     constructor(props) {
         super(props);
         this.btnClick = this.btnClick.bind(this);
@@ -14,10 +14,9 @@ class Toolbar extends React.Component {
     render() {
         return (
             <div>
-            <Button icon="folder" onClick={this.btnClick} />
-
-            <Button icon="cog" onClick={this.btnClick} />
-            <Button icon="print" onClick={this.btnClick} />
+                <Button icon="folder" tooltip="open file" onClick={this.btnClick} />
+                <Button icon="cogs" tooltip="run" onClick={this.btnClick} />
+                <Button icon="print" tooltip="print results" onClick={this.btnClick} />
             </div>
 
         )
@@ -32,7 +31,8 @@ class Button extends React.Component {
 
     render() {
         return (
-            <button className="btn btn-large btn-default btn-toolbar" onClick={this.props.onClick}>
+            <button className="btn btn-toolbar"
+                    onClick={this.props.onClick} title={this.props.tooltip} >
                 <Icon icon={this.props.icon} />
             </button>
         )
@@ -46,11 +46,10 @@ class Icon extends React.Component {
 
     render() {
         return (
-            <span className={"icon icon-" + this.props.icon}>
-            </span>
+            <i className={"fa fa-" + this.props.icon} />
         )
     }
 }
 
 
-export {Toolbar};
+export {ToolbarButtons};

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // my components imports
-import {Toolbar} from '../views/toolbar.js';
+import {ToolbarButtons} from '../views/toolbarButtons.js';
 import {TabsSwitcher} from '../views/tabsSwitcher.js';
 import {createMonthlyFlow, getExtremeFlow, createGraphData, getAverageData} from './parseCsv.js';
 
@@ -26,5 +26,6 @@ let sample_csv = `
   getAverageData(waterFlow);
 //  console.log(createMonthlyFlow(sample_csv));
 /*  ReactDOM.render(<Toolbar />, document.getElementById('toolbar'));*/
+  ReactDOM.render(<ToolbarButtons />, document.getElementById('toolbar-buttons'));
   ReactDOM.render(<TabsSwitcher />, document.getElementById('tabs-switcher'));
 }
