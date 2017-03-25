@@ -1,10 +1,34 @@
 import React from 'react';
+const dialog = require('electron').remote.dialog
 
 
 class ToolbarButtons extends React.Component {
     constructor(props) {
         super(props);
         this.btnClick = this.btnClick.bind(this);
+        this.importFile = this.importFile.bind(this);
+    }
+
+    importFile() {
+        console.log('File imported');
+        dialog.showOpenDialog(
+            {
+                properties: ['openFile', 'multiSelections'],
+                filters: [{name: 'csv', extensions: ['csv']}],
+            },
+            // callback (get array of paths of selected files)
+            function(fileNames) {
+                if (fileNames === undefined) { // no file was chosen
+                    return;
+                }
+
+                console.log(fileNames);
+            },
+        );
+    }
+
+    runCalculations() {
+        console.log('run');
     }
 
     btnClick(e) {
@@ -14,8 +38,8 @@ class ToolbarButtons extends React.Component {
     render() {
         return (
             <div>
-                <Button icon="folder" tooltip="open file" onClick={this.btnClick} />
-                <Button icon="cogs" tooltip="run" onClick={this.btnClick} />
+                <Button icon="folder" tooltip="import file" onClick={this.importFile} />
+                <Button icon="cogs" tooltip="run" onClick={this.runCalculations} />
                 <Button icon="print" tooltip="print results" onClick={this.btnClick} />
             </div>
 

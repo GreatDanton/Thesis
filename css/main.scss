@@ -277,6 +277,10 @@
         margin: 40px 0;
     }
     
+    .padding-v-40 {
+        padding: 40px 0;
+    }
+    
     .margin-u-40 {
         margin-top: 40px;
     }
@@ -306,4 +310,10 @@
     
     .zebra tbody tr:nth-child(odd) {
         background: $background-light-blue;
+    }
+    
+    canvas {
+        // disable selecting canvas on double click
+        -webkit-user-select: none;
+        user-select: none;
     }

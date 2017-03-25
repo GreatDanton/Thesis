@@ -38,8 +38,10 @@ class ResultsView extends React.Component {
                 </div>
             </div>
 
+            <div className="container-900">
                 <LineChart data={inputData} name={["2010", "custom"]} />
                 <BarChart data={inputData} name={["2010", "custom"]} />
+            </div>
             </div>
         )
     }
