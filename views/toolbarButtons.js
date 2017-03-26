@@ -1,4 +1,5 @@
 import React from 'react';
+const fs = require('fs'); // load file system;
 const dialog = require('electron').remote.dialog
 
 
@@ -13,7 +14,7 @@ class ToolbarButtons extends React.Component {
         console.log('File imported');
         dialog.showOpenDialog(
             {
-                properties: ['openFile', 'multiSelections'],
+                properties: ['openFile'],
                 filters: [{name: 'csv', extensions: ['csv']}],
             },
             // callback (get array of paths of selected files)
@@ -22,10 +23,22 @@ class ToolbarButtons extends React.Component {
                     return;
                 }
 
+                // read from first file
+                let filepath = fileNames[0];
+                fs.readFile(filepath,'utf-8', function(err, data) {
+                    if (err) {
+                        alert("An error occured");
+                        return;
+                    }
+
+                    console.log("The content is: " + data);
+                });
+
                 console.log(fileNames);
             },
         );
     }
+
 
     runCalculations() {
         console.log('run');

@@ -11,7 +11,7 @@ class InputBox extends React.Component {
             <div className="input-field">
                 <div className="row">
                         <label htmlFor={this.props.id}>{this.props.id}</label>
-                        <input type="text" id={this.props.id} value={this.props.value}/>
+                        <input type="text" id={this.props.id} value={this.props.value} onChange={this.props.onChange}/>
                         {this.props.end ?
                             <label htmlFor={this.props.id}>
                                 {'[' + this.props.end + ']'}
