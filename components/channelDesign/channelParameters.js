@@ -89,16 +89,20 @@ class TrapezoidChannel extends React.Component {
     circumference() {
         let b = parseFloat(this.state.b);
         let h = parseFloat(this.state.h);
-        let P = b + 2 * (b^2 + h^2 )^(1/2);
+        let B = parseFloat(this.state.B);
+        let x = (B - b) / 2
+
+        let P = b + 2 * ( x**2 + h**2 )**(1/2);
         return P
     }
 
     area() {
-        // check for different types of input -> either via B or angle
         let b = parseFloat(this.state.b);
         let h = parseFloat(this.state.h);
         let B = parseFloat(this.state.B);
-        let S = b * h + (B - b) / 2 * h
+        let x = (B - b) / 2;
+
+        let S = b * h + x * h
         return S
     }
 
