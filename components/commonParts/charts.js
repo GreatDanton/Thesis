@@ -3,14 +3,14 @@ import {Line, Bar} from 'react-chartjs-2';
 // line chart example
 
 // variables
-let COLORS = [
+const COLORS = [
     ['rgba(54,162,235,1)', 'rgba(54,162,235,0.2)'],
     ['rgba(255,99,132,1)', 'rgba(255,99,132,0.2)'],
     ['rgba(75,193,193,1)', 'rgba(75,193,193,0.2)'],
     ['rgba(255,206,86,1)', 'rgba(255,99,132,0.2)']
 ]
 
-let MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
             'August', 'September', 'October', 'November', 'December']
 
 
@@ -24,7 +24,7 @@ class LineChart extends React.Component {
     }
 
     buildData() {
-        let dataset = this.props.data.map((data, index) => {
+        let dataset = this.props.y.map((data, index) => {
             return (
                 {
                     label: this.props.name[index],
@@ -50,8 +50,15 @@ class LineChart extends React.Component {
             )
         });
 
+        let X;
+        if (this.props.x === 'months') {
+            X = MONTHS;
+        } else {
+            X = this.props.x;
+        }
+
         let finalData = {
-            labels: MONTHS,
+            labels: X,
             datasets: dataset
         }
 
@@ -80,7 +87,7 @@ class BarChart extends React.Component {
     }
 
     buildData() {
-        let dataset = this.props.data.map((data, index) => {
+        let dataset = this.props.y.map((data, index) => {
             return (
                 {
                     label: this.props.name[index],
@@ -94,8 +101,15 @@ class BarChart extends React.Component {
             )
         });
 
+        let X;
+        if (this.props.x === 'months') {
+            X = MONTHS;
+        } else {
+            X = this.props.x;
+        }
+
         let finalData = {
-            labels: MONTHS,
+            labels: X,
             datasets: dataset
         }
 

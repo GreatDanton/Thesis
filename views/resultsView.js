@@ -26,7 +26,7 @@ class ResultsView extends React.Component {
         let waterFlow = createMonthlyFlow(sample_csv);
         let graphData = createGraphData(2010, waterFlow);
         let inputData = [];
-        let data2 = [200, 50, 100, 50, 0, 100, 300, 0, 0, 30, 80, 100];
+        let data2 = [200, 50, 100, 50, 0, 100, 300, 0, -40, 30, 80, 100];
         inputData.push(graphData);
         inputData.push(data2);
 
@@ -39,8 +39,8 @@ class ResultsView extends React.Component {
             </div>
 
             <div className="container-900">
-                <LineChart data={inputData} name={["2010", "custom"]} />
-                <BarChart data={inputData} name={["2010", "custom"]} />
+                <LineChart y={inputData} x={'months'} name={["2010", "custom"]} />
+                <BarChart y={inputData} x={'months'} name={["2010", "custom"]} />
             </div>
             </div>
         )
