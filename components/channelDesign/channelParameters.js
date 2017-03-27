@@ -143,6 +143,25 @@ class TrapezoidChannel extends React.Component {
 class CustomChannel extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {points: [], x: '', y: ''};
+        this.onChange = this.onChange.bind(this);
+        this.addPoint = this.addPoint.bind(this);
+    }
+
+    // add new point to state
+    addPoint(e) {
+        e.preventDefault();
+        // if x & y are numbers, add them to the table
+        if (parseFloat(this.state.x) && parseFloat(this.state.y)) {
+            let p = {x: this.state.x, y: this.state.y};
+            let points = this.state.points.slice();
+            points.push(p);
+            this.setState({points: points, x: '', y: ''}); // add new array, and reset input fields
+        }
+    }
+
+    onChange(e) {
+        this.setState({[e.target.id]: e.target.value});
     }
 
     render() {
@@ -152,14 +171,17 @@ class CustomChannel extends React.Component {
 
                 <div className="container-900">
                     <div className="col-30">
+                        {/* button press on enter click will submit the form => execute addPoint*/}
+                        <form onSubmit={this.addPoint}>
                         <div className="row centered">
-                            <InputBox id="x" end="" />
-                            <InputBox id="y" end="" />
+                            <InputBox id="x" end="" value={this.state.x} onChange={this.onChange} />
+                            <InputBox id="y" end="" value={this.state.y} onChange={this.onChange} />
                         </div>
                         <div className="row centered">
-                            <div className="btn btn-primary"> Add </div>
+                            <button type="submit" className="btn btn-primary"> Add </button>
                         </div>
-                        <PointsTable />
+                        </form>
+                        <PointsTable data={this.state.points} />
                     </div>
                     <div className="col-70">
                     </div>
@@ -169,12 +191,20 @@ class CustomChannel extends React.Component {
     }
 }
 
+
+
 class PointsTable extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
+        let TableRows = this.props.data.map((point, index) => {
+                return (
+                    <TableRow x={point.x}  y={point.y} key={index} />
+                )
+        });
+
         return (
             <table className="zebra margin-u-40">
                 <thead>
@@ -184,8 +214,8 @@ class PointsTable extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <TableRow x={1} y={1} />
-                    <TableRow x={2} y={2} />
+                    <TableRow x={1} y={2} />
+                    {TableRows}
                 </tbody>
             </table>
         )
