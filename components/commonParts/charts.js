@@ -15,7 +15,7 @@ const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
 
 
 // Create line chart via props
-// data=[[1,2,3,4], [more,data,..,..]] name=["label1", "label2"]
+// y=[[1,2,3,4], [more,data,..,..]] x=["label1", "label2"]
 class LineChart extends React.Component {
     constructor(props) {
         super(props);
@@ -124,4 +124,43 @@ class BarChart extends React.Component {
     }
 }
 
-export {LineChart, BarChart};
+
+import Chart from 'chart.js';
+
+class ScatterChart extends React.Component {
+    constructor(props) {
+        super(props);
+        this.colors = COLORS;
+    }
+
+    render() {
+       let data = {
+       datasets: [
+            {
+                label: this.props.name,
+                fill: false,
+                backgroundColor: this.colors[0][0],
+                border: this.colors[0][0],
+                data: this.props.data,
+                lineTension: 0
+            }
+       ]
+    }
+    let options = {
+        scales: {
+            xAxes: [{
+                type: 'linear',
+                position: 'bottom'
+            }]
+        }
+    }
+
+        return (
+            <div>
+                <Line data={data} options={options}/>
+            </div>
+        )
+    }
+}
+
+export {LineChart, BarChart, ScatterChart};

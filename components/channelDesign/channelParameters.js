@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 // custom imports
 import {InputBox} from '../commonParts/inputBoxes.js';
+import {ScatterChart} from '../commonParts/charts.js';
 
 
 
@@ -152,7 +153,9 @@ class CustomChannel extends React.Component {
     addPoint(e) {
         e.preventDefault();
         // if x & y are numbers, add them to the table
-        if (parseFloat(this.state.x) && parseFloat(this.state.y)) {
+        let X = parseFloat(this.state.x);
+        let Y = parseFloat(this.state.y);
+        if (!isNaN(X) && !isNaN(Y)) {
             let p = {x: this.state.x, y: this.state.y};
             let points = this.state.points.slice();
             points.push(p);
@@ -165,25 +168,29 @@ class CustomChannel extends React.Component {
     }
 
     render() {
+
         return (
             <div>
                 <h2> Custom channel </h2>
 
                 <div className="container-900">
-                    <div className="col-30">
-                        {/* button press on enter click will submit the form => execute addPoint*/}
-                        <form onSubmit={this.addPoint}>
-                        <div className="row centered">
-                            <InputBox id="x" end="" value={this.state.x} onChange={this.onChange} />
-                            <InputBox id="y" end="" value={this.state.y} onChange={this.onChange} />
+                    <div className="row">
+                        <div className="col-30">
+                            {/* button press on enter click will submit the form => execute addPoint*/}
+                            <form onSubmit={this.addPoint}>
+                            <div className="row centered">
+                                <InputBox id="x" end="" value={this.state.x} onChange={this.onChange} />
+                                <InputBox id="y" end="" value={this.state.y} onChange={this.onChange} />
+                            </div>
+                            <div className="row centered">
+                                <button type="submit" className="btn btn-primary"> Add </button>
+                            </div>
+                            </form>
+                            <PointsTable data={this.state.points} />
                         </div>
-                        <div className="row centered">
-                            <button type="submit" className="btn btn-primary"> Add </button>
+                        <div className="col-70">
+                            <ScatterChart name="custom channel" data={this.state.points} />
                         </div>
-                        </form>
-                        <PointsTable data={this.state.points} />
-                    </div>
-                    <div className="col-70">
                     </div>
                 </div>
             </div>
@@ -214,7 +221,6 @@ class PointsTable extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <TableRow x={1} y={2} />
                     {TableRows}
                 </tbody>
             </table>
