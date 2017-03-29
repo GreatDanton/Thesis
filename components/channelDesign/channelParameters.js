@@ -147,6 +147,7 @@ class CustomChannel extends React.Component {
         this.state = {points: [], x: '', y: ''};
         this.onChange = this.onChange.bind(this);
         this.addPoint = this.addPoint.bind(this);
+        this.onRowClick = this.onRowClick.bind(this);
     }
 
     // add new point to state
@@ -165,6 +166,19 @@ class CustomChannel extends React.Component {
 
     onChange(e) {
         this.setState({[e.target.id]: e.target.value});
+    }
+
+    onRowClick(e) {
+        let X = e.currentTarget.getAttribute('x');
+        let Y = e.currentTarget.getAttribute('y');
+        let points_arr = [];
+        this.state.points.map(point => {
+            if (X !== point.x && Y !== point.y) {
+                points_arr.push(point);
+            }
+        })
+
+        this.setState({points: points_arr});
     }
 
     render() {
@@ -186,9 +200,9 @@ class CustomChannel extends React.Component {
                                 <button type="submit" className="btn btn-primary"> Add </button>
                             </div>
                             </form>
-                            <PointsTable data={this.state.points} />
+                            <PointsTable data={this.state.points} onClick={this.onRowClick} />
                         </div>
-                        <div className="col-70">
+                        <div className="col-70 padding-h-20">
                             <ScatterChart name="custom channel" data={this.state.points} />
                         </div>
                     </div>
@@ -208,7 +222,8 @@ class PointsTable extends React.Component {
     render() {
         let TableRows = this.props.data.map((point, index) => {
                 return (
-                    <TableRow x={point.x}  y={point.y} key={index} />
+                    <TableRow x={point.x}  y={point.y} key={index}
+                        onClick={this.props.onClick} />
                 )
         });
 
@@ -216,6 +231,7 @@ class PointsTable extends React.Component {
             <table className="zebra margin-u-40">
                 <thead>
                     <tr>
+                        <th> </th>
                         <th> x </th>
                         <th> y </th>
                     </tr>
@@ -236,6 +252,8 @@ class TableRow extends React.Component {
     render() {
         return (
             <tr>
+                <td className="td-delete" onClick={this.props.onClick}
+                    x={this.props.x}  y={this.props.y}> × </td>
                 <td> {this.props.x} </td>
                 <td> {this.props.y} </td>
             </tr>

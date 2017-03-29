@@ -289,6 +289,10 @@
         padding: 40px 0;
     }
     
+    .padding-h-20 {
+        padding: 0 20px;
+    }
+    
     .margin-u-40 {
         margin-top: 40px;
     }
@@ -315,6 +319,13 @@
         border-bottom: $border;
         border-left: none;
         border-right: none;
+    }
+    
+    .td-delete {
+        width: 30px;
+        text-align: center;
+        font-weight: 800;
+        cursor: pointer;
     }
     
     .zebra tbody tr:nth-child(odd) {
