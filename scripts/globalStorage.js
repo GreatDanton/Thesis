@@ -7,8 +7,12 @@ class GlobalStorage {
     constructor() {
         this.storage = {'a': "hello"};
 
-        this.activeTab = 'activeTab';
-        this.channelTab = {};
+        this.channelTab = {
+            "active": '',
+            "rectangular": '',
+            "trapezoid": '',
+            "custom": ''
+        };
         this.HETAb = {};
         this.resultsTab = {
             "rawData": '',

@@ -10,23 +10,33 @@ class ResultsView extends React.Component {
         super(props);
     }
 
-    render() {
-
+// display hydrogam if data exists
+    hydrogram() {
         let inputData  = GlobalStorage.resultsTab.hydrogram.y;
         let names = GlobalStorage.resultsTab.hydrogram.names;
 
-        return (
-            <div>
-            <div className="container-900">
-                <div className="row">
-                    <h2> ResultsView </h2>
+        if (inputData.length == names.length && inputData.length > 0) {
+            return (
+                <div>
+                    <LineChart y={inputData} x={'months'} name={names} />
+                    <BarChart y={inputData} x={'months'} name={names} />
                 </div>
-            </div>
+            )
+        }
+        else {
+            return (
+                <div className="data-not-imported">
+                    <h2> Import data too see graphs </h2>
+                </div>
+            )
+        }
+    }
 
+    render() {
+
+        return (
             <div className="container-900">
-                <LineChart y={inputData} x={'months'} name={names} />
-                <BarChart y={inputData} x={'months'} name={names} />
-            </div>
+               {this.hydrogram()}
             </div>
         )
     }

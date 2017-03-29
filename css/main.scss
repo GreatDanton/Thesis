@@ -235,6 +235,16 @@
             background: linear-gradient(darken(#6eb4f7, 10%), darken(#1a82fb, 10%));
         }
     }
+    
+    .data-not-imported {
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        h2 {
+            color: $color-inactive;
+        }
+    }
     /* UTILITIES */
     
     .row {

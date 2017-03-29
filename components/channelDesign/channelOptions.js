@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import {RectangularChannel, TrapezoidChannel, CustomChannel} from './channelParameters.js';
+import GlobalStorage from '../../scripts/globalStorage';
 
 let Options = [
             {
@@ -31,6 +32,24 @@ class ChannelOptions extends React.Component {
         this.onClick = this.onClick.bind(this);
     }
 
+// load selected channel when component will mount
+    componentWillMount() {
+        console.log('fired');
+        let selectedChannel = GlobalStorage.channelTab.active;
+        if (selectedChannel.length > 0) {
+        this.state.options.map(option => {
+            if (option.id === selectedChannel) {
+                this.setState({selectedOption: selectedChannel}, this.renderParams);
+            }
+        });
+        }
+    }
+
+// save selected channel to global storage
+    componentWillUnmount() {
+        GlobalStorage.channelTab.active = this.state.selectedOption;
+    }
+
     // on card click select correct radio button
     onClick(e) {
         let id = e.currentTarget.id.split('-')[1]; // returns id part of 'card-id'
@@ -50,23 +69,23 @@ class ChannelOptions extends React.Component {
             }
         })
 
-        ReactDOM.render(
-            render, document.getElementById('channel-parameters')
-        )
-    }
+            ReactDOM.render(
+                render, document.getElementById('channel-parameters')
+            )
+        }
 
-    componentDidMount() {
-        this.renderParams();
-    }
+        componentDidMount() {
+            this.renderParams();
+        }
 
-    // use componentDidUnmount to save state (:, and componentWillMount to load states
-    // to local storage???
+        // use componentDidUnmount to save state (:, and componentWillMount to load states
+        // to local storage???
 
 
-    render() {
-        let cards = this.state.options.map((option, index) => {
-            return (
-                <div className="col-30" key={index}
+        render() {
+            let cards = this.state.options.map((option, index) => {
+                return (
+                    <div className="col-30" key={index}
                 id={"card-" + option.id} onClick={this.onClick}>
                     <Card id={option.id} value={option.id}
                     image={option.img}
