@@ -29,7 +29,6 @@ class LineChart extends React.Component {
                 {
                     label: this.props.name[index],
                     fill: false,
-                    likeTension: 0.1,
                     backgroundColor: this.colors[index][0],
                     borderColor: this.colors[index][0],
                     borderCapStyle: 'butt',
@@ -41,9 +40,9 @@ class LineChart extends React.Component {
                     pointBorderWidth: 2,
                     pointHoverRadius: 5,
                     pointHoverBackgroundColor: this.colors[index][0],
-                    pointHoverBorderColor: 'rgba(220,220,220,1)',
+                    pointHoverBorderColor: 'rgba(0,0,0,0)',
                     pointHoverBorderWidth: 2,
-                    pointRadius: 1,
+                    pointRadius: 4,
                     pointHitRadius: 10,
                     data: data
                 }
@@ -134,17 +133,34 @@ class ScatterChart extends React.Component {
     }
 
     render() {
-       let data = {
-       datasets: [
+    let dataset = this.props.data.map((data, index) => {
+        console.log(data);
+        return (
             {
-                label: this.props.name,
+                label: this.props.name[index],
                 fill: false,
-                backgroundColor: this.colors[0][0],
-                border: this.colors[0][0],
-                data: this.props.data,
-                lineTension: 0
+                lineTension: 0,
+                backgroundColor: this.colors[index][0],
+                borderColor: this.colors[index][0],
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: this.colors[index][0],
+                pointBackgroundColor: '#fff',
+                pointBorderWidth: 2,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: this.colors[index][0],
+                pointHoverBorderColor: 'rgba(220,220,220,0)',
+                pointHoverBorderWidth: 2,
+                pointRadius: 4,
+                pointHitRadius: 10,
+                data: this.props.data[index],
             }
-       ]
+        )
+    });
+       let data = {
+       datasets: dataset
     }
     let options = {
         scales: {
