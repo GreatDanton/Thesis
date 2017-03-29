@@ -132,18 +132,20 @@ function sortArrayAsc(arr) {
 
 
 // create average flow for each month based on all data
+// returns array -> suitable for producing graphs;
 function getAverageData(waterFlow) {
     let monthlyData = [];
+    let numOfYears = 0;
     for (let year in waterFlow) {
         if (waterFlow.hasOwnProperty(year))  {
+            numOfYears++;
             let graphData = createGraphData(year, waterFlow);
             monthlyData.push(graphData);
         }
     }
-    let numOfYears = monthlyData.length;
-    var averageData = monthlyData.map((_, i) =>
-    monthlyData.reduce((p,_,j) => p + monthlyData[j][i]/numOfYears, 0 ));
 
+    let averageData = monthlyData[0].map((_, i) =>
+    monthlyData.reduce((p,_,j) => p + monthlyData[j][i]/numOfYears, 0 ));
     return averageData;
 }
 

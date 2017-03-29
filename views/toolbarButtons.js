@@ -2,6 +2,10 @@ import React from 'react';
 const fs = require('fs'); // load file system;
 const dialog = require('electron').remote.dialog
 
+// import globalStorage
+import GlobalStorage from '../scripts/globalStorage';
+import {createMonthlyFlow, getExtremeFlow, createGraphData, getAverageData} from '../scripts/parseCsv';
+
 
 class ToolbarButtons extends React.Component {
     constructor(props) {
@@ -31,10 +35,25 @@ class ToolbarButtons extends React.Component {
                         return;
                     }
 
-                    console.log("The content is: " + data);
-                });
+                    let parsedData = createMonthlyFlow(data);
+                    let average = getAverageData(parsedData);
+                    let extremes = getExtremeFlow(parsedData);
+                    let wetYear = extremes.wetYear;
+                    let dryYear = extremes.dryYear;
 
-                console.log(fileNames);
+                    // GlobalStorage.resultsTab.rawData = data;
+                    GlobalStorage.resultsTab.parsedData = parsedData;
+                    GlobalStorage.resultsTab.wetYear = wetYear;
+                    GlobalStorage.resultsTab.dryYear = dryYear;
+                    // graph data;
+                    let wetYearData = createGraphData(wetYear, parsedData);
+                    let dryYearData = createGraphData(dryYear, parsedData);
+                    let averageYearData = average;
+                    GlobalStorage.resultsTab.hydrogram.x = "months";
+                    GlobalStorage.resultsTab.hydrogram.y = [wetYearData, dryYearData, averageYearData];
+                    GlobalStorage.resultsTab.hydrogram.names = [`wet year(${wetYear})`, `dry year(${dryYear})`, 'average'];
+                    console.log(GlobalStorage);
+                });
             },
         );
     }

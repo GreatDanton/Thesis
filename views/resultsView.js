@@ -1,7 +1,8 @@
 import React from 'react';
 
 import {LineChart, BarChart} from '../components/commonParts/charts.js';
-import {createMonthlyFlow, getExtremeFlow, createGraphData, getAverageData} from '../scripts/parseCsv.js';
+//import {createMonthlyFlow, getExtremeFlow, createGraphData, getAverageData} from '../scripts/parseCsv.js';
+import GlobalStorage from '../scripts/globalStorage';
 
 
 class ResultsView extends React.Component {
@@ -11,7 +12,7 @@ class ResultsView extends React.Component {
 
     render() {
         // TODO: delete this later, leaving it here just for test
-        let sample_csv = `
+/*        let sample_csv = `
         1.1.2010,50.00
         2.1.2010,55.0
         3.1.2010,60.0
@@ -28,7 +29,10 @@ class ResultsView extends React.Component {
         let inputData = [];
         let data2 = [200, 50, 100, 50, 0, 100, 300, 0, -40, 30, 80, 100];
         inputData.push(graphData);
-        inputData.push(data2);
+        inputData.push(data2);*/
+
+        let inputData  = GlobalStorage.resultsTab.hydrogram.y;
+        let names = GlobalStorage.resultsTab.hydrogram.names;
 
         return (
             <div>
@@ -39,8 +43,8 @@ class ResultsView extends React.Component {
             </div>
 
             <div className="container-900">
-                <LineChart y={inputData} x={'months'} name={["2010", "custom"]} />
-                <BarChart y={inputData} x={'months'} name={["2010", "custom"]} />
+                <LineChart y={inputData} x={'months'} name={names} />
+                <BarChart y={inputData} x={'months'} name={names} />
             </div>
             </div>
         )

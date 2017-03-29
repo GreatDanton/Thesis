@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // my components imports
+import GlobalStorage from './globalStorage'
 import {ToolbarButtons} from '../views/toolbarButtons.js';
 import {TabsSwitcher} from '../views/tabsSwitcher.js';
 import {createMonthlyFlow, getExtremeFlow, createGraphData, getAverageData} from './parseCsv.js';
 
 window.onload = function(){
+  console.log(GlobalStorage);
 let sample_csv = `
 1.1.2010,50.00
 2.1.2010,55.0
