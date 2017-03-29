@@ -35,6 +35,7 @@ class ToolbarButtons extends React.Component {
                         return;
                     }
 
+                    // inserting data in global object - memory
                     let parsedData = createMonthlyFlow(data);
                     let average = getAverageData(parsedData);
                     let extremes = getExtremeFlow(parsedData);
@@ -45,7 +46,7 @@ class ToolbarButtons extends React.Component {
                     GlobalStorage.resultsTab.parsedData = parsedData;
                     GlobalStorage.resultsTab.wetYear = wetYear;
                     GlobalStorage.resultsTab.dryYear = dryYear;
-                    // graph data;
+                    // store graph data;
                     let wetYearData = createGraphData(wetYear, parsedData);
                     let dryYearData = createGraphData(dryYear, parsedData);
                     let averageYearData = average;

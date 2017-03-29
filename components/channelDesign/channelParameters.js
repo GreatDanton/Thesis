@@ -173,7 +173,7 @@ class CustomChannel extends React.Component {
         let Y = e.currentTarget.getAttribute('y');
         let points_arr = [];
         this.state.points.map(point => {
-            if (X !== point.x && Y !== point.y) {
+            if (X !== point.x || Y !== point.y) {
                 points_arr.push(point);
             }
         })

@@ -134,7 +134,6 @@ class ScatterChart extends React.Component {
 
     render() {
     let dataset = this.props.data.map((data, index) => {
-        console.log(data);
         return (
             {
                 label: this.props.name[index],
