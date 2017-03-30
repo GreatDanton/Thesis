@@ -10,10 +10,30 @@ class ResultsView extends React.Component {
         super(props);
     }
 
+    render() {
+        return (
+            <div className="container-900">
+               <Hydrogram />
+            </div>
+        )
+    }
+}
+
+
+// for displaying hydrogram charts
+class Hydrogram extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: GlobalStorage.resultsTab.hydrogram.y,
+            names: GlobalStorage.resultsTab.hydrogram.names
+        }
+    }
+
 // display hydrogam if data exists
-    hydrogram() {
-        let inputData  = GlobalStorage.resultsTab.hydrogram.y;
-        let names = GlobalStorage.resultsTab.hydrogram.names;
+    plot() {
+        let inputData = this.state.data;
+        let names = this.state.names;
 
         if (inputData.length == names.length && inputData.length > 0) {
             return (
@@ -33,13 +53,13 @@ class ResultsView extends React.Component {
     }
 
     render() {
-
         return (
-            <div className="container-900">
-               {this.hydrogram()}
+            <div>
+                {this.plot()}
             </div>
         )
     }
+
 }
 
 

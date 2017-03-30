@@ -9,9 +9,22 @@ class GlobalStorage {
 
         this.channelTab = {
             "active": '',
-            "rectangular": '',
-            "trapezoid": '',
-            "custom": ''
+            "rectangular": {
+                "h": '',
+                "B": '',
+                "ng": '',
+                "φ": ''
+            },
+            "trapezoid": {
+                "h": '',
+                "b": '',
+                "B": '',
+                "ng": '',
+                "φ": ''
+            },
+            "custom": {
+                "points": []
+            }
         };
         this.HETAb = {};
         this.resultsTab = {

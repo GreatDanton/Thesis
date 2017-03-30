@@ -5,16 +5,18 @@ import ReactDOM from 'react-dom';
 import {InputBox} from '../commonParts/inputBoxes.js';
 import {ScatterChart} from '../commonParts/charts.js';
 
+import GlobalStorage from '../../scripts/globalStorage';
 
 
 class RectangularChannel extends React.Component {
     constructor(props) {
         super(props);
+        this.storage = GlobalStorage.channelTab.rectangular;
         this.state = ({
-            h: '',
-            B: '',
-            ng: '',
-            φ: '',
+            h: this.storage.h,
+            B: this.storage.B,
+            ng: this.storage.ng,
+            φ: this.storage.φ,
         });
         this.handleChange = this.handleChange.bind(this);
         this.calculate = this.calculate.bind(this);
@@ -35,10 +37,10 @@ class RectangularChannel extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({[event.target.id]: event.target.value});
-        if (event.target.id === 'B' || event.target.id === 'b') {
-            console.log('hey');
-        }
+        let id = event.target.id;
+        let value = event.target.value;
+        this.setState({[id]: value});
+        this.storage[id] = value;
     }
 
     calculate() {
@@ -77,12 +79,13 @@ class RectangularChannel extends React.Component {
 class TrapezoidChannel extends React.Component {
     constructor(props) {
         super(props);
+        this.storage = GlobalStorage.channelTab.trapezoid;
         this.state = ({
-            B: '',
-            b: '',
-            h: '',
-            ng: '',
-            φ: ''
+            B: this.storage.B,
+            b: this.storage.b,
+            h: this.storage.h,
+            ng: this.storage.ng,
+            φ: this.storage.φ
         });
         this.handleChange = this.handleChange.bind(this);
     }
@@ -108,12 +111,14 @@ class TrapezoidChannel extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({[event.target.id]: event.target.value},
+        let value = event.target.value;
+        let id = event.target.id;
+        this.setState({[id]: value},
         function() {  // callback function
             console.log('area: ' + this.area());
             console.log('circumference: ' + this.circumference());
-        }
-        );
+        });
+        this.storage[id] = value; // save value of input into global storage
     }
 
     render() {
@@ -144,7 +149,8 @@ class TrapezoidChannel extends React.Component {
 class CustomChannel extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {points: [], x: '', y: ''};
+        this.storage = GlobalStorage.channelTab.custom;
+        this.state = {points: this.storage.points, x: '', y: ''};
         this.onChange = this.onChange.bind(this);
         this.addPoint = this.addPoint.bind(this);
         this.onRowClick = this.onRowClick.bind(this);
@@ -156,11 +162,12 @@ class CustomChannel extends React.Component {
         // if x & y are numbers, add them to the table
         let X = parseFloat(this.state.x);
         let Y = parseFloat(this.state.y);
-        if (!isNaN(X) && !isNaN(Y)) {
+        if (!isNaN(X) && !isNaN(Y)) { // if x and y is number
             let p = {x: this.state.x, y: this.state.y};
             let points = this.state.points.slice();
             points.push(p);
             this.setState({points: points, x: '', y: ''}); // add new array, and reset input fields
+            this.storage.points = points; // save points array into storage
         }
     }
 

@@ -67,7 +67,7 @@ class ChannelOptions extends React.Component {
             if (option.id === this.state.selectedOption) {
                 render = option.render;
             }
-        })
+        });
 
             ReactDOM.render(
                 render, document.getElementById('channel-parameters')
@@ -77,9 +77,6 @@ class ChannelOptions extends React.Component {
         componentDidMount() {
             this.renderParams();
         }
-
-        // use componentDidUnmount to save state (:, and componentWillMount to load states
-        // to local storage???
 
 
         render() {
