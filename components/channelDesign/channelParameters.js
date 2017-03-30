@@ -17,6 +17,8 @@ class RectangularChannel extends React.Component {
             B: this.storage.B,
             ng: this.storage.ng,
             φ: this.storage.φ,
+            P: this.storage.P,
+            S: this.storage.S
         });
         this.handleChange = this.handleChange.bind(this);
         this.calculate = this.calculate.bind(this);
@@ -39,13 +41,22 @@ class RectangularChannel extends React.Component {
     handleChange(event) {
         let id = event.target.id;
         let value = event.target.value;
-        this.setState({[id]: value});
+        let calculateIf = ['B', 'h'];
+        this.setState({[id]: value},
+        function() {
+            if (calculateIf.indexOf(id) > -1) {
+                this.storage.S = this.area();
+                this.storage.P = this.circumference();
+                console.log(GlobalStorage);
+            }
+        });
         this.storage[id] = value;
     }
 
     calculate() {
-        console.log('S: ' + this.area());
-        console.log('P: ' + this.circumference());
+        this.setState({"S": this.area(), "P": this.circumference()})
+        this.storage.S = this.area;
+        this.storage.P = this.circumference();
     }
 
     render() {
@@ -59,7 +70,6 @@ class RectangularChannel extends React.Component {
                             <br/>
                             <InputBox id="ng" end="/" value={this.state.ng} onChange={this.handleChange}/>
                             <InputBox id="φ" end="%" value={this.state.φ} onChange={this.handleChange}/>
-                            <div className="btn btn-primary" onClick={this.calculate}> Calculate </div>
                         </div>
                         <div className="col-70">
                             <img className="img-guide" src="images/rectangularChannel_guide.svg" />
@@ -85,7 +95,9 @@ class TrapezoidChannel extends React.Component {
             b: this.storage.b,
             h: this.storage.h,
             ng: this.storage.ng,
-            φ: this.storage.φ
+            φ: this.storage.φ,
+            S: this.storage.S,
+            P: this.storage.P
         });
         this.handleChange = this.handleChange.bind(this);
     }
@@ -113,10 +125,15 @@ class TrapezoidChannel extends React.Component {
     handleChange(event) {
         let value = event.target.value;
         let id = event.target.id;
+        let calculateIf = ['B', 'b','h'];
+
         this.setState({[id]: value},
         function() {  // callback function
-            console.log('area: ' + this.area());
-            console.log('circumference: ' + this.circumference());
+            if (calculateIf.indexOf(id) > 0) {
+                this.storage.S = this.area();
+                this.storage.P = this.circumference();
+                console.log(GlobalStorage);
+            }
         });
         this.storage[id] = value; // save value of input into global storage
     }

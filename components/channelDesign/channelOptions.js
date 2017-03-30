@@ -72,34 +72,34 @@ class ChannelOptions extends React.Component {
             ReactDOM.render(
                 render, document.getElementById('channel-parameters')
             )
-        }
+    }
 
-        componentDidMount() {
-            this.renderParams();
-        }
+    componentDidMount() {
+        this.renderParams();
+    }
 
 
-        render() {
-            let cards = this.state.options.map((option, index) => {
-                return (
-                    <div className="col-30" key={index}
-                id={"card-" + option.id} onClick={this.onClick}>
-                    <Card id={option.id} value={option.id}
-                    image={option.img}
-                    active={this.state.selectedOption === option.id}
-                    checked={this.state.selectedOption === option.id}
-                    onChange={this.handleChange} />
-                </div>
-            );
-        });
-
-        return (
-            <div className="container-900">
-                <div className="row space-around padding-v-40">
-                    {cards}
-                </div>
+    render() {
+        let cards = this.state.options.map((option, index) => {
+            return (
+                <div className="col-30" key={index}
+            id={"card-" + option.id} onClick={this.onClick}>
+                <Card id={option.id} value={option.id}
+                image={option.img}
+                active={this.state.selectedOption === option.id}
+                checked={this.state.selectedOption === option.id}
+                onChange={this.handleChange} />
             </div>
-        )
+        );
+    });
+
+    return (
+        <div className="container-900">
+            <div className="row space-around padding-v-40">
+                {cards}
+            </div>
+        </div>
+    )
     }
 }
 

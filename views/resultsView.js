@@ -45,9 +45,9 @@ class Hydrogram extends React.Component {
         }
         else {
             return (
-                <div className="data-not-imported">
-                    <h2> Import data too see graphs </h2>
-                </div>
+                    <div className="data-not-imported">
+                        <h2> Import data to see graphs </h2>
+                    </div>
             )
         }
     }

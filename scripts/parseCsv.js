@@ -114,7 +114,7 @@ function createGraphData(year, waterFlow) {
         if (months.indexOf(i+1) < 0) {
             graphData.push(0); // if month data is missing assign 0
         } else {
-            graphData.push(chosenYear[i+1]);
+            graphData.push(chosenYear[i+1].toFixed(1));
         }
     }
 
@@ -146,7 +146,14 @@ function getAverageData(waterFlow) {
 
     let averageData = monthlyData[0].map((_, i) =>
     monthlyData.reduce((p,_,j) => p + monthlyData[j][i]/numOfYears, 0 ));
-    return averageData;
+
+    let finalData = averageData.map((data) => {
+        return (
+            data.toFixed(1)
+        )
+    });
+
+    return finalData;
 }
 
 
