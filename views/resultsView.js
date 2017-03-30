@@ -20,6 +20,29 @@ class ResultsView extends React.Component {
 }
 
 
+
+// create consumption curve out of active channel data
+// TODO
+class ConsumptionCurve extends React.Component {
+    constructor(props) {
+        super(props);
+        this.storage = GlobalStorage.channelTab;
+    }
+
+    plot() {
+        let activeChannel = this.storage.active;
+    }
+
+    render() {
+        return (
+            <div>
+                <LineChart y={} x={} />
+            </div>
+        )
+    }
+}
+
+
 // for displaying hydrogram charts
 class Hydrogram extends React.Component {
     constructor(props) {

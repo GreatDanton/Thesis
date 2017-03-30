@@ -34,7 +34,6 @@ class ChannelOptions extends React.Component {
 
 // load selected channel when component will mount
     componentWillMount() {
-        console.log('fired');
         let selectedChannel = GlobalStorage.channelTab.active;
         if (selectedChannel.length > 0) {
         this.state.options.map(option => {

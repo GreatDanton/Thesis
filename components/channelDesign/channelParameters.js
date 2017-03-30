@@ -208,9 +208,6 @@ class CustomChannel extends React.Component {
     render() {
 
         return (
-            <div>
-                <h2> Custom channel </h2>
-
                 <div className="container-900">
                     <div className="row">
                         <div className="col-30">
@@ -231,7 +228,6 @@ class CustomChannel extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>
         )
     }
 }
