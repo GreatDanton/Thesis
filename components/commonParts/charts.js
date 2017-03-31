@@ -124,8 +124,6 @@ class BarChart extends React.Component {
 }
 
 
-import Chart from 'chart.js';
-
 class ScatterChart extends React.Component {
     constructor(props) {
         super(props);
@@ -133,6 +131,31 @@ class ScatterChart extends React.Component {
     }
 
     render() {
+        let PBR = 0;
+        let PHR = 0;
+        let PHBW = 0;
+        let PR = 0;
+    if (this.props.pointBorder === 'y') {
+        PBR = 2;
+        PHR = 5;
+        PHBW = 2;
+        PR = 4;
+    }
+    let lineTension = 0;
+    if (this.props.smooth === 'y') {
+       lineTension = 0.3;
+    }
+
+    let yAxes = '';
+    if (this.props.yAxes) {
+        yAxes = this.props.yAxes;
+    }
+
+    let xAxes = '';
+    if (this.props.xAxes) {
+        xAxes = this.props.xAxes;
+    }
+
     let dataset = this.props.data.map((data, index) => {
         return (
             {
@@ -147,12 +170,12 @@ class ScatterChart extends React.Component {
                 borderJoinStyle: 'miter',
                 pointBorderColor: this.colors[index][0],
                 pointBackgroundColor: '#fff',
-                pointBorderWidth: 2,
-                pointHoverRadius: 5,
+                pointBorderWidth: PBR,
+                pointHoverRadius: PHR,
                 pointHoverBackgroundColor: this.colors[index][0],
                 pointHoverBorderColor: 'rgba(220,220,220,0)',
-                pointHoverBorderWidth: 2,
-                pointRadius: 4,
+                pointHoverBorderWidth: PHBW,
+                pointRadius: PR,
                 pointHitRadius: 10,
                 data: this.props.data[index],
             }
@@ -165,7 +188,17 @@ class ScatterChart extends React.Component {
         scales: {
             xAxes: [{
                 type: 'linear',
-                position: 'bottom'
+                position: 'bottom',
+                scaleLabel: {
+                    display: true,
+                    labelString: xAxes
+                }
+            }],
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: yAxes,
+                }
             }]
         }
     }

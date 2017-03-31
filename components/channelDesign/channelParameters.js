@@ -224,7 +224,7 @@ class CustomChannel extends React.Component {
                             <PointsTable data={this.state.points} onClick={this.onRowClick} />
                         </div>
                         <div className="col-70 padding-h-20">
-                            <ScatterChart name={["custom channel"]} data={[this.state.points]} />
+                            <ScatterChart name={["custom channel"]} data={[this.state.points]} pointBorder={'y'} />
                         </div>
                     </div>
                 </div>
