@@ -9,15 +9,24 @@ function rectangle_circumference(b, h) {
     return (2 * h + b);
 }
 
-function trapezoid_area(b, h, angle) {
-    let x = h / Math.tan(angle);
-    return ( b * h + x * h);
+function trapezoid_area(b, h, beta) {
+    b = parseFloat(b);
+    h = parseFloat(h);
+    beta = parseFloat(beta) * Math.PI / 180; // beta should be in radians
+    let x = h / (Math.tan(beta)); // beta in radians
+    let area = b * h + x * h;
+    return area;
 }
 
-function trapezoid_circumference(b, h, angle) {
-    let x = h / Math.tan(angle);
+function trapezoid_circumference(b, h, beta) {
+    b = parseFloat(b);
+    h = parseFloat(h);
+    beta = parseFloat(beta) * Math.PI / 180; // beta should be in radians
+
+    let x = h / (Math.tan(beta));
     let sides = (x**2 + h**2)**(1/2);
-    return (b + 2*sides);
+    let P = b + 2 * sides;
+    return P;
 }
 
 // calculates water flow [m3/s]
@@ -25,8 +34,8 @@ function trapezoid_circumference(b, h, angle) {
 // circumference [m]
 // angle [%]
 // ng [/]
-function ManningEquation(area, circumference, ng, angle) {
-   let flow = 1/ng * (angle/100)**(1/2) * (area / circumference)**(2/3) * area;
+function ManningEquation(area, circumference, ng, channelAngle) {
+   let flow = 1/ng * (channelAngle/100)**(1/2) * (area / circumference)**(2/3) * area;
     return flow;
 }
 

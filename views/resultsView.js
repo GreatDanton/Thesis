@@ -33,8 +33,6 @@ class ConsumptionCurve extends React.Component {
 
     plot() {
         let activeChannel = this.storage.active;
-        let area;
-        let circumference;
         let points = [];
 
         if (activeChannel == 'Rectangular') {
@@ -46,18 +44,28 @@ class ConsumptionCurve extends React.Component {
             for (let i = 0; i < h; i += 0.01) {
                 let area = rectangle_area(b, i);
                 let circumference = rectangle_circumference(b, i);
-                let Q = ManningEquation(area, circumference, ng, angle);
-
-                points.push({'x': Q, 'y': i});
+                let Q = ManningEquation(area, circumference, ng, angle).toFixed(2);
+                let Y = i.toFixed(2);
+                points.push({'x': Q, 'y': Y});
             }
         } else if (activeChannel == 'Trapezoid') {
-            let h = this.storage.trapezoid.h;
-            let b = this.storage.trapezoid.B;
+            let h = parseFloat(this.storage.trapezoid.h);
+            let b = parseFloat(this.storage.trapezoid.b);
+            let B = parseFloat(this.storage.trapezoid.B);
+            let ng = parseFloat(this.storage.trapezoid.ng);
+            let channelAngle = parseFloat(this.storage.trapezoid.φ);
+            // calculate angle of sides
+            let _x = (B - b) / 2
+            let beta = (Math.atan(h / _x)) * 180 / Math.PI;
 
-            let areaFunc = trapezoid_area;
-            let circFunc = trapezoid_circumference;
+            for (let i = 0; i < h; i += 0.01) {
+                let area = trapezoid_area(b, i, beta);
+                let circumference = trapezoid_circumference(b, h, beta);
+                let Q = ManningEquation(area, circumference, ng, channelAngle).toFixed(2);
+                let Y = i.toFixed(2);
+                points.push({'x': Q, 'y': Y});
+            }
         } else if (activeChannel == 'Custom') {
-            console.log('custom');
             console.log('custom');
         }
 
@@ -67,8 +75,7 @@ class ConsumptionCurve extends React.Component {
 
     render() {
         let data = this.plot();
-        console.log(data);
-        if (data.length == 0) {
+        if (data[0].length === 0) {
             return (
                 <div className="data-not-imported">
                     <h2>  Add channel parameters to see consumption curve </h2>
@@ -77,6 +84,7 @@ class ConsumptionCurve extends React.Component {
         } else {
             return (
                 <div>
+                    <h3> Consumption curve </h3>
                     <ScatterChart data={data} name={["consumption curve"]} smooth={'y'} xAxes={'Q [m3/s]'} yAxes={'h [m]'}/>
                 </div>
             )
@@ -104,6 +112,7 @@ class Hydrogram extends React.Component {
         if (inputData.length == names.length && inputData.length > 0) {
             return (
                 <div>
+                    <h3> Hydrogram </h3>
                     <LineChart y={inputData} x={'months'} name={names} />
                     <BarChart y={inputData} x={'months'} name={names} />
                 </div>
