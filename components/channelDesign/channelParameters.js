@@ -170,7 +170,7 @@ class CustomChannel extends React.Component {
         this.state = {points: this.storage.points, x: '', y: ''};
         this.onChange = this.onChange.bind(this);
         this.addPoint = this.addPoint.bind(this);
-        this.onRowClick = this.onRowClick.bind(this);
+        this.deleteClick = this.deleteClick.bind(this);
     }
 
     // add new point to state
@@ -192,17 +192,18 @@ class CustomChannel extends React.Component {
         this.setState({[e.target.id]: e.target.value});
     }
 
-    onRowClick(e) {
+    deleteClick(e) {
         let X = e.currentTarget.getAttribute('x');
         let Y = e.currentTarget.getAttribute('y');
         let points_arr = [];
         this.state.points.map(point => {
+            // if x or y are not the same, push it to points array (this filters out unwanted point)
             if (X !== point.x || Y !== point.y) {
                 points_arr.push(point);
             }
         })
-
         this.setState({points: points_arr});
+        this.storage.points = points_arr;
     }
 
     render() {
@@ -221,13 +222,51 @@ class CustomChannel extends React.Component {
                                 <button type="submit" className="btn btn-primary"> Add </button>
                             </div>
                             </form>
-                            <PointsTable data={this.state.points} onClick={this.onRowClick} />
+
+                            <div className="row margin-u-40">
+                                <div className="col-80">
+                                    <PointsTable data={this.state.points} onClick={this.deleteClick} />
+                                </div>
+                                <div className="col-20">
+                                    <NgTable />
+                                </div>
+                            </div>
                         </div>
                         <div className="col-70 padding-h-20">
                             <ScatterChart name={["custom channel"]} data={[this.state.points]} pointBorder={'y'} />
                         </div>
                     </div>
                 </div>
+        )
+    }
+}
+
+class NgTable extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+                <table className="ngTable">
+                    <thead>
+                        <tr>
+                            <th> ng </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" className="ngInput" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" className="ngInput" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
         )
     }
 }
@@ -248,7 +287,7 @@ class PointsTable extends React.Component {
         });
 
         return (
-            <table className="zebra margin-u-40">
+            <table className="zebra">
                 <thead>
                     <tr>
                         <th> </th>
