@@ -228,7 +228,7 @@ class CustomChannel extends React.Component {
                                     <PointsTable data={this.state.points} onClick={this.deleteClick} />
                                 </div>
                                 <div className="col-20">
-                                    <NgTable />
+                                    <NgTable  displayInputs={this.state.points} />
                                 </div>
                             </div>
                         </div>
@@ -241,12 +241,41 @@ class CustomChannel extends React.Component {
     }
 }
 
+
+// custom channel renders ng input for number of points -1
 class NgTable extends React.Component {
     constructor(props) {
         super(props);
+        this.onChange = this.onChange.bind(this);
+        this.storage = GlobalStorage.channelTab.custom.ngInputs;
+        // state is present in order to change inputs later, otherwise we cannot change inputs after initial input
+        this.state = {inputValues: this.storage};
+    }
+
+    onChange(e) {
+        let id = e.target.id;
+        let value = e.target.value;
+        this.storage[id] = value;
+        this.setState({inputValues: this.storage});
     }
 
     render() {
+        let points = this.props.displayInputs;
+        let numOfPoints = points.length - 1;
+        let displayInputs = [];
+
+        if (numOfPoints > 0) {
+            for (let i = 0; i < numOfPoints; i++) {
+                displayInputs.push(
+                    <tr key={i}>
+                        <td>
+                            <input id={i} type="text" className="ngInput" onChange={this.onChange} value={this.storage[i]}/>
+                        </td>
+                    </tr>
+                )
+            }
+        }
+
         return (
                 <table className="ngTable">
                     <thead>
@@ -255,22 +284,12 @@ class NgTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <input type="text" className="ngInput" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text" className="ngInput" />
-                            </td>
-                        </tr>
+                        {displayInputs}
                     </tbody>
                 </table>
         )
     }
 }
-
 
 
 class PointsTable extends React.Component {

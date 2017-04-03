@@ -28,6 +28,7 @@ class GlobalStorage {
             },
             "custom": {
                 "points": [],
+                "ngInputs": {},
                 "S": '',
                 "P": ''
             }
