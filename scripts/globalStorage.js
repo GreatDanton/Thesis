@@ -7,6 +7,7 @@ class GlobalStorage {
     constructor() {
         this.activeTab = '';
         this.channelTab = {
+            "consumptionCurve": [],
             "active": '',
             "rectangular": {
                 "h": '',
@@ -14,7 +15,7 @@ class GlobalStorage {
                 "ng": '',
                 "φ": '',
                 "S": '',
-                "P": ''
+                "P": '',
             },
             "trapezoid": {
                 "h": '',
@@ -23,13 +24,13 @@ class GlobalStorage {
                 "ng": '',
                 "φ": '',
                 "S": '',
-                "P": ''
+                "P": '',
             },
             "custom": {
                 "points": [],
                 "ngInputs": {},
                 "S": '',
-                "P": ''
+                "P": '',
             }
         };
         this.HETAb = {

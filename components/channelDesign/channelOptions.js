@@ -35,12 +35,12 @@ class ChannelOptions extends React.Component {
 // load selected channel when component will mount
     componentWillMount() {
         let selectedChannel = GlobalStorage.channelTab.active;
-        if (selectedChannel.length > 0) {
-        this.state.options.map(option => {
-            if (option.id === selectedChannel) {
-                this.setState({selectedOption: selectedChannel}, this.renderParams);
-            }
-        });
+        if (selectedChannel.length > 0) { // if active tab exist in GlobalStorage load it
+            this.state.options.map(option => {
+                if (option.id === selectedChannel) {
+                    this.setState({selectedOption: selectedChannel}, this.renderParams);
+                }
+            });
         }
     }
 
@@ -68,9 +68,9 @@ class ChannelOptions extends React.Component {
             }
         });
 
-            ReactDOM.render(
-                render, document.getElementById('channel-parameters')
-            )
+        ReactDOM.render(
+            render, document.getElementById('channel-parameters')
+        )
     }
 
     componentDidMount() {
@@ -82,13 +82,13 @@ class ChannelOptions extends React.Component {
         let cards = this.state.options.map((option, index) => {
             return (
                 <div className="col-30" key={index}
-            id={"card-" + option.id} onClick={this.onClick}>
-                <Card id={option.id} value={option.id}
-                image={option.img}
-                active={this.state.selectedOption === option.id}
-                checked={this.state.selectedOption === option.id}
-                onChange={this.handleChange} />
-            </div>
+                    id={"card-" + option.id} onClick={this.onClick}>
+                    <Card id={option.id} value={option.id}
+                        image={option.img}
+                        active={this.state.selectedOption === option.id}
+                        checked={this.state.selectedOption === option.id}
+                        onChange={this.handleChange} />
+                </div>
         );
     });
 

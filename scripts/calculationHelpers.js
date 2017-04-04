@@ -9,7 +9,6 @@ import {rectangle_area, rectangle_circumference, trapezoid_area, trapezoid_circu
 
 export function createConsumptionCurve(activeChannel) {
     let storage = GlobalStorage.channelTab;
-    console.log(storage);
     let points = [];
 
     if (activeChannel == 'Rectangular') {
