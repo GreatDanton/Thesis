@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 
-import {LineChart, BarChart, ScatterChart} from '../components/commonParts/charts.js';
-import {rectangle_area, rectangle_circumference, trapezoid_area, trapezoid_circumference, ManningEquation} from '../scripts/shapeProperties';
-//import {createMonthlyFlow, getExtremeFlow, createGraphData, getAverageData} from '../scripts/parseCsv.js';
 import GlobalStorage from '../scripts/globalStorage';
+import {LineChart, BarChart, ScatterChart} from '../components/commonParts/charts.js';
+import {createConsumptionCurve} from '../scripts/calculationHelpers';
 
 
 class ResultsView extends React.Component {
@@ -29,10 +28,40 @@ class ResultsView extends React.Component {
             <div className="container-900">
                <Hydrogram data={this.state.HydrogramData} names={this.state.HydrogramNames} />
                <ConsumptionCurve />
+               <EnergyProduction />
             </div>
         )
     }
 }
+
+
+
+class EnergyProduction extends React.Component {
+    constructor(props) {
+        super(props);
+        this.storage = GlobalStorage.HETAb;
+        this.state = {
+            Qmin: this.storage.Qmin,
+            Qmax: this.storage.Qmax,
+            H: this.storage.H,
+            η:this.storage.η
+        }
+        // get consumption curve
+    }
+
+    calculatePower() {
+        console.log('power');
+    }
+
+    render() {
+        return (
+            <div className="data-not-imported">
+                <h2> Add power plant parameters & flow data to see produced electricity </h2>
+            </div>
+        )
+    }
+}
+
 
 
 
@@ -46,44 +75,8 @@ class ConsumptionCurve extends React.Component {
 
     plot() {
         let activeChannel = this.storage.active;
-        let points = [];
-
-        if (activeChannel == 'Rectangular') {
-            let h = parseFloat(this.storage.rectangular.h);
-            let b = parseFloat(this.storage.rectangular.B);
-            let ng = parseFloat(this.storage.rectangular.ng);
-            let angle = parseFloat(this.storage.rectangular.φ);
-
-            for (let i = 0; i < h; i += 0.01) {
-                let area = rectangle_area(b, i);
-                let circumference = rectangle_circumference(b, i);
-                let Q = ManningEquation(area, circumference, ng, angle).toFixed(2);
-                let Y = i.toFixed(2);
-                points.push({'x': Q, 'y': Y});
-            }
-        } else if (activeChannel == 'Trapezoid') {
-            let h = parseFloat(this.storage.trapezoid.h);
-            let b = parseFloat(this.storage.trapezoid.b);
-            let B = parseFloat(this.storage.trapezoid.B);
-            let ng = parseFloat(this.storage.trapezoid.ng);
-            let channelAngle = parseFloat(this.storage.trapezoid.φ);
-            // calculate angle of sides
-            let _x = (B - b) / 2
-            let beta = (Math.atan(h / _x)) * 180 / Math.PI;
-
-            for (let i = 0; i < h; i += 0.01) {
-                let area = trapezoid_area(b, i, beta);
-                let circumference = trapezoid_circumference(b, h, beta);
-                let Q = ManningEquation(area, circumference, ng, channelAngle).toFixed(2);
-                let Y = i.toFixed(2);
-                points.push({'x': Q, 'y': Y});
-            }
-        } else if (activeChannel == 'Custom') {
-            console.log('custom');
-        }
-
-        let pointsArray = [points];
-        return pointsArray;
+        let points = createConsumptionCurve(activeChannel);
+        return points;
     }
 
     render() {
@@ -102,7 +95,6 @@ class ConsumptionCurve extends React.Component {
                 </div>
             )
         }
-
     }
 }
 
@@ -131,7 +123,7 @@ class Hydrogram extends React.Component {
         else {
             return (
                     <div className="data-not-imported">
-                        <h2> Import data to see graphs </h2>
+                        <h2> Import flow data to see graphs </h2>
                     </div>
             )
         }
@@ -144,7 +136,6 @@ class Hydrogram extends React.Component {
             </div>
         )
     }
-
 }
 
 

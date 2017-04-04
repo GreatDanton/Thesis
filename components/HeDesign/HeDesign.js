@@ -5,6 +5,22 @@ import GlobalStorage from '../../scripts/globalStorage';
 
 class HeDesign extends React.Component {
     constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <div>
+                <Turbine />
+            </div>
+        )
+    }
+
+}
+
+
+class Turbine extends React.Component {
+    constructor(props) {
         super(props)
         this.storage = GlobalStorage.HETAb;
         this.state = {
@@ -14,7 +30,7 @@ class HeDesign extends React.Component {
             η: this.storage.η
         }
         this.onChange = this.onChange.bind(this);
-    }
+}
 
     onChange(e) {
         let id = e.target.id;
