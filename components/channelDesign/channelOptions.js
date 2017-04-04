@@ -94,7 +94,7 @@ class ChannelOptions extends React.Component {
 
     return (
         <div className="container-900">
-            <div className="row space-around padding-v-40">
+            <div className="row space-around margin-b-40">
                 {cards}
             </div>
         </div>

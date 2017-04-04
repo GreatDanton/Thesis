@@ -32,7 +32,12 @@ class GlobalStorage {
                 "P": ''
             }
         };
-        this.HETAb = {};
+        this.HETAb = {
+            "Qmin": '',
+            "Qmax": '',
+            "H": '',
+            "η": '',
+        };
         this.resultsTab = {
             "rawData": '',
             "parsedData": '',

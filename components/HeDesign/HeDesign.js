@@ -1,10 +1,28 @@
 import React from 'react';
 
 import {InputBox} from '../commonParts/inputBoxes.js';
+import GlobalStorage from '../../scripts/globalStorage';
 
 class HeDesign extends React.Component {
     constructor(props) {
         super(props)
+        this.storage = GlobalStorage.HETAb;
+        this.state = {
+            Qmin: this.storage.Qmin,
+            Qmax: this.storage.Qmax,
+            H: this.storage.H,
+            η: this.storage.η
+        }
+        this.onChange = this.onChange.bind(this);
+    }
+
+    onChange(e) {
+        let id = e.target.id;
+        let value = e.target.value;
+        this.setState({
+            [id]: value
+        });
+        this.storage[id] = value;
     }
 
     render() {
@@ -13,10 +31,11 @@ class HeDesign extends React.Component {
                 <div className="container-900">
                     <div className="row">
                         <div className="col-30">
-                            <InputBox id="Q" end="m^3/s" />
-                            <InputBox id="Δh" end="m" />
+                            <InputBox id="Qmin" end="m^3/s" onChange={this.onChange} value={this.state.Qmin}/>
+                            <InputBox id="Qmax" end="m^3/s" onChange={this.onChange} value={this.state.Qmax}/>
+                            <InputBox id="H" end="m" onChange={this.onChange} value={this.state.H} />
                             <br/>
-                            <InputBox id="η" end="%" />
+                            <InputBox id="η" end="%" onChange={this.onChange} value={this.state.η} />
                         </div>
                         <div className="col-70">
                             <img className="img-guide" src="images/powerplant_crossSection.svg" />

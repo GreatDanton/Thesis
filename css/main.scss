@@ -83,7 +83,7 @@
     }
     
     .main-body {
-        margin-top: 70px;
+        margin-top: 120px;
     }
     
     .card {
@@ -179,7 +179,7 @@
         margin: 10px 0;
         label:nth-child(1) {
             display: flex;
-            min-width: 30px;
+            min-width: 40px;
             line-height: 30px;
             flex-flow: row-reverse;
         }
@@ -313,6 +313,10 @@
     
     .margin-u-40 {
         margin-top: 40px;
+    }
+    
+    .margin-b-40 {
+        margin-bottom: 40px;
     }
     /* Table */
     
