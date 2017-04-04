@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom'
 
 import {LineChart, BarChart, ScatterChart} from '../components/commonParts/charts.js';
 import {rectangle_area, rectangle_circumference, trapezoid_area, trapezoid_circumference, ManningEquation} from '../scripts/shapeProperties';
@@ -9,12 +10,24 @@ import GlobalStorage from '../scripts/globalStorage';
 class ResultsView extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            HydrogramData: GlobalStorage.resultsTab.hydrogram.y,
+            HydrogramNames: GlobalStorage.resultsTab.hydrogram.names
+        }
+    }
+
+// update hydrogram on rerender resultsView component
+    componentWillReceiveProps() {
+        this.setState({
+            HydrogramData: GlobalStorage.resultsTab.hydrogram.y,
+            HydrogramNames: GlobalStorage.resultsTab.hydrogram.names
+        });
     }
 
     render() {
         return (
             <div className="container-900">
-               <Hydrogram />
+               <Hydrogram data={this.state.HydrogramData} names={this.state.HydrogramNames} />
                <ConsumptionCurve />
             </div>
         )
@@ -98,16 +111,13 @@ class ConsumptionCurve extends React.Component {
 class Hydrogram extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            data: GlobalStorage.resultsTab.hydrogram.y,
-            names: GlobalStorage.resultsTab.hydrogram.names
-        }
+        this.plot = this.plot.bind(this);
     }
 
 // display hydrogam if data exists
     plot() {
-        let inputData = this.state.data;
-        let names = this.state.names;
+        let inputData = this.props.data;
+        let names = this.props.names;
 
         if (inputData.length == names.length && inputData.length > 0) {
             return (

@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import {ChannelView} from './channelView.js';
 import {HeView} from './HEView.js';
 import {ResultsView} from './resultsView.js';
+import GlobalStorage from '../scripts/globalStorage';
 
 let Tabs = [
         {
@@ -32,6 +33,7 @@ class TabsSwitcher extends React.Component {
   changeView(e) {
       let name = e.target.innerText;
       this.setState({active: name}, this.renderNewView);
+      GlobalStorage.activeTab = name;
   }
 
 // when component mounts, render correct view (according to currently active tab)

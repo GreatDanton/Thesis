@@ -5,8 +5,7 @@
 // given the same instance of GlobalStorage -> Singleton pattern
 class GlobalStorage {
     constructor() {
-        this.storage = {'a': "hello"};
-
+        this.activeTab = '';
         this.channelTab = {
             "active": '',
             "rectangular": {

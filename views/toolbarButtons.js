@@ -1,10 +1,13 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+
 const fs = require('fs'); // load file system;
 const dialog = require('electron').remote.dialog
 
 // import globalStorage
 import GlobalStorage from '../scripts/globalStorage';
 import {createMonthlyFlow, getExtremeFlow, createGraphData, getAverageData} from '../scripts/parseCsv';
+import {ResultsView} from './resultsView';
 
 
 class ToolbarButtons extends React.Component {
@@ -54,6 +57,15 @@ class ToolbarButtons extends React.Component {
                     GlobalStorage.resultsTab.hydrogram.y = [wetYearData, dryYearData, averageYearData];
                     GlobalStorage.resultsTab.hydrogram.names = [`wet year(${wetYear})`, `dry year(${dryYear})`, 'average'];
                     console.log(GlobalStorage);
+
+                    // if button is clicked when results tab is active, rerender results tab (show hydrogram)
+                    if (GlobalStorage.activeTab === 'Results') {
+                        ReactDOM.render(
+                            <ResultsView />,
+                            document.getElementById('main-window')
+                        )
+                    }
+
                 });
             },
         );
