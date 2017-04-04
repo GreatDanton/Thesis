@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import {RectangularChannel, TrapezoidChannel, CustomChannel} from './channelParameters.js';
 import GlobalStorage from '../../scripts/globalStorage';
+import {createConsumptionCurve} from '../../scripts/calculationHelpers';
 
 let Options = [
             {
@@ -44,9 +45,11 @@ class ChannelOptions extends React.Component {
         }
     }
 
-// save selected channel to global storage
+// save selected channel and consumption curve for active channel to global storage
     componentWillUnmount() {
-        GlobalStorage.channelTab.active = this.state.selectedOption;
+        let activeChannel = this.state.selectedOption;
+        GlobalStorage.channelTab.active = activeChannel;
+        GlobalStorage.channelTab.consumptionCurve = createConsumptionCurve(activeChannel);
     }
 
     // on card click select correct radio button

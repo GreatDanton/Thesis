@@ -39,6 +39,7 @@ class ResultsView extends React.Component {
 class EnergyProduction extends React.Component {
     constructor(props) {
         super(props);
+        this.consumptionCurve = GlobalStorage.channelTab.consumptionCurve;
         this.storage = GlobalStorage.HETAb;
         this.state = {
             Qmin: this.storage.Qmin,
@@ -49,14 +50,53 @@ class EnergyProduction extends React.Component {
         // get consumption curve
     }
 
+// TODO: Finish this
     calculatePower() {
-        console.log('power');
+        let consumptionCurve = GlobalStorage.channelTab.consumptionCurve;
+        let averageData = GlobalStorage.resultsTab.hydrogram.y[2]; // flow
+
+        for (let i of averageData) {
+            let currentFlow = i;
+            let Qmin;
+            let Qmax;
+            let Q_month;
+
+            for (let j = 0; j < consumptionCurve.length; j++ ) {
+                let Q_current = consumptionCurve[j];
+                let Q_future = consumptionCurve[j+1];
+
+// future Q does not exist => which means our monthly average flow is bigger than top of our consumption curve
+// => water is spilling over channel ?
+                if (Q_future === undefined) {
+                    Qmax = currentFlow;
+                    Q_month = currentFlow;
+                    Qmin = Q_current;
+                }
+                else if (Q_current < currentFlow && Q_future < currentFlow) {
+                    continue;
+                }
+                else if (Q_current < currentFlow && Q_future > currentFlow) {
+                   Qmin = Q_current;
+                   Qmax = Q_future;
+                   Q_month = currentFlow;
+                   break;
+                }
+// first flow bigger than average monthly flow -> probably something wrong with data
+                else if (Q_current > currentFlow) {
+                    console.log('current Q > averageMonthly flow -> probably something wrong with data, check resultsView script')
+                    break;
+                }
+
+            }
+            console.log(currentFlow);
+        }
     }
 
     render() {
         return (
             <div className="data-not-imported">
                 <h2> Add power plant parameters & flow data to see produced electricity </h2>
+                {this.calculatePower()}
             </div>
         )
     }
@@ -80,7 +120,8 @@ class ConsumptionCurve extends React.Component {
     }
 
     render() {
-        let data = this.plot();
+        let data = this.storage.consumptionCurve;
+
         if (data[0].length === 0) {
             return (
                 <div className="data-not-imported">
