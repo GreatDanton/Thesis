@@ -48,13 +48,15 @@ class EnergyProduction extends React.Component {
     calculatePower() {
         let consumptionCurve = GlobalStorage.channelTab.consumptionCurve;
         let averageData = GlobalStorage.resultsTab.hydrogram.y[2]; // flow
-
         let daysInMonth = GlobalStorage.daysInMonth;
         let Qmin = parseFloat(this.storage.Qmin);
         let Qmax = parseFloat(this.storage.Qmax);
         let Qmax_teh = 1000;
+        let H = this.storage.H;
 
         let Q;
+        let NO_ENERGY_PRODUCED = -1;
+        let CHANNEL_OVERFLOW = -2
 
         // if data does not exist
         if (averageData === undefined) {
@@ -75,7 +77,18 @@ class EnergyProduction extends React.Component {
                 Q = Qmax;
             }
 
-            downstreamRiverHeight(Q);
+            let H_downstream = downstreamRiverHeight(Q);
+            if (H_downstream == NO_ENERGY_PRODUCED) {
+                H_downstream = H;
+                console.log('flow to small to produce energy');
+            } else if (H_downstream == CHANNEL_OVERFLOW) {
+                H_downstream = H;
+                console.log('channel is overflowing');
+            }
+
+            let hBruto = H - H_downstream;
+            console.log(i + '#####' + hBruto);
+            console.log('\n');
             // call function -> calculate height of downstream water
         }
     }

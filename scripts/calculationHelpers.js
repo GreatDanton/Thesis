@@ -62,27 +62,29 @@ export function downstreamRiverHeight(turbineFlow) {
     let h_bigger;
     let Q_smaller;
     let h_smaller;
-
     let h_downstream;
+
+    let Q_channelMax = consumptionCurve[consumptionCurve.length-1].x;
+
     for (let i = 0; i < consumptionCurve.length; i++) {
-        let riverFlow = consumptionCurve[i].x;
+        let flowOnConsumptionCurve = consumptionCurve[i].x;
 
         if (turbineFlow == 0) {
             return -1; // no energy produced
         }
-        else if (turbineFlow < riverFlow) {
-            Q_bigger = riverFlow;
+        else if (turbineFlow > Q_channelMax) { // water is overflowing channel -> notify
+            return -2;
+        }
+        else if (turbineFlow < flowOnConsumptionCurve) { // there is still some height left untill the top of the channel
+            Q_bigger = flowOnConsumptionCurve;
             h_bigger = consumptionCurve[i].y;
             Q_smaller = consumptionCurve[i-1].x;
             h_smaller = consumptionCurve[i-1].y;
 
+            // calculate downstream height
             let h_downstream = interpolateHeight(Q_bigger, h_bigger, Q_smaller, h_smaller, turbineFlow);
-            console.log('Turbine flow: ' + turbineFlow);
-            console.log(h_downstream);
-
             return h_downstream;
         }
-
     }
 }
 
