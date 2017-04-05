@@ -21,7 +21,9 @@ export function createConsumptionCurve(activeChannel) {
                     let area = rectangle_area(b, i);
                     let circumference = rectangle_circumference(b, i);
                     let Q = ManningEquation(area, circumference, ng, angle).toFixed(2);
+                    Q = parseFloat(Q);
                     let Y = i.toFixed(2);
+                    Y = parseFloat(Y);
                     points.push({'x': Q, 'y': Y});
                 }
             } else if (activeChannel == 'Trapezoid') {
@@ -38,7 +40,9 @@ export function createConsumptionCurve(activeChannel) {
                     let area = trapezoid_area(b, i, beta);
                     let circumference = trapezoid_circumference(b, h, beta);
                     let Q = ManningEquation(area, circumference, ng, channelAngle).toFixed(2);
+                    Q = parseFloat(Q);
                     let Y = i.toFixed(2);
+                    Y = parseFloat(Y);
                     points.push({'x': Q, 'y': Y});
                 }
             } else if (activeChannel == 'Custom') {
