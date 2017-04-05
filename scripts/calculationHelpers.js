@@ -52,3 +52,49 @@ export function createConsumptionCurve(activeChannel) {
             let pointsArray = [points];
             return pointsArray;
 }
+
+
+// TODO: finish this;
+// return -1 if there is not energy produced
+export function downstreamRiverHeight(turbineFlow) {
+    let consumptionCurve = GlobalStorage.channelTab.consumptionCurve[0];
+    let Q_bigger;
+    let h_bigger;
+    let Q_smaller;
+    let h_smaller;
+
+    let h_downstream;
+    for (let i = 0; i < consumptionCurve.length; i++) {
+        let riverFlow = consumptionCurve[i].x;
+
+        if (turbineFlow == 0) {
+            return -1; // no energy produced
+        }
+        else if (turbineFlow < riverFlow) {
+            Q_bigger = riverFlow;
+            h_bigger = consumptionCurve[i].y;
+            Q_smaller = consumptionCurve[i-1].x;
+            h_smaller = consumptionCurve[i-1].y;
+
+            let h_downstream = interpolateHeight(Q_bigger, h_bigger, Q_smaller, h_smaller, turbineFlow);
+            console.log('Turbine flow: ' + turbineFlow);
+            console.log(h_downstream);
+
+            return h_downstream;
+        }
+
+    }
+}
+
+
+// get downstream height via => dQ : dh = Q_diff : h_diff
+// returns downstream river height in channel
+function interpolateHeight(Q_bigger, h_bigger, Q_smaller, h_smaller, turbineFlow) {
+        let dQ = Q_bigger - Q_smaller;
+        let dh = h_bigger - h_smaller;
+        let Q_diff = turbineFlow - Q_smaller;
+        let h_diff = dh * Q_diff / dQ;
+
+        let h_downstream = parseFloat((h_diff + h_smaller).toFixed(2));
+        return h_downstream;
+}

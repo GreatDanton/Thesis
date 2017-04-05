@@ -159,6 +159,7 @@ export function getAverageData(waterFlow) {
 }
 
 // get average daily flow for producing data suitable for hydrograms graphs
+// output [[wetYear], [dryYear], [averageYear]]
 export function getDailyFlow(inputArr) {
     let daysInMonth = GlobalStorage.daysInMonth;
     let outputArray = inputArr.map((arr, index) => {
@@ -170,8 +171,6 @@ export function getDailyFlow(inputArr) {
         }
         return yearArr;
     });
-
-    console.log(outputArray);
     return outputArray;
 }
 

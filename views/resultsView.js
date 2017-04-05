@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import GlobalStorage from '../scripts/globalStorage';
 import {LineChart, BarChart, ScatterChart} from '../components/commonParts/charts.js';
 import {getDailyFlow} from '../scripts/parseCsv'
-import {createConsumptionCurve} from '../scripts/calculationHelpers';
+import {createConsumptionCurve, downstreamRiverHeight} from '../scripts/calculationHelpers';
 
 class ResultsView extends React.Component {
     constructor(props) {
@@ -42,7 +42,6 @@ class EnergyProduction extends React.Component {
             H: this.storage.H,
             η: this.storage.η
         }
-        // get consumption curve
     }
 
     // TODO: Finish this
@@ -76,7 +75,7 @@ class EnergyProduction extends React.Component {
                 Q = Qmax;
             }
 
-            console.log(Q);
+            downstreamRiverHeight(Q);
             // call function -> calculate height of downstream water
         }
     }
