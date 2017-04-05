@@ -36,6 +36,7 @@ class EnergyProduction extends React.Component {
         super(props);
         this.consumptionCurve = GlobalStorage.channelTab.consumptionCurve;
         this.storage = GlobalStorage.HETAb;
+        this.daysInMonth = GlobalStorage.daysInMonth;
         this.state = {
             Qmin: this.storage.Qmin,
             Qmax: this.storage.Qmax,
@@ -57,6 +58,7 @@ class EnergyProduction extends React.Component {
         let Q;
         let NO_ENERGY_PRODUCED = -1;
         let CHANNEL_OVERFLOW = -2
+        let PowerArr = [];
 
         // if data does not exist
         if (averageData === undefined) {
@@ -87,20 +89,39 @@ class EnergyProduction extends React.Component {
             }
 
             let hBruto = H - H_downstream;
-            console.log(i + '#####' + hBruto);
-            console.log('\n');
-            // call function -> calculate height of downstream water
+            let power = this.state.η * 9.81 * Q * hBruto; // in [kW]
+            PowerArr.push(power);
         }
+
+        return PowerArr;
     }
+
+
     render() {
-        return (
-            <div className="data-not-imported">
-                <h2>
-                    Add power plant parameters & flow data to see produced electricity
-                </h2>
-                {this.calculatePower()}
-            </div>
-        )
+        let PowerArr = this.calculatePower();
+        let graphData = [];
+
+        if (PowerArr === undefined) {
+            return (
+                <div className="data-not-imported">
+                    <h2> Add power plant parameters & flow data to see produced electricity </h2>
+                </div>
+            )
+
+        } else {
+            let ElectricityProduction = PowerArr.map((monthlyPower,index) => {
+                let producedElectricity = monthlyPower * this.daysInMonth[index] * 24 / 1000;
+                return parseFloat(producedElectricity.toFixed(1));
+            });
+            console.log(ElectricityProduction);
+
+            return (
+                <div>
+                    <h2> Average Production </h2>
+                    <BarChart y={[ElectricityProduction]} x={'months'} name={['Power production']} xAxes={'Months'} yAxes={'Produced [MWh]'}/>
+                </div>
+            )
+        }
     }
 }
 

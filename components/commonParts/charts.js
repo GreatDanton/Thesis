@@ -116,9 +116,40 @@ class BarChart extends React.Component {
     }
 
     render() {
+
+        let yAxes;
+        if (this.props.yAxes) {
+            yAxes = this.props.yAxes;
+        }
+
+        let xAxes
+        if (this.props.xAxes) {
+            xAxes = this.props.xAxes;
+        }
+
+        let options = {
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: xAxes
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: yAxes
+                    }
+                }]
+            }
+        }
+
+
+
+
         let data = this.buildData;
         return (
-            <Bar data={data} />
+            <Bar data={data} options={options}/>
         )
     }
 }
