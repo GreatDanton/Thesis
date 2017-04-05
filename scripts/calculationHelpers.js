@@ -64,6 +64,11 @@ export function downstreamRiverHeight(turbineFlow) {
     let h_smaller;
     let h_downstream;
 
+    // if consumption curve does not exist, return
+    if (consumptionCurve === undefined) {
+        return;
+    }
+
     let Q_channelMax = consumptionCurve[consumptionCurve.length-1].x;
 
     for (let i = 0; i < consumptionCurve.length; i++) {
@@ -99,4 +104,60 @@ function interpolateHeight(Q_bigger, h_bigger, Q_smaller, h_smaller, turbineFlow
 
         let h_downstream = parseFloat((h_diff + h_smaller).toFixed(2));
         return h_downstream;
+}
+
+
+// calculates produced power
+// returns array of power [kW] for each month in average year
+export function producedPower() {
+    let consumptionCurve = GlobalStorage.channelTab.consumptionCurve;
+    let averageData = GlobalStorage.resultsTab.hydrogram.y[2]; // flow
+    let daysInMonth = GlobalStorage.daysInMonth;
+
+    let storage = GlobalStorage.HETAb;
+    let Qmin = parseFloat(storage.Qmin);
+    let Qmax = parseFloat(storage.Qmax);
+    let Qmax_teh = 1000;
+    let H = storage.H;
+    let efficiency = storage.η
+
+    let Q;
+    let NO_ENERGY_PRODUCED = -1;
+    let CHANNEL_OVERFLOW = -2
+    let PowerArr = [];
+
+    // if data does not exist
+    if (averageData === undefined) {
+        return;
+    }
+
+    for (let i = 0; i < averageData.length; i++) {
+        // average monthly river flow
+        let riverFlow = parseFloat(averageData[i]) / daysInMonth[i];
+
+        if (riverFlow > Qmax_teh) { // if flow is bigger than technical maximum of power plant, produced energy == 0;
+            Q = 0;
+        } else if (riverFlow < Qmin) { // if flow is smaller than technical minimum, produced energy == 0;
+            Q = 0;
+        } else if (riverFlow > Qmin && riverFlow < Qmax) { // if flow is in between min and max
+            Q = riverFlow;
+        } else if (riverFlow > Qmax) { // if flow is bigger than technical maximum, flow == technical maximum
+            Q = Qmax;
+        }
+
+        let H_downstream = downstreamRiverHeight(Q);
+        if (H_downstream == NO_ENERGY_PRODUCED) {
+            H_downstream = H;
+            console.log('flow to small to produce energy');
+        } else if (H_downstream == CHANNEL_OVERFLOW) { // TODO finish this -> What to do if the channel is overflowing?
+            H_downstream = H;
+            console.log('channel is overflowing');
+        }
+
+        let hBruto = H - H_downstream;
+        let power = efficiency * 9.81 * Q * hBruto; // in [kW]
+        PowerArr.push(power);
+    }
+
+    return PowerArr;
 }
