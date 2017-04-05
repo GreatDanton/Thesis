@@ -1,3 +1,5 @@
+import GlobalStorage from './globalStorage';
+
 /* example of data we are parsing
 day.month.year,flow
 
@@ -13,7 +15,7 @@ sample_csv = `
 */
 
 // parse csv input data, returns hash map => ( [year] = [month]: monthly_flow )
-function createMonthlyFlow(input_data) {
+export function createMonthlyFlow(input_data) {
     // array of lines of data
     let linesOfData = input_data.split('\n');
 
@@ -58,7 +60,7 @@ function createMonthlyFlow(input_data) {
 // get dry and wet years from waterFlow object
 // input: waterFlow object
 // returns object {dryYear: year, wetYear: year}
-function getExtremeFlow(waterFlow) {
+export function getExtremeFlow(waterFlow) {
     let maxFlow = -1;
     let minFlow = -1;
     let wetYear;
@@ -94,7 +96,7 @@ function getExtremeFlow(waterFlow) {
 // creates data suitable for using in graphs
 // input: desired year and waterFlow object
 // output: array of data [1,2,3,4]
-function createGraphData(year, waterFlow) {
+export function createGraphData(year, waterFlow) {
     let chosenYear = waterFlow[year];
     let months = [];
     let graphData = [];
@@ -114,7 +116,7 @@ function createGraphData(year, waterFlow) {
         if (months.indexOf(i+1) < 0) {
             graphData.push(0); // if month data is missing assign 0
         } else {
-            graphData.push(chosenYear[i+1].toFixed(1));
+            graphData.push(parseFloat(chosenYear[i+1].toFixed(1)));
         }
     }
 
@@ -133,7 +135,7 @@ function sortArrayAsc(arr) {
 
 // create average flow for each month based on all data
 // returns array -> suitable for producing graphs;
-function getAverageData(waterFlow) {
+export function getAverageData(waterFlow) {
     let monthlyData = [];
     let numOfYears = 0;
     for (let year in waterFlow) {
@@ -149,18 +151,27 @@ function getAverageData(waterFlow) {
 
     let finalData = averageData.map((data) => {
         return (
-            data.toFixed(1)
+            parseFloat(data.toFixed(1))
         )
     });
 
     return finalData;
 }
 
+// get average daily flow for producing data suitable for hydrograms graphs
+export function getDailyFlow(inputArr) {
+    let daysInMonth = GlobalStorage.daysInMonth;
+    let outputArray = inputArr.map((arr, index) => {
+        let yearArr = [];
+        for (let i = 0; i < arr.length; i++) {
+            let monthlyFlow = arr[i] / daysInMonth[i];
+            monthlyFlow = parseFloat(monthlyFlow.toFixed(1));
+            yearArr.push(monthlyFlow);
+        }
+        return yearArr;
+    });
 
-// export functions
-export {
-    createMonthlyFlow,
-    getExtremeFlow,
-    createGraphData,
-    getAverageData
-};
+    console.log(outputArray);
+    return outputArray;
+}
+

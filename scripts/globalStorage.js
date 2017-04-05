@@ -5,6 +5,7 @@
 // given the same instance of GlobalStorage -> Singleton pattern
 class GlobalStorage {
     constructor() {
+        this.daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
         this.activeTab = '';
         this.channelTab = {
             "consumptionCurve": [],

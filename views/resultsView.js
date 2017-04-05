@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 
 import GlobalStorage from '../scripts/globalStorage';
 import {LineChart, BarChart, ScatterChart} from '../components/commonParts/charts.js';
+import {getDailyFlow} from '../scripts/parseCsv'
 import {createConsumptionCurve} from '../scripts/calculationHelpers';
 
 class ResultsView extends React.Component {
@@ -49,7 +50,7 @@ class EnergyProduction extends React.Component {
         let consumptionCurve = GlobalStorage.channelTab.consumptionCurve;
         let averageData = GlobalStorage.resultsTab.hydrogram.y[2]; // flow
 
-        let daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        let daysInMonth = GlobalStorage.daysInMonth;
         let Qmin = parseFloat(this.storage.Qmin);
         let Qmax = parseFloat(this.storage.Qmax);
         let Qmax_teh = 1000;
@@ -138,9 +139,7 @@ class ConsumptionCurve extends React.Component {
 class Hydrogram extends React.Component {
     constructor(props) {
         super(props);
-        this.plot = this
-            .plot
-            .bind(this);
+        this.plot = this.plot.bind(this);
     }
 
     // display hydrogam if data exists
@@ -148,14 +147,17 @@ class Hydrogram extends React.Component {
         let inputData = this.props.data;
         let names = this.props.names;
 
+
         if (inputData.length == names.length && inputData.length > 0) {
+            let graphData = getDailyFlow(inputData);
+
             return (
                 <div>
                     <h3>
                         Hydrogram
                     </h3>
-                    <LineChart y={inputData} x={'months'} name={names}/>
-                    <BarChart y={inputData} x={'months'} name={names}/>
+                    <LineChart y={graphData} x={'months'} name={names}/>
+                    <BarChart y={graphData} x={'months'} name={names}/>
                 </div>
             )
         } else {
