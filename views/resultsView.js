@@ -6,6 +6,10 @@ import {LineChart, BarChart, ScatterChart} from '../components/commonParts/chart
 import {getDailyFlow} from '../scripts/parseCsv'
 import {createConsumptionCurve, downstreamRiverHeight, producedPower} from '../scripts/calculationHelpers';
 
+import {Table} from '../components/commonParts/tables.js';
+
+
+
 class ResultsView extends React.Component {
     constructor(props) {
         super(props);
@@ -46,6 +50,18 @@ class EnergyProduction extends React.Component {
         }
     }
 
+    createTableData(ElectricityProduction) {
+        // Electricity production => array of arrays suitable for graphs
+        // returns array of arrays [Title, data,..., total]
+        let totalProducedElectricity = 0;
+        let tableData = ['Produced [MWh]'];
+        for (let i of ElectricityProduction) {
+            totalProducedElectricity += i;
+            tableData.push(i);
+        }
+        tableData.push(totalProducedElectricity.toFixed(1));
+        return [tableData];
+    }
 
     render() {
         let PowerArr = producedPower();
@@ -59,15 +75,20 @@ class EnergyProduction extends React.Component {
             )
         } else {
             let ElectricityProduction = PowerArr.map((monthlyPower,index) => {
-                let producedElectricity = monthlyPower * this.daysInMonth[index] * 24 / 1000;
+                let producedElectricity = monthlyPower * this.daysInMonth[index] * 24 / 1000; // MWh
                 return parseFloat(producedElectricity.toFixed(1));
             });
-            console.log(ElectricityProduction);
+
+            let tableData = this.createTableData(ElectricityProduction);
 
             return (
                 <div>
-                    <h2> Average Production </h2>
+                    <h3 className="margin-u-40"> Average yearly electricity production </h3>
                     <BarChart y={[ElectricityProduction]} x={'months'} name={['Power production']} xAxes={'Months'} yAxes={'Produced [MWh]'}/>
+
+                    <h3 className="margin-u-40"> Overview </h3>
+                    <Table header={['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', ' Σ Total']}
+                           data={tableData} />
                 </div>
             )
         }
@@ -102,9 +123,7 @@ class ConsumptionCurve extends React.Component {
         } else {
             return (
                 <div>
-                    <h3>
-                        Consumption curve
-                    </h3>
+                    <h3 className="margin-u-40"> Consumption curve </h3>
                     <ScatterChart
                         data={data}
                         name={["consumption curve"]}

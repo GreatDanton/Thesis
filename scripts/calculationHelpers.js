@@ -155,7 +155,7 @@ export function producedPower() {
         }
 
         let hBruto = H - H_downstream;
-        let power = efficiency * 9.81 * Q * hBruto; // in [kW]
+        let power = efficiency * 9.81 * Q * hBruto / 1000; // in [kW]
         PowerArr.push(power);
     }
 

@@ -9,12 +9,12 @@ class GlobalStorage {
         this.activeTab = '';
         this.channelTab = {
             "consumptionCurve": [],
-            "active": '',
+            "active": 'Rectangular',
             "rectangular": {
-                "h": '',
-                "B": '',
-                "ng": '',
-                "φ": '',
+                "h": 5,
+                "B": 10,
+                "ng": 0.03,
+                "φ": 2,
                 "S": '',
                 "P": '',
             },
@@ -35,10 +35,10 @@ class GlobalStorage {
             }
         };
         this.HETAb = {
-            "Qmin": '',
-            "Qmax": '',
-            "H": '',
-            "η": '',
+            "Qmin": 40,
+            "Qmax": 220,
+            "H": 11,
+            "η": 90,
         };
         this.resultsTab = {
             "rawData": '',
