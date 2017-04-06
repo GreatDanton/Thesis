@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import GlobalStorage from '../scripts/globalStorage';
 import {LineChart, BarChart, ScatterChart} from '../components/commonParts/charts.js';
 import {getDailyFlow} from '../scripts/parseCsv'
-import {createConsumptionCurve, downstreamRiverHeight, producedPower} from '../scripts/calculationHelpers';
+import {createConsumptionCurve, downstreamRiverHeight, producedElectricity} from '../scripts/calculationHelpers';
 
 import {Table} from '../components/commonParts/tables.js';
 
@@ -59,26 +59,22 @@ class EnergyProduction extends React.Component {
             totalProducedElectricity += i;
             tableData.push(i);
         }
+        totalProducedElectricity = totalProducedElectricity / 1000; // Total produced electricity in GWh
         tableData.push(totalProducedElectricity.toFixed(1));
         return [tableData];
     }
 
     render() {
-        let PowerArr = producedPower();
+        let ElectricityProduction = producedElectricity();
 
         // if powerarr does not exist -> render helper message
-        if (PowerArr === undefined) {
+        if (ElectricityProduction === undefined) {
             return (
                 <div className="data-not-imported">
                     <h2> Add power plant parameters & flow data to see produced electricity </h2>
                 </div>
             )
         } else {
-            let ElectricityProduction = PowerArr.map((monthlyPower,index) => {
-                let producedElectricity = monthlyPower * this.daysInMonth[index] * 24 / 1000; // MWh
-                return parseFloat(producedElectricity.toFixed(1));
-            });
-
             let tableData = this.createTableData(ElectricityProduction);
 
             return (
@@ -87,7 +83,7 @@ class EnergyProduction extends React.Component {
                     <BarChart y={[ElectricityProduction]} x={'months'} name={['Power production']} xAxes={'Months'} yAxes={'Produced [MWh]'}/>
 
                     <h3 className="margin-u-40"> Overview </h3>
-                    <Table header={['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', ' Σ Total']}
+                    <Table header={['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', ' Σ [GWh]']}
                            data={tableData} />
                 </div>
             )

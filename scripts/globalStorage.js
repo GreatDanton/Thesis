@@ -9,7 +9,7 @@ class GlobalStorage {
         this.activeTab = '';
         this.channelTab = {
             "consumptionCurve": [],
-            "active": 'Rectangular',
+            "active": 'Trapezoid',
             "rectangular": {
                 "h": 5,
                 "B": 10,
@@ -19,11 +19,11 @@ class GlobalStorage {
                 "P": '',
             },
             "trapezoid": {
-                "h": '',
-                "b": '',
-                "B": '',
-                "ng": '',
-                "φ": '',
+                "h": 10,
+                "b": 70,
+                "B": 95,
+                "ng": 0.033,
+                "φ": 0.14,
                 "S": '',
                 "P": '',
             },

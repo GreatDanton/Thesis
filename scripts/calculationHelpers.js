@@ -109,7 +109,7 @@ function interpolateHeight(Q_bigger, h_bigger, Q_smaller, h_smaller, turbineFlow
 
 // calculates produced power
 // returns array of power [kW] for each month in average year
-export function producedPower() {
+export function producedElectricity() {
     let consumptionCurve = GlobalStorage.channelTab.consumptionCurve;
     let averageData = GlobalStorage.resultsTab.hydrogram.y[2]; // flow
     let daysInMonth = GlobalStorage.daysInMonth;
@@ -119,7 +119,7 @@ export function producedPower() {
     let Qmax = parseFloat(storage.Qmax);
     let Qmax_teh = 1000;
     let H = storage.H;
-    let efficiency = storage.η
+    let efficiency = storage.η / 100;
 
     let Q;
     let NO_ENERGY_PRODUCED = -1;
@@ -132,7 +132,7 @@ export function producedPower() {
     }
 
     for (let i = 0; i < averageData.length; i++) {
-        // average monthly river flow
+        // average daily river flow
         let riverFlow = parseFloat(averageData[i]) / daysInMonth[i];
 
         if (riverFlow > Qmax_teh) { // if flow is bigger than technical maximum of power plant, produced energy == 0;
@@ -144,6 +144,7 @@ export function producedPower() {
         } else if (riverFlow > Qmax) { // if flow is bigger than technical maximum, flow == technical maximum
             Q = Qmax;
         }
+        console.log('Q:  ' + Q);
 
         let H_downstream = downstreamRiverHeight(Q);
         if (H_downstream == NO_ENERGY_PRODUCED) {
@@ -154,9 +155,12 @@ export function producedPower() {
             console.log('channel is overflowing');
         }
 
-        let hBruto = H - H_downstream;
-        let power = efficiency * 9.81 * Q * hBruto / 1000; // in [kW]
-        PowerArr.push(power);
+        let hBruto = H - H_downstream; // average hBruto per day for this month
+        let power = efficiency * 9.81 * Q * hBruto; // in [kW] per day for this month
+
+        let monthlyElectricity = power * daysInMonth[i] * 24 / 1000;  // MWh per month
+        monthlyElectricity = parseFloat(monthlyElectricity.toFixed(1));
+        PowerArr.push(monthlyElectricity);
     }
 
     return PowerArr;
