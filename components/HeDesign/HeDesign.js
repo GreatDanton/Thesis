@@ -26,6 +26,7 @@ class Turbine extends React.Component {
         this.state = {
             Qmin: this.storage.Qmin,
             Qmax: this.storage.Qmax,
+            Qteh: this.storage.Qteh,
             H: this.storage.H,
             η: this.storage.η
         }
@@ -49,6 +50,7 @@ class Turbine extends React.Component {
                         <div className="col-30">
                             <InputBox id="Qmin" end="m^3/s" onChange={this.onChange} value={this.state.Qmin}/>
                             <InputBox id="Qmax" end="m^3/s" onChange={this.onChange} value={this.state.Qmax}/>
+                            <InputBox id="Qteh" end="m^3/s" onChange={this.onChange} value={this.state.Qteh} tooltip='Maximum technical flow' />
                             <InputBox id="H" end="m" onChange={this.onChange} value={this.state.H} />
                             <br/>
                             <InputBox id="η" end="%" onChange={this.onChange} value={this.state.η} />

@@ -37,6 +37,7 @@ class GlobalStorage {
         this.HETAb = {
             "Qmin": 40,
             "Qmax": 220,
+            "Qteh": 1000,
             "H": 11,
             "η": 90,
         };

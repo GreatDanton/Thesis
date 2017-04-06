@@ -117,7 +117,7 @@ export function producedElectricity() {
     let storage = GlobalStorage.HETAb;
     let Qmin = parseFloat(storage.Qmin);
     let Qmax = parseFloat(storage.Qmax);
-    let Qmax_teh = 1000;
+    let Qmax_teh = storage.Qteh;
     let H = storage.H;
     let efficiency = storage.η / 100;
 
@@ -144,7 +144,6 @@ export function producedElectricity() {
         } else if (riverFlow > Qmax) { // if flow is bigger than technical maximum, flow == technical maximum
             Q = Qmax;
         }
-        console.log('Q:  ' + Q);
 
         let H_downstream = downstreamRiverHeight(Q);
         if (H_downstream == NO_ENERGY_PRODUCED) {
