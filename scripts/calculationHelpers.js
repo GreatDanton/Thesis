@@ -47,10 +47,19 @@ export function createConsumptionCurve(activeChannel) {
                 }
             } else if (activeChannel == 'Custom') {
                 console.log('custom');
+                customConsumptionCurve();
             }
 
             let pointsArray = [points];
             return pointsArray;
+}
+
+
+function customConsumptionCurve() {
+    let pointsObj = GlobalStorage.channelTab.custom.points;
+    let ngObj = GlobalStorage.channelTab.custom.ngInputs;
+    // algorithm for flow calculation
+    console.log(pointsObj);
 }
 
 
