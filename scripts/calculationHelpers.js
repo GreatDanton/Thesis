@@ -46,12 +46,86 @@ export function createConsumptionCurve(activeChannel) {
                     points.push({'x': Q, 'y': Y});
                 }
             } else if (activeChannel == 'Custom') {
-                console.log('custom');
-                customConsumptionCurve();
+                let points = storage.custom.points;
+                let channelHeight = custom_getChannelHeight(points);
+                let lowestPoint = custom_getLowestChannelPoint(points);
+
+                for (let i = 0; i < points.length - 1; i++) {
+                    let p1 = points[i];
+                    let p2 = points[i+1];
+
+                    custom_sectionFlow(p1, p2, channelHeight);
+                }
+
+                //console.log(channelHeight);
+                //console.log(lowestPoint);
             }
 
             let pointsArray = [points];
             return pointsArray;
+}
+
+
+function custom_sectionFlow(point1, point2, channelHeight) {
+    let H_starting = custom_getLowestChannelPoint([point1, point2]);
+    let func = custom_getFunction(point1, point2);
+    let k = func.k;
+    let n = func.n;
+
+    // for loop from H_starting to channelHeight to calculate S and P of section
+
+    console.log('k: ' + k);
+    console.log('n: ' + n);
+}
+
+
+function custom_getFunction(point1, point2) {
+    // y = k*x + n;
+    let dY = point2.y - point1.y;
+    let dX = point2.x - point1.x;
+    let k;
+    let n;
+
+   if (dX === 0) { // straight vertical line
+        return {
+            'k': 1,
+            'n': 0,
+        }
+    }
+
+    k = dY / dX;
+    n = point2.y - k * point2.x;
+    return {
+        'k': k,
+        'n': n
+    }
+}
+
+
+// get maximum height of channel (lowest point of side points)
+// input: pointsArr (from GlobalStorage)
+// returns: max height of channel (float);
+function custom_getChannelHeight(pointsArr) {
+    let start = pointsArr[0].y;
+    let end = pointsArr[pointsArr.length - 1].y;
+    if (start <= end) {
+        return start;
+    } else {
+        return end;
+    }
+}
+
+
+// input = PointsArray (from GlobalStorage)
+// returns lowest point of channel
+function custom_getLowestChannelPoint(pointsArr) {
+    let height = pointsArr[0].y;
+    for (let point of pointsArr) {
+        if (point.y < height) {
+            height = point.y;
+        }
+    }
+    return height;
 }
 
 
@@ -150,7 +224,7 @@ export function producedElectricity() {
             Q = 0;
         } else if (riverFlow > Qmin && riverFlow < Qmax) { // if flow is in between min and max
             Q = riverFlow;
-        } else if (riverFlow > Qmax) { // if flow is bigger than technical maximum, flow == technical maximum
+        } else if (riverFlow > Qmax) { // if flow is bigger than maximum flow through turbine, flow == technical maximum
             Q = Qmax;
         }
 
@@ -158,8 +232,9 @@ export function producedElectricity() {
         if (H_downstream == NO_ENERGY_PRODUCED) {
             H_downstream = H;
             console.log('flow to small to produce energy');
-        } else if (H_downstream == CHANNEL_OVERFLOW) { // TODO finish this -> What to do if the channel is overflowing?
-            H_downstream = H;
+        } else if (H_downstream == CHANNEL_OVERFLOW) {
+            // height of the downstream river is the same as height of the channel
+            H_downstream = consumptionCurve[consumptionCurve.length - 1].y;
             console.log('channel is overflowing');
         }
 

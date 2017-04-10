@@ -180,7 +180,7 @@ class CustomChannel extends React.Component {
         let X = parseFloat(this.state.x);
         let Y = parseFloat(this.state.y);
         if (!isNaN(X) && !isNaN(Y)) { // if x and y is number
-            let p = {x: this.state.x, y: this.state.y};
+            let p = {x: X, y: Y};
             let points = this.state.points.slice();
             points.push(p);
             this.setState({points: points, x: '', y: ''}); // add new array, and reset input fields

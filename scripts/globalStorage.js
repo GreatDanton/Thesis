@@ -9,7 +9,7 @@ class GlobalStorage {
         this.activeTab = '';
         this.channelTab = {
             "consumptionCurve": [],
-            "active": 'Trapezoid',
+            "active": 'Custom',
             "rectangular": {
                 "h": 5,
                 "B": 10,
@@ -28,7 +28,12 @@ class GlobalStorage {
                 "P": '',
             },
             "custom": {
-                "points": [],
+                "points": [
+                    {x: 0, y: 5},
+                    {x: 5, y: 0},
+                    {x: 10, y: 0},
+                    {x: 15, y: 5}
+                ],
                 "ngInputs": {},
                 "S": '',
                 "P": '',
