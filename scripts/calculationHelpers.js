@@ -69,6 +69,12 @@ export function createConsumptionCurve(activeChannel) {
 function custom_sectionFlow(point1, point2, channelHeight) {
     let H_starting = custom_getLowestChannelPoint([point1, point2]);
     let func = custom_getFunction(point1, point2);
+
+    if (func['line'] === 'vertical') {
+        // calculateForVertical
+    } else {
+        // calculate for diagonal
+    }
     let k = func.k;
     let n = func.n;
 
@@ -79,6 +85,27 @@ function custom_sectionFlow(point1, point2, channelHeight) {
 }
 
 
+// calculates P & S for each height for vertical linear function
+function custom_verticalFunction(point1, point2, channelHeight) {
+    let dY = Math.abs(point1.y - point2.y);
+    let startingPoint;
+    if (point1.y >= point2.y) {
+        startingPoint = point1.y;
+    } else {
+        startingPoint = point2.y;
+    }
+
+    let pointsArr = [];
+    for (let i = 0; i < dY; i+=0.01) {
+        let h = startingPoint + i;
+        let S = 0;
+        let P = i;
+        let point = {[h]: {'S': S, 'P': P}}
+        pointsArr.push(point);
+    }
+    return pointsArr;
+}
+
 function custom_getFunction(point1, point2) {
     // y = k*x + n;
     let dY = point2.y - point1.y;
@@ -88,14 +115,15 @@ function custom_getFunction(point1, point2) {
 
    if (dX === 0) { // straight vertical line
         return {
-            'k': 1,
-            'n': 0,
+            'line': 'vertical',
+            'x': point2.x
         }
     }
 
     k = dY / dX;
     n = point2.y - k * point2.x;
     return {
+        'line': 'diagonal',
         'k': k,
         'n': n
     }
