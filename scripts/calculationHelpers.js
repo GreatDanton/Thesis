@@ -66,22 +66,23 @@ export function createConsumptionCurve(activeChannel) {
 }
 
 
-function custom_sectionFlow(point1, point2, channelHeight) {
+// calculates P and S for each section (between two points)
+// input: starting, ending point
+// output: P & S for section on cm of water height
+function custom_sectionParameters(point1, point2, channelHeight) {
     let H_starting = custom_getLowestChannelPoint([point1, point2]);
     let func = custom_getFunction(point1, point2);
+    let points;
 
     if (func['line'] === 'vertical') {
-        // calculateForVertical
+        // calculate for vertical function
+        points = custom_verticalFunction(point1, point2, channelHeight);
     } else {
         // calculate for diagonal
+        points = custom_diagonalFunction(point1, point2, func, channelHeight);
     }
-    let k = func.k;
-    let n = func.n;
 
-    // for loop from H_starting to channelHeight to calculate S and P of section
-
-    console.log('k: ' + k);
-    console.log('n: ' + n);
+    return points;
 }
 
 
@@ -106,6 +107,99 @@ function custom_verticalFunction(point1, point2, channelHeight) {
     return pointsArr;
 }
 
+
+// calculates P & S for each height for diagonal or horizontal function
+function custom_diagonalFunction(point1, point2, func, channelHeight) {
+    let k = func.k;
+    let n = func.n;
+
+    let pointsArr = [];
+    if (k === 0) { // if function is horizontal
+        let dY = channelHeight - point2.y;
+        let dX = point1.x - point2.x
+
+        for (let i = 0; i < dY; i += 0.01) {
+            let h = point2.y + i;
+            let P = dX;
+            let S = dX * i;
+
+            let point =  {[h]: {'P': P, 'S': S}};
+            pointsArr.push(point);
+        }
+    } else { // if function is diagonal;
+        let startingPoint = custom_getLowestChannelPoint([point1, point2]);
+        let lowerPoint = custom_getLowerPoint(point1, point2);
+
+        let delta_pointY = Math.abs(point1.y - point2.y);
+
+        // river height
+        for (let height = startingPoint; height < channelHeight; height += 0.01) {
+            let triangularSection = startingPoint + delta_pointY;
+
+            // if water is in triangular section;
+            if (height < triangularSection) {
+                let slopePoint = custom_getSlopePoint(func, height);
+                let P = custom_pointsDistance(lowerPoint, slopePoint);
+                let S = custom_calculateTriangleArea(slopePoint, lowerPoint);
+                let point = {[height]: {'P': P, 'S': S}};
+                pointsArr.push(point);
+
+            } else { // if water is above triangular section
+                // calculate P from point1, point2;
+                // calculate S = Triangle S  +  Rectangle S
+                let P = custom_pointsDistance(point1, point2);
+                let S_triangle = custom_calculateTriangleArea(point1, point2);
+                let dX = Math.abs(point1.x - point2.x);
+                let S_square = dX * (height - startingPoint);
+                let S = S_triangle + S_square;
+
+                let point = {[height]: {'S': S, 'P': P}};
+                pointsArr.push(point);
+            }
+        }
+    }
+
+    return pointsArr;
+}
+
+
+function custom_calculateTriangleArea(point1, point2) {
+    let dX  = Math.abs(point1.x - point2.x);
+    let dY = Math.abs(point1.y - point2.y);
+    let area = dX * dY / 2;
+
+    return area
+}
+
+// get lower point of input points;
+function custom_getLowerPoint(point1, point2) {
+    if (point1.y < point2.y) {
+        return point1;
+    }
+    return point2;
+}
+
+function custom_pointsDistance(point1, point2) {
+    let dY = Math.abs(point1.y - point2.y);
+    let dX = Math.abs(point1.x - point2.x);
+    let distance = (dY ** 2 + dX ** 2) ** (1/2);
+    return distance;
+}
+
+// Get point coordinates on the slope of the input function
+// input: function {k, n}; height => y on function
+// returns: point {x, y} on the function
+function custom_getSlopePoint(func, height) {
+    let k = func.k;
+    let n = func.n;
+    let y = height;
+    // y = kx + n; ==> x
+    let x = (y - n) / k;
+    let point = {'x': x, 'y': y};
+    return point;
+}
+
+
 function custom_getFunction(point1, point2) {
     // y = k*x + n;
     let dY = point2.y - point1.y;
@@ -116,7 +210,6 @@ function custom_getFunction(point1, point2) {
    if (dX === 0) { // straight vertical line
         return {
             'line': 'vertical',
-            'x': point2.x
         }
     }
 
@@ -125,7 +218,7 @@ function custom_getFunction(point1, point2) {
     return {
         'line': 'diagonal',
         'k': k,
-        'n': n
+        'n': n,
     }
 }
 
