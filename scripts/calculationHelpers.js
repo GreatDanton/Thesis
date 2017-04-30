@@ -49,9 +49,7 @@ export function createConsumptionCurve(activeChannel) {
                 let channelPoints = storage.custom.points;
                 let channelHeight = custom_getChannelHeight(channelPoints);
                 let lowestPoint = custom_getLowestChannelPoint(channelPoints);
-                let channelParameters_sum = {
-                        0.01: {'P': 2, 'S': 2}
-                        };
+                let channelParameters_sum = {};
 
                 // iterate over points array
                 for (let i = 0; i < channelPoints.length - 1; i++) {
@@ -59,15 +57,17 @@ export function createConsumptionCurve(activeChannel) {
                     let p2 = channelPoints[i+1];
 
                     let channelParameters = custom_sectionParameters(p1, p2, channelHeight);
-                    console.log(channelParameters);
+                    //console.log(channelParameters);
+                    channelParameters_sum = sum_objects(channelParameters, channelParameters_sum);
 
                     // for each channel height in channelParameters array, add parameters
                     // to "sum" object
 
                 }
 
-                //console.log(channelHeight);
-                //console.log(lowestPoint);
+                // for each height calculate Q
+                let heights = Object.keys(channelParameters_sum);
+
             }
 
             let pointsArray = [points];
@@ -79,6 +79,25 @@ export function createConsumptionCurve(activeChannel) {
 // if it does: sum P and S
 // else add key and values
 // TODO FINISH THIS;
+function sum_objects(inputObjectArray, sumObject) {
+
+    for (let i in inputObjectArray) {
+        let obj = inputObjectArray[i];
+        let height = Object.keys(obj)[0];
+        let value = obj[height];
+
+        if (sumObject.hasOwnProperty(height)) {
+            sumObject[height]['P'] += value.P
+            sumObject[height]['S'] += value.S;
+        } else {
+            sumObject[height] = {};
+            sumObject[height]['P'] = value.P;
+            sumObject[height]['S'] = value.S;
+        }
+    }
+
+    return sumObject;
+}
 
 // calculates P and S for each section (between two points)
 // input: starting, ending point
@@ -115,7 +134,7 @@ function custom_verticalFunction(point1, point2, channelHeight) {
         let h = startingPoint + i;
         let S = 0;
         let P = i;
-        let point = {[h]: {'S': S, 'P': P}}
+        let point = {[h.toFixed(2)]: {'S': S, 'P': P}}
         pointsArr.push(point);
     }
     return pointsArr;
@@ -134,10 +153,10 @@ function custom_diagonalFunction(point1, point2, func, channelHeight) {
 
         for (let i = 0; i < dY; i += 0.01) {
             let h = point2.y + i;
-            let P = dX;
-            let S = dX * i;
+            let P = Math.abs(dX);
+            let S = Math.abs(dX * i);
 
-            let point =  {[h]: {'P': P, 'S': S}};
+            let point =  {[h.toFixed(2)]: {'P': P, 'S': S}};
             pointsArr.push(point);
         }
     } else { // if function is diagonal;
@@ -146,7 +165,7 @@ function custom_diagonalFunction(point1, point2, func, channelHeight) {
 
         let delta_pointY = Math.abs(point1.y - point2.y);
 
-        // river height
+        // river height = height
         for (let height = startingPoint; height < channelHeight; height += 0.01) {
             let triangularSection = startingPoint + delta_pointY;
 
@@ -155,7 +174,8 @@ function custom_diagonalFunction(point1, point2, func, channelHeight) {
                 let slopePoint = custom_getSlopePoint(func, height);
                 let P = custom_pointsDistance(lowerPoint, slopePoint);
                 let S = custom_calculateTriangleArea(slopePoint, lowerPoint);
-                let point = {[height]: {'P': P, 'S': S}};
+
+                let point = {[height.toFixed(2)]: {'P': P, 'S': S}};
                 pointsArr.push(point);
 
             } else { // if water is above triangular section
@@ -167,7 +187,7 @@ function custom_diagonalFunction(point1, point2, func, channelHeight) {
                 let S_square = dX * (height - startingPoint);
                 let S = S_triangle + S_square;
 
-                let point = {[height]: {'S': S, 'P': P}};
+                let point = {[height.toFixed(2)]: {'S': S, 'P': P}};
                 pointsArr.push(point);
             }
         }
@@ -185,7 +205,7 @@ function custom_calculateTriangleArea(point1, point2) {
     return area
 }
 
-// get lower point of input points;
+// get lower point of two input points;
 function custom_getLowerPoint(point1, point2) {
     if (point1.y < point2.y) {
         return point1;
@@ -261,14 +281,6 @@ function custom_getLowestChannelPoint(pointsArr) {
         }
     }
     return height;
-}
-
-
-function customConsumptionCurve() {
-    let pointsObj = GlobalStorage.channelTab.custom.points;
-    let ngObj = GlobalStorage.channelTab.custom.ngInputs;
-    // algorithm for flow calculation
-    console.log(pointsObj);
 }
 
 
