@@ -46,15 +46,24 @@ export function createConsumptionCurve(activeChannel) {
                     points.push({'x': Q, 'y': Y});
                 }
             } else if (activeChannel == 'Custom') {
-                let points = storage.custom.points;
-                let channelHeight = custom_getChannelHeight(points);
-                let lowestPoint = custom_getLowestChannelPoint(points);
+                let channelPoints = storage.custom.points;
+                let channelHeight = custom_getChannelHeight(channelPoints);
+                let lowestPoint = custom_getLowestChannelPoint(channelPoints);
+                let channelParameters_sum = {
+                        0.01: {'P': 2, 'S': 2}
+                        };
 
-                for (let i = 0; i < points.length - 1; i++) {
-                    let p1 = points[i];
-                    let p2 = points[i+1];
+                // iterate over points array
+                for (let i = 0; i < channelPoints.length - 1; i++) {
+                    let p1 = channelPoints[i];
+                    let p2 = channelPoints[i+1];
 
-                    custom_sectionFlow(p1, p2, channelHeight);
+                    let channelParameters = custom_sectionParameters(p1, p2, channelHeight);
+                    console.log(channelParameters);
+
+                    // for each channel height in channelParameters array, add parameters
+                    // to "sum" object
+
                 }
 
                 //console.log(channelHeight);
@@ -65,6 +74,11 @@ export function createConsumptionCurve(activeChannel) {
             return pointsArray;
 }
 
+
+// for each key in input object check if it exist in sumObject
+// if it does: sum P and S
+// else add key and values
+// TODO FINISH THIS;
 
 // calculates P and S for each section (between two points)
 // input: starting, ending point
@@ -78,7 +92,7 @@ function custom_sectionParameters(point1, point2, channelHeight) {
         // calculate for vertical function
         points = custom_verticalFunction(point1, point2, channelHeight);
     } else {
-        // calculate for diagonal
+        // calculate for diagonal or horizontal function
         points = custom_diagonalFunction(point1, point2, func, channelHeight);
     }
 
