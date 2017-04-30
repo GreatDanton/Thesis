@@ -97,6 +97,7 @@ class ConsumptionCurve extends React.Component {
     constructor(props) {
         super(props);
         this.storage = GlobalStorage.channelTab;
+        console.log(GlobalStorage);
     }
 
     plot() {

@@ -34,7 +34,8 @@ class GlobalStorage {
                     {x: 10, y: 0},
                     {x: 15, y: 5}
                 ],
-                "ngInputs": {},
+                "ngInputs": {0: 0.03, 1: 0.03, 2: 0.03},
+                "φ_inputs": {0: 1, 1: 1, 2: 1},
                 "S": '',
                 "P": '',
             }

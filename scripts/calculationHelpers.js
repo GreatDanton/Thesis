@@ -49,7 +49,8 @@ export function createConsumptionCurve(activeChannel) {
                 let channelPoints = storage.custom.points;
                 let channelHeight = custom_getChannelHeight(channelPoints);
                 let lowestPoint = custom_getLowestChannelPoint(channelPoints);
-                let channelParameters_sum = {};
+                //let channelParameters_sum = {};
+                let partlyFlows = [];
 
                 // iterate over points array
                 for (let i = 0; i < channelPoints.length - 1; i++) {
@@ -58,44 +59,84 @@ export function createConsumptionCurve(activeChannel) {
 
                     let channelParameters = custom_sectionParameters(p1, p2, channelHeight);
                     //console.log(channelParameters);
-                    channelParameters_sum = sum_objects(channelParameters, channelParameters_sum);
 
-                    // for each channel height in channelParameters array, add parameters
-                    // to "sum" object
+                    // ng and I for each section of the channel (between two points)
+                    let ng = storage.custom.ngInputs[i];
+                    let I = storage.custom.φ_inputs[i];
 
+                    // for each section of the channel create object {river_height: river_flow};
+                    let partSectionFlow = createHeightFlowObject(channelParameters, ng, I);
+                    partlyFlows.push(partSectionFlow);
                 }
 
-                // for each height calculate Q
-                let heights = Object.keys(channelParameters_sum);
-
+                points = custom_createPoints(partlyFlows);
             }
 
             let pointsArray = [points];
             return pointsArray;
 }
 
+// create {river_height: flow} object for each part of the channel
+// (between two points ==> section)
+// returns: {river_height: flow} object
+function createHeightFlowObject(channelParameters, ng, I) {
+    let heightFlow = {};
+    for (let i in channelParameters) {
+        let obj = channelParameters[i];
+        let riverHeight = Object.keys(obj);
+        let values = obj[riverHeight];
+
+        let S = values.S;
+        let P = values.P;
+        let Q;
+        // when p is zero manning equations returns infinite => fix it with Q = 0
+        if (P === 0) {
+            Q = 0;
+        } else {
+            Q = ManningEquation(S, P, ng, I);
+        }
+        heightFlow[riverHeight] = Q;
+    }
+    return heightFlow;
+}
+
+
+
+// returns [x: Q, y: h]
+function custom_createPoints(partlyFlowsArr) {
+    console.log('Custom points');
+    let sum_heightFlows = {};
+
+    for (let i of partlyFlowsArr) {
+        sum_heightFlows = sum_objects(i, sum_heightFlows);
+    }
+    console.log(sum_heightFlows);
+
+    let heights = Object.keys(sum_heightFlows).sort();
+    let points = [];
+
+    for (let height of heights) {
+        let Q = sum_heightFlows[height];
+        let point = {'x': Q, 'y': height}
+        points.push(point);
+    }
+    return points;
+}
 
 // for each key in input object check if it exist in sumObject
 // if it does: sum P and S
 // else add key and values
-// TODO FINISH THIS;
 function sum_objects(inputObjectArray, sumObject) {
+    let heights = Object.keys(inputObjectArray);
 
-    for (let i in inputObjectArray) {
-        let obj = inputObjectArray[i];
-        let height = Object.keys(obj)[0];
-        let value = obj[height];
-
-        if (sumObject.hasOwnProperty(height)) {
-            sumObject[height]['P'] += value.P
-            sumObject[height]['S'] += value.S;
+    for (let i of heights) {
+        let height = i;
+        if (sumObject.hasOwnProperty(i)) {
+            sumObject[height] += inputObjectArray[height];
         } else {
-            sumObject[height] = {};
-            sumObject[height]['P'] = value.P;
-            sumObject[height]['S'] = value.S;
+            sumObject[height] = inputObjectArray[height];
         }
     }
-
     return sumObject;
 }
 
@@ -234,6 +275,7 @@ function custom_getSlopePoint(func, height) {
 }
 
 
+// creates linear function between two given points
 function custom_getFunction(point1, point2) {
     // y = k*x + n;
     let dY = point2.y - point1.y;

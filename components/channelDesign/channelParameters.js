@@ -224,11 +224,14 @@ class CustomChannel extends React.Component {
                             </form>
 
                             <div className="row margin-u-40">
-                                <div className="col-80">
+                                <div className="col-60">
                                     <PointsTable data={this.state.points} onClick={this.deleteClick} />
                                 </div>
                                 <div className="col-20">
-                                    <NgTable  displayInputs={this.state.points} />
+                                    <NgTable  displayInputs={this.state.points} type="ng" />
+                                </div>
+                                <div className="col-20">
+                                    <NgTable displayInputs={this.state.points} type="φ" />
                                 </div>
                             </div>
                         </div>
@@ -247,7 +250,13 @@ class NgTable extends React.Component {
     constructor(props) {
         super(props);
         this.onChange = this.onChange.bind(this);
-        this.storage = GlobalStorage.channelTab.custom.ngInputs;
+
+        if (this.props.type === 'ng') {
+            this.storage = GlobalStorage.channelTab.custom.ngInputs;
+        }
+        else if (this.props.type === 'φ') {
+            this.storage = GlobalStorage.channelTab.custom.φ_inputs;
+        }
         // state is present in order to change inputs later, otherwise we cannot change inputs after initial input
         this.state = {inputValues: this.storage};
     }
@@ -257,6 +266,7 @@ class NgTable extends React.Component {
         let value = e.target.value;
         this.storage[id] = value;
         this.setState({inputValues: this.storage});
+        console.log(this.storage);
     }
 
     render() {
@@ -280,7 +290,7 @@ class NgTable extends React.Component {
                 <table className="ngTable">
                     <thead>
                         <tr>
-                            <th> ng </th>
+                            <th className="centered-text"> {this.props.type} </th>
                         </tr>
                     </thead>
                     <tbody>
