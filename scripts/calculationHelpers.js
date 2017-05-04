@@ -58,7 +58,7 @@ export function createConsumptionCurve(activeChannel) {
                     let p2 = channelPoints[i+1];
 
                     let channelParameters = custom_sectionParameters(p1, p2, channelHeight);
-                    //console.log(channelParameters);
+                    console.log(channelParameters);
 
                     // ng and I for each section of the channel (between two points)
                     let ng = storage.custom.ngInputs[i];
@@ -117,6 +117,7 @@ function custom_createPoints(partlyFlowsArr) {
 
     for (let height of heights) {
         let Q = sum_heightFlows[height];
+        height = parseFloat(height);
         let point = {'x': Q, 'y': height}
         points.push(point);
     }
@@ -165,9 +166,9 @@ function custom_verticalFunction(point1, point2, channelHeight) {
     let dY = Math.abs(point1.y - point2.y);
     let startingPoint;
     if (point1.y >= point2.y) {
-        startingPoint = point1.y;
-    } else {
         startingPoint = point2.y;
+    } else {
+        startingPoint = point1.y;
     }
 
     let pointsArr = [];

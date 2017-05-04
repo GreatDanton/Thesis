@@ -154,8 +154,9 @@ class Hydrogram extends React.Component {
                     <h3>
                         Hydrogram
                     </h3>
-                    <LineChart y={graphData} x={'months'} name={names}/>
-                    <BarChart y={graphData} x={'months'} name={names}/>
+                    <LineChart y={graphData} x={'months'} name={names} yAxes={'Q [m3/s]'} />
+                    <div className="margin-u-40" />
+                    <BarChart y={graphData} x={'months'} name={names} yAxes={'Q [m3/s]'} />
                 </div>
             )
         } else {

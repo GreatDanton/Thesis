@@ -231,12 +231,14 @@ class CustomChannel extends React.Component {
                                     <NgTable  displayInputs={this.state.points} type="ng" />
                                 </div>
                                 <div className="col-20">
-                                    <NgTable displayInputs={this.state.points} type="φ" />
+                                    <NgTable displayInputs={this.state.points} type="φ [%]" />
                                 </div>
                             </div>
                         </div>
                         <div className="col-70 padding-h-20">
                             <ScatterChart name={["custom channel"]} data={[this.state.points]} pointBorder={'y'} />
+
+                            <img className="img-level-guide" src="images/vertical_crossSection.svg" />
                         </div>
                     </div>
                 </div>
@@ -254,7 +256,7 @@ class NgTable extends React.Component {
         if (this.props.type === 'ng') {
             this.storage = GlobalStorage.channelTab.custom.ngInputs;
         }
-        else if (this.props.type === 'φ') {
+        else if (this.props.type.indexOf('φ') > -1)  {
             this.storage = GlobalStorage.channelTab.custom.φ_inputs;
         }
         // state is present in order to change inputs later, otherwise we cannot change inputs after initial input

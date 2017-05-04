@@ -65,10 +65,39 @@ class LineChart extends React.Component {
     }
 
     render() {
+
+        let yAxes = "";
+        if (this.props.yAxes) {
+            yAxes = this.props.yAxes;
+        }
+
+        let xAxes = "";
+        if (this.props.xAxes) {
+            xAxes = this.props.xAxes;
+        }
+
+        let options = {
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: xAxes
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: yAxes
+                    }
+                }]
+            }
+        }
+
+
         let dataset = this.buildData;
         return (
             <div>
-                <Line data={dataset} />
+                <Line data={dataset} options={options}/>
             </div>
         )
     }
@@ -117,12 +146,12 @@ class BarChart extends React.Component {
 
     render() {
 
-        let yAxes;
+        let yAxes = "";
         if (this.props.yAxes) {
             yAxes = this.props.yAxes;
         }
 
-        let xAxes
+        let xAxes = "";
         if (this.props.xAxes) {
             xAxes = this.props.xAxes;
         }
