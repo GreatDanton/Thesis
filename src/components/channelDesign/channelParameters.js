@@ -28,7 +28,7 @@ class RectangularChannel extends React.Component {
         let h = parseFloat(this.state.h);
         let B = parseFloat(this.state.B);
         let P = 2 * h + B;
-        return P
+        return P;
     }
 
     area() {
@@ -193,18 +193,14 @@ class CustomChannel extends React.Component {
     }
 
     deleteClick(e) {
-        let X = e.currentTarget.getAttribute('x');
-        let Y = e.currentTarget.getAttribute('y');
-        let points_arr = [];
-        this.state.points.map(point => {
-            // if x or y are not the same, push it to points array (this filters out unwanted point)
-            if (X !== point.x || Y !== point.y) {
-                points_arr.push(point);
-            }
-        })
-        this.setState({points: points_arr});
-        this.storage.points = points_arr;
+        let id = e.currentTarget.getAttribute('id');
+        let pointsArr = this.state.points.slice(); // copy state
+        pointsArr.splice(id, 1); // remove point with index same as id (clicked element)
+
+        this.setState({points: pointsArr});
+        this.storage.points = pointsArr; // save new array into global storage
     }
+
 
     render() {
 
@@ -268,7 +264,6 @@ class NgTable extends React.Component {
         let value = e.target.value;
         this.storage[id] = value;
         this.setState({inputValues: this.storage});
-        console.log(this.storage);
     }
 
     render() {
@@ -312,7 +307,7 @@ class PointsTable extends React.Component {
     render() {
         let TableRows = this.props.data.map((point, index) => {
                 return (
-                    <TableRow x={point.x}  y={point.y} key={index}
+                    <TableRow passIndex={index} x={point.x}  y={point.y} key={index}
                         onClick={this.props.onClick} />
                 )
         });
@@ -343,7 +338,7 @@ class TableRow extends React.Component {
         return (
             <tr>
                 <td className="td-delete" onClick={this.props.onClick}
-                    x={this.props.x}  y={this.props.y}> × </td>
+                    x={this.props.x}  y={this.props.y} id={this.props.passIndex}> × </td>
                 <td> {this.props.x} </td>
                 <td> {this.props.y} </td>
             </tr>
