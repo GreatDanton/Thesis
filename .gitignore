@@ -1,8 +1,17 @@
 node_modules
 .vscode
+
+# latex specific files
 *.log
 *.out
 *.synctex.gz
 *.toc
 *.aux
-
+*.lot
+*.lott
+*.lof
+*.loff
+*.bst
+*.bst
+*.sty
+*.loapp
