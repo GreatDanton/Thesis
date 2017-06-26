@@ -65,7 +65,7 @@ Kjer je:
 	\begin{figure}[ht!]
 		\begin{centering}
 			\includegraphics{slike/konsumpcijska_krivulja/rectangularChannel.pdf}		
-			\caption{Prečni prerez pravokotne struge} \label{fig:pravokotna struga}
+			\caption{Prečni prerez pravokotne struge}\label{fig:pravokotna struga}
 		\end{centering}
 	\end{figure}
 	
@@ -86,7 +86,7 @@ Kjer je:
 		\begin{figure}[ht!]
 			\begin{centering}
 				\includegraphics{slike/konsumpcijska_krivulja/trapezoidChannel.pdf}		
-				\caption{Prečni prerez trapezne struge} \label{fig:trapezna struga}
+				\caption{Prečni prerez trapezne struge}\label{fig:trapezna struga}
 			\end{centering}
 		\end{figure}
 	
@@ -104,7 +104,7 @@ Kjer je:
 
 
 
-Ko poznamo vse parametre Manningove enačbe, izračunamo pretoke vodotoka za vsak cm višine rečne struge, ki poteka od 0 do $H$ in narišemo konsumpcijsko krivuljo $h(Q)$.
+Ko poznamo vse parametre Manningove enačbe \ref{eq:ManningovaEnacba}, izračunamo pretoke vodotoka za vsak cm višine rečne struge, ki poteka od 0 do $H$ in narišemo konsumpcijsko krivuljo $h(Q)$.
 
 
 \newpage
@@ -117,7 +117,7 @@ Poljubno oblikovano strugo lahko popišemo s serijo točk, ki jih dodajamo v kar
 \begin{figure}[ht!]
 	\begin{centering}
 		\includegraphics{slike/customChannel/customStruga.pdf}		
-		\caption{Poljubno definirana struga} \label{fig:poljubnaStruga}
+		\caption{Poljubno definirana struga}\label{fig:poljubnaStruga}
 	\end{centering}
 \end{figure}
 
@@ -135,8 +135,8 @@ Skrajni točki struge sta točki $T_L$ in $T_D$ na sliki \ref{fig:poljubnaStruga
 Program razdeli podano strugo na odseke po dve točki $T_1$ ($x_1$, $y_1$) in $T_2$ ($x_2$, $y_2$). Za podan odsek se najprej določi enačba linearne funkcije. 
 
 \begin{equation}
-f(x) = kx + n
-\end{equation} \label{eq:enacba_linearnafunkcija}
+f(x) = kx + n \label{eq:enacba_linearnafunkcija}
+\end{equation}
 
 Naklon funkcije k se izračuna po formuli: 
 
@@ -149,12 +149,10 @@ k = \dfrac{y_2 - y_1}{x_2 - x_1}
 \begin{figure}[ht]
 	\begin{centering}
 		\includegraphics{slike/customChannel/odsek.pdf}
-		\bicaption[fig: odsekStruge]{}{
+		\bicaption[fig: odsekStruge]{}{\label{fig:odsekStruge}
 			Izbrani odsek struge
-			}{Figure}{
-			Chosen part of the river channel}
-			\addfiguretolof{Chosen part of the river channel} \label{fig:odsekStruge}
-			
+			}{Figure}{Chosen part of the river channel}
+			\addfiguretolof{Chosen part of the river channel}
 	%	\caption{Izbrani odsek struge} \label{fig:odsekStruge}
 	\end{centering}
 \end{figure}
@@ -162,15 +160,15 @@ k = \dfrac{y_2 - y_1}{x_2 - x_1}
 
 
 
-Če v enačbo linearne funkcije~\ref{eq:enacba_linearnafunkcija} vstavimo izračunan k in koordinate točke $T_1$, lahko izračunamo iskani $n$ in s tem je določena enačba linearne funkcije $f(x)$ med dvema točkama, ki jo potrebujemo za nadaljnje izračune. 
+Če v enačbo linearne funkcije \ref{eq:enacba_linearnafunkcija} vstavimo izračunan k in koordinate točke $T_1$, lahko izračunamo iskani $n$ in s tem je določena enačba linearne funkcije $f(x)$ med dvema točkama, ki jo potrebujemo za nadaljnje izračune. 
 
 
 
 % določitev ploščine posameznega kosa
-Za vsak odsek dveh točk se najprej določi najnižja točka odseka $T_{zac}$, na sliki~\ref{fig:odsekStruge} označena kot točka $O_2$. Y koordinata točke $T_{zac}$ nam predstavlja začetno višino odseka $h_{zac}$. Razdaljo med začetno višino odseka $h_{zac}$ in končno gladino struge $H$ označimo z $dh$.
+Za vsak odsek dveh točk se najprej določi najnižja točka odseka $T_{zac}$, na sliki \ref{fig:odsekStruge} označena kot točka $O_2$. Y koordinata točke $T_{zac}$ nam predstavlja začetno višino odseka $h_{zac}$. Razdaljo med začetno višino odseka $h_{zac}$ in končno gladino struge $H$ označimo z $dh$.
 
 % explain
-Od $h_{zac}$ do končne višine rečnega korita H za vsak cm po višini določimo presečišče $P_1$ prej izračunane funkcije $f(x)$ s horizontalno ravnino, ki predstavlja gladino vode pri dani višini. 
+Od $h_{zac}$ do končne višine rečnega korita H za vsak cm po višini določimo presečišče $P_1$ prej izračunane funkcije $f(x)$ s horizontalno ravnino $g$, ki predstavlja gladino vode pri trenutni višini $h$.
 
 
 \begin{figure}[ht!]
@@ -182,20 +180,20 @@ Od $h_{zac}$ do končne višine rečnega korita H za vsak cm po višini določim
 
 
 
-Ko imamo določeno presečišče $P_1$ gladine vode s funkcijo $f(x)$ med točkama odseka, lahko izračunamo dolžino omočenega oboda struge in ploščino lika ki ga oklepajo funkcija odseka, navidezna gladina vode $g$ in najnižja točka odseka T\textunderscore zac.
+Ko imamo določeno presečišče $P_1$ gladine vode s funkcijo $f(x)$ med točkama odseka, lahko izračunamo dolžino omočenega oboda struge in ploščino lika ki ga oklepajo funkcija odseka, navidezna gladina vode $g$ in najnižja točka odseka $T_{zac}$ na sliki \ref{fig:odsekStruge} označena z $O_2$.
 
 
 \begin{enumerate}
-	\item V primeru da se presečišče $P1$ odseka nahaja v območju med točkama $O_1$ in $O_2$ dolžino omočenega oboda določimo po Pitagorovem izreku kot:
+	\item V primeru da se presečišče $P1$ odseka nahaja v območju med točkama $O_1$ in $O_2$, dolžino omočenega oboda določimo po Pitagorovem izreku kot:
 	
 	%\begin{equation}
 	%P = \sqrt{(T_{zac}x - P_1x)^{2} + (T_{zac}y - P_1y)^{2}}
 	%\end{equation}
 	
 	\begin{ceqn}
-		\begin{align}
+		\begin{equation}
 		P = \sqrt{(T_{zac}x - P_1x)^{2} + (T_{zac}y - P_1y)^{2}}
-		\end{align}
+		\end{equation}
 	\end{ceqn}
 	
 	
@@ -211,7 +209,7 @@ Ko imamo določeno presečišče $P_1$ gladine vode s funkcijo $f(x)$ med točka
 	P = \sqrt{ (O_1x - O_2x)^{2} + (O_1y - O_2y)^{2}}
 	\end{equation}
 	
-	Ploščina pa se določi kot seštevek ploščin območij I in II na sliki~\ref{fig:odsekStruge}.
+	Ploščina pa se določi kot seštevek ploščin območij I in II na sliki \ref{fig:odsekStruge}.
 	
 	\begin{equation}
 	S = S_I + S_{II}
@@ -249,8 +247,6 @@ S(h) = S_1(h) + S_2(h) + S_3(h) + ... + S_{n-1}(h) + S_n(h)
 
 % TODO: kako izračunamo končni pretok za izris konsumpcijske krivulje.
 
-
-\subsection{Izris konsumpcijske krivulje}
 
 Za izris konsumpcijske krivulje potrebujemo podatke o pretokih v odvisnosti od višine vode v strugi. Za vsak odsek struge imamo na voljo podatke o ploščini prečnega profila struge in omočenega oboda dna struge v odvisnosti od višine vode v strugi. Pretoke za vsak cm višine vode v strugi izračunamo po Manningovi enačbi \ref{eq:ManningovaEnacba}
 
