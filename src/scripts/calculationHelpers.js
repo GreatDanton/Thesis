@@ -33,7 +33,7 @@ export function createConsumptionCurve(activeChannel) {
                 let ng = parseFloat(storage.trapezoid.ng);
                 let channelAngle = parseFloat(storage.trapezoid.φ);
                 // calculate angle of sides
-                let _x = (B - b) / 2
+                let _x = (B - b) / 2;
                 let beta = (Math.atan(h / _x)) * 180 / Math.PI;
 
                 for (let i = 0; i < h; i += 0.01) {
@@ -118,7 +118,7 @@ function custom_createPoints(partlyFlowsArr) {
     for (let height of heights) {
         let Q = sum_heightFlows[height];
         height = parseFloat(height);
-        let point = {'x': Q, 'y': height}
+        let point = {'x': Q, 'y': height};
         points.push(point);
     }
     return points;
@@ -149,7 +149,7 @@ function custom_sectionParameters(point1, point2, channelHeight) {
     let func = custom_getFunction(point1, point2);
     let points;
 
-    if (func['line'] === 'vertical') {
+    if (func.line === 'vertical') {
         // calculate for vertical function
         points = custom_verticalFunction(point1, point2, channelHeight);
     } else {
@@ -176,7 +176,7 @@ function custom_verticalFunction(point1, point2, channelHeight) {
         let h = startingPoint + i;
         let S = 0;
         let P = i;
-        let point = {[h.toFixed(2)]: {'S': S, 'P': P}}
+        let point = {[h.toFixed(2)]: {'S': S, 'P': P}};
         pointsArr.push(point);
     }
     return pointsArr;
@@ -191,7 +191,7 @@ function custom_diagonalFunction(point1, point2, func, channelHeight) {
     let pointsArr = [];
     if (k === 0) { // if function is horizontal
         let dY = channelHeight - point2.y;
-        let dX = point1.x - point2.x
+        let dX = point1.x - point2.x;
 
         for (let i = 0; i < dY; i += 0.01) {
             let h = point2.y + i;
@@ -244,7 +244,7 @@ function custom_calculateTriangleArea(point1, point2) {
     let dY = Math.abs(point1.y - point2.y);
     let area = dX * dY / 2;
 
-    return area
+    return area;
 }
 
 // get lower point of two input points;
@@ -258,7 +258,7 @@ function custom_getLowerPoint(point1, point2) {
 function custom_pointsDistance(point1, point2) {
     let dY = Math.abs(point1.y - point2.y);
     let dX = Math.abs(point1.x - point2.x);
-    let distance = (dY ** 2 + dX ** 2) ** (1/2);
+    let distance = (dY**2 + dX**2)**(1/2);
     return distance;
 }
 
@@ -287,7 +287,7 @@ function custom_getFunction(point1, point2) {
    if (dX === 0) { // straight vertical line
         return {
             'line': 'vertical',
-        }
+        };
     }
 
     k = dY / dX;
@@ -296,7 +296,7 @@ function custom_getFunction(point1, point2) {
         'line': 'diagonal',
         'k': k,
         'n': n,
-    }
+    };
 }
 
 
@@ -347,7 +347,7 @@ export function downstreamRiverHeight(turbineFlow) {
     for (let i = 0; i < consumptionCurve.length; i++) {
         let flowOnConsumptionCurve = consumptionCurve[i].x;
 
-        if (turbineFlow == 0) {
+        if (turbineFlow === 0) {
             return -1; // no energy produced
         }
         else if (turbineFlow > Q_channelMax) { // water is overflowing channel -> notify
@@ -396,7 +396,7 @@ export function producedElectricity() {
 
     let Q;
     let NO_ENERGY_PRODUCED = -1;
-    let CHANNEL_OVERFLOW = -2
+    let CHANNEL_OVERFLOW = -2;
     let PowerArr = [];
 
     // if data does not exist

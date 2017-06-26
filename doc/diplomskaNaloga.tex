@@ -1,0 +1,242 @@
+%
+% Jan Pribošek
+% Diplomska naloga
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt,a4paper,twoside,fleqn,openany]{book}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Nastavitve strani
+\setlength{\voffset}{-1 in}        % premakne koordinatno izhodisce strani na zg. rob lista
+\setlength{\hoffset}{-1 in}        % premakne koordinatno izhodisce strani na levi. rob lista
+\setlength{\oddsidemargin}{3 cm}   % velikost levega robu na sodih straneh
+\setlength{\evensidemargin}{2 cm}  % velikost levega robu na lihih straneh
+\setlength{\topmargin}{1.5 cm}     % velikost zgornjega robu do glave
+\setlength{\headheight}{1 cm}      % velikost glave
+\setlength{\headsep}{0.5 cm}       % glava od teksta
+\setlength{\textwidth}{16 cm}      % sirina besedila
+\setlength{\textheight}{24.7 cm}   % visina besedila
+\setlength{\footskip}{1 cm}        % noga od teksta
+\setlength{\marginparsep}{3 mm}    % ni vazno
+\setlength{\marginparwidth}{0 cm}  % ni vazno
+%
+% Nastavitve odstavka
+\setlength{\parindent}{0 mm}       % zamik prve vrstice odstavka
+\setlength{\parskip}{1.5ex}        % razmik med odstavki
+\renewcommand{\baselinestretch}{1.2}% razmik med vrsticami
+\setlength{\mathindent}{1 cm}       % zamik ena?b od levega roba
+
+\usepackage{times}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx, color}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{nccmath}
+\usepackage{tabularx}
+\usepackage{mathptmx}
+\usepackage{fancyhdr}
+\usepackage{mathtools}
+\usepackage{framed}
+\usepackage{wasysym}			% paket ki omogoča oznako promil
+\usepackage{booktabs}			% paket za tabele
+%\usepackage[pdftex,unicode]{hyperref}
+\usepackage[pdftex,unicode,colorlinks,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\urlstyle{same}
+
+\usepackage{cite}
+\usepackage{pdfpages}
+\usepackage{color}
+\definecolor{mygray}{gray}{.6}
+
+%\usepackage{lastpage}
+%\usepackage{totcount}
+%\regtotcounter{figure}
+%\regtotcounter{page}
+\usepackage[figure,table,page,equation]{totalcount}
+
+\usepackage{float}
+\usepackage{multirow}
+\usepackage[center]{subfigure}
+%\usepackage{natbib}
+
+% Paket za prilagajanje napisov pod plavajočimi objekti
+\usepackage[subfigure]{ccaption}
+\captionstyle{\centering}
+
+% customizing lists
+\usepackage{enumitem}
+
+
+% Urejanaje kazal
+% Za osnovn kazala popravljam kar osnovno definicijo v book.cls
+\AtBeginDocument{
+\renewcommand\contentsname{KAZALO VSEBINE}
+\renewcommand\listfigurename{KAZALO SLIK}
+\renewcommand\listtablename{KAZALO PREGLEDNIC}
+\renewcommand{\bibname}{VIRI}
+\renewcommand\tablename{Preglednica}
+}
+
+%
+% in seznam prilog
+\usepackage[subfigure, titles]{tocloft} % Paket za nastavitev seznamov
+
+% Seznam slik v ang.
+\newcommand{\listfigname}{LIST OF FIGURES}
+\newlistof[chapter]{ffigure}{loff}{\listfigname}
+% nov ukaz za dodajanje slik v seznam slik
+\newcommand{\addfiguretolof}[1]{
+\addcontentsline{loff}{figure}{\protect\numberline{\thefigure}#1}
+}
+% Seznam preglednic v angl
+\newcommand{\listtabname}{LIST OF TABLES}
+\newlistof[chapter]{ttable}{lott}{\listtabname}
+% nov ukaz za dodajanje preglednic v seznam preglednic
+\newcommand{\addtabletolot}[1]{
+\addcontentsline{lott}{figure}{\protect\numberline{\thetable}#1}
+}
+% Seznam prilog
+\newcommand{\listappname}{SEZNAM DODATKOV}
+\newlistof[chapter]{appendices}{loapp}{\listappname}
+\cftpagenumbersoff{appendices}
+\renewcommand{\cftappendicesdotsep}{\cftnodots}
+
+
+%\usepackage{setspace}
+%\onehalfspacing
+
+%Nastavitve nasplovov/podnaslovov...
+\usepackage{titlesec}
+
+% solve bug in titlesec package (numbers on chapters are not showing)
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\ttlh@hang}{\parindent\z@}{\parindent\z@\leavevmode}{}{}
+\patchcmd{\ttlh@hang}{\noindent}{}{}{}
+\makeatother
+
+
+
+\titleformat{\chapter}[hang]
+{\normalfont\bfseries\normalsize}
+{\thechapter}{2mm}{}
+\titlespacing{\chapter}{0pt}{\baselineskip}{\baselineskip}
+
+
+\titleformat{\section}[hang]
+{\normalfont\bfseries\normalsize}
+{\thesection}{2mm}{}
+
+\titleformat{\subsection}[hang]
+{\normalfont\bfseries\normalsize}
+{\thesubsection}{2mm}{}
+
+
+\SetSymbolFont{letters}{normal}{OML}{cmr}{m}{n}
+\SetSymbolFont{letters}{bold}{OML}{cmm}{b}{it}
+\SetSymbolFont{operators}{bold}{OT1}{cmr}{bx}{n}
+%
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+\newcommand{\bm}[1]{\mathbf{#1}}
+
+\newcommand\bcdot{\ensuremath{%
+  \mathchoice%
+   {\mskip\thinmuskip\lower0.2ex\hbox{\scalebox{1.5}{$\cdot$}}\mskip\thinmuskip}}%
+   {\mskip\thinmuskip\lower0.2ex\hbox{\scalebox{1.5}{$\cdot$}}\mskip\thinmuskip}%        
+   {\lower0.3ex\hbox{\scalebox{1.2}{$\cdot$}}}%  
+   {\lower0.3ex\hbox{\scalebox{1.2}{$\cdot$}}}%
+}
+
+
+
+\begin{document}
+
+\allowdisplaybreaks[1]
+
+%------------------------------------
+% Naslovnica
+%------------------------------------
+\frontmatter
+\include{Naslovnica/Naslovnica}
+%\includepdf[pages={1,{}},offset=1in -1in]{Naslovnica/Platnica.pdf}
+%\includepdf[pages={1},offset=1in -1in]{Naslovnica/PlatnicaZaTisk.pdf}
+
+%------------------------------------
+% Prve strani
+%------------------------------------
+\pagenumbering{Roman}
+%\includepdf[pages={1,{},2,{},3,{}},offset=1in -1in]{Naslovnica/Naslovnica.pdf}
+%\includepdf[pages={1,{},2,{},3,{}},offset=1in -1in]{Naslovnica/NaslovnicaSpodpisom.pdf}
+
+\input{Glava/Glava}
+\include{PrveStrani/StranSpopravki}
+%\include{PrveStrani/Izjave}
+\include{PrveStrani/Izvlecek}
+\include{PrveStrani/Abstract}
+
+%------------------------------------
+% Zahvala
+%------------------------------------
+\include{Zahvala/Zahvala}
+
+%------------------------------------
+% Kazala
+%------------------------------------
+\include{Kazala/Kazala}
+
+%------------------------------------
+% Vsebina
+%------------------------------------
+\mainmatter
+\pagenumbering{arabic}
+\input{Glava/Glava}
+
+\include{Uvod/Uvod}
+
+\include{TeoreticneOsnove/TeoreticneOsnove}
+
+\include{FormulacijaZNezveznoKinematiko/FormulacijaZNezveznoKinematiko}
+%\include{AproksimacijaPoMKE/AproksimacijaPoMKE}
+%\include{NumericniPrimeri/NumericniPrimeri}
+
+\include{Zakljucek/Zakljucek}
+
+\include{Povzetek/Povzetek}
+\include{Povzetek/Summary}
+
+
+%------------------------------------
+% Bibliografija
+%------------------------------------
+\phantomsection
+\addcontentsline{toc}{chapter}{VIRI}
+\bibliographystyle{disertation}
+
+\bibliography{Bibliografija/Lokalizacija}
+\thispagestyle{fancy}
+
+
+%------------------------------------
+% Priloge
+%------------------------------------
+\newpage
+\phantomsection
+%\chapter*{PRILOGE}
+\addcontentsline{toc}{chapter}{DODATKI}
+\listofappendices
+\thispagestyle{fancy}
+%\appendix
+\newcounter{Priloge}
+\input{Glava/GlavaPriloga}
+\renewcommand{\thechapter}{\Alph{Priloge}}
+\renewcommand{\theequation}{\Alph{Priloge}.\arabic{equation}}
+%\include{Dodatki/DodatekA}
+%\include{Dodatki/DodatekB}
+%\include{Dodatki/DodatekC}
+%\include{Dodatki/DodatekD}
+%\include{Dodatki/DodatekE}
+
+
+\end{document}
+

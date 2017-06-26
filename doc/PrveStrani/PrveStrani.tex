@@ -1,0 +1,129 @@
+\chapter*{POPRAVKI}
+\thispagestyle{fancy}
+
+\begin{table}[h!]
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{4cm} @{}>{\bfseries}p{4cm} @{}>{\bfseries}p{4cm} @{}>{\bfseries}p{4cm}}
+%
+Stran z napako	& Vrstica z napako	& Namesto & Naj bo	 \\
+%
+\end{tabularx}
+\end{table}
+
+
+\chapter*{IZJAVE}
+\thispagestyle{fancy}
+
+Podpisani Peter Èešarek izjavljam, da sem avtor doktorskega dela z naslovom
+"Dinamika prostorskih linijskih elementov z interpolacijo deformacijskih kolièin".
+
+Izjavljam, da je elektronska razlièica v vsem enaka tiskani razlièici.
+
+Izjavljam, da dovoljujem objavo elektronske razlièice v repozitoriju UL FGG.
+
+Ljubljana, \today
+\hspace*{\fill}Peter Èešarek
+
+
+
+\chapter*{BIBLIOGRAFSKO-DOKUMENTACIJSKA STRAN IN IZVLEÈEK}
+\thispagestyle{fancy}
+
+\begin{table}[h!]
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.5cm}@{} @{}>{\bfseries}p{12.5cm}@{}}
+%
+UDK	& xxx.xx:xxx.xxx(xxx.x)						 \\
+Avtor: & Peter Èešarek								 \\
+Mentor:& izr. prof. dr. Dejan Zupan				 	 \\
+Somentor: & prof. dr. Miran Saje						 \\
+Naslov: & Dinamika prostorskih linijskih elementov
+		  z interpolacijo deformacijskih kolièin	 \\
+Tip dokumenta: & Doktorska disertacija 		\\
+Obseg in oprema: & {\totalpages} str., {\totalfigures} sl., {\totaltables} preg., {\totalequations} en. \\
+Kljuène besede: & prostorski nosilec, toèna kinematika, dinamika, èasovna integracija, masni delec, trk
+%
+\end{tabularx}
+\end{table}
+
+\textbf{Izvleèek}
+
+V doktorski nalogi predstavimo nove metode za
+dinamièno analizo prostorskih linijskih konstrukcij.
+Obravnavamo èasovno integracijske sheme in
+formulacije konènih elementov, zasnovane na geometrijsko toèni
+teoriji prostorskih nosilcev.
+Bistvena novost predstavljenih algoritmov je
+izbira odvodov kinematiènih kolièin -- pomikov in rotacij,
+za osnovne neznanke pri reševanju problema
+v odvisnosti od parametrov prostora in èasa.
+Za èasovno integracijo dinamiènih enaèb predstavimo
+Newmarkovo shemo, prirejeno za nelinearen prostor rotacij,
+in predlagamo novo -- modificirano Newmarkovo shemo.
+Osnovne neznanke nove sheme so odvodi pomikov in rotacij po èasu
+-- hitrosti in kotne hitrosti.
+Predstavimo dve formulaciji linijskih konènih elementov,
+ki sta zasnovani na toènih kinematiènih
+zvezah med pomiki, rotacijami in deformacijami.
+Vodilne enaèbe obeh formulacij so
+sestavljene iz konsistenènih enaèb,
+ki zahtevajo enakost ravnotežnih in
+konstitutivnih notranjih sil in momentov.
+Sistem enaèb dopolnjujejo
+kinematièni in ravnotežni robni pogoji.
+Za osnovne neznanke v prvi formulaciji izberemo krajevne odvode pomikov in rotacij -- deformacije,
+v drugi formulaciji pa krajevne odvode hitrosti in kotnih hitrosti.
+Osnovne neznanke interpoliramo, za diskretizacijo zveznih enaèb
+po kraju pa izberemo kolokacijsko metodo.
+Pri deformacijskem elementu kinematiène zveze po èasu diskretiziramo
+z Newmarkovo shemo, za zagotovitev stabilnosti pa uporabimo
+posplošeno-$\alpha$ metodo numeriènega dušenja. Pri elementu
+z interpolacijo krajevnih odvodov hitrosti, kinematiène enaèbe
+po èasu diskretiziramo z modificirano Newmarkovo shemo.
+Enaèbe rešujemo z Newtonovo iteracijsko metodo.
+Za obe formulaciji podrobno predstavimo linearizacijo
+in dodajanje popravkov. Nove elemente vgradimo v
+raèunalniški program in testiramo na številnih primerih.
+Model nosilca dodatno nadgradimo z vplivom masnega delca na nosilec.
+Podrobneje obravnavamo trk masnega delca ob nosilec.
+
+
+
+
+\chapter*{BIBLIOGRAPHIC-DOCUMENTALISTIC INFORMATION AND ABSTRACT}
+\thispagestyle{fancy}
+
+%
+\begin{table}[h!]
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.5cm}@{} @{}>{\bfseries}p{12.5cm}@{}}
+%
+UDC	& xxx.xx:xxx.xxx(xxx.x)						 \\
+Author: & Peter Èešarek								 \\
+Supervisor:& assoc. prof. Dejan Zupan, Ph.D.				 	 \\
+Cosupervisor: & prof. dr. Miran Saje, Ph.D.						 \\
+Title: & Dynamics of spatial beams with interpolation
+	     of strain measures	 \\
+Document type: &  Doctoral Dissertation \\
+Notes: & {\totalpages} p., {\totalfigures} fig., {\totaltables} tab., {\totalequations} eq. \\
+Keywords: & spatial beam, exact kinematics, dynamics, time integation, mass particle, im\-pact
+%
+\end{tabularx}
+\end{table}
+\textbf{Abstarct}
+
+In the present thesis we present new numerical methods for
+
+The paper presents new implicit time discretization scheme for the
+dynamic analysis of rigid or flexible multibody systems. The present approach
+employs velocities and angular velocities as the only
+unknowns of the scheme. This allows efficient implementation
+of the method and increases the numerical stability of
+the algorithm. This paper presents a new finite-element formulation for the dynamic analysis of
+three-dimensional beams. The formulation is based on the geometrically exact
+three-di\-me\-nsi\-onal beam theory in which the strain vectors are the only unknown
+functions of the arc-length parameter. The classical Newmark time integration
+scheme extended to the multiplicative group of spatial rotations is used and
+properly adapted for the strain-based formulation. The Generalized-$\alpha$ method
+is used to assure
+numerical stability of the formulation. The update procedure needed in the
+iteration process is discussed in detail. The exact linearization of the
+governing equations is also presented. The performance of the formulation is
+demonstrated with numerical examples.

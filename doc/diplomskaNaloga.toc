@@ -1,0 +1,20 @@
+\select@language {slovene}
+\contentsline {chapter}{BIBLIOGRAFSKO-DOKUMENTACIJSKA STRAN IN IZVLE?EK}{II}{chapter*.2}
+\contentsline {chapter}{BIBLIOGRAPHIC-DOCUMENTALISTIC INFORMATION AND ABSTRACT}{III}{chapter*.3}
+\contentsline {chapter}{ZAHVALA}{IV}{chapter*.4}
+\contentsline {chapter}{\numberline {1}Uvod}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Teoreti\IeC {\v c}ne osnove}{2}{chapter.2}
+\contentsline {section}{\numberline {2.1}Pridobitev podatkov}{2}{section.2.1}
+\contentsline {section}{\numberline {2.2}Izra\IeC {\v c}un hidrolo\IeC {\v s}kega niza podatkov}{2}{section.2.2}
+\contentsline {section}{\numberline {2.3}Izra\IeC {\v c}un konsumpcijske krivulje}{2}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Izra\IeC {\v c}un konsumpcijske krivulje za pravokotne in trapezne struge}{3}{subsection.2.3.1}
+\contentsline {section}{\numberline {2.4}Izra\IeC {\v c}un konsumpcijske krivulje za struge poljubne oblike}{5}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Izra\IeC {\v c}un vi\IeC {\v s}ine re\IeC {\v c}nega korita}{5}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Dolo\IeC {\v c}itev parametrov odseka}{5}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.3}Izris konsumpcijske krivulje}{7}{subsection.2.4.3}
+\contentsline {section}{\numberline {2.5}Izra\IeC {\v c}un proizvodnje elektri\IeC {\v c}ne energije}{8}{section.2.5}
+\contentsline {chapter}{\numberline {3}ZAKLJU\IeC {\v C}EK}{10}{chapter.3}
+\contentsline {chapter}{POVZETEK}{11}{chapter*.10}
+\contentsline {chapter}{SUMMARY}{12}{chapter*.11}
+\contentsline {chapter}{VIRI}{13}{section*.12}
+\contentsline {chapter}{DODATKI}{13}{section*.13}
