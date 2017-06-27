@@ -37,12 +37,14 @@ Konsumpcijska krivulja je graf, ki predstavlja višino gladine spodnje vode v re
 
 
 %-------------------------------------------------
-\subsection{Izračun konsumpcijske krivulje za pravokotne in trapezne struge}
+\subsection{Izračun konsumpcijske krivulje za pravokotne in trapezne struge} \label{sec:pretok_prav_trapez}
 Za izračun konsumpcijske krivulje potrebujemo pretok vodotoka v odvisnosti od višine gladine vode $h$ v strugi. Gladina vode $h$ poteka od dna struge do maksimalne višine struge $H$. Pretok vode v strugi se za vsak cm višine $h$ izračuna po Manningovi enačbi:
 
-\begin{equation}
+\begin{ceqn}
+\begin{align}
 Q(h) = \dfrac{1}{ng} \sqrt{I}\dfrac{S(h)^{5/3}}{P(h)^{2/3}} \label{eq:ManningovaEnacba}
-\end{equation}
+\end{align}
+\end{ceqn}
 
 Kjer je:
 
@@ -71,15 +73,20 @@ Kjer je:
 	
 
 	Omočeni obod pravokotne struge dobimo kot seštevek širine dna struge in dvakratne višine struge $h$.
+	
+	\begin{ceqn}
 	\begin{equation}
 	P_{p}(h) = B + 2h
 	\end{equation}
+	\end{ceqn}
 	
 	Ploščino pravokotne struge dobimo po enačbi:
 	
-	\begin{equation}
+	\begin{ceqn}
+	\begin{align}
 	S_{p}(h) = B * h
-	\end{equation}
+	\end{align}
+	\end{ceqn}
 	
 	\item Trapezna struga:
 	
@@ -91,14 +98,19 @@ Kjer je:
 		\end{figure}
 	
 	Omočeni obod trapezne struge pa dobimo kot seštevek širine dna struge in dvakratne razdalje od roba dna struge do točke presečišča rečnega korita z gladino vode.
-	\begin{equation}
+	
+	\begin{ceqn}
+	\begin{align}
 	P_{t}(h) = b + 2 * \sqrt{h^2 + \left(\dfrac{h} {\tan\alpha} \right)^{2}}
-	\end{equation}
+	\end{align}
+	\end{ceqn}
 	
 	Ploščino trapezne struge pa dobimo po enačbi za pravokotnik:
-	\begin{equation}
+	\begin{ceqn}
+	\begin{align}
 	S_{t}(h) = b * h + 2 h \left( \dfrac{h}{ \tan\alpha} \right) ^ {2}
-	\end{equation}
+	\end{align}
+	\end{ceqn}
 	
 \end{enumerate}
 
@@ -109,7 +121,7 @@ Ko poznamo vse parametre Manningove enačbe \ref{eq:ManningovaEnacba}, izračuna
 
 \newpage
 %------------------------------------------------
-\section{Izračun konsumpcijske krivulje za struge poljubne oblike}\label{customChannel_algortihm}
+\section{Izračun konsumpcijske krivulje za struge poljubne oblike}\label{sec:pretokNumericnaMetoda}
 
 
 Poljubno oblikovano strugo lahko popišemo s serijo točk, ki jih dodajamo v kartezijski koordinatni sistem. Za vsako točko poljubnega rečnega korita podamo x in y koordinato, za točke pa predpostavimo da so med seboj povezane z enačbo linearne funkcije. 
@@ -134,15 +146,19 @@ Skrajni točki struge sta točki $T_L$ in $T_D$ na sliki \ref{fig:poljubnaStruga
 
 Program razdeli podano strugo na odseke po dve točki $T_1$ ($x_1$, $y_1$) in $T_2$ ($x_2$, $y_2$). Za podan odsek se najprej določi enačba linearne funkcije. 
 
-\begin{equation}
+\begin{ceqn}
+\begin{align}
 f(x) = kx + n \label{eq:enacba_linearnafunkcija}
-\end{equation}
+\end{align}
+\end{ceqn}
 
 Naklon funkcije k se izračuna po formuli: 
 
-\begin{equation}
+\begin{ceqn}
+\begin{align}
 k = \dfrac{y_2 - y_1}{x_2 - x_1}
-\end{equation}
+\end{align}
+\end{ceqn}
 
 
 
@@ -191,40 +207,50 @@ Ko imamo določeno presečišče $P_1$ gladine vode s funkcijo $f(x)$ med točka
 	%\end{equation}
 	
 	\begin{ceqn}
-		\begin{equation}
+		\begin{align}
 		P = \sqrt{(T_{zac}x - P_1x)^{2} + (T_{zac}y - P_1y)^{2}}
-		\end{equation}
+		\end{align}
 	\end{ceqn}
 	
 	
 	ploščino področja ki ga oklepajo horizontalna ravnina s presečiščem $P_1$ in najnižjo točko odseka $T_{zac}$ pa določimo kot ploščino trikotnika (področje I na sliki~\ref{fig:odsekStruge}) po formuli:
 	
-	\begin{equation}
+	\begin{ceqn}
+	\begin{align}
 	S = \dfrac{|T_{zac}x - P_1x| * |T_{zac}y - P_1y|}{2}
-	\end{equation}
+	\end{align}
+	\end{ceqn}
 	
 	
 	\item V primeru, da se presečišče $P1$ nahaja izven območja točk $O_1$ in $O_2$ pa se dolžina omočenega oboda izračuna kot razdalja med točkama $O_1$ in $O_2$ po Pitagorovem izreku:
-	\begin{equation}
+	
+	\begin{ceqn}
+	\begin{align}
 	P = \sqrt{ (O_1x - O_2x)^{2} + (O_1y - O_2y)^{2}}
-	\end{equation}
+	\end{align}
+	\end{ceqn}
 	
 	Ploščina pa se določi kot seštevek ploščin območij I in II na sliki \ref{fig:odsekStruge}.
 	
-	\begin{equation}
+	\begin{ceqn}
+	\begin{align}
 	S = S_I + S_{II}
-	\end{equation}
+	\end{align}
+	\end{ceqn}
 	
 	Pri čemer sta $S_I$ in $S_{II}$ enaka:
 	
-	\begin{equation}
+
+	\begin{ceqn}
+	\begin{align}
 	S_I =\dfrac{ (O_2y - O_1y) *  (O_2x - O_1x)}{2}
-	\end{equation}
+	\end{align}
 	
-	\begin{equation}
+	\begin{align}
 	S_{II} = (O_2x - O_1x) * (H - O_1y)
-	\end{equation}
-	
+	\end{align}
+	\end{ceqn}
+
 	
 	
 	
@@ -233,15 +259,21 @@ Ko imamo določeno presečišče $P_1$ gladine vode s funkcijo $f(x)$ med točka
 
 
 Za določitev končne dolžine omočenih obodov pri iskani višini $h$ moramo sešteti vse omočene obode odsekov pri iskani višini $h$.
-\begin{equation}
+\begin{ceqn}
+\begin{align}
 P(h) = P_1(h) + P_2(h) + P_3(h) + ... + P_{n-1}(h) + P_n(h)
-\end{equation}
+\end{align}
+\end{ceqn}
+
 
 
 Za določitev končnih vrednosti ploščin likov $S$ pri iskani višini $h$, moramo sešteti ploščine $S$ pri iskani višini $h$ za vse odseke točk rečne struge, to so vse točke med $T_L$ in $T_D$ na sliki~\ref{fig:poljubnaStruga}
-\begin{equation}
+
+\begin{ceqn}
+\begin{align}
 S(h) = S_1(h) + S_2(h) + S_3(h) + ... + S_{n-1}(h) + S_n(h)
-\end{equation}
+\end{align}
+\end{ceqn}
 
 
 
@@ -252,9 +284,12 @@ Za izris konsumpcijske krivulje potrebujemo podatke o pretokih v odvisnosti od v
 
 
 Ko imamo posamezne pretoke po višinah za vse odseke izračunane, jih medsebojno seštejemo in dobimo končne vrednosti pretokov:
-\begin{equation}
+
+\begin{ceqn}
+\begin{align}
 Q(h) = Q_1(h) + Q_2(h) + Q_3(h) + ... + Q_{n-1}(h) + Q_n(h)
-\end{equation}
+\end{align}
+\end{ceqn}
 
 Sledi izris konsumpcijske krivulje $h(Q)$.
 
@@ -279,14 +314,20 @@ Za določitev končne proizvodnje električne energije potrebujemo razliko med k
 Ker računamo proizvodnjo električne energije za pretočne hidroelektrarne, predpostavimo da je kota zgornje vode konstantna na višini $H$. Koto spodnje vode določimo iz prej izračunane konsumpcijske krivulje, kjer določimo višino spodnje vode v strugi za dani povprečni mesečni pretok skozi turbino hidroelektrarne. V primeru da se pretok skozi turbino hidroelektrarne nahaja med dvema točkama pretokov v konsumpcijski krivulji, iskano višino spodnje vode določimo z linearno interpolacijo med točkama na grafu konsumpcijske krivulje.
 
 Izračunamo višinsko razliko med koto zgornje in spodnje vode:
-\begin{equation}
+
+\begin{ceqn}
+\begin{align}
 dh = H - H_{spodaj}
-\end{equation}
+\end{align}
+\end{ceqn}
 
 Moč hidroelektrarne izračunamo po enačbi
-\begin{equation}
+
+\begin{ceqn}
+\begin{align}
 P = \mu * g * Q * dh
-\end{equation}
+\end{align}
+\end{ceqn}
 
 Pri čemer so:
 \begin{table}[htb!]
@@ -302,9 +343,11 @@ Pri čemer so:
 
 Za izračun povprečne mesečne proizvodnje električne energije, za vsak dan v mesecu izračunamo povprečno moč in uporabimo naslednjo enačbo:
 
-\begin{equation}
+\begin{ceqn}
+\begin{align}
 E = \dfrac{P * d * 24}{1000}
-\end{equation}
+\end{align}
+\end{ceqn}
 
 Pri čemer so:
 \begin{table}[htb!]

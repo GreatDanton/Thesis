@@ -79,13 +79,14 @@ class ToolbarButtons extends React.Component {
     btnClick(e) {
         console.log(e.target);
     }
+    // those two buttons were before in render()
+    // <Button icon="cogs" tooltip="run" onClick={this.runCalculations} />
+    //<Button icon="print" tooltip="print results" onClick={this.btnClick} />
 
     render() {
         return (
             <div>
                 <Button icon="folder" tooltip="import file" onClick={this.importFile} />
-                <Button icon="cogs" tooltip="run" onClick={this.runCalculations} />
-                <Button icon="print" tooltip="print results" onClick={this.btnClick} />
             </div>
 
         )
