@@ -1,0 +1,23 @@
+\begin{thebibliography}{1}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{{\tt #1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \expandafter\ifx\csname doi\endcsname\relax
+  \def\doi#1{doi:\discretionary{}{}{}#1}\fi \else
+  \expandafter\ifx\csname doi\endcsname\relax
+  \def\doi{doi:\discretionary{}{}{}\begingroup \urlstyle{rm}\Url}\fi \fi
+\expandafter\ifx\csname eprint\endcsname\relax\def\eprint#1{\url{#1}}\fi
+
+\bibitem{HEnaSrednjiSavi}
+Kryžanowski, A., Mikoš, M., Brilly, M. 2011.
+\newblock Dragocen obnovljivi vir energije nam teče skozi prste?:
+  Hidroelektrarne na srednji {Savi}.
+\newblock Delo 155: 3.
+
+\bibitem{VenTeChow}
+Chow, V.~T. 1956.
+\newblock Open-Channel Hydraulics.
+\newblock McGraw-Hill Book Company.
+
+\end{thebibliography}

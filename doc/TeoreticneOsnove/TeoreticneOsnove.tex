@@ -18,15 +18,27 @@ Za nadaljnje izračune potrebujemo podatke o:
 	\item Povprečnih dnevnih pretokih vodotoka za izbrano obdobje
 \end{itemize}
 
-Podatke o dimenzijah rečne struge lahko pridobimo z meritvami ali pa dimenzije ocenimo na podlagi ortofoto posnetkov. Naklon se lahko določi s pomočjo spletne aplikacije Geopedija, kjer so vneseni podatki o višinski razliki izbranih točk rečne struge in razdalje med točkami. Naklon rečne struge izračunamo po enačbi:
+Podatke o dimenzijah rečne struge lahko pridobimo z meritvami ali pa dimenzije ocenimo na podlagi ortofoto posnetkov. Naklon se lahko oceni s pomočjo spletne aplikacije Geopedija, kjer so vneseni podatki o višinski razliki izbranih točk $\Delta h$ rečne struge in razdalje med točkami $L$. Naklon rečne struge izračunamo po enačbi:
 \begin{align}
- I = \dfrac{\Delta h}{L}
+ I = \dfrac{100\Delta h}{L} [\%]
 \end{align}
 
- Manningov koeficient hrapavosti rečnega korita lahko določimo izkustveno na terenu s pomočjo priročnikov ali pa z umerjanjem na podlagi podatkov o nivojih vode in pretokih.
+
+  Manningov koeficient hrapavosti rečnega korita $ng$ se lahko oceni izkustveno na terenu s pomočjo priročnikov ali pa z umerjanjem na podlagi podatkov o nivojih vode in pretokih. Odvisen od naslednjih 7 faktorjev \cite{VenTeChow}:
+ \begin{enumerate}[noitemsep, topsep=0pt]
+ 	\item Hrapavosti površine ostenja
+ 	\item Zaraščenosti rečnega korita
+ 	\item Neregularnosti oblike rečnega korita
+ 	\item Meandriranja rečne struge
+ 	\item Zamašitve struge s plavinami 
+ 	\item Oblike in velikosti rečnega korita
+ 	\item Polnosti korita
+ \end{enumerate}
+ 
+
  
  
-  Podatke o pretokih slovenskih vodotokov lahko pridobimo iz arhiva, ki se nahaja na spletni strani agencije Republike Slovenije za okolje (ARSO).
+  Podatke o pretokih slovenskih vodotokov lahko pridobimo iz arhiva, ki se nahaja na spletni strani agencije Republike Slovenije za okolje (ARSO). V primeru da iščemo pretok za manjši vodotok, obstaja velika verjetnost da podatki o pretokih ne obstajajo. V tem primeru lahko pretok vodotoka ocenimo s pomočjo meritev višine gladine vode in dimenzij struge, ocene Manningovega koeficienta hrapavosti in naklona struge. S pomočjo Manningove enačbe opisane v poglavju~\ref{sec:teorija_trapeznaMetoda} in ocenjenih členov enačbe dobimo končno ocenjeno vrednost pretokov za posamezno obdobje meritev.
 
 
 
@@ -80,7 +92,7 @@ Kjer je:
 	\end{figure}
 	
 
-	Omočeni obod pravokotne struge dobimo kot seštevek širine dna struge in dvakratne višine struge $h$.
+	Omočeni obod pravokotne struge izračunamo kot seštevek širine dna struge in dvakratne višine struge $h$.
 	
 	\begin{ceqn}
 	\begin{equation}
@@ -105,7 +117,7 @@ Kjer je:
 			\end{centering}
 		\end{figure}
 	
-	Omočeni obod trapezne struge pa dobimo kot seštevek širine dna struge in dvakratne razdalje od roba dna struge do točke presečišča rečnega korita z gladino vode.
+	Omočeni obod trapezne struge izračunamo kot seštevek širine dna struge in dvakratne razdalje od roba dna struge do točke presečišča rečnega korita z gladino vode.
 	
 	\begin{ceqn}
 	\begin{align}
@@ -113,7 +125,7 @@ Kjer je:
 	\end{align}
 	\end{ceqn}
 	
-	Ploščino trapezne struge pa dobimo po enačbi:
+	Ploščino trapezne struge izračunamo po enačbi:
 	\begin{ceqn}
 	\begin{align}
 	S_{t}(h) = b \cdot h + \dfrac{h^2}{ 2\tan\alpha}
