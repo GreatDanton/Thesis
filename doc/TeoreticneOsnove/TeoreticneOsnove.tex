@@ -18,7 +18,15 @@ Za nadaljnje izračune potrebujemo podatke o:
 	\item Povprečnih dnevnih pretokih vodotoka za izbrano obdobje
 \end{itemize}
 
-Podatke o dimenzijah rečne struge lahko pridobimo ali z meritvami ali pa dimenzije ocenimo na podlagi ortofoto posnetkov. Naklon se lahko določi s pomočjo Geopedije, kjer so vneseni podatki o višinski razliki izbranih točk rečne struge in razdalje med točkami. Manningov koeficient hrapavosti rečnega korita lahko določimo izkustveno na terenu s pomočjo priročnikov ali pa z umerjanjem na podlagi podatkov o nivojih vode in pretokih. Podatke o pretokih slovenskih vodotokov lahko pridobimo iz arhiva, ki se nahaja na spletni strani agencije Republike Slovenije za okolje (ARSO).
+Podatke o dimenzijah rečne struge lahko pridobimo z meritvami ali pa dimenzije ocenimo na podlagi ortofoto posnetkov. Naklon se lahko določi s pomočjo spletne aplikacije Geopedija, kjer so vneseni podatki o višinski razliki izbranih točk rečne struge in razdalje med točkami. Naklon rečne struge izračunamo po enačbi:
+\begin{align}
+ I = \dfrac{\Delta h}{L}
+\end{align}
+
+ Manningov koeficient hrapavosti rečnega korita lahko določimo izkustveno na terenu s pomočjo priročnikov ali pa z umerjanjem na podlagi podatkov o nivojih vode in pretokih.
+ 
+ 
+  Podatke o pretokih slovenskih vodotokov lahko pridobimo iz arhiva, ki se nahaja na spletni strani agencije Republike Slovenije za okolje (ARSO).
 
 
 
@@ -37,7 +45,7 @@ Konsumpcijska krivulja je graf, ki predstavlja višino gladine spodnje vode v re
 
 
 %-------------------------------------------------
-\subsection{Izračun konsumpcijske krivulje za pravokotne in trapezne struge} \label{sec:pretok_prav_trapez}
+\subsection{Izračun konsumpcijske krivulje za pravokotne in trapezne struge} \label{sec:teorija_trapeznaMetoda}
 Za izračun konsumpcijske krivulje potrebujemo pretok vodotoka v odvisnosti od višine gladine vode $h$ v strugi. Gladina vode $h$ poteka od dna struge do maksimalne višine struge $H$. Pretok vode v strugi se za vsak cm višine $h$ izračuna po Manningovi enačbi:
 
 \begin{ceqn}
@@ -84,7 +92,7 @@ Kjer je:
 	
 	\begin{ceqn}
 	\begin{align}
-	S_{p}(h) = B * h
+	S_{p}(h) = B \cdot h
 	\end{align}
 	\end{ceqn}
 	
@@ -101,14 +109,14 @@ Kjer je:
 	
 	\begin{ceqn}
 	\begin{align}
-	P_{t}(h) = b + 2 * \sqrt{h^2 + \left(\dfrac{h} {\tan\alpha} \right)^{2}}
+	P_{t}(h) = b + 2 \cdot \sqrt{h^2 + \left(\dfrac{h} {\tan\alpha} \right)^{2}}
 	\end{align}
 	\end{ceqn}
 	
-	Ploščino trapezne struge pa dobimo po enačbi za pravokotnik:
+	Ploščino trapezne struge pa dobimo po enačbi:
 	\begin{ceqn}
 	\begin{align}
-	S_{t}(h) = b * h + 2 h \left( \dfrac{h}{ \tan\alpha} \right) ^ {2}
+	S_{t}(h) = b \cdot h + \dfrac{h^2}{ 2\tan\alpha}
 	\end{align}
 	\end{ceqn}
 	
@@ -165,11 +173,7 @@ k = \dfrac{y_2 - y_1}{x_2 - x_1}
 \begin{figure}[ht]
 	\begin{centering}
 		\includegraphics{slike/customChannel/odsek.pdf}
-		\bicaption[fig: odsekStruge]{}{\label{fig:odsekStruge}
-			Izbrani odsek struge
-			}{Figure}{Chosen part of the river channel}
-			\addfiguretolof{Chosen part of the river channel}
-	%	\caption{Izbrani odsek struge} \label{fig:odsekStruge}
+		\caption{Izbrani odsek struge} \label{fig:odsekStruge}
 	\end{centering}
 \end{figure}
 
@@ -217,7 +221,7 @@ Ko imamo določeno presečišče $P_1$ gladine vode s funkcijo $f(x)$ med točka
 	
 	\begin{ceqn}
 	\begin{align}
-	S = \dfrac{|T_{zac}x - P_1x| * |T_{zac}y - P_1y|}{2}
+	S = \dfrac{|T_{zac}x - P_1x| \cdot |T_{zac}y - P_1y|}{2}
 	\end{align}
 	\end{ceqn}
 	
@@ -325,7 +329,7 @@ Moč hidroelektrarne izračunamo po enačbi
 
 \begin{ceqn}
 \begin{align}
-P = \mu * g * Q * dh
+P = \mu \cdot g \cdot Q \cdot dh
 \end{align}
 \end{ceqn}
 
@@ -345,7 +349,7 @@ Za izračun povprečne mesečne proizvodnje električne energije, za vsak dan v 
 
 \begin{ceqn}
 \begin{align}
-E = \dfrac{P * d * 24}{1000}
+E = \dfrac{24P \cdot d}{1000}
 \end{align}
 \end{ceqn}
 

@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="140mm"
-   height="70mm"
-   viewBox="0 0 496.06299 248.03149"
+   width="87.21344mm"
+   height="63.146275mm"
+   viewBox="0 0 309.024 223.74664"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -86,25 +86,31 @@
      borderopacity="1"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.0775893"
-     inkscape:cx="225.51558"
-     inkscape:cy="90.927128"
+     inkscape:zoom="2.0371973"
+     inkscape:cx="178.29898"
+     inkscape:cy="102.47571"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1916"
-     inkscape:window-height="984"
-     inkscape:window-x="1280"
-     inkscape:window-y="72"
+     inkscape:window-width="1276"
+     inkscape:window-height="874"
+     inkscape:window-x="0"
+     inkscape:window-y="126"
      inkscape:window-maximized="0"
      inkscape:snap-bbox="true"
      inkscape:snap-bbox-midpoints="true"
      inkscape:snap-bbox-edge-midpoints="true"
      inkscape:bbox-nodes="true"
-     inkscape:object-nodes="true">
+     inkscape:object-nodes="true"
+     fit-margin-top="1"
+     fit-margin-bottom="1"
+     fit-margin-left="5"
+     fit-margin-right="5">
     <inkscape:grid
        type="xygrid"
-       id="grid4182" />
+       id="grid4182"
+       originx="-87.28347"
+       originy="-11.589895" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -122,9 +128,9 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-804.33071)">
+     transform="translate(-87.283465,-817.02566)">
     <path
-       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.12598419;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4.4000001;stroke-dasharray:none;stroke-dashoffset:10.62992096;stroke-opacity:1;marker-start:url(#marker8075);marker-end:url(#marker7883)"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2.12598425;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4.4000001;stroke-dasharray:none;stroke-dashoffset:10.62992096;stroke-opacity:1;marker-end:url(#marker4689);marker-start:url(#Arrow2Sstart)"
        d="m 140,822.36221 0,199.99999 238.59014,0.1757"
        id="path7875"
        inkscape:connector-curvature="0"
