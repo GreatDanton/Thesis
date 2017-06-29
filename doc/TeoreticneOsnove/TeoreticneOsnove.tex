@@ -79,12 +79,12 @@ Kjer je:
 \end{table}
 
 
-
+\newpage
 % pravokotna struga
 \begin{enumerate}
 	\item Pravokotna struga:
 	
-	\begin{figure}[ht!]
+	\begin{figure}[H]
 		\begin{centering}
 			\includegraphics{slike/konsumpcijska_krivulja/rectangularChannel.pdf}		
 			\caption{Prečni prerez pravokotne struge}\label{fig:pravokotna struga}
@@ -117,7 +117,7 @@ Kjer je:
 			\end{centering}
 		\end{figure}
 	
-	Omočeni obod trapezne struge izračunamo kot seštevek širine dna struge in dvakratne razdalje od roba dna struge do točke presečišča rečnega korita z gladino vode.
+	Omočeni obod trapezne struge izračunamo kot seštevek širine dna struge in dvakratne razdalje od roba dna struge do točke presečišča rečnega korita z gladino vode:
 	
 	\begin{ceqn}
 	\begin{align}
@@ -318,18 +318,18 @@ Sledi izris konsumpcijske krivulje $h(Q)$.
 
 
 \section{Izračun proizvodnje električne energije}
-Za določitev končne proizvodnje električne energije potrebujemo razliko med koto zgornje vode (vode v rezervoarju) in koto spodnje vode, ki jo določimo iz grafa konsumpcijske krivulje izračunanega za izbrano strugo.
+Za določitev končne proizvodnje električne energije potrebujemo razliko med koto zgornje vode t.j. vode v rezervoarju in koto spodnje vode, ki jo določimo iz grafa konsumpcijske krivulje izračunanega za izbrano strugo.
 
 \begin{figure}[ht!]
 	\begin{centering}
 		\includegraphics{slike/electricityProduction/powerplant_crossSection.pdf}
-		\caption{Prečni prerez hidroelektrarne}
+		\caption{Shema prečnega prereza hidroelektrarne}
 	\end{centering}
 \end{figure}
 
-Ker računamo proizvodnjo električne energije za pretočne hidroelektrarne, predpostavimo da je kota zgornje vode konstantna na višini $H$. Koto spodnje vode določimo iz prej izračunane konsumpcijske krivulje, kjer določimo višino spodnje vode v strugi za dani povprečni mesečni pretok skozi turbino hidroelektrarne. V primeru da se pretok skozi turbino hidroelektrarne nahaja med dvema točkama pretokov v konsumpcijski krivulji, iskano višino spodnje vode določimo z linearno interpolacijo med točkama na grafu konsumpcijske krivulje.
+Ker računamo proizvodnjo električne energije za pretočne hidroelektrarne, predpostavimo da je kota zgornje vode konstantna na višini $H$. Koto spodnje vode določimo iz prej izračunane konsumpcijske krivulje iz katere odčitamo višino spodnje vode v strugi za dani povprečni mesečni pretok skozi turbino hidroelektrarne. V primeru da se pretok skozi turbino hidroelektrarne nahaja med dvema točkama pretokov v konsumpcijski krivulji, iskano višino spodnje vode določimo z linearno interpolacijo med znanima točkama na grafu konsumpcijske krivulje.
 
-Izračunamo višinsko razliko med koto zgornje in spodnje vode:
+Višinsko razliko med koto zgornje in spodnje vode določimo po spodnji enačbi:
 
 \begin{ceqn}
 \begin{align}
@@ -337,7 +337,7 @@ dh = H - H_{spodaj}
 \end{align}
 \end{ceqn}
 
-Moč hidroelektrarne izračunamo po enačbi
+Moč hidroelektrarne izračunamo po enačbi:
 
 \begin{ceqn}
 \begin{align}
@@ -357,18 +357,19 @@ Pri čemer so:
 \end{table}
 
 
-Za izračun povprečne mesečne proizvodnje električne energije, za vsak dan v mesecu izračunamo povprečno moč in uporabimo naslednjo enačbo:
+Za določitev končne mesečne proizvodnje električne energije, za vsak mesec določimo povprečno moč $\overline{P}$ in uporabimo naslednjo enačbo
 
 \begin{ceqn}
 \begin{align}
-E = \dfrac{24P \cdot d}{1000}
+E = \dfrac{24 \cdot \overline{P} \cdot d}{1000}
 \end{align}
 \end{ceqn}
 
 Pri čemer so:
 \begin{table}[htb!]
 \begin{tabular}{r|p{10cm}}
-	E & proizvedena električna energija [$kWh$]\\
+	E & proizvedena električna energija [$MWh$]\\
+	$\overline{P}$ & povprečna moč v mesecu [$kW$]\\
 	d & število dni v mesecu \\
 \end{tabular}
 \end{table}
