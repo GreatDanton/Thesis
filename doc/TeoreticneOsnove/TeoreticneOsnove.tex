@@ -35,7 +35,7 @@ Podatke o dimenzijah rečnega korita lahko pridobimo z meritvami na terenu ali p
  	\item Meandriranja rečne struge
  	\item Zamašitve struge s plavinami 
  	\item Oblike in velikosti rečnega korita
- 	\item Polnosti korita z vodo
+ 	\item Polnosti rečnega korita z vodo
  \end{enumerate}
  
 
@@ -203,7 +203,10 @@ k = \dfrac{y_2 - y_1}{x_2 - x_1}
 
 
 % določitev ploščine posameznega kosa
-Za vsak odsek dveh točk se določi najnižja točka odseka $T_{zac}$, na sliki \ref{fig:odsekStruge} označena kot točka $O_2$. Y koordinata točke $T_{zac}$ nam predstavlja začetno višino odseka $h_{zac}$. Od $h_{zac}$ do končne višine rečnega korita H za vsak cm po višini določimo presečišče $P_1$ prej izračunane funkcije $f(x)$ s horizontalno ravnino $g$, ki predstavlja gladino vode pri trenutni višini $h$. Opisani postopek je prikazan na sliki \ref{fig:custom_odsekDetajl}.
+Za vsak odsek dveh točk se določi najnižja točka odseka $T_z$, na sliki \ref{fig:odsekStruge} označena kot točka $O_2$. Y koordinata točke $T_z$ nam predstavlja začetno višino odseka $h_{z}$. Od $h_z$ do končne višine gladine rečnega korita H za vsak cm po višini določimo presečišče $G$ prej izračunane funkcije $f(x)$ s horizontalno ravnino $g = h$, ki predstavlja gladino vode pri trenutni višini $h$, kar je prikazano na sliki \ref{fig:custom_odsekDetajl}.
+
+
+%FIXME-URGENT -> Računanje S in P glede na pozicijo presečišča G
 
 
 \begin{figure}[ht!]
@@ -215,37 +218,37 @@ Za vsak odsek dveh točk se določi najnižja točka odseka $T_{zac}$, na sliki 
 
 
 
-Ko imamo določeno presečišče $P_1$ gladine vode s funkcijo $f(x)$ med točkama odseka, lahko izračunamo dolžino omočenega oboda struge odseka in ploščino lika ki ga oklepajo funkcija odseka $f(x)$, navidezna gladina vode $g$ in najnižja točka odseka $T_{zac}$ na sliki \ref{fig:odsekStruge} označena z $O_2$.
+Ko imamo določeno presečišče $G$ gladine vode s funkcijo $f(x)$ med točkama odseka, lahko izračunamo dolžino omočenega oboda struge odseka in ploščino lika ki ga oklepajo funkcija odseka $f(x)$, navidezna gladina vode $g = h$ in najnižja točka odseka $T_z$, na sliki \ref{fig:odsekStruge} označena z $O_2$. Zaradi poenostavljenega zapisa so v nadaljevanju koordinate točke $O_1$ označene kot $x_1$ in $y_1$, koordinate točke $O_2$ pa $x_2$ in $y_2$.
 
 
-Način izračuna omočenega oboda struge vodotoka $P(h)$ in ploščine prečnega prereza $S(h)$ je odvisen od pozicije presečišča $P_1$:
+Način izračuna omočenega oboda struge vodotoka $P(h)$ in ploščine prečnega prereza $S(h)$ je odvisen od pozicije presečišča $G$:
 
 
 \begin{enumerate}
-	\item V primeru da se presečišče $P_1$ odseka nahaja v območju med točkama $O_1$ in $O_2$, dolžino omočenega oboda določimo po Pitagorovem izreku kot:
+	\item V primeru da se presečišče $G$ izbranega odseka struge nahaja v območju med točkama $O_1$ in $O_2$, dolžino omočenega oboda določimo po Pitagorovem izreku kot:
 		
-	%FIXME: decide on index P_1_x or P_1x
+	%FIXME: decide on index G_x or Gx
 	\begin{ceqn}
 		\begin{align}
-		P(h) = \sqrt{(T_{zac\_x} - P_{1\_x}(h))^{2} + (T_{zac\_y} - P_{1\_y}(h))^{2}}
+		P(h) = \sqrt{(T_{zx} - G_x(h))^{2} + (T_{zy} - G_y(h))^{2}}
 		\end{align}
 	\end{ceqn}
 	
 	
-	Ploščino območja ki ga oklepajo horizontalna ravnina s presečiščem $P_1$ in najnižjo točko odseka $T_{zac}$ pa določimo kot ploščino trikotnika (območje I na sliki~\ref{fig:odsekStruge}) po formuli:
+	Ploščino območja ki ga oklepajo horizontalna ravnina s presečiščem $G$ in najnižjo točko odseka $T_z$ pa določimo kot ploščino trikotnika (območje I na sliki~\ref{fig:odsekStruge}) po formuli:
 	
 	\begin{ceqn}
 	\begin{align}
-	S(h) = \dfrac{|T_{zac\_x} - P_{1x}(h)| \cdot |T_{zac\_y} - P_{1y}(h)|}{2}
+	S(h) = \dfrac{|T_{zx} - G_x(h)| \cdot |T_{zy} - G_y(h)|}{2}
 	\end{align}
 	\end{ceqn}
 	
 	
-	\item V primeru, da se presečišče $P1$ nahaja izven območja točk $O_1$ in $O_2$ se dolžina omočenega oboda odseka izračuna kot razdalja med točkama $O_1$ in $O_2$ po Pitagorovem izreku:
+	\item V primeru, da se presečišče $G$ nahaja izven območja točk $O_1$ in $O_2$ se dolžina omočenega oboda odseka izračuna kot razdalja med točkama $O_1$ in $O_2$ po Pitagorovem izreku:
 	
 	\begin{ceqn}
 	\begin{align}
-	P = \sqrt{ (O_1x - O_2x)^{2} + (O_1y - O_2y)^{2}}
+	P = \sqrt{ (x_1 - x_2)^{2} + (y_1 - y_2)^{2}}
 	\end{align}
 	\end{ceqn}
 	
@@ -257,12 +260,38 @@ Način izračuna omočenega oboda struge vodotoka $P(h)$ in ploščine prečnega
 	\end{align}
 	\end{ceqn}
 	
-	Pri čemer sta $S_I$ in $S_{II}$ enaka:
+	Pri čemer je $S_I$ enak:
+	
+	\begin{enumerate}
+		
+		
+		\item V primeru če je naklon funkcije $f(x)$, $k = 0$ se ploščina $S_I$ izračuna kot:
+		\begin{ceqn}
+			\begin{align}
+			S_I(h) = \bigg|(x_2 - x_1) \cdot (h - y_1)\bigg|
+			\end{align}
+		\end{ceqn}
+		
+		
+		\item Če za naklon funkcije $f(x)$ velja $k \neq 0$:
+		
+			\begin{ceqn}
+				\begin{align}
+				S_I(h) = \bigg|\dfrac{ (y_2 - y_1) \cdot  (x_2 - x_1)}{2}\bigg|
+				\end{align}
+			\end{ceqn}
+			
+
+	\end{enumerate}
+
+	
+	
+	 $S_{II}$ pa se izračuna kot:
 	
 	\begin{ceqn}
 	\begin{align}
-	S_I&= \bigg|\dfrac{ (O_2y - O_1y) \cdot  (O_2x - O_1x)}{2}\bigg|\\
-	S_{II}(h)&= \bigg|(O_{2x} - O_{1x}) \cdot (h - O_{1y})\bigg|
+	\\
+	S_{II}(h)&= \bigg|(x_2 - x_1) \cdot (h - y_1)\bigg|
 	\end{align}
 	\end{ceqn}
 
