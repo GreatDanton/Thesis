@@ -10,7 +10,7 @@ Parametre za iskano hidroelektrarno lahko izračunamo po naslednjem algoritmu:
 
 
 %-------------------------------------
-\section{Pridobitev podatkov}
+\section{Pridobitev podatkov} \label{sec:teorija_pridobitevPodatkov}
 Za nadaljnje izračune potrebujemo podatke o:
 \begin{itemize}[noitemsep, topsep=0pt]
 	\item Dimenzijah in naklonu rečne struge
@@ -47,7 +47,7 @@ Podatke o dimenzijah rečnega korita lahko pridobimo z meritvami na terenu ali p
 
 
 %------------------------------------------------
-\section{Analiza hidrološkega niza podatkov}
+\section{Analiza hidrološkega niza podatkov}~\label{sec:teorija_hidrogramObdobja}
 %TODO: FIXME -> izboljšaj
 Iz ARSO-vega arhiva lahko izvozimo podatke o povprečnih dnevnih pretokih iskanega vodotoka v csv obliki (comma separated values). Iz izvoženih podatkov lahko za vsak mesec obdobja izračunamo povprečni mesečni pretok. Če mesečne pretoke povprečimo za vsa leta izbranega obdobja lahko navedene povprečne mesečne pretoke obdobja prikažemo na hidrogramu obdobja. Hidrogram je graf, ki prikazuje povprečne mesečne pretoke vodotoka za izbrano obdobje analize.  %Prav tako se lahko določi mokro in suho leto obdobja, ki ju primerjamo s povprečnimi mesečnimi pretoki.
 
@@ -62,8 +62,9 @@ Konsumpcijska krivulja je graf funkcije, ki predstavlja višino gladine vode v o
 
 
 %-------------------------------------------------
+%TODO: opiši zakaj smo izbrali korak po cm
 \subsection{Izračun konsumpcijske krivulje za pravokotne in trapezne struge} \label{sec:teorija_trapeznaMetoda}
-Za izračun konsumpcijske krivulje potrebujemo pretok vodotoka $Q$ v odvisnosti od višine gladine vode $h$ v strugi. Gladina vode $h$ poteka od dna struge do maksimalne višine struge vodotoka $H$. Pretok vode v strugi $Q$ se za vsak cm višine $h$ izračuna po Manningovi enačbi:
+Za izračun konsumpcijske krivulje potrebujemo pretok vodotoka $Q$ v odvisnosti od višine gladine vode $h$ v strugi. Gladina vode $h$ poteka od dna struge do maksimalne višine struge vodotoka $H$. Natančnost izračuna numeričnih metod, je odvisna od velikosti koraka izračuna. V našem primeru za potrebe ocene pretoka centimetrski korak po višini predstavlja zadostno natančnost. Pretok vode v strugi $Q$ se torej za vsak cm višine $h$ izračuna po Manningovi enačbi: 
 
 \begin{ceqn}
 \begin{align}
@@ -149,7 +150,7 @@ Ko poznamo vse parametre Manningove enačbe \ref{eq:ManningovaEnacba}, izračuna
 \subsection{Izračun konsumpcijske krivulje za struge poljubne oblike}\label{sec:pretokNumericnaMetoda}
 
 
-V primeru da iščemo konsumpcijsko krivuljo za vodotok poljubne oblike, si za izračun le te ne moremo pomagati s znanimi formulami preprostih geometrijskih likov. Poljubno oblikovano strugo lahko popišemo s serijo točk, ki jih dodajamo v kartezijski koordinatni sistem. Za vsako točko ki definira poljubno rečno korito podamo x in y koordinato, za točke pa predpostavimo da so med seboj povezane z enačbo linearne funkcije. Na sliki~\ref{fig:poljubnaStruga} je predstavljen prečni prerez poljubno oblikovane struge vodotoka.
+V primeru, da iščemo konsumpcijsko krivuljo za strugo vodotoka poljubne oblike, si za izračun le te ne moremo pomagati s znanimi formulami preprostih geometrijskih likov. Poljubno oblikovano strugo lahko popišemo s serijo točk, ki jih dodajamo v kartezijski koordinatni sistem $x,y$. Za vsako točko ki definira poljubno rečno korito podamo x in y koordinato, za točke pa predpostavimo da so med seboj povezane z enačbo linearne funkcije. Na sliki~\ref{fig:poljubnaStruga} je predstavljen shema prečnega prereza poljubno oblikovane struge vodotoka.
 
 \begin{figure}[ht!]
 	\begin{centering}
@@ -162,12 +163,13 @@ V primeru da iščemo konsumpcijsko krivuljo za vodotok poljubne oblike, si za i
 
 %------------------------------------------
 %\subsection{Izračun višine rečnega korita}
-Skrajni točki na robu struge sta točki $T_L$ in $T_D$ na sliki \ref{fig:poljubnaStruga}. Točko na robu struge z nižjo y koordinato označimo s $T_{Rmin}$ (na sliki \ref{fig:poljubnaStruga} označena kot točka $T_D$). Najnižjo točko struge vodotoka označimo s $T_{min}$. Maksimalna gladina vode v rečnem koritu $H$ je definirana kot razdalja med točkama $T_{Rmin}$ in $T_{min}$. V primeru da je višina gladine vode večja od višine rečnega korita $H$ pride do preliva vode čez robove rečnega korita.
+Skrajni točki na robu struge vodotoka sta točki $T_L$ in $T_D$ na sliki \ref{fig:poljubnaStruga}. Točko na robu struge z nižjo y koordinato označimo s $T_{Rmin}$ (na sliki \ref{fig:poljubnaStruga} označena kot točka $T_D$). Najnižjo točko struge vodotoka označimo s $T_{min}$. Maksimalna višina gladine vode v rečnem koritu $H$ je definirana kot razdalja med točkama $T_{Rmin}$ in $T_{min}$. V primeru da je višina gladine vode večja od višine rečnega korita $H$ pride do preliva vode čez robove struge vodotoka.
 
 
 
 %\subsection{Določitev parametrov odseka}
-Za določitev parametrov odseka, ki jih potrebujemo za izračun konsumpcijske krivulje, s točkami definirano poljubno strugo vodotoka najprej razdelimo na odseke po dve točki $O_1$ ($x_1$, $y_1$) in $O_2$ ($x_2$, $y_2$). Za vsak izbran odsek rečne struge, se najprej določi enačba linearne funkcije, ki povezuje točki $O_1$ in $O_2$.
+Za izračun konsumpcijske krivulje, s točkami definirano poljubno strugo vodotoka najprej razdelimo na odseke po dve točki $O_1$ ($x_1$, $y_1$) in $O_2$ ($x_2$, $y_2$) kar je prikazano na sliki \ref{fig:poljubnaStruga}. Za vsak analizirani odsek struge vodotoka, se najprej določi enačba linearne funkcije, ki povezuje točki $O_1$ in $O_2$.  Zaradi poenostavljenega zapisa so v nadaljevanju koordinate točke $O_1$ označene kot $x_1$ in $y_1$, koordinate točke $O_2$ pa $x_2$ in $y_2$.
+
 
 Enačba linearne funkcije se definira kot:
 \begin{ceqn}
@@ -191,7 +193,7 @@ k = \dfrac{y_2 - y_1}{x_2 - x_1}
 \begin{figure}[H]
 	\begin{centering}
 		\includegraphics{slike/customChannel/odsek.pdf}
-		\caption{Izbrani odsek struge} \label{fig:odsekStruge}
+		\caption{Izbrani analizirani odsek struge} \label{fig:odsekStruge}
 	\end{centering}
 \end{figure}
 
@@ -203,30 +205,45 @@ k = \dfrac{y_2 - y_1}{x_2 - x_1}
 
 
 % določitev ploščine posameznega kosa
-Za vsak odsek dveh točk se določi najnižja točka odseka $T_z$, na sliki \ref{fig:odsekStruge} označena kot točka $O_2$. Y koordinata točke $T_z$ nam predstavlja začetno višino odseka $h_{z}$. Od $h_z$ do končne višine gladine rečnega korita H za vsak cm po višini določimo presečišče $G$ prej izračunane funkcije $f(x)$ s horizontalno ravnino $g = h$, ki predstavlja gladino vode pri trenutni višini $h$, kar je prikazano na sliki \ref{fig:custom_odsekDetajl}.
-
-
-%FIXME-URGENT -> Računanje S in P glede na pozicijo presečišča G
+Za vsak analizirani odsek dveh točk se določi najnižja točka odseka $T_z$, na sliki~\ref{fig:odsekStruge} označena kot točka $O_2$. Y koordinata točke $T_z$ nam predstavlja začetno višino odseka $h_{z}$. Od $h_z$ do končne višine gladine vode v strugi $H$ za vsak cm po višini določimo omočeni obod struge $P(h)$ in ploščino prečnega prereza odseka pod vodo $S(h)$. Razdaljo med $y$ koordinatami točk $O_1$ in $O_2$ označimo z $\Delta y$, razdaljo med $x$ koordinatami točk pa z $\Delta x$.  Ravnina $g$ predstavlja gladino vode pri trenutni višini $h$, kar je prikazano na sliki~\ref{fig:custom_odsekDetajl}.
 
 
 \begin{figure}[ht!]
 	\begin{centering}
 		\includegraphics{slike/customChannel/odsek_detajl.pdf}
-		\caption{Detajl odseka struge}\label{fig:custom_odsekDetajl}
+		\caption{Detajl izbranega odseka struge}\label{fig:custom_odsekDetajl}
 	\end{centering}
 \end{figure}
 
 
 
-Ko imamo določeno presečišče $G$ gladine vode s funkcijo $f(x)$ med točkama odseka, lahko izračunamo dolžino omočenega oboda struge odseka in ploščino lika ki ga oklepajo funkcija odseka $f(x)$, navidezna gladina vode $g = h$ in najnižja točka odseka $T_z$, na sliki \ref{fig:odsekStruge} označena z $O_2$. Zaradi poenostavljenega zapisa so v nadaljevanju koordinate točke $O_1$ označene kot $x_1$ in $y_1$, koordinate točke $O_2$ pa $x_2$ in $y_2$.
+Omočeni obod struge vodotoka $P(h)$ in ploščina prečnega prereza struge vodotoka pod gladino vode $S(h)$ se glede na naklon funkcije, ki povezuje točki na robu analiziranega odseka $f(x)$ izračuna na dva načina:
+
+\begin{enumerate}
+
+\item V primeru ko velja $\Delta y = 0$ je funkcija med točkama odseka $f(x)$ vodoravna premica in velja:
+
+\begin{ceqn}
+\begin{align}
+P(h)&= \Delta x\\
+S(h)&= \Delta x \cdot h
+\end{align}
+\end{ceqn}
 
 
-Način izračuna omočenega oboda struge vodotoka $P(h)$ in ploščine prečnega prereza $S(h)$ je odvisen od pozicije presečišča $G$:
+\item V primeru ko $\Delta y \neq 0$ ima funkcija $f(x)$ naklon $k \neq 0$. V tem primeru od začetka višine odseka $h_z$ do končne višine gladine vode v strugi $H$ za vsak cm izračunamo presečišče $G$, funkcije $f(x)$ s horizontalno ravnino $g = h$. 
+
+
+Ko imamo določeno presečišče $G$ gladine vode s funkcijo $f(x)$ med točkama odseka, lahko izračunamo dolžino omočenega oboda struge odseka in ploščino lika ki ga oklepajo funkcija odseka $f(x)$, navidezna gladina vode $g = h$ in najnižja točka odseka $T_z$ (na sliki \ref{fig:odsekStruge} označena z $O_2$). 
+
+
+
+Način izračuna omočenega oboda struge vodotoka $P(h)$ in ploščine prečnega prereza pod gladino vode $S(h)$ je odvisen od pozicije presečišča $G$:
 
 
 \begin{enumerate}
 	\item V primeru da se presečišče $G$ izbranega odseka struge nahaja v območju med točkama $O_1$ in $O_2$, dolžino omočenega oboda določimo po Pitagorovem izreku kot:
-		
+	
 	%FIXME: decide on index G_x or Gx
 	\begin{ceqn}
 		\begin{align}
@@ -235,71 +252,62 @@ Način izračuna omočenega oboda struge vodotoka $P(h)$ in ploščine prečnega
 	\end{ceqn}
 	
 	
-	Ploščino območja ki ga oklepajo horizontalna ravnina s presečiščem $G$ in najnižjo točko odseka $T_z$ pa določimo kot ploščino trikotnika (območje I na sliki~\ref{fig:odsekStruge}) po formuli:
+	Ploščino območja ki ga oklepajo horizontalna ravnina $g$ s presečiščem $G$ in najnižjo točko odseka $T_z$ pa določimo kot ploščino trikotnika (območje I na sliki~\ref{fig:odsekStruge}) po formuli:
 	
 	\begin{ceqn}
-	\begin{align}
-	S(h) = \dfrac{|T_{zx} - G_x(h)| \cdot |T_{zy} - G_y(h)|}{2}
-	\end{align}
+		\begin{align}
+		S(h) = \dfrac{|T_{zx} - G_x(h)| \cdot |T_{zy} - G_y(h)|}{2}
+		\end{align}
 	\end{ceqn}
 	
 	
 	\item V primeru, da se presečišče $G$ nahaja izven območja točk $O_1$ in $O_2$ se dolžina omočenega oboda odseka izračuna kot razdalja med točkama $O_1$ in $O_2$ po Pitagorovem izreku:
 	
 	\begin{ceqn}
-	\begin{align}
-	P = \sqrt{ (x_1 - x_2)^{2} + (y_1 - y_2)^{2}}
-	\end{align}
+		\begin{align}
+		P = \sqrt{ \Delta x^{2} + \Delta y^{2}}
+		\end{align}
 	\end{ceqn}
 	
-	Ploščina $S$ odseka pa se določi kot seštevek ploščin območij I in II na sliki \ref{fig:odsekStruge}.
+	Ploščina pod gladino vode odseka $S(h)$ pa se določi kot seštevek ploščin območij I in II označenih na sliki \ref{fig:odsekStruge}.
 	
 	\begin{ceqn}
-	\begin{align}
-	S(h) = S_I + S_{II}(h)
-	\end{align}
+		\begin{align}
+		S(h) = S_I + S_{II}(h)
+		\end{align}
 	\end{ceqn}
 	
-	Pri čemer je $S_I$ enak:
+	Pri čemer sta $S_I$ in $S_{II}$ enaka:
 	
-	\begin{enumerate}
-		
-		
-		\item V primeru če je naklon funkcije $f(x)$, $k = 0$ se ploščina $S_I$ izračuna kot:
 		\begin{ceqn}
 			\begin{align}
-			S_I(h) = \bigg|(x_2 - x_1) \cdot (h - y_1)\bigg|
+			S_I&= \bigg|\dfrac{ \Delta y \cdot  \Delta x}{2}\bigg|\\
+			S_{II}(h)&= \bigg|\Delta x \cdot (h - y_1)\bigg|
 			\end{align}
 		\end{ceqn}
 		
-		
-		\item Če za naklon funkcije $f(x)$ velja $k \neq 0$:
-		
-			\begin{ceqn}
-				\begin{align}
-				S_I(h) = \bigg|\dfrac{ (y_2 - y_1) \cdot  (x_2 - x_1)}{2}\bigg|
-				\end{align}
-			\end{ceqn}
 			
-
+		
 	\end{enumerate}
+	
+	
 
-	
-	
-	 $S_{II}$ pa se izračuna kot:
-	
-	\begin{ceqn}
-	\begin{align}
-	\\
-	S_{II}(h)&= \bigg|(x_2 - x_1) \cdot (h - y_1)\bigg|
-	\end{align}
-	\end{ceqn}
 
-	
+
+
+
 \end{enumerate}
 
+%FIXME-URGENT -> Računanje S in P glede na pozicijo presečišča G
 
-Ko imamo za vsak cm višine gladine vode izračunan omočeni obod $P_n(h)$ odseka $n$ in ploščino prečnega prereza pod gladino vode $S_n(h)$ lahko določimo pretok vode skozi odsek $Q_n(h)$. Pretok vode skozi odsek izračunamo po Manningovi enačbi \ref{eq:ManningovaEnacba}. Za vsak računani odsek moramo poznati tudi naklon struge vodotoka $I_n$ in  Manningov koeficient hrapavosti površine $ng_n$.
+
+
+
+
+
+
+
+Ko imamo za vsak cm višine gladine vode izračunan omočeni obod $P_n(h)$ odseka $n$ in ploščino prečnega prereza pod gladino vode $S_n(h)$ lahko določimo pretok vode skozi odsek struge vodotoka $Q_n(h)$. Pretok vode skozi odsek izračunamo po Manningovi enačbi omenjeni v poglavju \ref{eq:ManningovaEnacba}. Za vsak računani odsek moramo poznati tudi naklon struge vodotoka $I_n$ in  Manningov koeficient hrapavosti površine $ng_n$, ki se ju določi po postopkih opisanih v poglavju \ref{sec:teorija_pridobitevPodatkov}.
 
 
 \begin{ceqn}
@@ -309,7 +317,7 @@ Ko imamo za vsak cm višine gladine vode izračunan omočeni obod $P_n(h)$ odsek
 \end{ceqn}
 
 
-Ko imamo posamezne pretoke po višinah za vse odseke izračunane, jih medsebojno seštejemo in dobimo končne vrednosti pretokov $Q(h)$:
+Posamezne pretoke odsekov po višinah medsebojno seštejemo in dobimo končne vrednosti pretokov $Q$ v odvisnosti od višine gladine vode v strugi vodotoka:
 
 \begin{ceqn}
 \begin{align}
@@ -318,14 +326,14 @@ Q(h) = Q_1(h) + Q_2(h) + Q_3(h) + ... + Q_{n-1}(h) + Q_n(h)
 \end{ceqn}
 
 
-S imamo točke za izris konsumpcijske krivulje določene in funkcijo konsumpcijske narišemo na graf $h(Q)$.
-
+S tem postopkom smo izračunali točke ki določajo konsumpcijsko krivuljo $h(Q)$ za izbrano strugo poljubne oblike.
 
 
 \newpage
 
+%TODO: dodaj Qtehnični, Qminimalni, kako se določi pretok skozi turbine.
 \section{Izračun proizvodnje električne energije}
-Za določitev končne proizvodnje električne energije potrebujemo razliko med koto zgornje vode t.j. vode v rezervoarju in koto spodnje vode, ki jo določimo iz grafa konsumpcijske krivulje izračunanega za izbrano strugo.
+Za določitev končne proizvodnje električne energije potrebujemo razliko med koto zgornje vode t.j. vode v rezervoarju in koto spodnje vode t.j. vode ki teče skozi turbine hidroelektrarne. Ker računamo proizvodnjo električne energije za pretočne hidroelektrarne, predpostavimo da je kota zgornje vode konstantna na višini $H_z$.
 
 \begin{figure}[ht!]
 	\begin{centering}
@@ -334,13 +342,14 @@ Za določitev končne proizvodnje električne energije potrebujemo razliko med k
 	\end{centering}
 \end{figure}
 
-Ker računamo proizvodnjo električne energije za pretočne hidroelektrarne, predpostavimo da je kota zgornje vode konstantna na višini $H$. Koto spodnje vode določimo iz prej izračunane konsumpcijske krivulje iz katere odčitamo višino spodnje vode v strugi za dani povprečni mesečni pretok skozi turbino hidroelektrarne. V primeru da se pretok skozi turbino hidroelektrarne nahaja med dvema točkama pretokov v konsumpcijski krivulji, iskano višino spodnje vode določimo z linearno interpolacijo med znanima točkama na grafu konsumpcijske krivulje.
+ Koto spodnje vode $H_s$ določimo iz prej izračunane konsumpcijske krivulje iz katere odčitamo višino gladine vode v strugi za dani povprečni mesečni pretok skozi turbine hidroelektrarne. V primeru da se pretok skozi turbine hidroelektrarne nahaja med dvema točkama pretokov v konsumpcijski krivulji, iskano višino spodnje vode določimo z linearno interpolacijo med znanima izračunanima točkama na grafu konsumpcijske krivulje.
+
 
 Višinsko razliko med koto zgornje in spodnje vode določimo po spodnji enačbi:
 
 \begin{ceqn}
 \begin{align}
-dh = H - H_{spodaj}
+dh = H_z - H_s
 \end{align}
 \end{ceqn}
 
@@ -348,7 +357,7 @@ Moč hidroelektrarne izračunamo po enačbi:
 
 \begin{ceqn}
 \begin{align}
-P = \mu \cdot g \cdot Q \cdot dh
+P = \mu \cdot \dfrac{g \cdot \rho_v}{1000} \cdot Q \cdot dh \label{eq:mocHidroelektrarne}
 \end{align}
 \end{ceqn}
 
@@ -357,14 +366,31 @@ Pri čemer so:
 	\begin{tabular}{r|p{10cm}}
 		P & moč [$kW$]\\
 		$\mu$ & izkoristek turbine [\%]\\
-		g & gravitacijska konstanta [$9,81\dfrac{m}{s^{2}}$ ] \\
-		Q & pretok [$m^{3}/s$]\\
+		g & gravitacijska konstanta $\left[9,81~\dfrac{m}{s^{2}}\right]$ \\
+		$\rho_v$&gostota vode $\left[\dfrac{1000 kg}{m^3}\right]$\\
+		Q & pretok $\left[m^{3}/s \right]$\\
 		dh & razlika višin spodnje in zgornje vode [$m$]
 	\end{tabular}
 \end{table}
 
 
-Za določitev končne mesečne proizvodnje električne energije, za vsak mesec določimo povprečno moč $\overline{P}$ in uporabimo naslednjo enačbo
+
+Za ocenitev povprečne letne proizvodnje električne energije, potrebujemo podatke o povprečnih mesečnih pretokih vodotoka izračunanih za iskano časovno obdobje. Podatke o povprečnih mesečnih pretokih pridobimo iz rezultatov analize hidrološkega niza podatkov opisane v poglavju~\ref{sec:teorija_hidrogramObdobja}.
+
+
+
+Za določitev povprečne mesečne proizvodnje električne energije potrebujemo znano povprečno mesečno moč hidroelektrarne  $\overline{P}$. Povprečno mesečno moč hidroelektrarne izračunamo s povprečjem dnevnih moči hidroelektrarne za iskani mesec. Za vsak mesec izračunamo povprečno moč hidroelektrarne po enačbi, pri čemer je $n$ število dni v mesecu:
+
+
+\begin{ceqn}
+\begin{align}
+\overline{P} = \dfrac{P_1 + P_2 + P_3 + ... + P_{n-1} + P_n}{n}
+\end{align}
+\end{ceqn}
+
+
+
+Povprečno mesečno proizvodnjo električne energije izračunamo po naslednji enačbi:
 
 \begin{ceqn}
 \begin{align}
@@ -375,9 +401,18 @@ E = \dfrac{24 \cdot \overline{P} \cdot d}{1000}
 Pri čemer so:
 \begin{table}[htb!]
 \begin{tabular}{r|p{10cm}}
-	E & proizvedena električna energija [$MWh$]\\
+	E & povprečna mesečna proizvedena električna energija [$MWh$]\\
 	$\overline{P}$ & povprečna moč v mesecu [$kW$]\\
 	d & število dni v mesecu \\
 \end{tabular}
 \end{table}
+
+
+Končna povprečna letna proizvodnja električne energije je določena s seštevkom povprečnih mesečnih proizvodenj električne energije $E$:
+
+\begin{ceqn}
+\begin{align}
+ E_{leto} =  \dfrac{E_1 + E_2 + E_3 + ... + E_{10} + E_{11} + E_{12}}{12} ~[MWh]
+\end{align}
+\end{ceqn}
 
