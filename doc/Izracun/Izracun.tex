@@ -136,9 +136,10 @@ Z grafa konsumpcijske krivulje \ref{fig:custom_konsumpcijskaKrivulja} pri višin
 
 
 %----------------------------------------------
-\section{Rezultati}
-V poglavjih ~\ref{sec:izracun_trapeznaMetoda} in ~\ref{sec:izracun_numericnaMetoda} smo preverili da sta rezultata ročnega izračuna in izračuna s programom po enaki metodi enaka. Če pa primerjamo rezultat trapezne metode z rezultati numerične metode pa se rezultati razlikujejo. Razlog za ta pojav se skriva v samem matematičnem modelu, kar prikazujejo enačbe spodaj:
+\section{Rezultati izračuna}
+V poglavjih ~\ref{sec:izracun_trapeznaMetoda} in ~\ref{sec:izracun_numericnaMetoda} smo preverili da sta rezultata ročnega izračuna in izračuna s programom po enaki metodi enaka. Če primerjamo rezultate trapezne metode z rezultati numerične metode pa se rezultati razlikujejo. Razlog za to je v izbiri matematičnega modela, kar prikazujejo enačbe spodaj.
 
+Primerjali bomo rezultata pretokov vodotoka po trapezni in numerični metodi. Pri tem uporabimo podatke iz naloge opisane v poglavju~\ref{sec:izracun}. Celotna površina prečnega prereza pod gladino vode $S(h)$ in omočeni obod struge $P(h)$ sta sestavljena iz treh odsekov kot je prikazano na sliki~\ref{fig:izracun_trapeznaStruga}. $Q_i$ predstavlja izračun pretoka po trapezni metodi, $Q_{ii}$ pa izračun pretoka po numerični metodi:
 \begin{ceqn}
 \begin{align}
 S(h)&= S_I(h) + S_{II}(h) + S_{III}(h)\\
@@ -148,7 +149,7 @@ Q_{ii} &= \dfrac{\sqrt{I}}{ng} \cdot \dfrac{S_I^{5/3}}{P_I^{2/3}} + \dfrac{\sqrt
 \end{align}
 \end{ceqn}
 
-Če v obeh enačbah odstranimo skupne člene enačbe dobimo:
+Če v obeh enačbah odstranimo skupne člene enačbe, enačbe poenostavimo v:
 
 \begin{ceqn}
 \begin{align}
@@ -158,9 +159,10 @@ Q_{ii} &= \dfrac{S_I^{5/3}}{P_I^{2/3}} + \dfrac{S_{II}^{5/3}}{P_{II}^{2/3}} + \d
 \end{ceqn}
 
 
-Enačimo obe enačbi in uporabimo podatke iz naloge opisane v poglavju~\ref{sec:izracun}:
+Enačimo obe enačbi in uporabimo podatke iz:
 \begin{ceqn}
 \begin{align}
+Q_i &= Q_{ii}\\
 \dfrac{S^{5/3}}{P^{2/3}} &= \dfrac{S_I^{5/3}}{P_I^{2/3}} + \dfrac{S_{II}^{5/3}}{P_{II}^{2/3}} + \dfrac{S_{III}^{5/3}}{P_{III}^{2/3}}\\
 \dfrac{50^{5/3}}{19,14^{2/3}} &= \dfrac{12,5^{5/3}}{7,07^{2/3}} + \dfrac{25^{5/3}}{5^{2/3}} + \dfrac{12,5^{5/3}}{7,07^{2/3}}\\
 94,84 &\neq 109,7
@@ -174,4 +176,6 @@ Do razlike v rezultatih pride zaradi matematičnih pravil seštevanja potenc:
 a^y + b^y \neq (a+b)^y
 \end{align}
 \end{ceqn}
+
+
 
