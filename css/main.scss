@@ -1,0 +1,397 @@
+    $toolbar-background: #fff;
+    $tab-background: linear-gradient(#fcfcfc, #f1f1f1);
+    $tab-border-bottom: 3px solid #f1f1f1;
+    $tab-box-shadow: inset 0 1px 0 #f5f4f5;
+    $tab-color-active: #1c90f3;
+    $border: 1px solid #c2c0c2;
+    $border-active: 1px solid #8a8a8a;
+    $box-shadow-active: 0 0 5px #cacaca;
+    $transition-fast-linear: all 0.2s linear;
+    $color-inactive: #888;
+    $color-active: #333;
+    $font-family: 'Open Sans';
+    $p-font-size: 14px;
+    /* Table */
+    
+    $background-light-blue: #d5ecff;
+    /* BTNS */
+    
+    $default-border-radius: 4px;
+    /* css */
+    
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+    
+    body {
+        font-family: $font-family;
+        color: $color-active;
+    }
+    
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: $font-family;
+    }
+    
+    p {
+        font-size: $p-font-size;
+    }
+    
+    .toolbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        box-shadow: $box-shadow-active;
+        border-bottom: $border;
+        z-index: 1;
+        background: $toolbar-background;
+    }
+    
+    .tab-group {
+        display: flex;
+        width: 100%;
+        font-size: $p-font-size;
+    }
+    
+    .tab-item {
+        background: $tab-background;
+        border-bottom: $tab-border-bottom;
+        border-right: $border;
+        box-shadow: $tab-box-shadow;
+        width: 100%;
+        padding: 5px 0;
+        text-align: center;
+        transition: $transition-fast-linear;
+        &:hover {
+            border-bottom: 3px solid rgba(54, 162, 235, 0.3);
+        }
+        &:nth-last-child(1) {
+            border-right: none;
+        }
+    }
+    
+    .tab-item.active {
+        border-bottom: 3px solid $tab-color-active;
+        color: $tab-color-active;
+    }
+    
+    .main-body {
+        margin-top: 120px;
+    }
+    
+    .card {
+        color: $color-inactive;
+        width: 100%;
+        min-width: 150px;
+        padding: 1rem;
+        border: $border;
+        transition: $transition-fast-linear;
+        label {
+            color: $color-inactive;
+            transition: $transition-fast-linear;
+        }
+    }
+    
+    .card.active {
+        color: $color-active;
+        border: $border-active;
+        box-shadow: $box-shadow-active;
+        label {
+            color: $color-active;
+        }
+    }
+    
+    .channel-thumbnail {
+        display: block;
+        margin: 0 auto;
+        height: 80px;
+        opacity: 0.3;
+        -webkit-user-drag: none;
+        transition: $transition-fast-linear;
+    }
+    
+    .channel-thumbnail.active {
+        opacity: 1;
+    }
+    
+    .channel-options {
+        padding: 40px 0 60px;
+    }
+    
+    .centered {
+        label {
+            text-align: center;
+            display: block;
+        }
+        input[type="radio"] {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+    
+    .img-guide {
+        display: block;
+        margin: 20px auto;
+        -webkit-user-drag: none;
+        max-width: 100%;
+    }
+    
+    .img-level-guide {
+        display: block;
+        margin: 50px auto 0;
+        -webkit-user-drag: none;
+    }
+    
+    body {
+        overflow-y: scroll;
+    }
+    
+    input[type="text"] {
+        font-size: 13px;
+        height: 30px;
+        color: $color-active;
+        border: $border;
+        box-shadow: none;
+        outline: none;
+        padding: 0 5px;
+        margin: 0 10px;
+        width: 100px;
+    }
+    
+    input:focus {
+        border: $border-active;
+        box-shadow: $box-shadow-active;
+    }
+    
+    label {
+        color: $color-active;
+        font-size: $p-font-size;
+    }
+    
+    .input-field {
+        margin: 10px 0;
+        label:nth-child(1) {
+            display: flex;
+            min-width: 40px;
+            line-height: 30px;
+            flex-flow: row-reverse;
+        }
+        label:nth-last-child(1) {
+            line-height: 30px;
+            min-width: 30px;
+        }
+    }
+    /* BUTTONS */
+    
+    .btn {
+        display: inline-block;
+        padding: 5px 15px;
+        margin-bottom: 0;
+        font-size: $p-font-size;
+        line-height: 1.4;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: default;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: $default-border-radius;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, .06);
+        -webkit-app-region: no-drag;
+        user-select: none;
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    }
+    
+    .btn-toolbar {
+        border-radius: 0;
+        background-color: #fff;
+        border-right: $border;
+        transition: $transition-fast-linear;
+        &:hover {
+            background-color: #f3f3f3;
+        }
+        &:nth-last-child(1) {
+            border-right: none;
+        }
+    }
+    
+    // hide input button for importing csv file
+    #selectedFile {
+        display: none;
+    }
+    
+    .btn-primary {
+        border-color: #388df8;
+        border-bottom-color: darken(#388df8, 15%);
+        background: linear-gradient(#6eb4f7, #1a82fb);
+        color: #fff;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+        &:active {
+            background: linear-gradient(darken(#6eb4f7, 10%), darken(#1a82fb, 10%));
+        }
+    }
+    
+    .data-not-imported {
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        h2 {
+            color: $color-inactive;
+        }
+    }
+    /* UTILITIES */
+    
+    .row {
+        display: flex;
+        width: 100%;
+        flex-flow: row;
+    }
+    
+    .space-around {
+        justify-content: space-around;
+    }
+    
+    .row.centered {
+        justify-content: center;
+    }
+    
+    .container-900 {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .col-20 {
+        width: 20%;
+    }
+    
+    .col-30 {
+        width: 30%;
+    }
+    
+    .col-40 {
+        width: 40%;
+    }
+    
+    .col-50 {
+        width: 50%;
+    }
+    
+    .col-60 {
+        width: 60%;
+    }
+    
+    .col-70 {
+        width: 70%;
+    }
+    
+    .col-80 {
+        width: 80%;
+    }
+    
+    .col-33 {
+        width: 33.33333%;
+    }
+    /* Margins */
+    
+    .margin-v-40 {
+        margin: 40px 0;
+    }
+    
+    .padding-v-40 {
+        padding: 40px 0;
+    }
+    
+    .padding-h-20 {
+        padding: 0 20px;
+    }
+    
+    .margin-u-40 {
+        margin-top: 40px;
+    }
+    
+    .margin-b-40 {
+        margin-bottom: 40px;
+    }
+    
+    .centered-text {
+        text-align: center;
+    }
+    /* Table */
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+    }
+    
+    thead {
+        text-align: left;
+    }
+    
+    th {
+        padding: 15px 5px;
+        border-bottom: $border-active !important;
+    }
+    
+    td {
+        padding: 5px;
+        border-bottom: $border;
+        border-left: none;
+        border-right: none;
+    }
+    
+    .table-one-field {
+        width: 40px;
+    }
+    
+    .table-grow {
+        flex-grow: 1;
+    }
+    
+    .td-delete {
+        width: 30px;
+        text-align: center;
+        font-weight: 800;
+        cursor: pointer;
+    }
+    
+    .ngTable {
+        tbody tr:first-child td {
+            padding-top: 15px;
+        }
+        td {
+            border-bottom: none;
+            padding: 0;
+            line-height: 30px !important;
+            max-height: 30px !important;
+        }
+    }
+    
+    .ngInput {
+        padding: 0 2px !important;
+        max-width: 50px;
+        min-width: 30px;
+        margin: 0 !important;
+        height: 25px !important;
+    }
+    
+    .zebra tbody tr:nth-child(odd) {
+        background: $background-light-blue;
+    }
+    
+    canvas {
+        // disable selecting canvas on double click
+        -webkit-user-select: none;
+        user-select: none;
+    }
