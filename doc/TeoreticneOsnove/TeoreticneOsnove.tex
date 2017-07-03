@@ -357,7 +357,7 @@ Moč hidroelektrarne izračunamo po enačbi:
 
 \begin{ceqn}
 \begin{align}
-P = \mu \cdot \dfrac{g \cdot \rho_v}{1000} \cdot Q \cdot dh \label{eq:mocHidroelektrarne}
+P = \eta \cdot \dfrac{g \cdot \rho_v}{1000} \cdot Q \cdot dh \label{eq:mocHidroelektrarne}
 \end{align}
 \end{ceqn}
 
@@ -365,17 +365,24 @@ Pri čemer so:
 \begin{table}[htb!]
 	\begin{tabular}{r|p{10cm}}
 		P & moč [$kW$]\\
-		$\mu$ & izkoristek turbine [\%]\\
+		$\eta$ & izkoristek turbine [\%]\\
 		g & gravitacijska konstanta $\left[9,81~\dfrac{m}{s^{2}}\right]$ \\
 		$\rho_v$&gostota vode $\left[\dfrac{1000 kg}{m^3}\right]$\\
-		Q & pretok $\left[m^{3}/s \right]$\\
+		Q & pretok skozi turbine hidroelektrarne $\left[m^{3}/s \right]$\\
 		dh & razlika višin spodnje in zgornje vode [$m$]
 	\end{tabular}
 \end{table}
 
 
 
-Za ocenitev povprečne letne proizvodnje električne energije, potrebujemo podatke o povprečnih mesečnih pretokih vodotoka izračunanih za iskano časovno obdobje. Podatke o povprečnih mesečnih pretokih pridobimo iz rezultatov analize hidrološkega niza podatkov opisane v poglavju~\ref{sec:teorija_hidrogramObdobja}.
+Za ocenitev povprečne letne proizvodnje električne energije, potrebujemo podatke o povprečnih mesečnih pretokih vodotoka izračunanih za iskano časovno obdobje in parametrih turbin hidroelektrarne.
+
+Za določitev pretoka skozi turbine hidroelektrarne potrebujemo osnovne podatke o hidroelektrarni, kot so minimalni pretok vode $Q_{min}$, maksimalni pretok $Q_{max}$ in tehnični maksimalni pretok hidroelektrarne $Q_{teh}$.
+
+ Podatke o povprečnih mesečnih pretokih pridobimo iz rezultatov analize hidrološkega niza podatkov opisane v poglavju~\ref{sec:teorija_hidrogramObdobja}.
+
+
+
 
 
 

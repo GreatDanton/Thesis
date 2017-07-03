@@ -83,7 +83,7 @@ class EnergyProduction extends React.Component {
                     <BarChart
                         y={[ElectricityProduction]}
                         x={'months'}
-                        name={['Power production']}
+                        name={['Electricity production']}
                         xAxes={'Months'}
                         yAxes={'Produced [MWh]'}/>
 
