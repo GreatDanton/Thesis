@@ -86,25 +86,25 @@
 % in seznam prilog
 \usepackage[subfigure, titles]{tocloft} % Paket za nastavitev seznamov
 
-% Seznam slik v ang.
-\newcommand{\listfigname}{LIST OF FIGURES}
-\newlistof[chapter]{ffigure}{loff}{\listfigname}
+% Seznam slik v ang. - removed 7.3
+%\newcommand{\listfigname}{LIST OF FIGURES}
+%\newlistof[chapter]{ffigure}{loff}{\listfigname}
 % nov ukaz za dodajanje slik v seznam slik
-\newcommand{\addfiguretolof}[1]{
-\addcontentsline{loff}{figure}{\protect\numberline{\thefigure}#1}
-}
+%\newcommand{\addfiguretolof}[1]{
+%\addcontentsline{loff}{figure}{\protect\numberline{\thefigure}#1}
+%}
 % Seznam preglednic v angl
-\newcommand{\listtabname}{LIST OF TABLES}
-\newlistof[chapter]{ttable}{lott}{\listtabname}
+%\newcommand{\listtabname}{LIST OF TABLES}
+%\newlistof[chapter]{ttable}{lott}{\listtabname}
 % nov ukaz za dodajanje preglednic v seznam preglednic
-\newcommand{\addtabletolot}[1]{
-\addcontentsline{lott}{figure}{\protect\numberline{\thetable}#1}
-}
+%\newcommand{\addtabletolot}[1]{
+%\addcontentsline{lott}{figure}{\protect\numberline{\thetable}#1}
+%}
 % Seznam prilog
 \newcommand{\listappname}{SEZNAM DODATKOV}
-\newlistof[chapter]{appendices}{loapp}{\listappname}
-\cftpagenumbersoff{appendices}
-\renewcommand{\cftappendicesdotsep}{\cftnodots}
+%\newlistof[chapter]{appendices}{loapp}{\listappname}
+%\cftpagenumbersoff{appendices}
+%\renewcommand{\cftappendicesdotsep}{\cftnodots}
 
 
 %\usepackage{setspace}
@@ -232,7 +232,7 @@
 \phantomsection
 %\chapter*{PRILOGE}
 \addcontentsline{toc}{chapter}{DODATKI}
-\listofappendices
+%\listofappendices
 \thispagestyle{fancy}
 %\appendix
 \newcounter{Priloge}

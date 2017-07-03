@@ -49,7 +49,13 @@ Podatke o dimenzijah rečnega korita lahko pridobimo z meritvami na terenu ali p
 %------------------------------------------------
 \section{Analiza hidrološkega niza podatkov}~\label{sec:teorija_hidrogramObdobja}
 %TODO: FIXME -> izboljšaj, dodaj opis krivulje trajanja, kako se izračuna hidrogram
-Iz ARSO-vega arhiva lahko izvozimo podatke o povprečnih dnevnih pretokih iskanega vodotoka v csv obliki (comma separated values). Iz izvoženih podatkov lahko za vsak mesec obdobja izračunamo povprečni mesečni pretok. Če mesečne pretoke povprečimo za vsa leta izbranega obdobja lahko navedene povprečne mesečne pretoke obdobja prikažemo na hidrogramu obdobja. Hidrogram je graf, ki prikazuje povprečne mesečne pretoke vodotoka za izbrano obdobje analize.  %Prav tako se lahko določi mokro in suho leto obdobja, ki ju primerjamo s povprečnimi mesečnimi pretoki.
+
+% Zakaj izvajamo analize hidrološkega niza podatkov?.
+
+Iz ARSO-vega arhiva lahko izvozimo podatke o povprečnih dnevnih pretokih iskanega vodotoka v csv obliki (comma separated values). Iz izvoženih podatkov lahko za vsak mesec obdobja izračunamo povprečni mesečni pretok. Če mesečne pretoke povprečimo za vsa leta izbranega obdobja lahko navedene povprečne mesečne pretoke obdobja prikažemo na hidrogramu obdobja. Hidrogram je graf, ki prikazuje povprečne mesečne pretoke vodotoka za izbrano obdobje analize. Prav tako se lahko določi mokro in suho leto obdobja, to sta leti obdobja v katerih ima vodotok največji oz. najmanjši pretok.
+
+
+
 
 %TODO: krivulja trajanja
 
@@ -62,7 +68,6 @@ Konsumpcijska krivulja je graf funkcije, ki predstavlja višino gladine vode v o
 
 
 %-------------------------------------------------
-%TODO: opiši zakaj smo izbrali korak po cm
 \subsection{Izračun konsumpcijske krivulje za pravokotne in trapezne struge} \label{sec:teorija_trapeznaMetoda}
 Za izračun konsumpcijske krivulje potrebujemo pretok vodotoka $Q$ v odvisnosti od višine gladine vode $h$ v strugi. Gladina vode $h$ poteka od dna struge do maksimalne višine struge vodotoka $H$. Natančnost izračuna numeričnih metod, je odvisna od velikosti koraka izračuna. V našem primeru za potrebe ocene pretoka centimetrski korak po višini predstavlja zadostno natančnost. Pretok vode v odprti strugi $Q$ se torej za vsak cm višine $h$ izračuna po Manningovi enačbi: 
 
@@ -244,7 +249,6 @@ Način izračuna omočenega oboda struge vodotoka $P(h)$ in ploščine prečnega
 \begin{enumerate}
 	\item V primeru da se presečišče $G$ izbranega odseka struge nahaja v območju med točkama $O_1$ in $O_2$, dolžino omočenega oboda določimo po Pitagorovem izreku kot:
 	
-	%FIXME: decide on index G_x or Gx
 	\begin{ceqn}
 		\begin{align}
 		P(h) = \sqrt{(T_{zx} - G_x(h))^{2} + (T_{zy} - G_y(h))^{2}}
@@ -298,13 +302,6 @@ Način izračuna omočenega oboda struge vodotoka $P(h)$ in ploščine prečnega
 
 \end{enumerate}
 
-%FIXME-URGENT -> Računanje S in P glede na pozicijo presečišča G
-
-
-
-
-
-
 
 
 Ko imamo za vsak cm višine gladine vode izračunan omočeni obod $P_n(h)$ odseka $n$ in ploščino prečnega prereza pod gladino vode $S_n(h)$ lahko določimo pretok vode skozi odsek struge vodotoka $Q_n(h)$. Pretok vode skozi odsek izračunamo po Manningovi enačbi omenjeni v poglavju \ref{eq:ManningovaEnacba}. Za vsak računani odsek moramo poznati tudi naklon struge vodotoka $I_n$ in  Manningov koeficient hrapavosti površine $ng_n$, ki se ju določi po postopkih opisanih v poglavju \ref{sec:teorija_pridobitevPodatkov}.
@@ -331,7 +328,6 @@ S tem postopkom smo izračunali točke ki določajo konsumpcijsko krivuljo $h(Q)
 
 \newpage
 
-%TODO: dodaj Qtehnični, Qminimalni, kako se določi pretok skozi turbine.
 \section{Izračun proizvodnje električne energije}
 Za določitev končne proizvodnje električne energije potrebujemo razliko med koto zgornje vode t.j. vode v rezervoarju in koto spodnje vode t.j. vode ki teče skozi turbine hidroelektrarne. Ker računamo proizvodnjo električne energije za pretočne hidroelektrarne, predpostavimo da je kota zgornje vode konstantna na višini $H_z$.
 
@@ -397,7 +393,7 @@ Pri čemer so:
 	\begin{tabular}{r|p{10cm}}
 		$Q$ & Pretok vodotoka $\left[m^3/s \right]$\\
 		$Q_{min}$ & biološki minimum pretoka vodotoka $\left[m^3/s \right]$ \\
-		$Q_{max}$ & maksimalni pretok skozi turbine hidroelektrarne $\left[m^3/s \right]$ \\
+		$Q_{max}$ & instalirani pretok $\left[m^3/s \right]$ \\
 		$Q_{teh}$ & tehnični maksimum pretoka vodotoka $\left[m^3/s \right]$ \\
 	\end{tabular}
 \end{table}
