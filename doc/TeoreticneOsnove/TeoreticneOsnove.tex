@@ -41,14 +41,14 @@ Podatke o dimenzijah rečnega korita lahko pridobimo z meritvami na terenu ali p
 
  
  
-  Podatke o pretokih slovenskih vodotokov lahko pridobimo iz arhiva, ki se nahaja na spletni strani agencije Republike Slovenije za okolje (v nadaljevanju ARSO). V primeru da iščemo pretok za manjši vodotok, je zelo verjetno da podatki o pretokih vodotoka ne obstajajo. V tem primeru lahko pretok vodotoka ocenimo s pomočjo meritev višine gladine vode in dimenzij struge, ocene Manningovega koeficienta hrapavosti in naklona struge. S pomočjo Manningove enačbe opisane kasneje v poglavju~\ref{sec:teorija_trapeznaMetoda} in prej omenjenih členov Manningove enačbe dobimo končno ocenjeno vrednost pretoka vodotoka za posamezno obdobje meritev.
+  Podatke o pretokih slovenskih vodotokov lahko pridobimo iz arhiva, ki se nahaja na spletni strani agencije Republike Slovenije za okolje (v nadaljevanju ARSO). V primeru da iščemo pretok za manjši vodotok, je zelo verjetno da podatki o pretokih vodotoka ne obstajajo. V tem primeru lahko pretok vodotoka ocenimo s pomočjo meritev višine gladine vode in dimenzij struge, ocene Manningovega koeficienta hrapavosti in naklona struge. S pomočjo Manningove enačbe opisane kasneje v poglavju~\ref{sec:teorija_trapeznaMetoda} dobimo končno ocenjeno vrednost pretoka vodotoka za posamezno obdobje meritev.
 
 
 
 
 %------------------------------------------------
 \section{Analiza hidrološkega niza podatkov}~\label{sec:teorija_hidrogramObdobja}
-%TODO: FIXME -> izboljšaj
+%TODO: FIXME -> izboljšaj, dodaj opis krivulje trajanja, kako se izračuna hidrogram
 Iz ARSO-vega arhiva lahko izvozimo podatke o povprečnih dnevnih pretokih iskanega vodotoka v csv obliki (comma separated values). Iz izvoženih podatkov lahko za vsak mesec obdobja izračunamo povprečni mesečni pretok. Če mesečne pretoke povprečimo za vsa leta izbranega obdobja lahko navedene povprečne mesečne pretoke obdobja prikažemo na hidrogramu obdobja. Hidrogram je graf, ki prikazuje povprečne mesečne pretoke vodotoka za izbrano obdobje analize.  %Prav tako se lahko določi mokro in suho leto obdobja, ki ju primerjamo s povprečnimi mesečnimi pretoki.
 
 %TODO: krivulja trajanja
@@ -64,7 +64,7 @@ Konsumpcijska krivulja je graf funkcije, ki predstavlja višino gladine vode v o
 %-------------------------------------------------
 %TODO: opiši zakaj smo izbrali korak po cm
 \subsection{Izračun konsumpcijske krivulje za pravokotne in trapezne struge} \label{sec:teorija_trapeznaMetoda}
-Za izračun konsumpcijske krivulje potrebujemo pretok vodotoka $Q$ v odvisnosti od višine gladine vode $h$ v strugi. Gladina vode $h$ poteka od dna struge do maksimalne višine struge vodotoka $H$. Natančnost izračuna numeričnih metod, je odvisna od velikosti koraka izračuna. V našem primeru za potrebe ocene pretoka centimetrski korak po višini predstavlja zadostno natančnost. Pretok vode v strugi $Q$ se torej za vsak cm višine $h$ izračuna po Manningovi enačbi: 
+Za izračun konsumpcijske krivulje potrebujemo pretok vodotoka $Q$ v odvisnosti od višine gladine vode $h$ v strugi. Gladina vode $h$ poteka od dna struge do maksimalne višine struge vodotoka $H$. Natančnost izračuna numeričnih metod, je odvisna od velikosti koraka izračuna. V našem primeru za potrebe ocene pretoka centimetrski korak po višini predstavlja zadostno natančnost. Pretok vode v odprti strugi $Q$ se torej za vsak cm višine $h$ izračuna po Manningovi enačbi: 
 
 \begin{ceqn}
 \begin{align}
@@ -142,7 +142,7 @@ Kjer je:
 
 
 
-Ko poznamo vse parametre Manningove enačbe \ref{eq:ManningovaEnacba}, izračunamo pretoke vodotoka za vsak cm višine rečne struge, ki poteka od višine 0 do $H$ in narišemo graf konsumpcijske krivulje $h(Q)$.
+Ko poznamo vse parametre Manningove enačbe \ref{eq:ManningovaEnacba}, izračunamo pretoke vodotoka za vsak cm višine rečne struge, ki poteka od višine 0 do $H$ in narišemo graf konsumpcijske krivulje $h(Q)$. Iz konsumpcijske krivulje bomo v naslednjih poglavjih določali višino spodnje vode v rečni strugi.
 
 
 \newpage
@@ -357,7 +357,7 @@ Moč hidroelektrarne izračunamo po enačbi:
 
 \begin{ceqn}
 \begin{align}
-P = \eta \cdot \dfrac{g \cdot \rho_v}{1000} \cdot Q \cdot dh \label{eq:mocHidroelektrarne}
+P = \eta \cdot \dfrac{g \cdot \rho_v}{1000} \cdot Q_t \cdot dh \label{eq:mocHidroelektrarne}
 \end{align}
 \end{ceqn}
 
@@ -368,25 +368,48 @@ Pri čemer so:
 		$\eta$ & izkoristek turbine [\%]\\
 		g & gravitacijska konstanta $\left[9,81~\dfrac{m}{s^{2}}\right]$ \\
 		$\rho_v$&gostota vode $\left[\dfrac{1000 kg}{m^3}\right]$\\
-		Q & pretok skozi turbine hidroelektrarne $\left[m^{3}/s \right]$\\
+		$Q_t$ & pretok skozi turbine hidroelektrarne $\left[m^{3}/s \right]$\\
 		dh & razlika višin spodnje in zgornje vode [$m$]
 	\end{tabular}
 \end{table}
 
 
 
-Za ocenitev povprečne letne proizvodnje električne energije, potrebujemo podatke o povprečnih mesečnih pretokih vodotoka izračunanih za iskano časovno obdobje in parametrih turbin hidroelektrarne.
+% opis kako izračunamo povprečno moč hidroelektrarne:
+% 1. kako določimo Q, 
+% 2. kje dobimo podatke o pretokih (analiza hidroloških podatkov)
 
-Za določitev pretoka skozi turbine hidroelektrarne potrebujemo osnovne podatke o hidroelektrarni, kot so minimalni pretok vode $Q_{min}$, maksimalni pretok $Q_{max}$ in tehnični maksimalni pretok hidroelektrarne $Q_{teh}$.
+Izkoristek turbin hidroelektrarne je načeloma odvisen od pretoka vode skozi turbine, vendar lahko to lastnost turbin za potrebe ocene izračuna električne energije zanemarimo. Pretok vode skozi turbine hidroelektrarne $Q_t$ je odvisen od parametrov hidroelektrarne in pretoka vodotoka. $Q_t$ se določi glede na spodnje pogoje:
 
- Podatke o povprečnih mesečnih pretokih pridobimo iz rezultatov analize hidrološkega niza podatkov opisane v poglavju~\ref{sec:teorija_hidrogramObdobja}.
+\begin{ceqn}
+	\begin{align}
+	Q_t = \begin{cases}
+	0, &Q < Q_{min}\\
+	Q, &Q_{min} < Q < Q_{max}\\
+	Q_{max}, &Q_{max}< Q < Q_{teh}\\
+	0, &Q > Q_{teh}\\
+	\end{cases}
+	\end{align}
+\end{ceqn}
+
+Pri čemer so:
+\begin{table}[htb!]
+	\begin{tabular}{r|p{10cm}}
+		$Q$ & Pretok vodotoka $\left[m^3/s \right]$\\
+		$Q_{min}$ & biološki minimum pretoka vodotoka $\left[m^3/s \right]$ \\
+		$Q_{max}$ & maksimalni pretok skozi turbine hidroelektrarne $\left[m^3/s \right]$ \\
+		$Q_{teh}$ & tehnični maksimum pretoka vodotoka $\left[m^3/s \right]$ \\
+	\end{tabular}
+\end{table}
+
+%TODO: fix this part
+V primeru ko je pretok vodotoka manjši kot biološki minimum, ki se zahteva zato da reka ne presahne, se vsa voda preliva skozi prelivna polja hidroelektrarne. V primeru poplav, ko je pretok vodotoka večji od tehničnega maksimuma pretoka hidroelektrarne se vsa voda preliva preko jezu in hidroelektrarna ne proizvaja električne energije. V vseh ostalih primerih pretokov vodotoka pa je pretok skozi turbine kar enak pretoku vodotoka z maksimumom pri $Q_{max}$.
 
 
+%-----
 
+Za določitev povprečne mesečne proizvodnje električne energije potrebujemo znano povprečno mesečno moč hidroelektrarne  $\overline{P}$. Povprečno mesečno moč hidroelektrarne izračunamo s povprečjem dnevnih moči hidroelektrarne za iskani mesec po enačbi~\ref{eq:mocHidroelektrarne}. Podatke o povprečnih mesečnih pretokih pridobimo iz rezultatov analize hidrološkega niza podatkov opisane v poglavju~\ref{sec:teorija_hidrogramObdobja}. Za vsak mesec izračunamo povprečno moč hidroelektrarne po spodnji enačbi, pri čemer je $n$ število dni v mesecu. 
 
-
-
-Za določitev povprečne mesečne proizvodnje električne energije potrebujemo znano povprečno mesečno moč hidroelektrarne  $\overline{P}$. Povprečno mesečno moč hidroelektrarne izračunamo s povprečjem dnevnih moči hidroelektrarne za iskani mesec. Za vsak mesec izračunamo povprečno moč hidroelektrarne po enačbi, pri čemer je $n$ število dni v mesecu:
 
 
 \begin{ceqn}
