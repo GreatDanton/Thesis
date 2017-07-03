@@ -8,10 +8,10 @@ const COLORS = [
     ['rgba(255,99,132,1)', 'rgba(255,99,132,0.2)'],
     ['rgba(75,193,193,1)', 'rgba(75,193,193,0.2)'],
     ['rgba(255,206,86,1)', 'rgba(255,99,132,0.2)']
-]
+];
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
-            'August', 'September', 'October', 'November', 'December']
+            'August', 'September', 'October', 'November', 'December'];
 
 
 // Create line chart via props
@@ -24,11 +24,17 @@ class LineChart extends React.Component {
     }
 
     buildData() {
+        let LineTension = 0.4;
+        if (this.props.LineTension) {
+            LineTension = this.props.LineTension;
+        }
+
         let dataset = this.props.y.map((data, index) => {
             return (
                 {
                     label: this.props.name[index],
                     fill: false,
+                    lineTension: LineTension,
                     backgroundColor: this.colors[index][0],
                     borderColor: this.colors[index][0],
                     borderCapStyle: 'butt',
@@ -76,6 +82,11 @@ class LineChart extends React.Component {
             xAxes = this.props.xAxes;
         }
 
+        let startWithZero = true;
+        if (this.props.startWithZero) {
+            startWithZero = this.props.startWithZero;
+        }
+
         let options = {
             scales: {
                 xAxes: [{
@@ -88,6 +99,9 @@ class LineChart extends React.Component {
                     scaleLabel: {
                         display: true,
                         labelString: yAxes
+                    },
+                    ticks: {
+                        beginAtZero: startWithZero
                     }
                 }]
             }
