@@ -47,12 +47,17 @@ Podatke o dimenzijah rečnega korita lahko pridobimo z meritvami na terenu ali p
 
 
 %------------------------------------------------
-\section{Analiza hidrološkega niza podatkov}~\label{sec:teorija_hidrogramObdobja}
 %TODO: FIXME -> izboljšaj, dodaj opis krivulje trajanja, kako se izračuna hidrogram
+\section{Analiza hidrološkega niza podatkov}~\label{sec:teorija_hidrogramObdobja}
+Namen analize hidrološkega niza podatkov je priprava podatkov za nadaljnje izračune energetskih parametrov hidroelektrarne. Potrebovali bomo hidrogram obdobja in krivuljo trajanja. Hidrogram obdobja je graf, ki prikazuje povprečne mesečne pretoke vodotoka za izbrano obdobje analize sortirane v kronološkem vrstnem redu. S pomočjo hidrograma lahko ocenimo rečni režim našega vodotoka, in približne maksimalne in minimalne vrednosti pretokov v določenem letnem času. Po navadi na hidrogramu tudi prikažemo vrednosti pretokov za mokro in suho leto, tj. leto z maksimalnimi oz. minimalnimi vrednostmi pretokov vodotoka v izbranem obdobju analize. S tem si ponazorimo nihanje gladine vode, ki se lahko pojavi v bodočem času obratovanja hidroelektrarne.
 
-% Zakaj izvajamo analize hidrološkega niza podatkov?.
 
-Iz ARSO-vega arhiva lahko izvozimo podatke o povprečnih dnevnih pretokih iskanega vodotoka v csv obliki (comma separated values). Iz izvoženih podatkov lahko za vsak mesec obdobja izračunamo povprečni mesečni pretok. Če mesečne pretoke povprečimo za vsa leta izbranega obdobja lahko navedene povprečne mesečne pretoke obdobja prikažemo na hidrogramu obdobja. Hidrogram je graf, ki prikazuje povprečne mesečne pretoke vodotoka za izbrano obdobje analize. Prav tako se lahko določi mokro in suho leto obdobja, to sta leti obdobja v katerih ima vodotok največji oz. najmanjši pretok.
+Krivulja trajanja je graf, ki nam prikazuje podatke iz hidrograma obdobja sortirane po vrsti padajoče. S pomočjo krivulje trajanja si ponazorimo čas trajanja posameznih vrednosti pretokov izbranega vodotoka. Poleg tega si pomagamo pri izbiri ustrezne vrste in velikosti turbin bodoče hidroelektrarne.
+
+
+%TODO: Update this part
+%Iz ARSO-vega arhiva lahko izvozimo podatke o povprečnih dnevnih pretokih iskanega vodotoka v csv obliki (comma separated values). Iz izvoženih podatkov lahko za vsak mesec obdobja izračunamo povprečni mesečni pretok. Če mesečne pretoke povprečimo za vsa leta izbranega obdobja lahko navedene povprečne mesečne pretoke obdobja prikažemo na hidrogramu obdobja. 
+
 
 
 
@@ -136,7 +141,7 @@ Kjer je:
 	\end{align}
 	\end{ceqn}
 	
-	Ploščino omočenega dela v trapezno oblikovani rečni strugi izračunamo po enačbi:
+	Ploščino prečnega prereza struge pod gladino vode v trapezno oblikovani rečni strugi izračunamo po enačbi:
 	\begin{ceqn}
 	\begin{align}
 	S_{t}(h) = b \cdot h + \dfrac{h^2}{ 2\tan\alpha}
@@ -147,10 +152,10 @@ Kjer je:
 
 
 
-Ko poznamo vse parametre Manningove enačbe \ref{eq:ManningovaEnacba}, izračunamo pretoke vodotoka za vsak cm višine rečne struge, ki poteka od višine 0 do $H$ in narišemo graf konsumpcijske krivulje $h(Q)$. Iz konsumpcijske krivulje bomo v naslednjih poglavjih določali višino spodnje vode v rečni strugi.
+Ko poznamo vse parametre Manningove enačbe \ref{eq:ManningovaEnacba}, izračunamo pretoke vodotoka za vsak cm višine rečne struge, ki poteka od višine 0 do $H$ in narišemo graf konsumpcijske krivulje $h(Q)$. S pomočjo konsumpcijske krivulje bomo v naslednjih poglavjih določali višino spodnje vode hidroelektrarne v rečni strugi.
 
 
-\newpage
+
 %------------------------------------------------
 \subsection{Izračun konsumpcijske krivulje za struge poljubne oblike}\label{sec:pretokNumericnaMetoda}
 
@@ -226,7 +231,7 @@ Omočeni obod struge vodotoka $P(h)$ in ploščina prečnega prereza struge vodo
 
 \begin{enumerate}
 
-\item V primeru ko velja $\Delta y = 0$ je funkcija med točkama odseka $f(x)$ vodoravna premica in velja:
+\item V primeru ko velja $\Delta y = 0$ je funkcija med točkama odseka $f(x)$ vodoravna premica in dolžino omočenega oboda $P(h)$ in ploščino prečnega prereza struge pod gladino vode $S(h)$ določimo kot:
 
 \begin{ceqn}
 \begin{align}
@@ -399,7 +404,7 @@ Pri čemer so:
 \end{table}
 
 %TODO: fix this part
-V primeru ko je pretok vodotoka manjši kot biološki minimum, ki se zahteva zato da reka ne presahne, se vsa voda preliva skozi prelivna polja hidroelektrarne. V primeru poplav, ko je pretok vodotoka večji od tehničnega maksimuma pretoka hidroelektrarne se vsa voda preliva preko jezu in hidroelektrarna ne proizvaja električne energije. V vseh ostalih primerih pretokov vodotoka pa je pretok skozi turbine kar enak pretoku vodotoka z maksimumom pri $Q_{max}$.
+V primeru ko je pretok vodotoka manjši kot biološki minimum, ki se zahteva zato da reka ne presahne, se vsa voda preliva skozi prelivna polja hidroelektrarne in do proizvodnje električne energije ne pride. V primeru poplav, ko je pretok vodotoka večji od tehničnega maksimuma pretoka hidroelektrarne se vsa voda preliva preko jezu in hidroelektrarna prav tako ne proizvaja električne energije. V vseh ostalih primerih pretokov vodotoka pa je pretok skozi turbine kar enak pretoku vodotoka z maksimalnim pretokom $Q_{max}$. Maksimalni pretok $Q_{max}$ se določi na podlagi vrednosti krivulje trajanja.
 
 
 %-----
