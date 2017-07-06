@@ -2,7 +2,7 @@
 
 Za izračun ocene parametrov pretočne hidroelektrarne je ključnega pomena pravilen izračun konsumpcijske krivulje za izbran vodotok, saj se vsi nadaljnji izračuni nanašajo nanj. V tem poglavju bom s primerom dokazal, da program računa parametre pravilno. Za dokaz bom uporabil namišljen primer trapezno oblikovane struge vodotoka prikazane na sliki~\ref{fig:izracun_trapeznaStruga}, z 1\% naklonom struge, višino vode v strugi $h=5m$ in Manningovim koeficientom hrapavosti 0,3.
 
- Rezultate ročnega izračuna bom primerjal z rezultati ki jih izračuna program po trapezni in numerični metodi opisani v poglavju~\ref{sec:teorija_trapeznaMetoda}  oz.~\ref{sec:pretokNumericnaMetoda}. Vse mere na spodnji  sliki~\ref{fig:izracun_trapeznaStruga} so v metrih.
+ Rezultate ročnega izračuna bom primerjal z rezultati ki jih izračuna program po trapezni in metodi za izračun pretokov za strugo poljubne oblike opisani v poglavju~\ref{sec:teorija_trapeznaMetoda}  oz.~\ref{sec:pretokNumericnaMetoda}. Vse mere na spodnji  sliki~\ref{fig:izracun_trapeznaStruga} so v metrih.
 
 
 
@@ -61,7 +61,7 @@ S slike~\ref{fig:trapeznaMetoda_konsumpcijskaKrivulja} lahko odčitamo pretok st
 %-----------------------------------------------
 \section{Izračun parametrov po numerični metodi}\label{sec:izracun_numericnaMetoda}
 
-V tem poglavju bomo primerjali rezultate ročno izračunanih parametrov in parametrov izračunanih s programom po numerični metodi omenjeni v poglavju~\ref{sec:izracun_trapeznaMetoda}.
+V tem poglavju bomo primerjali rezultate ročno izračunanih parametrov in parametrov izračunanih s programom po metodi za izračun pretoka struge poljubne oblike omenjeni v poglavju~\ref{sec:izracun_trapeznaMetoda}.
 
 
 \subsection{Ročni izračun parametrov hidroelektrarne}\label{sec:izracun_rocno_numericnaMetoda}
@@ -137,9 +137,9 @@ Z grafa konsumpcijske krivulje \ref{fig:custom_konsumpcijskaKrivulja} pri višin
 
 %----------------------------------------------
 \section{Rezultati izračuna}
-V poglavjih ~\ref{sec:izracun_trapeznaMetoda} in ~\ref{sec:izracun_numericnaMetoda} smo preverili da sta rezultata ročnega izračuna in izračuna s programom po enaki metodi enaka. Če primerjamo rezultate trapezne metode z rezultati numerične metode pa se rezultati razlikujejo. Razlog za to je v izbiri matematičnega modela, kar prikazujejo enačbe spodaj.
+V poglavjih ~\ref{sec:izracun_trapeznaMetoda} in ~\ref{sec:izracun_numericnaMetoda} smo preverili, da sta rezultata ročnega izračuna in izračuna s programom po enaki metodi enaka. Če primerjamo rezultate trapezne metode z rezultati metode izračuna poljubno oblikovane struge pa se rezultati razlikujejo. Razlog za to je v izbiri matematičnega modela, kar prikazujejo enačbe spodaj.
 
-Primerjali bomo rezultata pretokov vodotoka po trapezni in numerični metodi. Pri tem uporabimo podatke iz naloge opisane v poglavju~\ref{sec:izracun}. Celotna površina prečnega prereza pod gladino vode $S(h)$ in omočeni obod struge $P(h)$ sta sestavljena iz treh odsekov kot je prikazano na sliki~\ref{fig:izracun_trapeznaStruga}. $Q_i$ predstavlja izračun pretoka po trapezni metodi, $Q_{ii}$ pa izračun pretoka po numerični metodi:
+Primerjali bomo rezultata pretokov vodotoka po trapezni in metodi poljubno oblikovane struge. Pri tem uporabimo podatke iz naloge opisane v poglavju~\ref{sec:izracun}. Celotna površina prečnega prereza pod gladino vode $S(h)$ in omočeni obod struge $P(h)$ sta sestavljena iz treh odsekov kot je prikazano na sliki~\ref{fig:izracun_trapeznaStruga}. $Q_i$ predstavlja izračun pretoka po trapezni metodi, $Q_{ii}$ pa izračun pretoka po metodi poljubno oblikovane struge:
 \begin{ceqn}
 \begin{align}
 S(h)&= S_I(h) + S_{II}(h) + S_{III}(h)\\
