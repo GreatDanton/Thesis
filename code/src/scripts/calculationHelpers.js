@@ -57,7 +57,6 @@ export function createConsumptionCurve(activeChannel) {
                     let p2 = channelPoints[i+1];
 
                     let channelParameters = custom_sectionParameters(p1, p2, channelHeight);
-                    console.log(channelParameters);
 
                     // ng and I for each section of the channel (between two points)
                     let ng = storage.custom.ngInputs[i];
@@ -211,7 +210,7 @@ function custom_diagonalFunction(point1, point2, func, channelHeight) {
             let triangularSection = startingPoint + delta_pointY;
 
             // if water is in triangular section;
-            if (height < triangularSection) {
+            if (height <= triangularSection) {
                 let slopePoint = custom_getSlopePoint(func, height);
                 let P = custom_pointsDistance(lowerPoint, slopePoint);
                 let S = custom_calculateTriangleArea(slopePoint, lowerPoint);
@@ -225,7 +224,7 @@ function custom_diagonalFunction(point1, point2, func, channelHeight) {
                 let P = custom_pointsDistance(point1, point2);
                 let S_triangle = custom_calculateTriangleArea(point1, point2);
                 let dX = Math.abs(point1.x - point2.x);
-                let S_square = dX * (height - startingPoint);
+                let S_square = dX * (height - triangularSection);
                 let S = S_triangle + S_square;
 
                 let point = {[height.toFixed(2)]: {'S': S, 'P': P}};
