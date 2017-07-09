@@ -1,8 +1,65 @@
-\section{Izračun}\label{sec:izracun}
+\chapter{Opis uporabe programa}
+
+
+V tem poglavju bo opisana uporaba programa, ki je nastal v okviru te diplomske naloge. Program lahko služi kot učni pripomoček ali pa kot pripomoček za hitro oceno proizvedene električne energije iz bližnjega potoka ali večje reke. Napisan je v programskem jeziku $Javascript$, poleg katerega sem uporabil tudi knjižnici $React$ za prikazovanje uporabniškega vmesnika in $ChartJs$ za risanje grafov. Sam program je odprto koden in pod MIT licenco, izvorna koda programa pa se nahaja na spletni strani: \href{https://github.com/GreatDanton/Thesis/tree/master/code}{https://github.com/GreatDanton/Thesis/tree/master/code}.
+
+Za izračun energetskih parametrov hidroelektrarne s programom moramo najprej vnesti podatke o dimenzijah struge vodotoka in povprečnih dnevnih vrednostih pretoka vodotoka za izbrano obdobje. Podatke lahko pridobimo na način, ki je opisan v poglavju~\ref{sec:teorija_pridobitevPodatkov}.
+
+
+
+
+\section{Vnos podatkov}
+Na sliki~\ref{fig:opis_frontpage} je viden uporabniški vmesnik, ki se pokaže ob zagonu programa. S pritiskom na gumb v levem zgornjem kotu izberemo datoteko, ki vsebuje podatke o povprečnih dnevnih pretokih vodotoka, ki smo jih dobili iz ARSO-vega arhiva v .csv formatu. Primer podatkov v datoteki je prikazan spodaj. Vejica $,$ loči datum meritve in povprečni dnevni pretok izbranega vodotoka.
+
+\begin{figure}[htp!]
+	\begin{centering}
+		\includegraphics[width=\textwidth]{slike/opis/frontpage.png}		
+		\caption{Uporabniški vmesnik ob zagonu programa}\label{fig:opis_frontpage}
+	\end{centering}
+\end{figure}
+
+\begin{center}
+01.01.1989,85.1\\
+02.01.1989,83.6\\
+03.01.1989,85.1\\
+04.01.1989,82.1\\
+05.01.1989,73.6\\
+06.01.1989,69.6\\
+07.01.1989,74.9\\
+08.01.1989,79.2\\
+09.01.1989,80.6\\
+10.01.1989,79.2\\
+11.01.1989,79.2\\
+12.01.1989,79.2\\
+\end{center}
+
+Po vnosu podatkov o povprečnih dnevnih pretokih vodotoka, program samodejno analizira podatke in v zavihku $Results$ izriše hidrogram in krivuljo trajanja.
+
+\begin{figure}[htp!]
+	\begin{centering}
+		\includegraphics[width=\textwidth]{slike/opis/hidrogram.png}		
+		\caption{Hidrogram v črtnem in stolpičnem diagramu}\label{fig:opis_hidrogram}
+	\end{centering}
+\end{figure}
+
+
+\begin{figure}[htp!]
+	\begin{centering}
+		\includegraphics[width=\textwidth]{slike/opis/krivuljaTrajanja.png}		
+		\caption{Krivulja trajanja}\label{fig:opis_krivuljaTrajanja}
+	\end{centering}
+\end{figure}
+
+
+
+
+\newpage
+
+\section{Izračun konsumpcijske krivulje}\label{sec:izracun}
 
 Za izračun ocene parametrov pretočne hidroelektrarne je ključnega pomena pravilen izračun konsumpcijske krivulje za izbran vodotok, saj se vsi nadaljnji izračuni nanašajo nanj. V tem poglavju bom s primerom dokazal, da program računa parametre pravilno. Za dokaz bom uporabil namišljen primer trapezno oblikovane struge vodotoka prikazane na sliki~\ref{fig:izracun_trapeznaStruga}, z 1\% naklonom struge, višino vode v strugi $h=5m$ in Manningovim koeficientom hrapavosti 0,3.
 
- Rezultate ročnega izračuna bom primerjal z rezultati ki jih izračuna program po trapezni in metodi za izračun pretokov za strugo poljubne oblike opisani v poglavju~\ref{sec:teorija_trapeznaMetoda}  oz.~\ref{sec:pretokNumericnaMetoda}. Vse mere na spodnji  sliki~\ref{fig:izracun_trapeznaStruga} so v metrih.
+Rezultate ročnega izračuna bom primerjal z rezultati ki jih izračuna program po trapezni in metodi za izračun pretokov za strugo poljubne oblike opisani v poglavju~\ref{sec:teorija_trapeznaMetoda}  oz.~\ref{sec:pretokNumericnaMetoda}. Vse mere na spodnji  sliki~\ref{fig:izracun_trapeznaStruga} so v metrih.
 
 
 
@@ -25,11 +82,11 @@ Za izračun ocene parametrov pretočne hidroelektrarne je ključnega pomena prav
 Za izračun pretoka vodotoka pri višini $h=5m$ uporabimo enačbe navedene v poglavju~\ref{sec:teorija_trapeznaMetoda}.
 
 \begin{ceqn}
-\begin{align}
- P(h)&= b + 2 \cdot \sqrt{h^2 + \left(\dfrac{h} {\tan\alpha} \right)^{2}} = 5 + 2 \cdot \sqrt{5^2 + \left(\dfrac{5} {\tan 45} \right)^{2}} = 19,1~m \\
- S(h)&= b \cdot h +  \dfrac{h^{2}}{\cdot\tan{\alpha}}   = 5  5 +  \dfrac{5^{2}}{\tan{45}}= 50~m^2 \\
- Q(h)&= \dfrac{\sqrt{0,01}}{0,03} \cdot \dfrac{50^{5/3}}{19,1^{2/3}} = 316,6~m^3/s
-\end{align}
+	\begin{align}
+	P(h)&= b + 2 \cdot \sqrt{h^2 + \left(\dfrac{h} {\tan\alpha} \right)^{2}} = 5 + 2 \cdot \sqrt{5^2 + \left(\dfrac{5} {\tan 45} \right)^{2}} = 19,1~m \\
+	S(h)&= b \cdot h +  \dfrac{h^{2}}{\cdot\tan{\alpha}}   = 5  5 +  \dfrac{5^{2}}{\tan{45}}= 50~m^2 \\
+	Q(h)&= \dfrac{\sqrt{0,01}}{0,03} \cdot \dfrac{50^{5/3}}{19,1^{2/3}} = 316,6~m^3/s
+	\end{align}
 \end{ceqn}
 
 
@@ -72,19 +129,19 @@ V tem poglavju bomo primerjali rezultate ročno izračunanih parametrov in param
 	
 	\begin{ceqn}
 		\begin{align}
-			S_I&=\dfrac{5  5}{2} = 12,5~m^2\\
-			P_I&=\sqrt{5^2 + 5^2} = 7,07~m\\
-			Q_I&=\dfrac{\sqrt{0,01}}{0,03} \cdot \dfrac{12,5^{5/3}}{7,07^{2/3}} = 60,9~m^3/s
+		S_I&=\dfrac{5  5}{2} = 12,5~m^2\\
+		P_I&=\sqrt{5^2 + 5^2} = 7,07~m\\
+		Q_I&=\dfrac{\sqrt{0,01}}{0,03} \cdot \dfrac{12,5^{5/3}}{7,07^{2/3}} = 60,9~m^3/s
 		\end{align}
 	\end{ceqn}
-		
+	
 	\item Odsek:
 	
 	\begin{ceqn}
 		\begin{align}
-			S_{II}&=55 = 25 ~m^2\\
-			P_{II}&=5~m\\
-			Q_{II}&=\dfrac{\sqrt{0,01}}{0,03} \cdot \dfrac{25^{5/3}}{5^{2/3}} = 243,7~m^3/s
+		S_{II}&=55 = 25 ~m^2\\
+		P_{II}&=5~m\\
+		Q_{II}&=\dfrac{\sqrt{0,01}}{0,03} \cdot \dfrac{25^{5/3}}{5^{2/3}} = 243,7~m^3/s
 		\end{align}
 	\end{ceqn}
 	
@@ -102,10 +159,10 @@ V tem poglavju bomo primerjali rezultate ročno izračunanih parametrov in param
 Skupni pretok za višino $h=5m$:
 
 \begin{ceqn}
- \begin{align}
-Q_{s} = Q_{I} + Q_{II} + Q_{III} = 60,9 + 243,7 + 60,9 = 365,5~m^3/s
- \end{align}
- \end{ceqn}
+	\begin{align}
+	Q_{s} = Q_{I} + Q_{II} + Q_{III} = 60,9 + 243,7 + 60,9 = 365,5~m^3/s
+	\end{align}
+\end{ceqn}
 
 
 
@@ -136,46 +193,44 @@ Z grafa konsumpcijske krivulje \ref{fig:custom_konsumpcijskaKrivulja} pri višin
 
 
 %----------------------------------------------
-\section{Rezultati izračuna}
+\section{Rezultati izračuna konsumpcijske krivulje}
 V poglavjih ~\ref{sec:izracun_trapeznaMetoda} in ~\ref{sec:izracun_numericnaMetoda} smo preverili, da sta rezultata ročnega izračuna in izračuna s programom po enaki metodi enaka. Če primerjamo rezultate trapezne metode z rezultati metode izračuna poljubno oblikovane struge pa se rezultati razlikujejo. Razlog za to je v izbiri matematičnega modela, kar prikazujejo enačbe spodaj.
 
 Primerjali bomo rezultata pretokov vodotoka po trapezni in metodi poljubno oblikovane struge. Pri tem uporabimo podatke iz naloge opisane v poglavju~\ref{sec:izracun}. Celotna površina prečnega prereza pod gladino vode $S(h)$ in omočeni obod struge $P(h)$ sta sestavljena iz treh odsekov kot je prikazano na sliki~\ref{fig:izracun_trapeznaStruga}. $Q_i$ predstavlja izračun pretoka po trapezni metodi, $Q_{ii}$ pa izračun pretoka po metodi poljubno oblikovane struge:
 \begin{ceqn}
-\begin{align}
-S(h)&= S_I(h) + S_{II}(h) + S_{III}(h)\\
-P(h)&= P_I(h) + P_{II}(h) + P_{III}(h)\\
-Q_i &= \dfrac{\sqrt{I}}{ng} \cdot \dfrac{S^{5/3}}{P^{2/3}} \\
-Q_{ii} &= \dfrac{\sqrt{I}}{ng} \cdot \dfrac{S_I^{5/3}}{P_I^{2/3}} + \dfrac{\sqrt{I}}{ng} \cdot \dfrac{S_{II}^{5/3}}{P_{II}^{2/3}} + \dfrac{\sqrt{I}}{ng} \cdot \dfrac{S_{III}^{5/3}}{P_{III}^{2/3}}
-\end{align}
+	\begin{align}
+	S(h)&= S_I(h) + S_{II}(h) + S_{III}(h)\\
+	P(h)&= P_I(h) + P_{II}(h) + P_{III}(h)\\
+	Q_i &= \dfrac{\sqrt{I}}{ng} \cdot \dfrac{S^{5/3}}{P^{2/3}} \\
+	Q_{ii} &= \dfrac{\sqrt{I}}{ng} \cdot \dfrac{S_I^{5/3}}{P_I^{2/3}} + \dfrac{\sqrt{I}}{ng} \cdot \dfrac{S_{II}^{5/3}}{P_{II}^{2/3}} + \dfrac{\sqrt{I}}{ng} \cdot \dfrac{S_{III}^{5/3}}{P_{III}^{2/3}}
+	\end{align}
 \end{ceqn}
 
 Če v obeh enačbah odstranimo skupne člene enačbe, enačbe poenostavimo v:
 
 \begin{ceqn}
-\begin{align}
-Q_i &=\dfrac{S^{5/3}}{P^{2/3}}\\
-Q_{ii} &= \dfrac{S_I^{5/3}}{P_I^{2/3}} + \dfrac{S_{II}^{5/3}}{P_{II}^{2/3}} + \dfrac{S_{III}^{5/3}}{P_{III}^{2/3}}
-\end{align}
+	\begin{align}
+	Q_i &=\dfrac{S^{5/3}}{P^{2/3}}\\
+	Q_{ii} &= \dfrac{S_I^{5/3}}{P_I^{2/3}} + \dfrac{S_{II}^{5/3}}{P_{II}^{2/3}} + \dfrac{S_{III}^{5/3}}{P_{III}^{2/3}}
+	\end{align}
 \end{ceqn}
 
 
 Enačimo obe enačbi in uporabimo podatke iz:
 \begin{ceqn}
-\begin{align}
-Q_i &= Q_{ii}\\
-\dfrac{S^{5/3}}{P^{2/3}} &= \dfrac{S_I^{5/3}}{P_I^{2/3}} + \dfrac{S_{II}^{5/3}}{P_{II}^{2/3}} + \dfrac{S_{III}^{5/3}}{P_{III}^{2/3}}\\
-\dfrac{50^{5/3}}{19,14^{2/3}} &= \dfrac{12,5^{5/3}}{7,07^{2/3}} + \dfrac{25^{5/3}}{5^{2/3}} + \dfrac{12,5^{5/3}}{7,07^{2/3}}\\
-94,84 &\neq 109,7
-\end{align}
+	\begin{align}
+	Q_i &= Q_{ii}\\
+	\dfrac{S^{5/3}}{P^{2/3}} &= \dfrac{S_I^{5/3}}{P_I^{2/3}} + \dfrac{S_{II}^{5/3}}{P_{II}^{2/3}} + \dfrac{S_{III}^{5/3}}{P_{III}^{2/3}}\\
+	\dfrac{50^{5/3}}{19,14^{2/3}} &= \dfrac{12,5^{5/3}}{7,07^{2/3}} + \dfrac{25^{5/3}}{5^{2/3}} + \dfrac{12,5^{5/3}}{7,07^{2/3}}\\
+	94,84 &\neq 109,7
+	\end{align}
 \end{ceqn}
 
 
 Do razlike v rezultatih izračuna po različnih metodah pride zaradi matematičnih pravil seštevanja potenc, kar smo pokazali z zgornjim izračunom:
 \begin{ceqn}
-\begin{align}
-(a+b)^y \neq a^y + b^y
-\end{align}
+	\begin{align}
+	(a+b)^y \neq a^y + b^y
+	\end{align}
 \end{ceqn}
-
-
 
