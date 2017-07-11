@@ -23,7 +23,7 @@ class ResultsView extends React.Component {
 
     render() {
         return (
-            <div className="container-900">
+            <div className="container-small">
                 <Hydrogram data={this.state.HydrogramData} names={this.state.HydrogramNames}/>
                 <DurationCurve data={this.state.HydrogramData} names={this.state.HydrogramNames} />
                 <ConsumptionCurve/>

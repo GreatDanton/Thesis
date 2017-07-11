@@ -108,13 +108,24 @@ function custom_createPoints(partlyFlowsArr) {
     for (let i of partlyFlowsArr) {
         sum_heightFlows = sum_objects(i, sum_heightFlows);
     }
+    console.log("SUM HEIGHT FLOWS: ");
     console.log(sum_heightFlows);
 
-    let heights = Object.keys(sum_heightFlows).sort();
+    // sort heights in ascending order
+    let heights = Object.keys(sum_heightFlows);
+    heights = heights.map(function(item) {
+        return parseFloat(item);
+    });
+    heights.sort(function(a,b){
+        return a-b;
+    });
+
     let points = [];
 
+    // calculate height(flow)
     for (let height of heights) {
-        let Q = sum_heightFlows[height];
+        height = height.toFixed(2);
+        let Q = sum_heightFlows[height.toString()];
         height = parseFloat(height);
         let point = {'x': Q, 'y': height};
         points.push(point);
@@ -210,7 +221,7 @@ function custom_diagonalFunction(point1, point2, func, channelHeight) {
             let triangularSection = startingPoint + delta_pointY;
 
             // if water is in triangular section;
-            if (height <= triangularSection) {
+            if (height < triangularSection) {
                 let slopePoint = custom_getSlopePoint(func, height);
                 let P = custom_pointsDistance(lowerPoint, slopePoint);
                 let S = custom_calculateTriangleArea(slopePoint, lowerPoint);
