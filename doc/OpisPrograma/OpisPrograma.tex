@@ -13,8 +13,7 @@ Na sliki~\ref{fig:opis_frontpage} je viden uporabniški vmesnik, ki se pokaže o
 
 \begin{figure}[htp!]
 	\begin{centering}
-		\includegraphics[width=\textwidth]{slike/opis/frontpage.png}		
-		\caption{Uporabniški vmesnik ob zagonu programa}\label{fig:opis_frontpage}
+		\includegraphics[width=\textwidth]{slike/opis/frontpage.png}\caption{Uporabniški vmesnik ob zagonu programa}\label{fig:opis_frontpage}
 	\end{centering}
 \end{figure}
 
@@ -33,20 +32,19 @@ Na sliki~\ref{fig:opis_frontpage} je viden uporabniški vmesnik, ki se pokaže o
 12.01.1989,79.2\\
 \end{center}
 
-Po vnosu podatkov o povprečnih dnevnih pretokih vodotoka, program samodejno analizira podatke in v zavihku $Results$ izriše hidrogram in krivuljo trajanja.
+Po vnosu podatkov o povprečnih dnevnih pretokih vodotoka, program samodejno analizira podatke in v zavihku $Results$ izriše hidrogram in krivuljo trajanja. Primer izpisa hidrološke analize je viden na slikah~\ref{fig:opis_hidrogram} in~\ref{fig:opis_krivuljaTrajanja}. S pritiskom na leto analize, ki se nahaja nad samim diagramom, lahko izbrano leto analize odstranimo iz diagrama analize.
+
 
 \begin{figure}[htp!]
 	\begin{centering}
-		\includegraphics[width=\textwidth]{slike/opis/hidrogram.png}		
-		\caption{Hidrogram v črtnem in stolpičnem diagramu}\label{fig:opis_hidrogram}
+		\includegraphics[width=\textwidth]{slike/opis/hidrogram.png}\caption{Hidrogram v črtnem in stolpičnem diagramu}\label{fig:opis_hidrogram}
 	\end{centering}
 \end{figure}
 
 
 \begin{figure}[htp!]
 	\begin{centering}
-		\includegraphics[width=\textwidth]{slike/opis/krivuljaTrajanja.png}		
-		\caption{Krivulja trajanja}\label{fig:opis_krivuljaTrajanja}
+		\includegraphics[width=\textwidth]{slike/opis/krivuljaTrajanja.png}\caption{Izris krivulje trajanja}\label{fig:opis_krivuljaTrajanja}
 	\end{centering}
 \end{figure}
 
@@ -57,9 +55,9 @@ Po vnosu podatkov o povprečnih dnevnih pretokih vodotoka, program samodejno ana
 
 \section{Izračun konsumpcijske krivulje}\label{sec:izracun}
 
-Za izračun ocene parametrov pretočne hidroelektrarne je ključnega pomena pravilen izračun konsumpcijske krivulje za izbran vodotok, saj se vsi nadaljnji izračuni nanašajo nanj. V tem poglavju bom s primerom dokazal, da program računa parametre pravilno. Za dokaz bom uporabil namišljen primer trapezno oblikovane struge vodotoka prikazane na sliki~\ref{fig:izracun_trapeznaStruga}, z 1\% naklonom struge, višino vode v strugi $h=5m$ in Manningovim koeficientom hrapavosti 0,3.
+Za izračun ocene parametrov pretočne hidroelektrarne je ključnega pomena pravilen izračun konsumpcijske krivulje za izbran vodotok, saj se vsi nadaljnji izračuni nanašajo nanj. V tem poglavju bom s primerom dokazal, da program računa točke konsumpcijske krivulje pravilno. Za dokaz bom uporabil namišljen primer trapezno oblikovane struge vodotoka prikazane na sliki~\ref{fig:izracun_trapeznaStruga}, z 1\% naklonom struge, višino vode v strugi $h=5m$ in Manningovim koeficientom hrapavosti 0,3.
 
-Rezultate ročnega izračuna bom primerjal z rezultati ki jih izračuna program po trapezni in metodi za izračun pretokov za strugo poljubne oblike opisani v poglavju~\ref{sec:teorija_trapeznaMetoda}  oz.~\ref{sec:pretokNumericnaMetoda}. Vse mere na spodnji  sliki~\ref{fig:izracun_trapeznaStruga} so v metrih.
+Rezultate ročnega izračuna bom primerjal z rezultati ki jih izračuna program po metodi za pravokotno in trapezno oblikovane struge in metodi za izračun pretokov za strugo poljubne oblike opisani v poglavju~\ref{sec:teorija_trapeznaMetoda}  oz.~\ref{sec:teorija_metodaPoljubnaOblika}. Vse mere na spodnji  sliki~\ref{fig:izracun_trapeznaStruga} so v metrih.
 
 
 
@@ -74,22 +72,20 @@ Rezultate ročnega izračuna bom primerjal z rezultati ki jih izračuna program 
 
 
 %----------------------------------------------
-\section{Izračun parametrov po trapezni metodi}\label{sec:izracun_trapeznaMetoda}
+\section{Izračun parametrov po metodi za pravokotno in trapezno oblikovano strugo vodotoka}\label{sec:izracun_trapeznaMetoda}
 
+V tem poglavju bom preverjal rezultate ročnega izračuna z rezultati, ki jih izračuna program po metodi za pravokotno in trapezno oblikovane struge opisani v poglavju~\ref{sec:teorija_trapeznaMetoda}.
 
 
 \subsection{Ročni izračun}
 Za izračun pretoka vodotoka pri višini $h=5m$ uporabimo enačbe navedene v poglavju~\ref{sec:teorija_trapeznaMetoda}.
-
 \begin{ceqn}
 	\begin{align}
 	P(h)&= b + 2 \cdot \sqrt{h^2 + \left(\dfrac{h} {\tan\alpha} \right)^{2}} = 5 + 2 \cdot \sqrt{5^2 + \left(\dfrac{5} {\tan 45} \right)^{2}} = 19,1~m \\
-	S(h)&= b \cdot h +  \dfrac{h^{2}}{\cdot\tan{\alpha}}   = 5  5 +  \dfrac{5^{2}}{\tan{45}}= 50~m^2 \\
+	S(h)&= b \cdot h +  \dfrac{h^{2}}{\tan{\alpha}}   = 5  5 +  \dfrac{5^{2}}{\tan{45}}= 50~m^2 \\
 	Q(h)&= \dfrac{\sqrt{0,01}}{0,03} \cdot \dfrac{50^{5/3}}{19,1^{2/3}} = 316,6~m^3/s
 	\end{align}
 \end{ceqn}
-
-
 
 
 \subsection{Izračun s programom}
@@ -105,23 +101,25 @@ V program vnesemo podatke o rečnem koritu kot je prikazano na sliki~\ref{fig:tr
 
 \begin{figure}[H]
 	\begin{centering}
-		\includegraphics[width=\textwidth]{slike/izracuni/trapeznaMetoda_konsumpcijska.png}		
-		\caption{Konsumpcijska krivulja izračunana po trapezni metodi}\label{fig:trapeznaMetoda_konsumpcijskaKrivulja}
+		\includegraphics[width=\textwidth]{slike/izracuni/trapeznaMetoda_konsumpcijska.png}\caption{Konsumpcijska krivulja izračunana po metodi za pravokotne in trapezno oblikovane struge}\label{fig:trapeznaMetoda_konsumpcijskaKrivulja}
 	\end{centering}
 \end{figure}
 
 
 
-S slike~\ref{fig:trapeznaMetoda_konsumpcijskaKrivulja} lahko odčitamo pretok struge izračunane po trapezni metodi $Q(h=5m) = 316,1~m^3/s$. 
+S slike~\ref{fig:trapeznaMetoda_konsumpcijskaKrivulja} lahko odčitamo pretok struge izračunane po metodi za pravokotne in trapezno oblikovane struge $Q(h=5m) = 316,1~m^3/s$. 
 
 
 %-----------------------------------------------
 \section{Izračun parametrov po metodi za strugo poljubne oblike}\label{sec:izracun_numericnaMetoda}
 
-V tem poglavju bomo primerjali rezultate ročno izračunanih parametrov in parametrov izračunanih s programom po metodi za izračun pretoka struge poljubne oblike omenjeni v poglavju~\ref{sec:izracun_trapeznaMetoda}.
+V tem poglavju bomo primerjali rezultate ročno izračunanih parametrov in parametrov izračunanih s programom po metodi za izračun pretoka struge poljubne oblike opisani v poglavju~\ref{sec:teorija_metodaPoljubnaOblika}.
 
 
 \subsection{Ročni izračun parametrov hidroelektrarne}\label{sec:izracun_rocno_numericnaMetoda}
+
+Pretoke v strugi vodotoka računamo po odsekih med točkami s katerimi modeliramo strugo vodotoka, pri maksimalni višini $h=5m$.
+
 
 \begin{enumerate}[I.]
 	
@@ -173,30 +171,28 @@ S pomočjo uporabniškega vmesnika v koordinatni sistem vnašamo serijo točk, s
 
 \begin{figure}[H]
 	\begin{centering}
-		\includegraphics[width=\textwidth]{slike/izracuni/numericno_modeliranjeStruge.png}		
-		\caption{Vnos podatkov v program}\label{fig:modeliranjeStruge}
+		\includegraphics[width=\textwidth]{slike/izracuni/numericno_modeliranjeStruge.png}\caption{Vnos podatkov v program}\label{fig:modeliranjeStruge}
 	\end{centering}
 \end{figure}
 
 % H forces image to stand here on this place -> pushes text below
 \begin{figure}[H]
 	\begin{centering}
-		\includegraphics[width=\textwidth]{slike/izracuni/numericno_konsumpcijskaKrivulja.png}		
-		\caption{Graf konsumpcijske krivulje izračunani po numerični metodi}\label{fig:custom_konsumpcijskaKrivulja}
+		\includegraphics[width=\textwidth]{slike/izracuni/numericno_konsumpcijskaKrivulja.png}\caption{Graf konsumpcijske krivulje izračunani po metodi za poljubno oblikovane struge}\label{fig:custom_konsumpcijskaKrivulja}
 	\end{centering}
 \end{figure}
 
 
-Z grafa konsumpcijske krivulje \ref{fig:custom_konsumpcijskaKrivulja} pri višini $h = 5m$ lahko preberemo da je pretok $Q=365,5~m^3/s$. Rezultat po numeričnem postopku izračunan s programom je enak rezultatu ki smo ga izračunali ročno v poglavju~\ref{sec:izracun_rocno_numericnaMetoda}
+Z grafa konsumpcijske krivulje \ref{fig:custom_konsumpcijskaKrivulja} pri višini $h = 5m$ lahko odčitamo pretok $Q=365,5~m^3/s$. Rezultat izračunan s programom po metodi za poljubno oblikovane struge je enak rezultatu, ki smo ga izračunali ročno v poglavju~\ref{sec:izracun_rocno_numericnaMetoda}.
 
 
 
 
 %----------------------------------------------
-\section{Rezultati izračuna konsumpcijske krivulje}
-V poglavjih ~\ref{sec:izracun_trapeznaMetoda} in ~\ref{sec:izracun_numericnaMetoda} smo preverili, da sta rezultata ročnega izračuna in izračuna s programom po enaki metodi enaka. Če primerjamo rezultate trapezne metode z rezultati metode izračuna poljubno oblikovane struge pa se rezultati razlikujejo. Razlog za to je v izbiri matematičnega modela, kar prikazujejo enačbe spodaj.
+\section{Rezultati izračuna konsumpcijske krivulje} \label{sec:opis_rezultatIzracuna}
+V poglavjih ~\ref{sec:izracun_trapeznaMetoda} in ~\ref{sec:izracun_numericnaMetoda} smo preverili, da sta rezultata ročnega izračuna in izračuna s programom po enaki metodi enaka. Če primerjamo rezultate izračunane po metodi za pravokotne in trapezno oblikovane struge z rezultati metode izračuna poljubno oblikovane struge pa se rezultati razlikujejo. Razlog za to je v izbiri matematičnega modela, kar prikazujejo enačbe spodaj.
 
-Primerjali bomo rezultata pretokov vodotoka po trapezni in metodi poljubno oblikovane struge. Pri tem uporabimo podatke iz naloge opisane v poglavju~\ref{sec:izracun}. Celotna površina prečnega prereza pod gladino vode $S(h)$ in omočeni obod struge $P(h)$ sta sestavljena iz treh odsekov kot je prikazano na sliki~\ref{fig:izracun_trapeznaStruga}. $Q_i$ predstavlja izračun pretoka po trapezni metodi, $Q_{ii}$ pa izračun pretoka po metodi poljubno oblikovane struge:
+Primerjali bomo rezultata pretokov vodotoka po metodi za pravokotne in trapezno oblikovane struge in metodi poljubno oblikovane struge. Pri tem uporabimo podatke iz naloge opisane v poglavju~\ref{sec:izracun}. Celotna površina prečnega prereza pod gladino vode $S(h)$ in omočeni obod struge $P(h)$ sta sestavljena iz treh odsekov kot je prikazano na sliki~\ref{fig:izracun_trapeznaStruga}. $Q_i$ predstavlja izračun pretoka po trapezni metodi, $Q_{ii}$ pa izračun pretoka po metodi poljubno oblikovane struge:
 \begin{ceqn}
 	\begin{align}
 	S(h)&= S_I(h) + S_{II}(h) + S_{III}(h)\\
@@ -230,7 +226,7 @@ Enačimo obe enačbi in uporabimo podatke iz:
 Do razlike v rezultatih izračuna po različnih metodah pride zaradi matematičnih pravil seštevanja potenc, kar smo pokazali z zgornjim izračunom:
 \begin{ceqn}
 	\begin{align}
-	(a+b)^y \neq a^y + b^y
+	(a+b+c)^y \neq a^y + b^y + c^y
 	\end{align}
 \end{ceqn}
 
