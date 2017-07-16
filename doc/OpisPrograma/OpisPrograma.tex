@@ -1,7 +1,7 @@
 \chapter{Opis uporabe programa}
 
 
-V tem poglavju bo opisana uporaba programa, ki je nastal v okviru te diplomske naloge. Program lahko služi kot učni pripomoček ali pa kot pripomoček za hitro oceno proizvedene električne energije iz bližnjega potoka ali večje reke. Napisan je v programskem jeziku $Javascript$, poleg katerega sem uporabil tudi knjižnici $React$ za prikazovanje uporabniškega vmesnika in $ChartJs$ za risanje grafov. Sam program je odprto koden in pod MIT licenco, izvorna koda programa pa se nahaja na spletni strani: \href{https://github.com/GreatDanton/Thesis/tree/master/code}{https://github.com/GreatDanton/Thesis/tree/master/code}.
+V tem poglavju bo opisana uporaba programa, ki je nastal v okviru te diplomske naloge. Program lahko služi kot učni pripomoček ali pa kot pripomoček za hitro oceno proizvedene električne energije iz bližnjega potoka ali večje reke. Napisan je v programskem jeziku $Javascript$, poleg katerega sem uporabil tudi knjižnici $React$ za prikazovanje uporabniškega vmesnika in $ChartJs$ za za lažje risanje diagramov rezultatov. Sam program je odprto koden in pod MIT licenco, izvorna koda programa pa se nahaja na spletni strani: \href{https://github.com/GreatDanton/Thesis/tree/master/code}{https://github.com/GreatDanton/Thesis/tree/master/code}.
 
 Za izračun energetskih parametrov hidroelektrarne s programom moramo najprej vnesti podatke o dimenzijah struge vodotoka in povprečnih dnevnih vrednostih pretoka vodotoka za izbrano obdobje. Podatke lahko pridobimo na način, ki je opisan v poglavju~\ref{sec:teorija_pridobitevPodatkov}.
 
@@ -30,21 +30,22 @@ Na sliki~\ref{fig:opis_frontpage} je viden uporabniški vmesnik, ki se pokaže o
 10.01.1989,79.2\\
 11.01.1989,79.2\\
 12.01.1989,79.2\\
+itd...\\
 \end{center}
 
-Po vnosu podatkov o povprečnih dnevnih pretokih vodotoka, program samodejno analizira podatke in v zavihku $Results$ izriše hidrogram in krivuljo trajanja. Primer izpisa hidrološke analize je viden na slikah~\ref{fig:opis_hidrogram} in~\ref{fig:opis_krivuljaTrajanja}. S pritiskom na leto analize, ki se nahaja nad samim diagramom, lahko izbrano leto analize odstranimo iz diagrama analize.
+Po vnosu podatkov o povprečnih dnevnih pretokih vodotoka, program samodejno analizira podatke o pretokih in v zavihku $Results$ izriše hidrogram in krivuljo trajanja. Primer izpisa hidrološke analize je viden na slikah~\ref{fig:opis_hidrogram} in~\ref{fig:opis_krivuljaTrajanja}. S pritiskom na leto analize, ki se nahaja nad samim diagramom, lahko izbrano leto analize odstranimo oz. filtriramo iz diagrama analize.
 
 
 \begin{figure}[htp!]
 	\begin{centering}
-		\includegraphics[width=\textwidth]{slike/opis/hidrogram.png}\caption{Hidrogram v črtnem in stolpičnem diagramu}\label{fig:opis_hidrogram}
+		\includegraphics[width=\textwidth]{slike/opis/hidrogram.png}\caption{Primer izračunanega hidrograma v črtnem in stolpičnem diagramu}\label{fig:opis_hidrogram}
 	\end{centering}
 \end{figure}
 
 
 \begin{figure}[htp!]
 	\begin{centering}
-		\includegraphics[width=\textwidth]{slike/opis/krivuljaTrajanja.png}\caption{Izris krivulje trajanja}\label{fig:opis_krivuljaTrajanja}
+		\includegraphics[width=\textwidth]{slike/opis/krivuljaTrajanja.png}\caption{Primer izračunane krivulje trajanja}\label{fig:opis_krivuljaTrajanja}
 	\end{centering}
 \end{figure}
 
@@ -64,7 +65,7 @@ Rezultate ročnega izračuna bom primerjal z rezultati ki jih izračuna program 
 \begin{figure}[ht!]
 	\begin{centering}
 		\includegraphics{slike/izracuni/shema_trapezneStruge.pdf}		
-		\caption{Shema struge izbranega vodotoka}\label{fig:izracun_trapeznaStruga}
+		\caption{Shema rečnega korita obravnavanega vodotoka}\label{fig:izracun_trapeznaStruga}
 	\end{centering}
 \end{figure}
 
@@ -190,7 +191,7 @@ Z grafa konsumpcijske krivulje \ref{fig:custom_konsumpcijskaKrivulja} pri višin
 
 %----------------------------------------------
 \section{Rezultati izračuna konsumpcijske krivulje} \label{sec:opis_rezultatIzracuna}
-V poglavjih ~\ref{sec:izracun_trapeznaMetoda} in ~\ref{sec:izracun_numericnaMetoda} smo preverili, da sta rezultata ročnega izračuna in izračuna s programom po enaki metodi enaka. Če primerjamo rezultate izračunane po metodi za pravokotne in trapezno oblikovane struge z rezultati metode izračuna poljubno oblikovane struge pa se rezultati razlikujejo. Razlog za to je v izbiri matematičnega modela, kar prikazujejo enačbe spodaj.
+V poglavjih ~\ref{sec:izracun_trapeznaMetoda} in ~\ref{sec:izracun_numericnaMetoda} smo preverili, da sta rezultata ročnega izračuna in izračuna s programom po enaki metodi enaka. Če primerjamo rezultate izračunane po različnih metodah pa se rezultati razlikujejo. Razlog za to je v izbiri matematičnega modela, kar prikazujejo enačbe spodaj.
 
 Primerjali bomo rezultata pretokov vodotoka po metodi za pravokotne in trapezno oblikovane struge in metodi poljubno oblikovane struge. Pri tem uporabimo podatke iz naloge opisane v poglavju~\ref{sec:izracun}. Celotna površina prečnega prereza pod gladino vode $S(h)$ in omočeni obod struge $P(h)$ sta sestavljena iz treh odsekov kot je prikazano na sliki~\ref{fig:izracun_trapeznaStruga}. $Q_i$ predstavlja izračun pretoka po trapezni metodi, $Q_{ii}$ pa izračun pretoka po metodi poljubno oblikovane struge:
 \begin{ceqn}
@@ -212,7 +213,7 @@ Primerjali bomo rezultata pretokov vodotoka po metodi za pravokotne in trapezno 
 \end{ceqn}
 
 
-Enačimo obe enačbi in uporabimo podatke iz:
+Enačimo obe enačbi in vstavimo podatke:
 \begin{ceqn}
 	\begin{align}
 	Q_i &= Q_{ii}\\
@@ -226,7 +227,7 @@ Enačimo obe enačbi in uporabimo podatke iz:
 Do razlike v rezultatih izračuna po različnih metodah pride zaradi matematičnih pravil seštevanja potenc, kar smo pokazali z zgornjim izračunom:
 \begin{ceqn}
 	\begin{align}
-	(a+b+c)^y \neq a^y + b^y + c^y
+	\dfrac{(a+b+c)^y}{(p_1 + p_2 + p_3)^z} \neq \dfrac{a^y}{p_1^z} + \dfrac{b^y}{p_2^z} + \dfrac{c^y}{p_3^z}
 	\end{align}
 \end{ceqn}
 
