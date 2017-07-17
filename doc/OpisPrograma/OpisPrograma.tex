@@ -1,7 +1,7 @@
 \chapter{Opis uporabe programa}
 
 
-V tem poglavju bo opisana uporaba programa, ki je nastal v okviru te diplomske naloge. Program lahko služi kot učni pripomoček ali pa kot pripomoček za hitro oceno proizvedene električne energije iz bližnjega potoka ali večje reke. Napisan je v programskem jeziku $Javascript$, poleg katerega sem uporabil tudi knjižnici $React$ za prikazovanje uporabniškega vmesnika in $ChartJs$ za za lažje risanje diagramov rezultatov. Sam program je odprto koden in pod MIT licenco, izvorna koda programa pa se nahaja na spletni strani: \href{https://github.com/GreatDanton/Thesis/tree/master/code}{https://github.com/GreatDanton/Thesis/tree/master/code}.
+V tem poglavju bo opisana uporaba programa, ki je nastal v okviru te diplomske naloge. Program lahko služi kot učni pripomoček ali pa kot pripomoček za hitro oceno proizvedene električne energije iz bližnjega potoka ali večje reke. Napisan je v programskem jeziku $Javascript$, poleg katerega sem uporabil tudi knjižnici $React$ za prikazovanje uporabniškega vmesnika in $ChartJs$ za risanje diagramov. Sam program je odprto koden in pod MIT licenco, izvorna koda programa pa se nahaja na spletni strani: \href{https://github.com/GreatDanton/Thesis/tree/master/code}{https://github.com/GreatDanton/Thesis/tree/master/code}.
 
 Za izračun energetskih parametrov hidroelektrarne s programom moramo najprej vnesti podatke o dimenzijah struge vodotoka in povprečnih dnevnih vrednostih pretoka vodotoka za izbrano obdobje. Podatke lahko pridobimo na način, ki je opisan v poglavju~\ref{sec:teorija_pridobitevPodatkov}.
 
@@ -9,7 +9,7 @@ Za izračun energetskih parametrov hidroelektrarne s programom moramo najprej vn
 
 
 \section{Vnos podatkov}
-Na sliki~\ref{fig:opis_frontpage} je viden uporabniški vmesnik, ki se pokaže ob zagonu programa. S pritiskom na gumb v levem zgornjem kotu izberemo datoteko, ki vsebuje podatke o povprečnih dnevnih pretokih vodotoka, ki smo jih dobili iz ARSO-vega arhiva v .csv formatu. Primer podatkov v datoteki je prikazan spodaj. Vejica $,$ loči datum meritve in povprečni dnevni pretok izbranega vodotoka.
+Na sliki~\ref{fig:opis_frontpage} je viden uporabniški vmesnik, ki se pokaže ob zagonu programa. S pritiskom na ikono v levem zgornjem kotu izberemo in vnesemo datoteko, ki vsebuje podatke o povprečnih dnevnih pretokih vodotoka, ki smo jih dobili iz ARSO-vega arhiva v .csv formatu za izbrano obdobje analize. Primer podatkov v datoteki je prikazan spodaj. Vejica loči datum meritve in povprečni dnevni pretok izbranega vodotoka.
 
 \begin{figure}[htp!]
 	\begin{centering}
@@ -102,7 +102,7 @@ V program vnesemo podatke o rečnem koritu kot je prikazano na sliki~\ref{fig:tr
 
 \begin{figure}[H]
 	\begin{centering}
-		\includegraphics[width=\textwidth]{slike/izracuni/trapeznaMetoda_konsumpcijska.png}\caption{Konsumpcijska krivulja izračunana po metodi za pravokotne in trapezno oblikovane struge}\label{fig:trapeznaMetoda_konsumpcijskaKrivulja}
+		\includegraphics[width=\textwidth]{slike/izracuni/trapeznaMetoda_konsumpcijska.png}\caption{Konsumpcijska krivulja določena po metodi za pravokotne in trapezno oblikovane struge}\label{fig:trapeznaMetoda_konsumpcijskaKrivulja}
 	\end{centering}
 \end{figure}
 

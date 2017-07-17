@@ -66,24 +66,36 @@ Za izris konsumpcijske krivulje potrebujemo vrednosti pretoka vodotoka $Q$ v odv
 
 \begin{ceqn}
 \begin{align}
-Q(h) = \dfrac{1}{ng} \sqrt{I}\dfrac{S(h)^{5/3}}{P(h)^{2/3}} \label{eq:ManningovaEnacba}
+Q = \dfrac{\sqrt{I}}{ng} \cdot S \cdot R^{2/3} \label{eq:ManningovaEnacba}
 \end{align}
 \end{ceqn}
 
-Kjer je:
 
-\begin{table}[htb!]
+Kjer je:
+\begin{table}[H]
 	\begin{tabular}{r|p{10cm}}
 		Q & pretok \\
 		ng & Manningov koeficient hrapavosti dna struge\\
 		I & naklon struge \\
 		S & ploščina dela prečnega profila pod gladino vode\\
-		P & dolžina omočenega oboda struge
+		R & hidravlični radij $\dfrac{S}{P}$\\
+		P & dolžina omočenega oboda struge\\
 	\end{tabular}
 \end{table}
 
+Če člene Manningove enačbe izpišemo dobimo spodnjo enačbo:
 
-\newpage
+\begin{ceqn}
+	\begin{align}
+	Q(h) = \dfrac{\sqrt{I}}{ng} \cdot \dfrac{S(h)^{5/3}}{P(h)^{2/3}} \label{eq:ManningovaEnacba}
+	\end{align}
+\end{ceqn}
+
+
+Dobili smo končno enačbo katero bomo uporabljali v nadaljevanju pri izračunu pretokov po višini za pravokotne in trapezno oblikovane struge.
+
+
+
 % pravokotna struga
 \begin{enumerate}
 	\item Pravokotno oblikovana struga vodotoka:
@@ -293,7 +305,7 @@ Ko imamo za vsak cm višine gladine vode izračunan omočeni obod $P_m(h)$ odsek
 
 \begin{ceqn}
 	\begin{align}
-	Q_m(h) = \dfrac{1}{ng_m} \sqrt{I_m}\dfrac{S_m(h)^{5/3}}{P_m(h)^{2/3}}
+	Q_m(h) = \dfrac{\sqrt{I_m}}{ng_m} \cdot \dfrac{S_m(h)^{5/3}}{P_m(h)^{2/3}}
 	\end{align}
 \end{ceqn}
 
