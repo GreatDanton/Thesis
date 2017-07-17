@@ -111,11 +111,12 @@ function custom_createPoints(partlyFlowsArr) {
     console.log("SUM HEIGHT FLOWS: ");
     console.log(sum_heightFlows);
 
-    // sort heights in ascending order
+    // turn strings(heights) into floats so we can sort them later
     let heights = Object.keys(sum_heightFlows);
     heights = heights.map(function(item) {
         return parseFloat(item);
     });
+    // sort heights in ascending order
     heights.sort(function(a,b){
         return a-b;
     });
