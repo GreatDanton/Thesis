@@ -1,6 +1,6 @@
 \chapter{Teoretične osnove}
 
-Energetske parametre za iskano hidroelektrarno lahko izračunamo po naslednjem algoritmu:
+Energetske parametre za izbrani odsek vodotoka lahko izračunamo po naslednjem algoritmu:
 \begin{enumerate}[noitemsep, topsep=0pt]
 	\item Pridobitev podatkov
 	\item Analiza hidrološkega niza podatkov za iskano obdobje
@@ -13,12 +13,17 @@ Energetske parametre za iskano hidroelektrarno lahko izračunamo po naslednjem a
 \section{Pridobitev podatkov} \label{sec:teorija_pridobitevPodatkov}
 Za nadaljnje izračune potrebujemo podatke o:
 \begin{itemize}[noitemsep, topsep=0pt]
-	\item Dimenzijah in naklonu rečne struge
+	\item Geometriji in naklonu rečne struge
 	\item Manningovem koeficientu hrapavosti rečnega korita
 	\item Povprečnih dnevnih pretokih vodotoka za izbrano obdobje
 \end{itemize}
 
-Podatke o dimenzijah rečnega korita lahko pridobimo z meritvami na terenu ali pa dimenzije ocenimo na podlagi ortofoto posnetkov. Naklon rečne struge vodotoka se lahko oceni s pomočjo spletne aplikacije Geopedija. Na karti v spletni aplikaciji Geopedija si izberemo dve točki, ki definirata odsek analiziranega vodotoka in odčitamo podatke o višinski razliki $\Delta h$ in razdalji $\Delta L$ med izbranima točkama. S pomočjo spodnje enačbe določimo naklon izbranega odseka vodotoka:
+
+Podatke o geometriji rečnega korita lahko pridobimo iz javne baze podatkov (npr. LIDAR, ortofoto), praviloma pa je treba natančnejše posnetke zagotoviti z geodetskimi meritvami na terenu. Za potrebe ocene hidroenergetskega potenciala niso potrebne natančne izmere, zato smo geometrijo struge določili na podlagi ortofoto posnetkov. Naklon rečne struge vodotoka se lahko oceni s pomočjo spletne aplikacije Geopedija. Na karti v spletni aplikaciji Geopedija si izberemo dve točki, ki definirata odsek analiziranega vodotoka in odčitamo podatke o višinski razliki $\Delta h$ in razdalji $\Delta L$ med izbranima točkama. S pomočjo spodnje enačbe določimo naklon izbranega odseka vodotoka:
+
+
+%BEFORE:
+%Podatke o dimenzijah rečnega korita lahko pridobimo z meritvami na terenu ali pa dimenzije ocenimo na podlagi ortofoto posnetkov. Naklon rečne struge vodotoka se lahko oceni s pomočjo spletne aplikacije Geopedija. Na karti v spletni aplikaciji Geopedija si izberemo dve točki, ki definirata odsek analiziranega vodotoka in odčitamo podatke o višinski razliki $\Delta h$ in razdalji $\Delta L$ med izbranima točkama. S pomočjo spodnje enačbe določimo naklon izbranega odseka vodotoka:
 
 \begin{ceqn}
 \begin{align}
@@ -160,7 +165,7 @@ Ko poznamo vse člene Manningove enačbe \ref{eq:ManningovaEnacba}, izračunamo 
 \subsection{Izračun konsumpcijske krivulje za struge poljubne oblike} \label{sec:teorija_metodaPoljubnaOblika}
 
 
-V primeru, da iščemo konsumpcijsko krivuljo za strugo vodotoka poljubne oblike, si za izračun členov Manningove enačbe ($S(h)$ in $P(h)$) ne moremo pomagati z znanimi formulami preprostih geometrijskih likov. Poljubno oblikovano strugo lahko modeliramo s serijo točk, ki jih dodajamo v kartezijski koordinatni sistem $x,y$. Za vsako točko ki definira poljubno rečno korito podamo x in y koordinato, za točke pa predpostavimo da so med seboj povezane z enačbo linearne funkcije. Na sliki~\ref{fig:poljubnaStruga} je predstavljena shema prečnega prereza poljubno oblikovane struge vodotoka.
+V primeru, da iščemo konsumpcijsko krivuljo za strugo vodotoka poljubne oblike, si za izračun členov Manningove enačbe ($S(h)$ in $P(h)$) ne moremo pomagati z znanimi formulami preprostih geometrijskih likov. Poljubno oblikovano strugo lahko modeliramo s serijo točk, ki jih dodajamo v kartezijski koordinatni sistem $x,y$. Za vsako točko ki definira poljubno rečno korito podamo x in y koordinato, za točke pa predpostavimo, da so med seboj povezane z enačbo linearne funkcije. Na sliki~\ref{fig:poljubnaStruga} je predstavljena shema prečnega prereza poljubno oblikovane struge vodotoka.
 
 \begin{figure}[ht!]
 	\begin{centering}
@@ -172,7 +177,7 @@ V primeru, da iščemo konsumpcijsko krivuljo za strugo vodotoka poljubne oblike
 
 %------------------------------------------
 %\subsection{Izračun višine rečnega korita}
-Skrajni točki na robu struge vodotoka sta točki $T_L$ in $T_D$ prikazani na sliki \ref{fig:poljubnaStruga}. Točko na robu struge z nižjo y koordinato označimo s $T_{Rmin}$ (na sliki \ref{fig:poljubnaStruga} desna skrajna točka označena kot točka $T_D$). Najnižjo točko struge vodotoka označimo s $T_{min}$. Maksimalna višina gladine vode v rečnem koritu $H$ je definirana kot razdalja med točkama $T_{Rmin}$ in $T_{min}$. Obilno deževje, ki privede do poplav, lahko povzroči, da bi bil pretok vodotoka večji od pretoka ki ga je rečno korito sploh sposobno prevajati. V tem primeru se voda začne prelivati preko robov struge vodotoka, višina gladine vode v strugi pa je zaradi preliva vode preko robov vodotoka še vedno enaka maksimalni višini gladine $h=H$.
+Skrajni točki na robu struge vodotoka sta točki $T_L$ in $T_D$ prikazani na sliki \ref{fig:poljubnaStruga}. Točko na robu struge z nižjo y koordinato označimo s $T_{Rmin}$ (na sliki \ref{fig:poljubnaStruga} desna skrajna točka označena kot točka $T_D$). Najnižjo točko struge vodotoka označimo s $T_{min}$. Maksimalna višina gladine vode v rečnem koritu $H$ je definirana kot razdalja med točkama $T_{Rmin}$ in $T_{min}$. Obilno deževje, ki privede do poplav, lahko povzroči, da bi bil pretok vodotoka večji od pretoka, ki ga je rečno korito sploh sposobno prevajati. V tem primeru se voda začne prelivati preko robov struge vodotoka, višina gladine vode v strugi pa je zaradi preliva vode preko robov vodotoka še vedno enaka maksimalni višini gladine $h=H$.
 
 
 
@@ -241,7 +246,7 @@ S(h)&= \Delta x \cdot h
 \item V primeru ko $\Delta y \neq 0$ ima funkcija $f(x)$ naklon $k \neq 0$. V tem primeru od začetka višine odseka $h_z$ do končne višine gladine vode v strugi vodotoka $H$ za vsak cm izračunamo presečišče $G$, funkcije $f(x)$ s horizontalno ravnino $g = h$, ki predstavlja gladino vode v strugi vodotoka. 
 
 
-Ko imamo določeno presečišče $G$ gladine vode s funkcijo $f(x)$ med točkama analiziranega odseka, lahko izračunamo dolžino omočenega oboda struge odseka in ploščino lika ki ga oklepajo funkcija odseka $f(x)$, navidezna gladina vode $g = h$ in najnižja točka odseka $T_z$ (na sliki \ref{fig:odsekStruge} označena z $O_2$). 
+Ko imamo določeno presečišče $G$ gladine vode s funkcijo $f(x)$ med točkama analiziranega odseka, lahko izračunamo dolžino omočenega oboda struge odseka in ploščino lika, ki ga oklepajo funkcija odseka $f(x)$, navidezna gladina vode $g = h$ in najnižja točka odseka $T_z$ (na sliki \ref{fig:odsekStruge} označena z $O_2$). 
 
 
 
@@ -258,7 +263,7 @@ Način izračuna omočenega oboda struge vodotoka $P(h)$ in ploščine prečnega
 	\end{ceqn}
 	
 	
-	Ploščino območja ki ga oklepajo horizontalna ravnina $g$ s presečiščem $G$ in najnižjo točko odseka $T_z$ pa določimo kot ploščino trikotnika (območje I na sliki~\ref{fig:odsekStruge}) po formuli:
+	Ploščino območja, ki ga oklepajo horizontalna ravnina $g$ s presečiščem $G$ in najnižjo točko odseka $T_z$ pa določimo kot ploščino trikotnika (območje I na sliki~\ref{fig:odsekStruge}) po formuli:
 	
 	\begin{ceqn}
 		\begin{align}
@@ -314,7 +319,8 @@ Posamezne pretoke odsekov po višinah medsebojno seštejemo in dobimo končne vr
 
 \begin{ceqn}
 	\begin{align}
-	Q(h) = Q_1(h) + Q_2(h) + Q_3(h) + ... + Q_{n-1}(h) + Q_n(h)
+	%Q(h) = Q_1(h) + Q_2(h) + Q_3(h) + ... + Q_{n-1}(h) + Q_n(h)
+	Q(h) = \sum_{1}^{n} Q_n(h)
 	\end{align}
 \end{ceqn}
 
@@ -328,13 +334,13 @@ Posamezne pretoke odsekov po višinah medsebojno seštejemo in dobimo končne vr
 
 
 
-S tem postopkom smo določili vse točke ki določajo konsumpcijsko krivuljo $h(Q)$ za izbrano strugo poljubne oblike.
+S tem postopkom smo določili vse točke, ki določajo konsumpcijsko krivuljo $h(Q)$ za izbrano strugo poljubne oblike.
 
 
 \newpage
 
 \section{Izračun proizvodnje električne energije}
-Za določitev proizvodnje električne energije potrebujemo podatek o razliki med koto zgornje vode t.j. vode v rezervoarju in koto spodnje vode t.j. vode ki teče skozi turbine hidroelektrarne. Ker računamo proizvodnjo električne energije za pretočne hidroelektrarne, predpostavimo da je kota zgornje vode konstantna na višini $H_z$.
+Za določitev proizvodnje električne energije potrebujemo podatek o razliki med koto zgornje vode t.j. vode v rezervoarju in koto spodnje vode t.j. vode, ki teče skozi turbine hidroelektrarne. Ker računamo proizvodnjo električne energije za pretočne hidroelektrarne predpostavimo, da je kota zgornje vode konstantna na višini $H_z$.
 
 \begin{figure}[ht!]
 	\begin{centering}
@@ -404,7 +410,7 @@ Pri čemer so:
 \end{table}
 
 %TODO: fix this part
-V primeru ko je pretok vodotoka manjši kot biološki minimum, ki se zahteva zato, da reka ne presahne, se vsa voda preliva skozi prelivna polja hidroelektrarne in do proizvodnje električne energije ne pride. V primeru poplav, ko je pretok vodotoka večji od tehničnega maksimuma pretoka hidroelektrarne se vsa voda preliva preko jezu in hidroelektrarna prav tako ne proizvaja električne energije. V vseh ostalih primerih pretokov vodotoka, pa je pretok skozi turbine kar enak pretoku vodotoka z maksimalnim pretokom pri $Q_t = Q_{max}$. Maksimalni pretok $Q_{max}$ se določi na podlagi izbranih turbin hidroelektrarne, določenih s pomočjo krivulje trajanja.
+V primeru, ko je pretok vodotoka manjši kot biološki minimum, ki se zahteva zato, da reka ne presahne, se vsa voda preliva skozi prelivna polja hidroelektrarne in do proizvodnje električne energije ne pride. V primeru poplav, ko je pretok vodotoka večji od tehničnega maksimuma pretoka hidroelektrarne se vsa voda preliva preko jezu in hidroelektrarna prav tako ne proizvaja električne energije. V vseh ostalih primerih pretokov vodotoka, pa je pretok skozi turbine kar enak pretoku vodotoka z maksimalnim pretokom pri $Q_t = Q_{max}$. Maksimalni pretok $Q_{max}$ se določi na podlagi izbranih turbin hidroelektrarne, določenih s pomočjo krivulje trajanja.
 
 
 %-----

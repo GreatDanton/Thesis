@@ -56,7 +56,7 @@ Po vnosu podatkov o povprečnih dnevnih pretokih vodotoka, program samodejno ana
 
 \section{Izračun konsumpcijske krivulje}\label{sec:izracun}
 
-Za izračun ocene parametrov pretočne hidroelektrarne je ključnega pomena pravilen izračun konsumpcijske krivulje za izbran vodotok, saj se vsi nadaljnji izračuni nanašajo nanj. V tem poglavju bom s primerom dokazal, da program računa točke konsumpcijske krivulje pravilno. Za dokaz bom uporabil namišljen primer trapezno oblikovane struge vodotoka prikazane na sliki~\ref{fig:izracun_trapeznaStruga}, z 1\% naklonom struge, višino vode v strugi $h=5m$ in Manningovim koeficientom hrapavosti 0,3.
+Za izračun ocene parametrov pretočne hidroelektrarne je ključnega pomena pravilen izračun konsumpcijske krivulje za izbran vodotok, saj se vsi nadaljnji izračuni nanašajo nanj. V tem poglavju bom na primeru pokazal pravilnost postopka izračuna konsumpcijske krivulje. V ta namen bom uporabil namišljen primer trapezno oblikovane struge vodotoka prikazane na sliki~\ref{fig:izracun_trapeznaStruga}, z 1\% naklonom struge, višino vode v strugi $h=5m$ in Manningovim koeficientom hrapavosti 0,3.
 
 Rezultate ročnega izračuna bom primerjal z rezultati ki jih izračuna program po metodi za pravokotno in trapezno oblikovane struge in metodi za izračun pretokov za strugo poljubne oblike opisani v poglavju~\ref{sec:teorija_trapeznaMetoda}  oz.~\ref{sec:teorija_metodaPoljubnaOblika}. Vse mere na spodnji  sliki~\ref{fig:izracun_trapeznaStruga} so v metrih.
 
@@ -184,7 +184,7 @@ S pomočjo uporabniškega vmesnika v koordinatni sistem vnašamo serijo točk, s
 \end{figure}
 
 
-Z grafa konsumpcijske krivulje \ref{fig:custom_konsumpcijskaKrivulja} pri višini $h = 5m$ lahko odčitamo pretok $Q=365,5~m^3/s$. Rezultat izračunan s programom po metodi za poljubno oblikovane struge je enak rezultatu, ki smo ga izračunali ročno v poglavju~\ref{sec:izracun_rocno_numericnaMetoda}.
+Z grafa konsumpcijske krivulje \ref{fig:custom_konsumpcijskaKrivulja} pri višini $h = 5m$ lahko odčitamo pretok $Q=365,5~m^3/s$, ki je enak rezultatu ročnega izračuna v poglavju~\ref{sec:izracun_rocno_numericnaMetoda}. S tem smo pokazali pravilnost numeričnega algoritma za izračun točk konsumpcijske krivulje za poljubno oblikovano strugo vodotoka..
 
 
 
