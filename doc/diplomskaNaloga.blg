@@ -14,42 +14,42 @@ The style file: disertation.bst
 Database file #1: Bibliografija/Viri.bib
 You've used 2 entries,
             2382 wiz_defined-function locations,
-            1006 strings with 9650 characters,
-and the built_in function-call counts, 614 in all, are:
+            1008 strings with 9775 characters,
+and the built_in function-call counts, 597 in all, are:
 = -- 33
 > -- 14
 < -- 0
 + -- 6
 - -- 4
-* -- 18
-:= -- 75
-add.period$ -- 6
+* -- 15
+:= -- 68
+add.period$ -- 7
 call.type$ -- 2
-change.case$ -- 1
+change.case$ -- 2
 chr.to.int$ -- 0
 cite$ -- 2
-duplicate$ -- 73
+duplicate$ -- 67
 empty$ -- 74
 format.name$ -- 5
-if$ -- 133
+if$ -- 131
 int.to.chr$ -- 0
 int.to.str$ -- 2
-missing$ -- 18
-newline$ -- 22
+missing$ -- 16
+newline$ -- 23
 num.names$ -- 2
-pop$ -- 36
+pop$ -- 40
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
 skip$ -- 13
 stack$ -- 0
-substring$ -- 3
-swap$ -- 33
+substring$ -- 2
+swap$ -- 30
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 3
+while$ -- 2
 width$ -- 3
-write$ -- 32
+write$ -- 33
