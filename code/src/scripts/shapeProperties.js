@@ -24,7 +24,7 @@ function trapezoid_circumference(b, h, beta) {
     beta = parseFloat(beta) * Math.PI / 180; // beta should be in radians
 
     let x = h / (Math.tan(beta));
-    let sides = (x**2 + h**2)**(1/2);
+    let sides = (x ** 2 + h ** 2) ** (1 / 2);
     let P = b + 2 * sides;
     return P;
 }
@@ -39,7 +39,7 @@ function ManningEquation(area, circumference, ng, channelAngle) {
     circumference = parseFloat(circumference);
     ng = parseFloat(ng);
     channelAngle = parseFloat(channelAngle);
-   let flow = 1/ng * (channelAngle/100)**(1/2) * (area / circumference)**(2/3) * area;
+    let flow = 1 / ng * (channelAngle / 100) ** (1 / 2) * (area / circumference) ** (2 / 3) * area;
     return flow;
 }
 

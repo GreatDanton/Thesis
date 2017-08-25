@@ -1,5 +1,5 @@
 import GlobalStorage from './globalStorage';
-import {rectangle_area, rectangle_circumference, trapezoid_area, trapezoid_circumference, ManningEquation} from './shapeProperties';
+import { rectangle_area, rectangle_circumference, trapezoid_area, trapezoid_circumference, ManningEquation } from './shapeProperties';
 
 
 // parameters:
@@ -12,66 +12,64 @@ export function createConsumptionCurve(activeChannel) {
     let points = [];
 
     if (activeChannel == 'Rectangular') {
-                let h = parseFloat(storage.rectangular.h);
-                let b = parseFloat(storage.rectangular.B);
-                let ng = parseFloat(storage.rectangular.ng);
-                let angle = parseFloat(storage.rectangular.φ);
+        let h = parseFloat(storage.rectangular.h);
+        let b = parseFloat(storage.rectangular.B);
+        let ng = parseFloat(storage.rectangular.ng);
+        let angle = parseFloat(storage.rectangular.φ);
 
-                for (let i = 0; i < h; i += 0.01) {
-                    let area = rectangle_area(b, i);
-                    let circumference = rectangle_circumference(b, i);
-                    let Q = ManningEquation(area, circumference, ng, angle).toFixed(2);
-                    Q = parseFloat(Q);
-                    let Y = i.toFixed(2);
-                    Y = parseFloat(Y);
-                    points.push({'x': Q, 'y': Y});
-                }
-            } else if (activeChannel == 'Trapezoid') {
-                let h = parseFloat(storage.trapezoid.h);
-                let b = parseFloat(storage.trapezoid.b);
-                let B = parseFloat(storage.trapezoid.B);
-                let ng = parseFloat(storage.trapezoid.ng);
-                let channelAngle = parseFloat(storage.trapezoid.φ);
-                // calculate angle of sides
-                let _x = (B - b) / 2;
-                let beta = (Math.atan(h / _x)) * 180 / Math.PI;
+        for (let i = 0; i < h; i += 0.01) {
+            let area = rectangle_area(b, i);
+            let circumference = rectangle_circumference(b, i);
+            let Q = ManningEquation(area, circumference, ng, angle).toFixed(2);
+            Q = parseFloat(Q);
+            let Y = i.toFixed(2);
+            Y = parseFloat(Y);
+            points.push({ 'x': Q, 'y': Y });
+        }
+    } else if (activeChannel == 'Trapezoid') {
+        let h = parseFloat(storage.trapezoid.h);
+        let b = parseFloat(storage.trapezoid.b);
+        let B = parseFloat(storage.trapezoid.B);
+        let ng = parseFloat(storage.trapezoid.ng);
+        let channelAngle = parseFloat(storage.trapezoid.φ);
+        // calculate angle of sides
+        let _x = (B - b) / 2;
+        let beta = (Math.atan(h / _x)) * 180 / Math.PI;
 
-                for (let i = 0; i < h; i += 0.01) {
-                    let area = trapezoid_area(b, i, beta);
-                    let circumference = trapezoid_circumference(b, h, beta);
-                    let Q = ManningEquation(area, circumference, ng, channelAngle).toFixed(2);
-                    Q = parseFloat(Q);
-                    let Y = i.toFixed(2);
-                    Y = parseFloat(Y);
-                    points.push({'x': Q, 'y': Y});
-                }
-            } else if (activeChannel == 'Custom') {
-                let channelPoints = storage.custom.points;
-                let channelHeight = custom_getChannelHeight(channelPoints);
-                //let channelParameters_sum = {};
-                let partlyFlows = [];
+        for (let i = 0; i < h; i += 0.01) {
+            let area = trapezoid_area(b, i, beta);
+            let circumference = trapezoid_circumference(b, i, beta);
+            let Q = ManningEquation(area, circumference, ng, channelAngle).toFixed(2);
+            Q = parseFloat(Q);
+            let Y = i.toFixed(2);
+            Y = parseFloat(Y);
+            points.push({ 'x': Q, 'y': Y });
+        }
+    } else if (activeChannel == 'Custom') {
+        let channelPoints = storage.custom.points;
+        let channelHeight = custom_getChannelHeight(channelPoints);
+        //let channelParameters_sum = {};
+        let channelPartParameters = [];
 
-                // iterate over points array
-                for (let i = 0; i < channelPoints.length - 1; i++) {
-                    let p1 = channelPoints[i];
-                    let p2 = channelPoints[i+1];
+        // iterate over points array
+        for (let i = 0; i < channelPoints.length - 1; i++) {
+            let p1 = channelPoints[i];
+            let p2 = channelPoints[i + 1];
 
-                    let channelParameters = custom_sectionParameters(p1, p2, channelHeight);
+            let channelPartParams = custom_sectionParameters(p1, p2, channelHeight);
+            // ng and I for each section of the channel (between two points)
+            let ng = storage.custom.ngInputs[i];
+            let I = storage.custom.φ_inputs[i];
+            channelPartParameters.push([channelPartParams, ng, I]);
+        }
 
-                    // ng and I for each section of the channel (between two points)
-                    let ng = storage.custom.ngInputs[i];
-                    let I = storage.custom.φ_inputs[i];
+        let riverParams = sumChannelParameters(channelPartParameters);
+        let riverFlow = createHeightFlowObject(riverParams, 0.03, 1);
+        points = custom_createPoints(riverFlow);
+    }
 
-                    // for each section of the channel create object {river_height: river_flow};
-                    let partSectionFlow = createHeightFlowObject(channelParameters, ng, I);
-                    partlyFlows.push(partSectionFlow);
-                }
-
-                points = custom_createPoints(partlyFlows);
-            }
-
-            let pointsArray = [points];
-            return pointsArray;
+    let pointsArray = [points];
+    return pointsArray;
 }
 
 // create {river_height: flow} object for each part of the channel
@@ -79,11 +77,10 @@ export function createConsumptionCurve(activeChannel) {
 // returns: {river_height: flow} object
 function createHeightFlowObject(channelParameters, ng, I) {
     let heightFlow = {};
-    for (let i in channelParameters) {
-        let obj = channelParameters[i];
-        let riverHeight = Object.keys(obj);
-        let values = obj[riverHeight];
+    let riverHeightsArr = Object.keys(channelParameters);
 
+    for (let riverHeight of riverHeightsArr) {
+        let values = channelParameters[riverHeight];
         let S = values.S;
         let P = values.P;
         let Q;
@@ -93,32 +90,53 @@ function createHeightFlowObject(channelParameters, ng, I) {
         } else {
             Q = ManningEquation(S, P, ng, I);
         }
+        Q = parseFloat(Q.toFixed(2));
         heightFlow[riverHeight] = Q;
     }
     return heightFlow;
 }
 
+// sum S and P together from array of channel parts
+// channelParametersArr = [[h: {S, P}], ng , I]
+//
+// return {height: {P, S}} of the whole array
+// used to build data for river flow through custom channel
+function sumChannelParameters(channelParametersArr) {
+    let channelParameters = {};
+
+    for (let i of channelParametersArr) {
+        let heightParamsArray = i[0]; // {height = {S, P}}
+        for (let obj of heightParamsArray) {
+            let height = Object.keys(obj)[0]; // we have only one key in object
+            let values = obj[height];
+            let S = values.S;
+            let P = values.P;
+
+            if (channelParameters.hasOwnProperty(height)) {
+                channelParameters[height]["S"] += S;
+                channelParameters[height]["P"] += P;
+            } else {
+                channelParameters[height] = {};
+                channelParameters[height]["S"] = S;
+                channelParameters[height]["P"] = P;
+            }
+        }
+    }
+    return channelParameters;
+}
+
 
 
 // returns [x: Q, y: h]
-function custom_createPoints(partlyFlowsArr) {
-    console.log('Custom points');
-    let sum_heightFlows = {};
-
-    for (let i of partlyFlowsArr) {
-        sum_heightFlows = sum_objects(i, sum_heightFlows);
-    }
-    console.log("SUM HEIGHT FLOWS: ");
-    console.log(sum_heightFlows);
-
+function custom_createPoints(riverFlow) {
     // turn strings(heights) into floats so we can sort them later
-    let heights = Object.keys(sum_heightFlows);
-    heights = heights.map(function(item) {
+    let heights = Object.keys(riverFlow);
+    heights = heights.map(function (item) {
         return parseFloat(item);
     });
     // sort heights in ascending order
-    heights.sort(function(a,b){
-        return a-b;
+    heights.sort(function (a, b) {
+        return a - b;
     });
 
     let points = [];
@@ -126,9 +144,9 @@ function custom_createPoints(partlyFlowsArr) {
     // calculate height(flow)
     for (let height of heights) {
         height = height.toFixed(2);
-        let Q = sum_heightFlows[height.toString()];
+        let Q = riverFlow[height.toString()];
         height = parseFloat(height);
-        let point = {'x': Q, 'y': height};
+        let point = { 'x': Q, 'y': height };
         points.push(point);
     }
     return points;
@@ -182,11 +200,11 @@ function custom_verticalFunction(point1, point2, channelHeight) {
     }
 
     let pointsArr = [];
-    for (let i = 0; i < dY; i+=0.01) {
+    for (let i = 0; i < dY; i += 0.01) {
         let h = startingPoint + i;
         let S = 0;
         let P = i;
-        let point = {[h.toFixed(2)]: {'S': S, 'P': P}};
+        let point = { [h.toFixed(2)]: { 'S': S, 'P': P } };
         pointsArr.push(point);
     }
     return pointsArr;
@@ -208,7 +226,7 @@ function custom_diagonalFunction(point1, point2, func, channelHeight) {
             let P = Math.abs(dX);
             let S = Math.abs(dX * i);
 
-            let point =  {[h.toFixed(2)]: {'P': P, 'S': S}};
+            let point = { [h.toFixed(2)]: { 'P': P, 'S': S } };
             pointsArr.push(point);
         }
     } else { // if function is diagonal;
@@ -227,7 +245,7 @@ function custom_diagonalFunction(point1, point2, func, channelHeight) {
                 let P = custom_pointsDistance(lowerPoint, slopePoint);
                 let S = custom_calculateTriangleArea(slopePoint, lowerPoint);
 
-                let point = {[height.toFixed(2)]: {'P': P, 'S': S}};
+                let point = { [height.toFixed(2)]: { 'P': P, 'S': S } };
                 pointsArr.push(point);
 
             } else { // if water is above triangular section
@@ -239,7 +257,7 @@ function custom_diagonalFunction(point1, point2, func, channelHeight) {
                 let S_square = dX * (height - triangularSection);
                 let S = S_triangle + S_square;
 
-                let point = {[height.toFixed(2)]: {'S': S, 'P': P}};
+                let point = { [height.toFixed(2)]: { 'S': S, 'P': P } };
                 pointsArr.push(point);
             }
         }
@@ -250,7 +268,7 @@ function custom_diagonalFunction(point1, point2, func, channelHeight) {
 
 
 function custom_calculateTriangleArea(point1, point2) {
-    let dX  = Math.abs(point1.x - point2.x);
+    let dX = Math.abs(point1.x - point2.x);
     let dY = Math.abs(point1.y - point2.y);
     let area = dX * dY / 2;
 
@@ -268,7 +286,7 @@ function custom_getLowerPoint(point1, point2) {
 function custom_pointsDistance(point1, point2) {
     let dY = Math.abs(point1.y - point2.y);
     let dX = Math.abs(point1.x - point2.x);
-    let distance = (dY**2 + dX**2)**(1/2);
+    let distance = (dY ** 2 + dX ** 2) ** (1 / 2);
     return distance;
 }
 
@@ -281,7 +299,7 @@ function custom_getSlopePoint(func, height) {
     let y = height;
     // y = kx + n; ==> x
     let x = (y - n) / k;
-    let point = {'x': x, 'y': y};
+    let point = { 'x': x, 'y': y };
     return point;
 }
 
@@ -294,7 +312,7 @@ function custom_getFunction(point1, point2) {
     let k;
     let n;
 
-   if (dX === 0) { // straight vertical line
+    if (dX === 0) { // straight vertical line
         return {
             'line': 'vertical',
         };
@@ -352,7 +370,7 @@ export function downstreamRiverHeight(turbineFlow) {
         return;
     }
 
-    let Q_channelMax = consumptionCurve[consumptionCurve.length-1].x;
+    let Q_channelMax = consumptionCurve[consumptionCurve.length - 1].x;
 
     for (let i = 0; i < consumptionCurve.length; i++) {
         let flowOnConsumptionCurve = consumptionCurve[i].x;
@@ -366,8 +384,8 @@ export function downstreamRiverHeight(turbineFlow) {
         else if (turbineFlow < flowOnConsumptionCurve) { // there is still some height left untill the top of the channel
             Q_bigger = flowOnConsumptionCurve;
             h_bigger = consumptionCurve[i].y;
-            Q_smaller = consumptionCurve[i-1].x;
-            h_smaller = consumptionCurve[i-1].y;
+            Q_smaller = consumptionCurve[i - 1].x;
+            h_smaller = consumptionCurve[i - 1].y;
 
             // calculate downstream height
             let h_downstream = interpolateHeight(Q_bigger, h_bigger, Q_smaller, h_smaller, turbineFlow);
@@ -380,13 +398,13 @@ export function downstreamRiverHeight(turbineFlow) {
 // get downstream height via => dQ : dh = Q_diff : h_diff
 // returns downstream river height in channel
 function interpolateHeight(Q_bigger, h_bigger, Q_smaller, h_smaller, turbineFlow) {
-        let dQ = Q_bigger - Q_smaller;
-        let dh = h_bigger - h_smaller;
-        let Q_diff = turbineFlow - Q_smaller;
-        let h_diff = dh * Q_diff / dQ;
+    let dQ = Q_bigger - Q_smaller;
+    let dh = h_bigger - h_smaller;
+    let Q_diff = turbineFlow - Q_smaller;
+    let h_diff = dh * Q_diff / dQ;
 
-        let h_downstream = parseFloat((h_diff + h_smaller).toFixed(2));
-        return h_downstream;
+    let h_downstream = parseFloat((h_diff + h_smaller).toFixed(2));
+    return h_downstream;
 }
 
 

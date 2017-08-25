@@ -79,7 +79,7 @@ export function getExtremeFlow(waterFlow) {
                 minFlow = waterFlow[key]['yearlyFlow'];
                 dryYear = key;
             }
-            if (waterFlow[key]['yearlyFlow'] > maxFlow)  {
+            if (waterFlow[key]['yearlyFlow'] > maxFlow) {
                 maxFlow = waterFlow[key]['yearlyFlow'];
                 wetYear = key;
             }
@@ -113,10 +113,10 @@ export function createGraphData(year, waterFlow) {
 
     // create array of flow numbers for every month in chosen year
     for (let i = 0; i < 12; i++) {
-        if (months.indexOf(i+1) < 0) {
+        if (months.indexOf(i + 1) < 0) {
             graphData.push(0); // if month data is missing assign 0
         } else {
-            graphData.push(parseFloat(chosenYear[i+1].toFixed(1)));
+            graphData.push(parseFloat(chosenYear[i + 1].toFixed(1)));
         }
     }
 
@@ -126,7 +126,7 @@ export function createGraphData(year, waterFlow) {
 
 // sort given array ascending
 function sortArrayAsc(arr) {
-    arr.sort(function(a,b) {
+    arr.sort(function (a, b) {
         return a - b;
     });
     return arr;
@@ -139,7 +139,7 @@ export function getAverageData(waterFlow) {
     let monthlyData = [];
     let numOfYears = 0;
     for (let year in waterFlow) {
-        if (waterFlow.hasOwnProperty(year))  {
+        if (waterFlow.hasOwnProperty(year)) {
             numOfYears++;
             let graphData = createGraphData(year, waterFlow);
             monthlyData.push(graphData);
@@ -147,7 +147,7 @@ export function getAverageData(waterFlow) {
     }
 
     let averageData = monthlyData[0].map((_, i) =>
-    monthlyData.reduce((p,_,j) => p + monthlyData[j][i]/numOfYears, 0 ));
+        monthlyData.reduce((p, _, j) => p + monthlyData[j][i] / numOfYears, 0));
 
     let finalData = averageData.map((data) => {
         return (
