@@ -1,11 +1,11 @@
 import React from 'react';
 
 import GlobalStorage from '../scripts/globalStorage';
-import {LineChart, BarChart, ScatterChart} from '../components/commonParts/charts.js';
-import {getDailyFlow} from '../scripts/parseCsv';
-import {createConsumptionCurve, downstreamRiverHeight, producedElectricity} from '../scripts/calculationHelpers';
+import { LineChart, BarChart, ScatterChart } from '../components/commonParts/charts.js';
+import { getDailyFlow } from '../scripts/parseCsv';
+import { createConsumptionCurve, downstreamRiverHeight, producedElectricity } from '../scripts/calculationHelpers';
 
-import {Table} from '../components/commonParts/tables.js';
+import { Table } from '../components/commonParts/tables.js';
 
 class ResultsView extends React.Component {
     constructor(props) {
@@ -18,16 +18,16 @@ class ResultsView extends React.Component {
 
     // update hydrogram on rerender resultsView component
     componentWillReceiveProps() {
-        this.setState({HydrogramData: GlobalStorage.resultsTab.hydrogram.y, HydrogramNames: GlobalStorage.resultsTab.hydrogram.names});
+        this.setState({ HydrogramData: GlobalStorage.resultsTab.hydrogram.y, HydrogramNames: GlobalStorage.resultsTab.hydrogram.names });
     }
 
     render() {
         return (
-            <div className="container-small">
-                <Hydrogram data={this.state.HydrogramData} names={this.state.HydrogramNames}/>
+            <div className="container-900">
+                <Hydrogram data={this.state.HydrogramData} names={this.state.HydrogramNames} />
                 <DurationCurve data={this.state.HydrogramData} names={this.state.HydrogramNames} />
-                <ConsumptionCurve/>
-                <EnergyProduction/>
+                <ConsumptionCurve />
+                <EnergyProduction />
             </div>
         )
     }
@@ -85,31 +85,31 @@ class EnergyProduction extends React.Component {
                         x={'months'}
                         name={['Electricity production']}
                         xAxes={'Months'}
-                        yAxes={'Produced [MWh]'}/>
+                        yAxes={'Produced [MWh]'} />
 
                     <h3 className="margin-u-40">
                         Overview
                     </h3>
 
                     <div className="margin-b-40">
-                    <Table
-                        header={[
-                        '',
-                        'Jan',
-                        'Feb',
-                        'Mar',
-                        'Apr',
-                        'May',
-                        'Jun',
-                        'Jul',
-                        'Aug',
-                        'Sep',
-                        'Oct',
-                        'Nov',
-                        'Dec',
-                        ' Σ [GWh]'
-                    ]}
-                        data={tableData}/>
+                        <Table
+                            header={[
+                                '',
+                                'Jan',
+                                'Feb',
+                                'Mar',
+                                'Apr',
+                                'May',
+                                'Jun',
+                                'Jul',
+                                'Aug',
+                                'Sep',
+                                'Oct',
+                                'Nov',
+                                'Dec',
+                                ' Σ [GWh]'
+                            ]}
+                            data={tableData} />
                     </div>
                 </div>
             )
@@ -153,7 +153,7 @@ class ConsumptionCurve extends React.Component {
                         name={["consumption curve"]}
                         smooth={'y'}
                         xAxes={'Q [m3/s]'}
-                        yAxes={'h [m]'}/>
+                        yAxes={'h [m]'} />
                 </div>
             )
         }
@@ -183,17 +183,14 @@ class DurationCurve extends React.Component {
         } else {
             // display graph
             let graphData = getDailyFlow(inputData);
-            console.log(graphData);
 
             let sortedArr = [];
             for (let year of graphData) {
-                let sortedYear = year.sort(function(a,b){
+                let sortedYear = year.sort(function (a, b) {
                     return b - a;
                 });
                 sortedArr.push(sortedYear);
             }
-            console.log('sorted arr')
-            console.log(sortedArr);
 
             return (
                 <div>
@@ -244,9 +241,9 @@ class Hydrogram extends React.Component {
                     <h3>
                         Hydrogram
                     </h3>
-                    <LineChart y={graphData} x={'months'} name={names} yAxes={'Q [m3/s]'}/>
-                    <div className="margin-u-40"/>
-                    <BarChart y={graphData} x={'months'} name={names} yAxes={'Q [m3/s]'}/>
+                    <LineChart y={graphData} x={'months'} name={names} yAxes={'Q [m3/s]'} />
+                    <div className="margin-u-40" />
+                    <BarChart y={graphData} x={'months'} name={names} yAxes={'Q [m3/s]'} />
                 </div>
             )
         } else {
@@ -269,4 +266,4 @@ class Hydrogram extends React.Component {
     }
 }
 
-export {ResultsView};
+export { ResultsView };

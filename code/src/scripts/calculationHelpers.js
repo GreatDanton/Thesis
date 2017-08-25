@@ -413,7 +413,7 @@ function interpolateHeight(Q_bigger, h_bigger, Q_smaller, h_smaller, turbineFlow
 // calculates produced power
 // returns array of power [kW] for each month in average year
 export function producedElectricity() {
-    let consumptionCurve = GlobalStorage.channelTab.consumptionCurve;
+    let consumptionCurve = GlobalStorage.channelTab.consumptionCurve[0];
     let averageData = GlobalStorage.resultsTab.hydrogram.y[2]; // flow
     let daysInMonth = GlobalStorage.daysInMonth;
 
@@ -434,9 +434,10 @@ export function producedElectricity() {
         return;
     }
 
+
+    // calculate average daily power [m3/s] for each month of the average year
     for (let i = 0; i < averageData.length; i++) {
-        // average daily river flow
-        let riverFlow = parseFloat(averageData[i]) / daysInMonth[i];
+        let riverFlow = parseFloat(averageData[i]) / daysInMonth[i]; // daily river flow in each month
 
         if (riverFlow > Qmax_teh) { // if flow is bigger than technical maximum of power plant, produced energy == 0;
             Q = 0;
@@ -454,7 +455,19 @@ export function producedElectricity() {
             console.log('flow to small to produce energy');
         } else if (H_downstream == CHANNEL_OVERFLOW) {
             // height of the downstream river is the same as height of the channel
-            H_downstream = consumptionCurve[consumptionCurve.length - 1].y;
+            let lastChannelParameter = consumptionCurve[consumptionCurve.length - 1];
+            H_downstream = lastChannelParameter.y;
+            // correct flow through turbine so the channel will not overflow
+            Q = lastChannelParameter.x;
+
+            if (Q > Qmax_teh) {
+                Q = 0;
+            } else if (Q > Qmax) {
+                Q = Qmax;
+            } else if (Q < Qmin) {
+                Q = 0;
+            }
+
             console.log('channel is overflowing');
         }
 
