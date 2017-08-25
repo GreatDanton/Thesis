@@ -1,6 +1,6 @@
 \chapter{Teoretične osnove}
 
-V tem poglavju bodo predstavljene teoretične osnove in enačbe za izračun energetskih parametrov za izbrani odsek vodotoka. Na sliki ~\ref{fig:uvodna_slika} je prikazan značilni vzdolžni prerez vodotoka za katerega nas zanimajo energetski parametri. Obravnavali bomo pretočno hidroelektrarno na lokaciji med točkama $A$ in $B$, katera proizvaja električno energijo na podlagi bruto razlike višin vode $H_B$. 
+V tem poglavju bodo predstavljene teoretične osnove in enačbe za izračun energetskih parametrov za izbrani odsek vodotoka. Na sliki ~\ref{fig:uvodna_slika} je prikazan značilni vzdolžni prerez vodotoka za katerega nas zanimajo energetski parametri. Obravnavali bomo pretočno hidroelektrarno na lokaciji med točkama $A$ in $B$, katera proizvaja električno energijo na podlagi bruto razlike višin vode $H_B$. Gladino zgornje vode določa nivo zajezitve v zadrževalniku ali derivacijskem kanalu, gladino pod pregrado pa določimo na podlagi konsumpcijske krivulje, ki je odvisna od geometrije struge in pretočnih razmer.
 
 
 
@@ -38,8 +38,6 @@ Za nadaljnje izračune potrebujemo podatke o:
 Podatke o geometriji rečnega korita lahko pridobimo iz javne baze podatkov (npr. LIDAR, ortofoto), praviloma pa je treba natančnejše posnetke zagotoviti z geodetskimi meritvami na terenu. Za potrebe ocene hidroenergetskega potenciala niso potrebne natančne izmere, zato smo geometrijo struge določili na podlagi ortofoto posnetkov. Naklon rečne struge vodotoka se lahko oceni s pomočjo spletne aplikacije Geopedija. Na karti v spletni aplikaciji Geopedija si izberemo dve točki, ki definirata odsek analiziranega vodotoka in odčitamo podatke o višinski razliki $\Delta h$ in razdalji $\Delta L$ med izbranima točkama. S pomočjo spodnje enačbe določimo naklon izbranega odseka vodotoka:
 
 
-%BEFORE:
-%Podatke o dimenzijah rečnega korita lahko pridobimo z meritvami na terenu ali pa dimenzije ocenimo na podlagi ortofoto posnetkov. Naklon rečne struge vodotoka se lahko oceni s pomočjo spletne aplikacije Geopedija. Na karti v spletni aplikaciji Geopedija si izberemo dve točki, ki definirata odsek analiziranega vodotoka in odčitamo podatke o višinski razliki $\Delta h$ in razdalji $\Delta L$ med izbranima točkama. S pomočjo spodnje enačbe določimo naklon izbranega odseka vodotoka:
 
 \begin{ceqn}
 \begin{align}
@@ -321,24 +319,36 @@ Način izračuna omočenega oboda struge vodotoka $P(h)$ in ploščine prečnega
 
 
 
-Ko imamo za vsak cm višine gladine vode izračunan omočeni obod $P_m(h)$ odseka $m$ in ploščino prečnega prereza pod gladino vode $S_m(h)$ lahko določimo pretok vode skozi odsek struge vodotoka $Q_m(h)$. Pretok vode skozi odsek izračunamo po Manningovi enačbi opisani v poglavju \ref{sec:teorija_trapeznaMetoda}. Za vsak računani odsek $m$ moramo poznati tudi naklon struge vodotoka $I_m$ in  Manningov koeficient hrapavosti površine $ng_m$, ki se ju določi po postopkih opisanih v poglavju \ref{sec:teorija_pridobitevPodatkov}.
+Ko imamo za vsak cm višine gladine vode izračunan omočeni obod $P_n(h)$ odseka $n$ in ploščino prečnega prereza pod gladino vode $S_n(h)$, lahko določimo pretok vode skozi odsek struge vodotoka $Q(h)$. Pretok vode skozi odsek izračunamo po Manningovi enačbi opisani v poglavju \ref{sec:teorija_trapeznaMetoda}. 
+
+%before:Za vsak računani odsek $m$ moramo poznati tudi naklon struge vodotoka $I_m$ in  Manningov koeficient hrapavosti površine $ng_m$, ki se ju določi po postopkih opisanih v poglavju \ref{sec:teorija_pridobitevPodatkov}.
 
 
 \begin{ceqn}
 	\begin{align}
-	Q_m(h) = \dfrac{\sqrt{I_m}}{ng_m} \cdot \dfrac{S_m(h)^{5/3}}{P_m(h)^{2/3}}
+	Q(h) = \dfrac{\sqrt{I}}{ng} \cdot \dfrac{S(h)^{5/3}}{P(h)^{2/3}}
 	\end{align}
 \end{ceqn}
 
 
-Posamezne pretoke odsekov po višinah medsebojno seštejemo in dobimo končne vrednosti pretokov $Q$ v odvisnosti od višine gladine vode v strugi vodotoka, kar je shematično prikazano na sliki~\ref{fig:customChannel_sestevek}:
+Posamezne ploščine odsekov $S_n$ po višinah medsebojno seštejemo in dobimo končno površino vodnega telesa v odvisnosti od višine gladine vode v strugi vodotoka, ter po enakem postopku določimo omočeni obod v prečni smeri $P_n$, kar je shematično prikazano na sliki ~\ref{fig:customChannel_sestevek}:
+
+
+%before: Posamezne pretoke odsekov po višinah medsebojno seštejemo in dobimo končne vrednosti pretokov $Q$ v odvisnosti od višine gladine vode v strugi vodotoka, kar je shematično prikazano na sliki~\ref{fig:customChannel_sestevek}:
 
 \begin{ceqn}
 	\begin{align}
-	%Q(h) = Q_1(h) + Q_2(h) + Q_3(h) + ... + Q_{n-1}(h) + Q_n(h)
-	Q(h) = \sum_{1}^{n} Q_n(h)
+	S(h) = \sum_{1}^{n} S_n(h)
 	\end{align}
 \end{ceqn}
+
+
+\begin{ceqn}
+	\begin{align}
+	P(h) = \sum_{1}^{n} P_n(h)
+	\end{align}
+\end{ceqn}
+
 
 
 \begin{figure}[ht!]
@@ -356,7 +366,7 @@ S tem postopkom smo določili vse točke, ki določajo konsumpcijsko krivuljo $h
 \newpage
 
 \section{Izračun proizvodnje električne energije}
-Za določitev proizvodnje električne energije potrebujemo podatek o razliki med koto zgornje vode t.j. vode v rezervoarju in koto spodnje vode t.j. vode, ki teče skozi turbine hidroelektrarne. Ker računamo proizvodnjo električne energije za pretočne hidroelektrarne predpostavimo, da je kota zgornje vode konstantna na višini $H_z$.
+Za določitev proizvodnje električne energije potrebujemo podatek o razliki med koto zgornje vode t.j. vode v zadrževalniku in koto spodnje vode, ki je določena s konsumpcijsko krivuljo za pretok, ki teče čez profil pregrade. Ker računamo proizvodnjo električne energije za pretočne hidroelektrarne predpostavimo, da je kota zgornje vode konstantna na višini $H_z$.
 
 \begin{figure}[ht!]
 	\begin{centering}
@@ -388,7 +398,7 @@ Pri čemer so:
 \begin{table}[htb!]
 	\begin{tabular}{r|p{10cm}}
 		P & moč [$kW$]\\
-		$\eta$ & izkoristek turbine [\%]\\
+		$\eta$ & izkoristek pri pretvorbi mehanske energije v električno [\%]\\
 		g & gravitacijska konstanta $\left[9,81~\dfrac{m}{s^{2}}\right]$ \\
 		$\rho_v$&gostota vode $\left[\dfrac{1000 kg}{m^3}\right]$\\
 		$Q_t$ & pretok skozi turbine hidroelektrarne $\left[m^{3}/s \right]$\\
@@ -398,11 +408,7 @@ Pri čemer so:
 
 
 
-% opis kako izračunamo povprečno moč hidroelektrarne:
-% 1. kako določimo Q, 
-% 2. kje dobimo podatke o pretokih (analiza hidroloških podatkov)
-
-Izkoristek turbin hidroelektrarne je načeloma odvisen od pretoka vode skozi turbine, vendar lahko to lastnost turbin za potrebe ocene proizvodnje električne energije zanemarimo. Pretok vode skozi turbine hidroelektrarne $Q_t$ je odvisen od parametrov hidroelektrarne in pretoka vodotoka. $Q_t$ se določi glede na spodnje pogoje:
+Izkoristek turbin hidroelektrarne je odvisen od razmerja med dejanskim in instaliranim pretokom in se ves čas spreminja. V primeru naše naloge pa so te razlike tako majhne, da lahko za potrebe ocene proizvodnje električne energije privzamemo, da je izkoristek elektrarne konstanten. Pretok vode skozi turbine hidroelektrarne $Q_t$ je odvisen od parametrov hidroelektrarne in pretoka vodotoka. $Q_t$ se določi glede na spodnje pogoje:
 
 \begin{ceqn}
 	\begin{align}
@@ -419,17 +425,22 @@ Pri čemer so:
 \begin{table}[htb!]
 	\begin{tabular}{r|p{10cm}}
 		$Q$ & Pretok vodotoka $\left[m^3/s \right]$\\
-		$Q_{min}$ & biološki minimum pretoka vodotoka $\left[m^3/s \right]$ \\
+		$Q_{min}$ & biološki minimum v vodotoku $\left[m^3/s \right]$ \\
 		$Q_{max}$ & instalirani pretok $\left[m^3/s \right]$ \\
 		$Q_{teh}$ & tehnični maksimum pretoka hidroelektrarne $\left[m^3/s \right]$ \\
 	\end{tabular}
 \end{table}
 
-%TODO: fix this part
-V primeru, ko je pretok vodotoka manjši kot biološki minimum, ki se zahteva zato, da reka ne presahne, se vsa voda preliva skozi prelivna polja hidroelektrarne in do proizvodnje električne energije ne pride. V primeru poplav, ko je pretok vodotoka večji od tehničnega maksimuma pretoka hidroelektrarne se vsa voda preliva preko jezu in hidroelektrarna prav tako ne proizvaja električne energije. V vseh ostalih primerih pretokov vodotoka, pa je pretok skozi turbine kar enak pretoku vodotoka z maksimalnim pretokom pri $Q_t = Q_{max}$. Maksimalni pretok $Q_{max}$ se določi na podlagi izbranih turbin hidroelektrarne, določenih s pomočjo krivulje trajanja.
+
+V primeru, ko je pretok vodotoka manjši od biološkega minimuma, ki omogoča ohranjanje bioloških razmer v vodotoku, se vsa voda preliva preko prelivnih polj na pregradi in elektrarna ne obratuje. V primeru pojava visokih voda, ko je pretok vodotoka večji od tehničnega maksimuma pretoka hidroelektrarne, ki predstavlja mejni pretok za obratovanje hidroelektrane, se vsa voda preliva preko pregrade in elektrarna ne obratuje. 
+
+V vseh ostalih obratovalnih primerih, pa je pretok skozi turbine kar enak pretoku vodotoka, vendar v primeru, ko pretok vodotoka $Q$ presega instalirani pretok elektrarne $Q_{max}$, elektrarna obratuje z instaliranim pretokom pri $Q_t = Q_{max}$. Instalirani pretok $Q_{max}$ določimo na podlagi krivulje trajanja in izbranega tipa turbin. Za pretočne elektrarne velja pravilo, da je instalirani pretok enak ali malo manjši od srednjega letnega pretoka vodotoka. 
+
 
 
 %-----
+
+%FIXME: explain exactly
 
 Za določitev povprečne mesečne proizvodnje električne energije potrebujemo znano povprečno mesečno moč hidroelektrarne  $\overline{P}$. Povprečno mesečno moč hidroelektrarne izračunamo s povprečjem dnevnih moči hidroelektrarne za iskani mesec po enačbi~\ref{eq:mocHidroelektrarne}. Podatke o povprečnih mesečnih pretokih pridobimo iz rezultatov analize hidrološkega niza podatkov opisane v poglavju~\ref{sec:teorija_hidrogramObdobja}. Za vsak mesec izračunamo povprečno moč hidroelektrarne po spodnji enačbi, pri čemer je $n$ število dni v mesecu. 
 
