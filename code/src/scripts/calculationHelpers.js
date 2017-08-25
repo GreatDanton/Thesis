@@ -48,7 +48,9 @@ export function createConsumptionCurve(activeChannel) {
     } else if (activeChannel == 'Custom') {
         let channelPoints = storage.custom.points;
         let channelHeight = custom_getChannelHeight(channelPoints);
-        //let channelParameters_sum = {};
+        let ng = parseFloat(storage.custom.ng);
+        let angle = parseFloat(storage.custom.φ);
+
         let channelPartParameters = [];
 
         // iterate over points array
@@ -58,13 +60,13 @@ export function createConsumptionCurve(activeChannel) {
 
             let channelPartParams = custom_sectionParameters(p1, p2, channelHeight);
             // ng and I for each section of the channel (between two points)
-            let ng = storage.custom.ngInputs[i];
-            let I = storage.custom.φ_inputs[i];
+            let ng = storage.custom.ng;
+            let I = storage.custom.φ;
             channelPartParameters.push([channelPartParams, ng, I]);
         }
 
         let riverParams = sumChannelParameters(channelPartParameters);
-        let riverFlow = createHeightFlowObject(riverParams, 0.03, 1);
+        let riverFlow = createHeightFlowObject(riverParams, ng, angle);
         points = custom_createPoints(riverFlow);
     }
 

@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // custom imports
-import {InputBox} from '../commonParts/inputBoxes.js';
-import {ScatterChart} from '../commonParts/charts.js';
+import { InputBox } from '../commonParts/inputBoxes.js';
+import { ScatterChart } from '../commonParts/charts.js';
 
 import GlobalStorage from '../../scripts/globalStorage';
 
@@ -42,19 +42,19 @@ class RectangularChannel extends React.Component {
         let id = event.target.id;
         let value = event.target.value;
         let calculateIf = ['B', 'h'];
-        this.setState({[id]: value},
-        function() {
-            if (calculateIf.indexOf(id) > -1) {
-                this.storage.S = this.area();
-                this.storage.P = this.circumference();
-                console.log(GlobalStorage);
-            }
-        });
+        this.setState({ [id]: value },
+            function () {
+                if (calculateIf.indexOf(id) > -1) {
+                    this.storage.S = this.area();
+                    this.storage.P = this.circumference();
+                    console.log(GlobalStorage);
+                }
+            });
         this.storage[id] = value;
     }
 
     calculate() {
-        this.setState({"S": this.area(), "P": this.circumference()})
+        this.setState({ "S": this.area(), "P": this.circumference() })
         this.storage.S = this.area;
         this.storage.P = this.circumference();
     }
@@ -66,10 +66,10 @@ class RectangularChannel extends React.Component {
                     <div className="row">
                         <div className="col-30">
                             <InputBox id="B" end="m" value={this.state.B} onChange={this.handleChange} />
-                            <InputBox id="h" end="m" value={this.state.h} onChange={this.handleChange}/>
-                            <br/>
-                            <InputBox id="ng" end="/" value={this.state.ng} onChange={this.handleChange}/>
-                            <InputBox id="φ" end="%" value={this.state.φ} onChange={this.handleChange}/>
+                            <InputBox id="h" end="m" value={this.state.h} onChange={this.handleChange} />
+                            <br />
+                            <InputBox id="ng" end="/" value={this.state.ng} onChange={this.handleChange} />
+                            <InputBox id="φ" end="%" value={this.state.φ} onChange={this.handleChange} />
                         </div>
                         <div className="col-70">
                             <img className="img-guide" src="images/rectangularChannel_guide.svg" />
@@ -108,7 +108,7 @@ class TrapezoidChannel extends React.Component {
         let B = parseFloat(this.state.B);
         let x = (B - b) / 2
 
-        let P = b + 2 * ( x**2 + h**2 )**(1/2);
+        let P = b + 2 * (x ** 2 + h ** 2) ** (1 / 2);
         return P
     }
 
@@ -125,16 +125,16 @@ class TrapezoidChannel extends React.Component {
     handleChange(event) {
         let value = event.target.value;
         let id = event.target.id;
-        let calculateIf = ['B', 'b','h'];
+        let calculateIf = ['B', 'b', 'h'];
 
-        this.setState({[id]: value},
-        function() {  // callback function
-            if (calculateIf.indexOf(id) > 0) {
-                this.storage.S = this.area();
-                this.storage.P = this.circumference();
-                console.log(GlobalStorage);
-            }
-        });
+        this.setState({ [id]: value },
+            function () {  // callback function
+                if (calculateIf.indexOf(id) > 0) {
+                    this.storage.S = this.area();
+                    this.storage.P = this.circumference();
+                    console.log(GlobalStorage);
+                }
+            });
         this.storage[id] = value; // save value of input into global storage
     }
 
@@ -147,7 +147,7 @@ class TrapezoidChannel extends React.Component {
                             <InputBox id="B" end="m" value={this.state.B} onChange={this.handleChange} />
                             <InputBox id="b" end="m" value={this.state.b} onChange={this.handleChange} />
                             <InputBox id="h" end="m" value={this.state.h} onChange={this.handleChange} />
-                            <br/>
+                            <br />
                             <InputBox id="ng" end="/" value={this.state.ng} onChange={this.handleChange} />
                             <InputBox id="φ" end="%" value={this.state.φ} onChange={this.handleChange} />
                         </div>
@@ -167,7 +167,7 @@ class CustomChannel extends React.Component {
     constructor(props) {
         super(props);
         this.storage = GlobalStorage.channelTab.custom;
-        this.state = {points: this.storage.points, x: '', y: ''};
+        this.state = { points: this.storage.points, x: '', y: '', ng: this.storage.ng, φ: this.storage.φ };
         this.onChange = this.onChange.bind(this);
         this.addPoint = this.addPoint.bind(this);
         this.deleteClick = this.deleteClick.bind(this);
@@ -180,16 +180,21 @@ class CustomChannel extends React.Component {
         let X = parseFloat(this.state.x);
         let Y = parseFloat(this.state.y);
         if (!isNaN(X) && !isNaN(Y)) { // if x and y is number
-            let p = {x: X, y: Y};
+            let p = { x: X, y: Y };
             let points = this.state.points.slice();
             points.push(p);
-            this.setState({points: points, x: '', y: ''}); // add new array, and reset input fields
+            this.setState({ points: points, x: '', y: '' }); // add new array, and reset input fields
             this.storage.points = points; // save points array into storage
         }
     }
 
     onChange(e) {
-        this.setState({[e.target.id]: e.target.value});
+        this.setState({ [e.target.id]: e.target.value });
+        if (e.target.id == "ng") {
+            this.storage.ng = parseFloat(e.target.value);
+        } else if (e.target.id == "φ") {
+            this.storage.φ = parseFloat(e.target.value);
+        }
     }
 
     deleteClick(e) {
@@ -197,7 +202,7 @@ class CustomChannel extends React.Component {
         let pointsArr = this.state.points.slice(); // copy state
         pointsArr.splice(id, 1); // remove point with index same as id (clicked element)
 
-        this.setState({points: pointsArr});
+        this.setState({ points: pointsArr });
         this.storage.points = pointsArr; // save new array into global storage
     }
 
@@ -205,11 +210,11 @@ class CustomChannel extends React.Component {
     render() {
 
         return (
-                <div className="container-900">
-                    <div className="row">
-                        <div className="col-30">
-                            {/* button press on enter click will submit the form => execute addPoint*/}
-                            <form onSubmit={this.addPoint}>
+            <div className="container-900">
+                <div className="row">
+                    <div className="col-30">
+                        {/* button press on enter click will submit the form => execute addPoint*/}
+                        <form onSubmit={this.addPoint}>
                             <div className="row centered">
                                 <InputBox id="x" end="" value={this.state.x} onChange={this.onChange} />
                                 <InputBox id="y" end="" value={this.state.y} onChange={this.onChange} />
@@ -217,27 +222,24 @@ class CustomChannel extends React.Component {
                             <div className="row centered">
                                 <button type="submit" className="btn btn-primary"> Add </button>
                             </div>
-                            </form>
+                        </form>
 
-                            <div className="row margin-u-40">
-                                <div className="col-60">
-                                    <PointsTable data={this.state.points} onClick={this.deleteClick} />
-                                </div>
-                                <div className="col-20">
-                                    <NgTable  displayInputs={this.state.points} type="ng" />
-                                </div>
-                                <div className="col-20">
-                                    <NgTable displayInputs={this.state.points} type="φ [%]" />
-                                </div>
-                            </div>
+                        <div className="margin-u-40">
+                            <InputBox id="ng" value={this.state.ng} onChange={this.onChange} end={"/"} />
+                            <InputBox id="φ" value={this.state.φ} onChange={this.onChange} end={"%"} />
                         </div>
-                        <div className="col-70 padding-h-20">
-                            <ScatterChart name={["custom channel"]} data={[this.state.points]} pointBorder={'y'} />
 
-                            <img className="img-level-guide" src="images/vertical_crossSection.svg" />
+                        <div className="row">
+                            <PointsTable data={this.state.points} onClick={this.deleteClick} />
                         </div>
                     </div>
+                    <div className="col-70 padding-h-20">
+                        <ScatterChart name={["custom channel"]} data={[this.state.points]} pointBorder={'y'} />
+
+                        <img className="img-level-guide" src="images/vertical_crossSection.svg" />
+                    </div>
                 </div>
+            </div>
         )
     }
 }
@@ -252,18 +254,18 @@ class NgTable extends React.Component {
         if (this.props.type === 'ng') {
             this.storage = GlobalStorage.channelTab.custom.ngInputs;
         }
-        else if (this.props.type.indexOf('φ') > -1)  {
+        else if (this.props.type.indexOf('φ') > -1) {
             this.storage = GlobalStorage.channelTab.custom.φ_inputs;
         }
         // state is present in order to change inputs later, otherwise we cannot change inputs after initial input
-        this.state = {inputValues: this.storage};
+        this.state = { inputValues: this.storage };
     }
 
     onChange(e) {
         let id = e.target.id;
         let value = e.target.value;
         this.storage[id] = value;
-        this.setState({inputValues: this.storage});
+        this.setState({ inputValues: this.storage });
     }
 
     render() {
@@ -276,7 +278,7 @@ class NgTable extends React.Component {
                 displayInputs.push(
                     <tr key={i}>
                         <td>
-                            <input id={i} type="text" className="ngInput" onChange={this.onChange} value={this.storage[i]}/>
+                            <input id={i} type="text" className="ngInput" onChange={this.onChange} value={this.storage[i]} />
                         </td>
                     </tr>
                 )
@@ -284,16 +286,16 @@ class NgTable extends React.Component {
         }
 
         return (
-                <table className="ngTable">
-                    <thead>
-                        <tr>
-                            <th className="centered-text"> {this.props.type} </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {displayInputs}
-                    </tbody>
-                </table>
+            <table className="ngTable">
+                <thead>
+                    <tr>
+                        <th className="centered-text"> {this.props.type} </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {displayInputs}
+                </tbody>
+            </table>
         )
     }
 }
@@ -306,10 +308,10 @@ class PointsTable extends React.Component {
 
     render() {
         let TableRows = this.props.data.map((point, index) => {
-                return (
-                    <TableRow passIndex={index} x={point.x}  y={point.y} key={index}
-                        onClick={this.props.onClick} />
-                )
+            return (
+                <TableRow passIndex={index} x={point.x} y={point.y} key={index}
+                    onClick={this.props.onClick} />
+            )
         });
 
         return (
@@ -317,8 +319,8 @@ class PointsTable extends React.Component {
                 <thead>
                     <tr>
                         <th> </th>
-                        <th> x </th>
-                        <th> y </th>
+                        <th className="padding-h-20"> x </th>
+                        <th className="padding-h-20"> y </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -338,13 +340,13 @@ class TableRow extends React.Component {
         return (
             <tr>
                 <td className="td-delete" onClick={this.props.onClick}
-                    x={this.props.x}  y={this.props.y} id={this.props.passIndex}> × </td>
-                <td> {this.props.x} </td>
-                <td> {this.props.y} </td>
+                    x={this.props.x} y={this.props.y} id={this.props.passIndex}> × </td>
+                <td className="padding-h-20"> {this.props.x} </td>
+                <td className="padding-h-20"> {this.props.y} </td>
             </tr>
         )
     }
 }
 
-export {RectangularChannel, TrapezoidChannel, CustomChannel};
+export { RectangularChannel, TrapezoidChannel, CustomChannel };
 
