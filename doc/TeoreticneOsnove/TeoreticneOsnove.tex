@@ -60,7 +60,7 @@ Podatke o geometriji rečnega korita lahko pridobimo iz javne baze podatkov (npr
 
  
  
-  Podatke o pretokih slovenskih vodotokov lahko pridobimo iz arhiva, ki se nahaja na spletni strani agencije Republike Slovenije za okolje (v nadaljevanju ARSO). V primeru da iščemo pretok za manjši vodotok, je zelo verjetno da podatki o pretokih vodotoka ne obstajajo. V tem primeru lahko pretok vodotoka ocenimo s pomočjo meritev višine gladine vode in dimenzij struge, ocene Manningovega koeficienta hrapavosti in naklona struge. S pomočjo Manningove enačbe opisane kasneje v poglavju~\ref{sec:teorija_trapeznaMetoda} dobimo končno ocenjeno vrednost pretoka vodotoka za posamezno obdobje meritev.
+  Podatke o pretokih slovenskih vodotokov lahko pridobimo iz arhiva, ki se nahaja na spletni strani agencije Republike Slovenije za okolje (v nadaljevanju ARSO). V primeru, da iščemo pretok za manjši vodotok, je zelo verjetno da podatki o pretokih vodotoka ne obstajajo. V tem primeru lahko pretok vodotoka ocenimo s pomočjo meritev višine gladine vode in dimenzij struge, ocene Manningovega koeficienta hrapavosti in naklona struge. S pomočjo Manningove enačbe opisane kasneje v poglavju~\ref{sec:teorija_trapeznaMetoda} dobimo končno ocenjeno vrednost pretoka vodotoka za posamezno obdobje meritev.
 
 
 
@@ -70,7 +70,7 @@ Podatke o geometriji rečnega korita lahko pridobimo iz javne baze podatkov (npr
 Namen analize hidrološkega niza podatkov je priprava podatkov za nadaljnje izračune energetskih parametrov hidroelektrarne. Potrebovali bomo hidrogram obdobja in krivuljo trajanja. Hidrogram obdobja je diagram, ki prikazuje povprečne mesečne pretoke vodotoka za izbrano obdobje analize vodotoka, sortirane v kronološkem vrstnem redu. S pomočjo hidrograma lahko ocenimo rečni režim našega vodotoka in nihanja vrednosti povprečnih mesečnih pretokov vodotoka skozi leto. Po navadi na hidrogramu tudi prikažemo vrednosti pretokov za mokro in suho leto, t.j. leto z maksimalnimi oz. minimalnimi vrednostmi pretokov vodotoka v izbranem obdobju analize. S tem ponazorimo nihanje pretokov vodotoka, ki se lahko pojavi v bodočem času obratovanja hidroelektrarne.
 
 
-Krivulja trajanja je diagram, ki prikazuje podatke iz hidrograma, t.j. povprečne mesečne pretoke vodotoka v analiziranem obdobju sortirane po vrsti padajoče. S pomočjo krivulje trajanja si ponazorimo čas trajanja posameznih vrednosti pretokov izbranega vodotoka. Poleg tega si s krivuljo trajanja pomagamo pri izbiri ustrezne vrste in velikosti turbin v času načrtovanja hidroelektrarne.
+Krivulja trajanja je diagram, ki prikazuje podatke iz hidrograma, t.j. povprečne mesečne pretoke vodotoka v analiziranem obdobju sortirane po vrsti padajoče. S pomočjo krivulje trajanja ponazorimo čas trajanja posameznih vrednosti pretokov izbranega vodotoka. Poleg tega si s krivuljo trajanja pomagamo pri izbiri ustrezne vrste in velikosti turbin v času načrtovanja hidroelektrarne.
 
 
 %------------------------------------------------
@@ -196,7 +196,7 @@ Skrajni točki na robu struge vodotoka sta točki $T_L$ in $T_D$ prikazani na sl
 
 
 %\subsection{Določitev parametrov odseka}
-Za izračun konsumpcijske krivulje, s točkami definirano poljubno strugo vodotoka najprej razdelimo na $n$ odsekov po dve točki $O_1$ ($x_1$, $y_1$) in $O_2$ ($x_2$, $y_2$) kar je shematično prikazano na sliki \ref{fig:poljubnaStruga}. Za vsak analizirani odsek struge vodotoka $m$, se najprej določi enačba linearne funkcije, ki povezuje točki $O_1$ in $O_2$.  Zaradi poenostavljenega zapisa so v nadaljevanju koordinate točke $O_1$ označene z $x_1$ in $y_1$, koordinate točke $O_2$ pa z $x_2$ in $y_2$. Razdaljo med $y$ koordinatami točk analiziranega odseka $O_1$ in $O_2$ označimo z $\Delta y$, razdaljo med $x$ koordinatami točk $O_1$ in $O_2$ pa z $\Delta x$.
+Za izračun konsumpcijske krivulje, s točkami definirano poljubno strugo vodotoka najprej razdelimo na $n$ odsekov po dve točki $O_1$ ($x_1$, $y_1$) in $O_2$ ($x_2$, $y_2$) kar je shematično prikazano na sliki \ref{fig:poljubnaStruga}. Za vsak analizirani odsek struge vodotoka $n$, se najprej določi enačba linearne funkcije, ki povezuje točki $O_1$ in $O_2$.  Zaradi poenostavljenega zapisa so v nadaljevanju koordinate točke $O_1$ označene z $x_1$ in $y_1$, koordinate točke $O_2$ pa z $x_2$ in $y_2$. Razdaljo med $y$ koordinatami točk analiziranega odseka $O_1$ in $O_2$ označimo z $\Delta y$, razdaljo med $x$ koordinatami točk $O_1$ in $O_2$ pa z $\Delta x$.
 
 
 Enačba linearne funkcije je definirana kot:
@@ -319,22 +319,12 @@ Način izračuna omočenega oboda struge vodotoka $P(h)$ in ploščine prečnega
 
 
 
-Ko imamo za vsak cm višine gladine vode izračunan omočeni obod $P_n(h)$ odseka $n$ in ploščino prečnega prereza pod gladino vode $S_n(h)$, lahko določimo pretok vode skozi odsek struge vodotoka $Q(h)$. Pretok vode skozi odsek izračunamo po Manningovi enačbi opisani v poglavju \ref{sec:teorija_trapeznaMetoda}. 
-
-%before:Za vsak računani odsek $m$ moramo poznati tudi naklon struge vodotoka $I_m$ in  Manningov koeficient hrapavosti površine $ng_m$, ki se ju določi po postopkih opisanih v poglavju \ref{sec:teorija_pridobitevPodatkov}.
 
 
-\begin{ceqn}
-	\begin{align}
-	Q(h) = \dfrac{\sqrt{I}}{ng} \cdot \dfrac{S(h)^{5/3}}{P(h)^{2/3}}
-	\end{align}
-\end{ceqn}
 
 
-Posamezne ploščine odsekov $S_n$ po višinah medsebojno seštejemo in dobimo končno površino vodnega telesa v odvisnosti od višine gladine vode v strugi vodotoka, ter po enakem postopku določimo omočeni obod v prečni smeri $P_n$, kar je shematično prikazano na sliki ~\ref{fig:customChannel_sestevek}:
+Ko imamo za vsak cm višine gladine vode izračunan omočeni obod $P_n(h)$ odseka $n$ in ploščino prečnega prereza pod gladino vode $S_n(h)$, lahko določimo pretok vode skozi odsek struge vodotoka $Q(h)$. Posamezne ploščine odsekov $S_n$ po višinah medsebojno seštejemo in dobimo končno površino vodnega telesa v odvisnosti od višine gladine vode v strugi vodotoka, ter po enakem postopku določimo omočeni obod v prečni smeri $P_n$, kar je shematično prikazano na sliki ~\ref{fig:customChannel_sestevek}:
 
-
-%before: Posamezne pretoke odsekov po višinah medsebojno seštejemo in dobimo končne vrednosti pretokov $Q$ v odvisnosti od višine gladine vode v strugi vodotoka, kar je shematično prikazano na sliki~\ref{fig:customChannel_sestevek}:
 
 \begin{ceqn}
 	\begin{align}
@@ -351,17 +341,27 @@ Posamezne ploščine odsekov $S_n$ po višinah medsebojno seštejemo in dobimo k
 
 
 
+
+
+
+Pretok vode skozi presek izbranega vodotoka izračunamo po Manningovi enačbi opisani v poglavju ~\ref{sec:teorija_trapeznaMetoda}. 
+
+\begin{ceqn}
+	\begin{align}
+	Q(h) = \dfrac{\sqrt{I}}{ng} \cdot \dfrac{S(h)^{5/3}}{P(h)^{2/3}}
+	\end{align}
+\end{ceqn}
+
+
+S tem postopkom smo izračunali vse točke, ki določajo konsumpcijsko krivuljo $h(Q)$ za izbrano strugo poljubne geometrije.
+
+
 \begin{figure}[ht!]
 	\begin{centering}
 		\includegraphics{slike/customChannel/sestevekPretokov.pdf}
-		\caption{Prikaz seštevka pretokov po odsekih}\label{fig:customChannel_sestevek}
+		\caption{Prikaz seštevka $S_n(h)$ in $P_n(h)$ po odsekih}\label{fig:customChannel_sestevek}
 	\end{centering}
 \end{figure}
-
-
-
-S tem postopkom smo določili vse točke, ki določajo konsumpcijsko krivuljo $h(Q)$ za izbrano strugo poljubne oblike.
-
 
 \newpage
 
@@ -375,7 +375,7 @@ Za določitev proizvodnje električne energije potrebujemo podatek o razliki med
 	\end{centering}
 \end{figure}
 
- Koto spodnje vode $H_s$ določimo iz prej izračunane konsumpcijske krivulje iz katere odčitamo višino gladine vode v strugi za dani povprečni mesečni pretok ki teče skozi turbine hidroelektrarne. V primeru da se pretok skozi turbine hidroelektrarne nahaja med dvema točkama pretokov v konsumpcijski krivulji, iskano višino spodnje vode določimo z linearno interpolacijo med znanima izračunanima točkama na grafu konsumpcijske krivulje.
+ Koto spodnje vode $H_s$ določimo iz prej izračunane konsumpcijske krivulje $h(Q)$, iz katere odčitamo višino gladine vode v strugi za dani povprečni mesečni pretok ki teče skozi turbine hidroelektrarne. V primeru da se pretok skozi turbine hidroelektrarne nahaja med dvema točkama pretokov v konsumpcijski krivulji, iskano višino spodnje vode določimo z linearno interpolacijo med znanima izračunanima točkama na grafu konsumpcijske krivulje.
 
 
 Višinsko razliko med koto zgornje in spodnje vode določimo po spodnji enačbi:
@@ -432,7 +432,7 @@ Pri čemer so:
 \end{table}
 
 
-V primeru, ko je pretok vodotoka manjši od biološkega minimuma, ki omogoča ohranjanje bioloških razmer v vodotoku, se vsa voda preliva preko prelivnih polj na pregradi in elektrarna ne obratuje. V primeru pojava visokih voda, ko je pretok vodotoka večji od tehničnega maksimuma pretoka hidroelektrarne, ki predstavlja mejni pretok za obratovanje hidroelektrane, se vsa voda preliva preko pregrade in elektrarna ne obratuje. 
+V primeru, ko je pretok vodotoka manjši od biološkega minimuma, ki omogoča ohranjanje bioloških razmer v vodotoku, se vsa voda preliva preko prelivnih polj na pregradi in elektrarna ne obratuje. V primeru pojava visokih voda, ko je pretok vodotoka večji od tehničnega maksimuma pretoka hidroelektrarne, ki predstavlja mejni pretok za obratovanje hidroelektrane, se vsa voda preliva preko pregrade in elektrarna prav tako ne obratuje. 
 
 V vseh ostalih obratovalnih primerih, pa je pretok skozi turbine kar enak pretoku vodotoka, vendar v primeru, ko pretok vodotoka $Q$ presega instalirani pretok elektrarne $Q_{max}$, elektrarna obratuje z instaliranim pretokom pri $Q_t = Q_{max}$. Instalirani pretok $Q_{max}$ določimo na podlagi krivulje trajanja in izbranega tipa turbin. Za pretočne elektrarne velja pravilo, da je instalirani pretok enak ali malo manjši od srednjega letnega pretoka vodotoka. 
 
@@ -442,13 +442,20 @@ V vseh ostalih obratovalnih primerih, pa je pretok skozi turbine kar enak pretok
 
 %FIXME: explain exactly
 
-Za določitev povprečne mesečne proizvodnje električne energije potrebujemo znano povprečno mesečno moč hidroelektrarne  $\overline{P}$. Povprečno mesečno moč hidroelektrarne izračunamo s povprečjem dnevnih moči hidroelektrarne za iskani mesec po enačbi~\ref{eq:mocHidroelektrarne}. Podatke o povprečnih mesečnih pretokih pridobimo iz rezultatov analize hidrološkega niza podatkov opisane v poglavju~\ref{sec:teorija_hidrogramObdobja}. Za vsak mesec izračunamo povprečno moč hidroelektrarne po spodnji enačbi, pri čemer je $n$ število dni v mesecu. 
+\pagebreak
+
+Za določitev povprečne mesečne proizvodnje električne energije n-tega meseca, potrebujemo znano povprečno mesečno moč hidroelektrarne  $\overline{P_n}$ za vsak mesec v letu. Povprečno mesečno moč hidroelektrarne izračunamo s pomočjo prej navedene enačbe za moč hidroelektrarne~\ref{eq:mocHidroelektrarne}, pri čemer v enačbo vstavimo povprečni mesečni pretok $\overline{Q_t}$ za n-ti mesec, pridobljen iz rezultatov analize hidrološkega niza podatkov opisane v poglavju~\ref{sec:teorija_hidrogramObdobja}. S pomočjo povprečnega pretoka meseca $\overline{Q_t}$ in konsumpcijske krivulje določimo še razliko višin med koto zgornje in spodnje vode $\overline{dh}$ in izračunamo povprečno moč $\overline{P_n}$ za n-ti mesec leta:
+
+
+
+%povprečjem dnevnih moči hidroelektrarne za iskani mesec po enačbi~\ref{eq:mocHidroelektrarne}. Podatke o povprečnih mesečnih pretokih pridobimo iz rezultatov analize hidrološkega niza podatkov opisane v poglavju~\ref{sec:teorija_hidrogramObdobja}. Za vsak mesec izračunamo povprečno moč hidroelektrarne po spodnji enačbi, pri čemer je $n$ število dni v mesecu. 
 
 
 
 \begin{ceqn}
 \begin{align}
-\overline{P} = \dfrac{P_1 + P_2 + P_3 + ... + P_{n-1} + P_n}{n}
+\overline{P_n} = \eta \cdot \dfrac{g \cdot \rho_v}{1000} \cdot \overline{Q_t} \cdot \overline{dh} \\
+%\overline{P} = \dfrac{P_1 + P_2 + P_3 + ... + P_{n-1} + P_n}{n}
 \end{align}
 \end{ceqn}
 
@@ -458,7 +465,7 @@ Povprečno mesečno proizvodnjo električne energije n-tega meseca izračunamo p
 
 \begin{ceqn}
 \begin{align}
-E_n = \dfrac{24 \cdot \overline{P} \cdot d}{1000}
+E_n = \dfrac{24 \cdot \overline{P_n} \cdot d}{1000}
 \end{align}
 \end{ceqn}
 
@@ -466,7 +473,7 @@ Pri čemer so:
 \begin{table}[htb!]
 \begin{tabular}{r|p{10cm}}
 	$E_n$ & povprečna mesečna proizvedena električna energija [$MWh$]\\
-	$\overline{P}$ & povprečna moč v mesecu [$kW$]\\
+	$\overline{P_n}$ & povprečna moč v mesecu [$kW$]\\
 	$d$ & število dni v mesecu \\
 \end{tabular}
 \end{table}
