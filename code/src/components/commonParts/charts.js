@@ -1,5 +1,5 @@
 import React from 'react';
-import {Line, Bar} from 'react-chartjs-2';
+import { Line, Bar } from 'react-chartjs-2';
 // line chart example
 
 // variables
@@ -11,7 +11,7 @@ const COLORS = [
 ];
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
-            'August', 'September', 'October', 'November', 'December'];
+    'August', 'September', 'October', 'November', 'December'];
 
 
 // Create line chart via props
@@ -111,7 +111,7 @@ class LineChart extends React.Component {
         let dataset = this.buildData;
         return (
             <div>
-                <Line data={dataset} options={options}/>
+                <Line data={dataset} options={options} />
             </div>
         )
     }
@@ -170,6 +170,11 @@ class BarChart extends React.Component {
             xAxes = this.props.xAxes;
         }
 
+        let startWithZero = true;
+        if (this.props.startWithZero) {
+            startWithZero = this.props.startWithZero;
+        }
+
         let options = {
             scales: {
                 xAxes: [{
@@ -182,6 +187,9 @@ class BarChart extends React.Component {
                     scaleLabel: {
                         display: true,
                         labelString: yAxes
+                    },
+                    ticks: {
+                        beginAtZero: startWithZero
                     }
                 }]
             }
@@ -192,7 +200,7 @@ class BarChart extends React.Component {
 
         let data = this.buildData;
         return (
-            <Bar data={data} options={options}/>
+            <Bar data={data} options={options} />
         )
     }
 }
@@ -209,80 +217,80 @@ class ScatterChart extends React.Component {
         let PHR = 0;
         let PHBW = 0;
         let PR = 0;
-    if (this.props.pointBorder === 'y') {
-        PBR = 2;
-        PHR = 5;
-        PHBW = 2;
-        PR = 4;
-    }
-    let lineTension = 0;
-    if (this.props.smooth === 'y') {
-       lineTension = 0.3;
-    }
-
-    let yAxes = '';
-    if (this.props.yAxes) {
-        yAxes = this.props.yAxes;
-    }
-
-    let xAxes = '';
-    if (this.props.xAxes) {
-        xAxes = this.props.xAxes;
-    }
-
-    let dataset = this.props.data.map((data, index) => {
-        return (
-            {
-                label: this.props.name[index],
-                fill: false,
-                lineTension: 0,
-                backgroundColor: this.colors[index][0],
-                borderColor: this.colors[index][0],
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: this.colors[index][0],
-                pointBackgroundColor: '#fff',
-                pointBorderWidth: PBR,
-                pointHoverRadius: PHR,
-                pointHoverBackgroundColor: this.colors[index][0],
-                pointHoverBorderColor: 'rgba(220,220,220,0)',
-                pointHoverBorderWidth: PHBW,
-                pointRadius: PR,
-                pointHitRadius: 10,
-                data: this.props.data[index],
-            }
-        )
-    });
-       let data = {
-       datasets: dataset
-    }
-    let options = {
-        scales: {
-            xAxes: [{
-                type: 'linear',
-                position: 'bottom',
-                scaleLabel: {
-                    display: true,
-                    labelString: xAxes
-                }
-            }],
-            yAxes: [{
-                scaleLabel: {
-                    display: true,
-                    labelString: yAxes,
-                }
-            }]
+        if (this.props.pointBorder === 'y') {
+            PBR = 2;
+            PHR = 5;
+            PHBW = 2;
+            PR = 4;
         }
-    }
+        let lineTension = 0;
+        if (this.props.smooth === 'y') {
+            lineTension = 0.3;
+        }
+
+        let yAxes = '';
+        if (this.props.yAxes) {
+            yAxes = this.props.yAxes;
+        }
+
+        let xAxes = '';
+        if (this.props.xAxes) {
+            xAxes = this.props.xAxes;
+        }
+
+        let dataset = this.props.data.map((data, index) => {
+            return (
+                {
+                    label: this.props.name[index],
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: this.colors[index][0],
+                    borderColor: this.colors[index][0],
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: this.colors[index][0],
+                    pointBackgroundColor: '#fff',
+                    pointBorderWidth: PBR,
+                    pointHoverRadius: PHR,
+                    pointHoverBackgroundColor: this.colors[index][0],
+                    pointHoverBorderColor: 'rgba(220,220,220,0)',
+                    pointHoverBorderWidth: PHBW,
+                    pointRadius: PR,
+                    pointHitRadius: 10,
+                    data: this.props.data[index],
+                }
+            )
+        });
+        let data = {
+            datasets: dataset
+        }
+        let options = {
+            scales: {
+                xAxes: [{
+                    type: 'linear',
+                    position: 'bottom',
+                    scaleLabel: {
+                        display: true,
+                        labelString: xAxes
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: yAxes,
+                    }
+                }]
+            }
+        }
 
         return (
             <div>
-                <Line data={data} options={options}/>
+                <Line data={data} options={options} />
             </div>
         )
     }
 }
 
-export {LineChart, BarChart, ScatterChart};
+export { LineChart, BarChart, ScatterChart };
