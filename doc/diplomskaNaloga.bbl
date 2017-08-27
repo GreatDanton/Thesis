@@ -17,9 +17,24 @@ Kryžanowski, A., Mikoš, M., Brilly, M. 2011.
   \url{http://www.delo.si/druzba/znanost/dragocen-obnovljivi-vir-energije-nam-tece-skozi-prste.html}.
 \newblock (Pridobljeno 23. 08. 2017.).
 
+\bibitem{Geopedija}
+Geopedija.
+\newblock \url{http://www.geopedia.si/}.
+\newblock (Dostopano 17.3.2017).
+
 \bibitem{VenTeChow}
 Chow, V.~T. 1959.
 \newblock Open-Channel Hydraulics.
 \newblock New York, McGraw-Hill: 680 str.
+
+\bibitem{Arso}
+Arso.
+\newblock \url{http://www.arso.gov.si/}.
+\newblock (Dostopano 17.3.2017).
+
+\bibitem{SourceCode}
+Aplikacija.
+\newblock \url{https://github.com/GreatDanton/Thesis/tree/master/code}.
+\newblock (Dostopano 27.08.2017).
 
 \end{thebibliography}

@@ -1,7 +1,7 @@
 \chapter{Opis uporabe programa}
 
 
-V tem poglavju bo opisana uporaba programa, ki je nastal v okviru te diplomske naloge. Program lahko služi kot učni pripomoček ali pa kot pripomoček za hitro oceno proizvedene električne energije iz bližnjega potoka ali večje reke. Napisan je v programskem jeziku $Javascript$, poleg katerega sem uporabil tudi knjižnici $React$ za prikazovanje uporabniškega vmesnika in $ChartJs$ za risanje diagramov. Sam program je odprto koden in pod MIT licenco, izvorna koda programa pa se nahaja na spletni strani: \href{https://github.com/GreatDanton/Thesis/tree/master/code}{https://github.com/GreatDanton/Thesis/tree/master/code}.
+V tem poglavju bo opisana uporaba programa, ki je nastal v okviru te diplomske naloge. Program lahko služi kot učni pripomoček ali pa kot pripomoček za hitro oceno proizvedene električne energije iz bližnjega potoka ali večje reke. Napisan je v programskem jeziku $Javascript$, poleg katerega sem uporabil tudi knjižnici $React$ za prikazovanje uporabniškega vmesnika in $ChartJs$ za risanje diagramov. Sam program je odprto koden in pod MIT licenco, izvorna koda programa pa se nahaja na spletni strani~\cite{SourceCode}.
 
 Za izračun energetskih parametrov hidroelektrarne s programom moramo najprej vnesti podatke o dimenzijah struge vodotoka in povprečnih dnevnih vrednostih pretoka vodotoka za izbrano obdobje. Podatke lahko pridobimo na način, ki je opisan v poglavju~\ref{sec:teorija_pridobitevPodatkov}.
 
@@ -9,7 +9,7 @@ Za izračun energetskih parametrov hidroelektrarne s programom moramo najprej vn
 
 
 \section{Vnos podatkov}
-Na sliki~\ref{fig:opis_frontpage} je viden uporabniški vmesnik, ki se pokaže ob zagonu programa. S pritiskom na ikono v levem zgornjem kotu izberemo in vnesemo datoteko, ki vsebuje podatke o povprečnih dnevnih pretokih vodotoka, ki smo jih dobili iz ARSO-vega arhiva v .csv formatu za izbrano obdobje analize. Primer podatkov v datoteki je prikazan spodaj. Vejica loči datum meritve in povprečni dnevni pretok izbranega vodotoka.
+Na sliki~\ref{fig:opis_frontpage} je viden uporabniški vmesnik, ki se pokaže ob zagonu programa. S pritiskom na ikono v levem zgornjem kotu izberemo in vnesemo datoteko, ki vsebuje podatke o povprečnih dnevnih pretokih vodotoka, ki smo jih dobili iz ARSO-vega arhiva v .csv formatu za izbrano obdobje analize~\cite{Arso}. Primer podatkov v datoteki je prikazan spodaj. Vejica loči datum meritve in povprečni dnevni pretok izbranega vodotoka.
 
 \begin{figure}[htp!]
 	\begin{centering}
@@ -45,7 +45,7 @@ Po vnosu podatkov o povprečnih dnevnih pretokih vodotoka, program samodejno ana
 
 \begin{figure}[htp!]
 	\begin{centering}
-		\includegraphics[width=\textwidth]{slike/opis/krivuljaTrajanja.png}\caption{Primer izračunane krivulje trajanja}\label{fig:opis_krivuljaTrajanja}
+		\includegraphics[width=\textwidth]{slike/opis/krivuljaTrajanja.png}\caption{Primer izračunane krivulje trajanja pretokov}\label{fig:opis_krivuljaTrajanja}
 	\end{centering}
 \end{figure}
 
@@ -56,7 +56,7 @@ Po vnosu podatkov o povprečnih dnevnih pretokih vodotoka, program samodejno ana
 
 \section{Izračun konsumpcijske krivulje}\label{sec:izracun}
 
-Za izračun ocene parametrov pretočne hidroelektrarne je ključnega pomena pravilen izračun konsumpcijske krivulje za izbran vodotok, saj se vsi nadaljnji izračuni nanašajo nanj. V tem poglavju bomo na primeru pokazali pravilnost postopka izračuna konsumpcijske krivulje. V ta namen bomo uporabili namišljen primer trapezno oblikovane struge vodotoka prikazane na sliki~\ref{fig:izracun_trapeznaStruga}, z 1\% naklonom struge, višino vode v strugi $h=5m$ in Manningovim koeficientom hrapavosti 0,3.
+Za izračun ocene parametrov pretočne hidroelektrarne je ključnega pomena pravilen izračun konsumpcijske krivulje za izbran vodotok, saj se vsi nadaljnji izračuni nanašajo nanj. V tem poglavju bomo na primeru pokazali pravilnost postopka izračuna konsumpcijske krivulje. V ta namen bomo uporabili namišljen primer trapezno oblikovane struge vodotoka prikazane na sliki~\ref{fig:izracun_trapeznaStruga}, z 1\% naklonom struge, višino vode v strugi $h=5m$ in Manningovim koeficientom hrapavosti $n_g = 0,3$.
 
 Rezultate ročnega izračuna bomo primerjali z rezultati ki jih izračuna program po metodi za pravokotno in trapezno oblikovane struge in metodi za izračun pretokov za strugo poljubne oblike opisani v poglavju~\ref{sec:teorija_trapeznaMetoda}  oz.~\ref{sec:teorija_metodaPoljubnaOblika}. Vse mere na spodnji  sliki~\ref{fig:izracun_trapeznaStruga} so v metrih.
 
@@ -75,7 +75,7 @@ Rezultate ročnega izračuna bomo primerjali z rezultati ki jih izračuna progra
 %----------------------------------------------
 \section{Izračun parametrov po metodi za pravokotno in trapezno oblikovano strugo vodotoka}\label{sec:izracun_trapeznaMetoda}
 
-V tem poglavju bomo preverjali rezultate ročnega izračuna z rezultati, ki jih izračuna program po metodi za pravokotno in trapezno oblikovane struge opisani v poglavju~\ref{sec:teorija_trapeznaMetoda}.
+V tem poglavju bomo preverili pravilnost delovanja implementiranega algoritma. V ta namen bomo primerjali rezultate ročnega izračuna z rezultati, ki jih izračuna program po metodi za pravokotno in trapezno oblikovane struge opisani v poglavju~\ref{sec:teorija_trapeznaMetoda}.
 
 
 \subsection{Ročni izračun}
@@ -152,7 +152,7 @@ Pretoke v strugi vodotoka računamo po odsekih med točkami s katerimi modeliram
 	
 \end{enumerate}
 
-Skupni pretok pri $h=5m$ izračunamo kot:
+Skupni pretok pri $h=5 m$ izračunamo kot:
 
 \begin{ceqn}
 	\begin{align}
@@ -183,7 +183,7 @@ S pomočjo uporabniškega vmesnika v koordinatni sistem vnašamo serijo točk, s
 \end{figure}
 
 
-Z grafa konsumpcijske krivulje \ref{fig:custom_konsumpcijskaKrivulja} pri višini $h = 5m$ lahko odčitamo pretok $Q=316,1~m^3/s$, ki je enak rezultatu ročnega izračuna v poglavju~\ref{sec:izracun_rocno_numericnaMetoda} in rezultatu dobljenem po metodi za pravokotne in trapezno oblikovane struge v poglavju~\ref{sec:izracun_trapeznaMetoda}. S tem smo pokazali pravilnost numeričnega algoritma za izračun točk konsumpcijske krivulje za poljubno oblikovano strugo vodotoka.
+Z grafa konsumpcijske krivulje \ref{fig:custom_konsumpcijskaKrivulja} pri višini $h = 5 m$ lahko odčitamo pretok $Q=316,1~m^3/s$, ki je enak rezultatu ročnega izračuna v poglavju~\ref{sec:izracun_rocno_numericnaMetoda} in rezultatu dobljenem po metodi za pravokotne in trapezno oblikovane struge v poglavju~\ref{sec:izracun_trapeznaMetoda}. S tem smo dokazali pravilnost numeričnega algoritma za izračun točk konsumpcijske krivulje za poljubno oblikovano strugo vodotoka.
 
 
 

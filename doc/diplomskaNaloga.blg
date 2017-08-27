@@ -12,44 +12,44 @@ A level-1 auxiliary file: OpisPrograma/OpisPrograma.aux
 A level-1 auxiliary file: Zakljucek/Zakljucek.aux
 The style file: disertation.bst
 Database file #1: Bibliografija/Viri.bib
-You've used 2 entries,
+You've used 5 entries,
             2382 wiz_defined-function locations,
-            1008 strings with 9775 characters,
-and the built_in function-call counts, 597 in all, are:
-= -- 33
-> -- 14
+            1020 strings with 9992 characters,
+and the built_in function-call counts, 1173 in all, are:
+= -- 69
+> -- 17
 < -- 0
-+ -- 6
++ -- 9
 - -- 4
-* -- 15
-:= -- 68
-add.period$ -- 7
-call.type$ -- 2
-change.case$ -- 2
+* -- 21
+:= -- 104
+add.period$ -- 16
+call.type$ -- 5
+change.case$ -- 8
 chr.to.int$ -- 0
-cite$ -- 2
-duplicate$ -- 67
-empty$ -- 74
+cite$ -- 5
+duplicate$ -- 139
+empty$ -- 164
 format.name$ -- 5
-if$ -- 131
+if$ -- 272
 int.to.chr$ -- 0
-int.to.str$ -- 2
-missing$ -- 16
-newline$ -- 23
+int.to.str$ -- 5
+missing$ -- 28
+newline$ -- 38
 num.names$ -- 2
-pop$ -- 40
+pop$ -- 91
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 13
+skip$ -- 37
 stack$ -- 0
-substring$ -- 2
-swap$ -- 30
+substring$ -- 8
+swap$ -- 57
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
 while$ -- 2
-width$ -- 3
-write$ -- 33
+width$ -- 6
+write$ -- 60
