@@ -1,4 +1,3 @@
-
 // global storage class
 
 // whenever GlobalStorage is required from somewhere else, we are always

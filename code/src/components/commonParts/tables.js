@@ -9,9 +9,7 @@ export class Table extends React.Component {
     render() {
         let head = this.props.header.map((head, index) => {
             return (
-                <th key={index}>
-                    {head}
-                </th>
+                <th key={index}>{head}</th>
             )
         });
 
@@ -24,27 +22,23 @@ export class Table extends React.Component {
         return (
             <table>
                 <thead>
-                    <tr>
-                        {head}
-                    </tr>
+                    <tr>{head}</tr>
                 </thead>
-                <tbody>
-                    {tableData}
-                </tbody>
+                <tbody>{tableData}</tbody>
             </table>
         )
     }
 }
 
 class Row extends React.Component {
-
     render() {
         let content = this.props.data.map((item, index) => {
             return (
                 <td key={index}>{item}</td>
             )
         });
-
-        return (<tr>{content}</tr>)
+        return (
+            <tr>{content}</tr>
+        )
     }
 }

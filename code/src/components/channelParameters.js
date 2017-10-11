@@ -20,7 +20,6 @@ class RectangularChannel extends React.Component {
             S: this.storage.S
         });
         this.handleChange = this.handleChange.bind(this);
-        this.calculate = this.calculate.bind(this);
     }
 
     circumference() {
@@ -51,12 +50,6 @@ class RectangularChannel extends React.Component {
         this.storage[id] = value;
     }
 
-    calculate() {
-        this.setState({ "S": this.area(), "P": this.circumference() })
-        this.storage.S = this.area;
-        this.storage.P = this.circumference();
-    }
-
     render() {
         return (
             <div>
@@ -74,7 +67,6 @@ class RectangularChannel extends React.Component {
                             <img className="img-level-guide" src="images/vertical_crossSection.svg" alt="River channel horizontal section" />
                         </div>
                     </div>
-
                 </div>
             </div>
         )

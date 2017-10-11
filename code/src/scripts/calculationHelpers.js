@@ -6,7 +6,6 @@ import { rectangle_area, rectangle_circumference, trapezoid_area, trapezoid_circ
 // activeChannel: currently active channel (get it from GlobalStorage)
 // returns: [[{x1,y1}, {x2,y2}]]  => where x=flow, y=height
 // points in array of arrays for displaying in ScatterPlot
-
 export function createConsumptionCurve(activeChannel) {
     let storage = GlobalStorage.channelTab;
     let points = [];
@@ -267,6 +266,7 @@ function custom_getLowerPoint(point1, point2) {
     return point2;
 }
 
+// get distance between the two points via Pythagorean theorem
 function custom_pointsDistance(point1, point2) {
     let dY = Math.abs(point1.y - point2.y);
     let dX = Math.abs(point1.x - point2.x);
@@ -289,6 +289,7 @@ function custom_getSlopePoint(func, height) {
 
 
 // creates linear function between two given points
+// and returns type of function
 function custom_getFunction(point1, point2) {
     // y = k*x + n;
     let dY = point2.y - point1.y;
