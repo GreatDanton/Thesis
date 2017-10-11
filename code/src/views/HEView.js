@@ -49,7 +49,7 @@ class Turbine extends React.Component {
                             <InputBox id="η" end="%" onChange={this.onChange} value={this.state.η} />
                         </div>
                         <div className="col-70">
-                            <img className="img-guide" src="images/powerplant_crossSection.svg" />
+                            <img className="img-guide" src="images/powerplant_crossSection.svg" alt="Powerplant cross section" />
                         </div>
                     </div>
                 </div>

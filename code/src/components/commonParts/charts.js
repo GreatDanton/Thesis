@@ -243,7 +243,7 @@ class ScatterChart extends React.Component {
                 {
                     label: this.props.name[index],
                     fill: false,
-                    lineTension: 0,
+                    lineTension: lineTension,
                     backgroundColor: this.colors[index][0],
                     borderColor: this.colors[index][0],
                     borderCapStyle: 'butt',

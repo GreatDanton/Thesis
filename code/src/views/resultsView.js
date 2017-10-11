@@ -3,11 +3,11 @@ import React from 'react';
 import GlobalStorage from '../scripts/globalStorage';
 import { LineChart, BarChart, ScatterChart } from '../components/commonParts/charts.js';
 import { getDailyFlow } from '../scripts/parseCsv';
-import { createConsumptionCurve, downstreamRiverHeight, producedElectricity } from '../scripts/calculationHelpers';
+import { createConsumptionCurve, producedElectricity } from '../scripts/calculationHelpers';
 
 import { Table } from '../components/commonParts/tables.js';
 
-// Displaying resutls view
+// ResultsView component used for displaying results in results tab
 class ResultsView extends React.Component {
     constructor(props) {
         super(props);
@@ -213,7 +213,7 @@ class Hydrogram extends React.Component {
         let inputData = this.props.data;
         let names = this.props.names;
         // if hydrogram data exist
-        if (inputData.length == names.length && inputData.length > 0) {
+        if (inputData.length === names.length && inputData.length > 0) {
             let graphData = getDailyFlow(inputData);
             return (
                 <div>

@@ -11,7 +11,7 @@ export function createConsumptionCurve(activeChannel) {
     let storage = GlobalStorage.channelTab;
     let points = [];
 
-    if (activeChannel == 'Rectangular') {
+    if (activeChannel === 'Rectangular') {
         let h = parseFloat(storage.rectangular.h);
         let b = parseFloat(storage.rectangular.B);
         let ng = parseFloat(storage.rectangular.ng);
@@ -26,7 +26,7 @@ export function createConsumptionCurve(activeChannel) {
             Y = parseFloat(Y);
             points.push({ 'x': Q, 'y': Y });
         }
-    } else if (activeChannel == 'Trapezoid') {
+    } else if (activeChannel === 'Trapezoid') {
         let h = parseFloat(storage.trapezoid.h);
         let b = parseFloat(storage.trapezoid.b);
         let B = parseFloat(storage.trapezoid.B);
@@ -45,7 +45,7 @@ export function createConsumptionCurve(activeChannel) {
             Y = parseFloat(Y);
             points.push({ 'x': Q, 'y': Y });
         }
-    } else if (activeChannel == 'Custom') {
+    } else if (activeChannel === 'Custom') {
         let channelPoints = storage.custom.points;
         let channelHeight = custom_getChannelHeight(channelPoints);
         let ng = parseFloat(storage.custom.ng);
@@ -154,28 +154,10 @@ function custom_createPoints(riverFlow) {
     return points;
 }
 
-// for each key in input object check if it exist in sumObject
-// if it does: sum P and S
-// else add key and values
-function sum_objects(inputObjectArray, sumObject) {
-    let heights = Object.keys(inputObjectArray);
-
-    for (let i of heights) {
-        let height = i;
-        if (sumObject.hasOwnProperty(i)) {
-            sumObject[height] += inputObjectArray[height];
-        } else {
-            sumObject[height] = inputObjectArray[height];
-        }
-    }
-    return sumObject;
-}
-
 // calculates P and S for each section (between two points)
 // input: starting, ending point
 // output: P & S for section on cm of water height
 function custom_sectionParameters(point1, point2, channelHeight) {
-    let H_starting = custom_getLowestChannelPoint([point1, point2]);
     let func = custom_getFunction(point1, point2);
     let points;
 
@@ -216,7 +198,7 @@ function custom_verticalFunction(point1, point2, channelHeight) {
 // calculates P & S for each height for diagonal or horizontal function
 function custom_diagonalFunction(point1, point2, func, channelHeight) {
     let k = func.k;
-    let n = func.n;
+    //let n = func.n;
 
     let pointsArr = [];
     if (k === 0) { // if function is horizontal
@@ -365,7 +347,6 @@ export function downstreamRiverHeight(turbineFlow) {
     let h_bigger;
     let Q_smaller;
     let h_smaller;
-    let h_downstream;
 
     // if consumption curve does not exist, return
     if (consumptionCurve === undefined) {
@@ -450,10 +431,10 @@ export function producedElectricity() {
         }
 
         let H_downstream = downstreamRiverHeight(Q);
-        if (H_downstream == NO_ENERGY_PRODUCED) {
+        if (H_downstream === NO_ENERGY_PRODUCED) {
             H_downstream = H;
             console.log('flow to small to produce energy');
-        } else if (H_downstream == CHANNEL_OVERFLOW) {
+        } else if (H_downstream === CHANNEL_OVERFLOW) {
             // height of the downstream river is the same as height of the channel
             let lastChannelParameter = consumptionCurve[consumptionCurve.length - 1];
             H_downstream = lastChannelParameter.y;

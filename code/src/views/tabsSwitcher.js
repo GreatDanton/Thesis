@@ -44,7 +44,7 @@ class TabsSwitcher extends React.Component {
   // render New View in main-window according to currently active element
   renderNewView() {
     let render_view;
-    this.state.tabs.map(item => {
+    this.state.tabs.forEach(item => {
       if (item.name === this.state.active) {
         render_view = item.render;
       }

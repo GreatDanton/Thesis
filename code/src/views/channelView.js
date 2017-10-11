@@ -53,7 +53,7 @@ class ChannelOptions extends React.Component {
     componentWillMount() {
         let selectedChannel = GlobalStorage.channelTab.active;
         if (selectedChannel.length > 0) { // if active tab exist in GlobalStorage load it
-            this.state.options.map(option => {
+            this.state.options.forEach(option => {
                 if (option.id === selectedChannel) {
                     this.setState({ selectedOption: selectedChannel }, this.renderParams);
                 }
@@ -81,7 +81,7 @@ class ChannelOptions extends React.Component {
 
     renderParams() {
         let render;
-        this.state.options.map(option => {
+        this.state.options.forEach(option => {
             if (option.id === this.state.selectedOption) {
                 render = option.render;
             }
@@ -123,16 +123,13 @@ class ChannelOptions extends React.Component {
 // Card renders cards for picking channel geometry
 // (Rectangular channel, Trapezoid channel, Custom channel)
 class Card extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         return (
             <div className={this.props.active ? 'card active' : 'card'} >
                 <div className="centered">
                     <label htmlFor={this.props.id}>{this.props.id}</label>
                     <img className={this.props.active ? "channel-thumbnail active" : "channel-thumbnail"}
-                        src={this.props.image} />
+                        src={this.props.image} alt="" />
                     <input type="radio" id={this.props.id}
                         onChange={this.props.onChange} value={this.props.value}
                         checked={this.props.checked} />

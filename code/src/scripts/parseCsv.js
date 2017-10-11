@@ -34,9 +34,9 @@ export function createMonthlyFlow(input_data) {
             }
 
             let date_arr = date.split('.');
-            /*             let day = parseInt(date_arr[0]); */
-            let month = parseInt(date_arr[1]);
-            let year = parseInt(date_arr[2]);
+            // let day = parseInt(date_arr[0], 10);
+            let month = parseInt(date_arr[1], 10);
+            let year = parseInt(date_arr[2], 10);
 
             // initialize sub objects to get around undefined error
             if (waterFlow[year] === undefined) {
@@ -105,7 +105,7 @@ export function createGraphData(year, waterFlow) {
     // get all months from waterFlow object of chosen year
     for (let key in chosenYear) {
         if (key !== 'yearlyFlow') {
-            months.push(parseInt(key));
+            months.push(parseInt(key, 10));
         }
     }
     // sort months array ascending

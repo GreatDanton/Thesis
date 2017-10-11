@@ -61,4 +61,4 @@ class GlobalStorage {
     }
 }
 
-export default (new GlobalStorage);
+export default (new GlobalStorage());

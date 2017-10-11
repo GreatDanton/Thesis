@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 // custom imports
 import { InputBox } from './commonParts/inputBoxes.js';
@@ -71,8 +70,8 @@ class RectangularChannel extends React.Component {
                             <InputBox id="φ" end="%" value={this.state.φ} onChange={this.handleChange} />
                         </div>
                         <div className="col-70">
-                            <img className="img-guide" src="images/rectangularChannel_guide.svg" />
-                            <img className="img-level-guide" src="images/vertical_crossSection.svg" />
+                            <img className="img-guide" src="images/rectangularChannel_guide.svg" alt="Rectangular river channel" />
+                            <img className="img-level-guide" src="images/vertical_crossSection.svg" alt="River channel horizontal section" />
                         </div>
                     </div>
 
@@ -148,8 +147,8 @@ class TrapezoidChannel extends React.Component {
                             <InputBox id="φ" end="%" value={this.state.φ} onChange={this.handleChange} />
                         </div>
                         <div className="col-70">
-                            <img className="img-guide" src="images/trapezoidChannel_guide.svg" />
-                            <img className="img-level-guide" src="images/vertical_crossSection.svg" />
+                            <img className="img-guide" src="images/trapezoidChannel_guide.svg" alt="Trapezoid river channel" />
+                            <img className="img-level-guide" src="images/vertical_crossSection.svg" alt="River channel horizontal section" />
                         </div>
                     </div>
                 </div>
@@ -186,9 +185,9 @@ class CustomChannel extends React.Component {
 
     onChange(e) {
         this.setState({ [e.target.id]: e.target.value });
-        if (e.target.id == "ng") {
+        if (e.target.id === "ng") {
             this.storage.ng = parseFloat(e.target.value);
-        } else if (e.target.id == "φ") {
+        } else if (e.target.id === "φ") {
             this.storage.φ = parseFloat(e.target.value);
         }
     }
@@ -230,7 +229,7 @@ class CustomChannel extends React.Component {
                     <div className="col-70 padding-h-20">
                         <ScatterChart name={["custom channel"]} data={[this.state.points]} pointBorder={'y'} />
 
-                        <img className="img-level-guide" src="images/vertical_crossSection.svg" />
+                        <img className="img-level-guide" src="images/vertical_crossSection.svg" alt="River channel horizontal section" />
                     </div>
                 </div>
             </div>
@@ -242,10 +241,6 @@ class CustomChannel extends React.Component {
 // PointsTable component is used for displaying x,y points that define
 // custom river channel
 class PointsTable extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         let TableRows = this.props.data.map((point, index) => {
             return (
@@ -275,10 +270,6 @@ class PointsTable extends React.Component {
 // TableRow is used to display one table row with x,y point coordinates
 // and x button that is used to delete the row.
 class TableRow extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <tr>
