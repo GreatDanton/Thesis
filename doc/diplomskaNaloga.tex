@@ -40,11 +40,19 @@
 \usepackage{framed}
 \usepackage{wasysym}			% paket ki omogoča oznako promil
 \usepackage{booktabs}			% paket za tabele
-%\usepackage[pdftex,unicode]{hyperref}
-\usepackage[ocgcolorlinks]{hyperref}
+\usepackage[pdftex,unicode]{hyperref}
+
+% display black and white links
+%\usepackage[hidelinks]{hyperref}
+% display colored links
+%\usepackage[ocgcolorlinks]{hyperref}
+
+
 %\usepackage[pdftex,unicode,ocgcolorlinks,citecolor=blue,urlcolor=blue,linkcolor=blue]{hyperref}
 %,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage{url}
+
+%\usepackage[a-1b]{pdfx}
 
 
 \urlstyle{same}
@@ -184,7 +192,7 @@
 \include{PrveStrani/StranSpopravki}
 
 % FIXME: izjave samo ob printu
-%\include{PrveStrani/Izjave}
+\include{PrveStrani/Izjave}
 \include{PrveStrani/Izvlecek}
 \include{PrveStrani/Abstract}
 
@@ -211,10 +219,6 @@
 
 %\include{Izracun/Izracun}
 
-
-%\include{FormulacijaZNezveznoKinematiko/FormulacijaZNezveznoKinematiko}
-%\include{AproksimacijaPoMKE/AproksimacijaPoMKE}
-%\include{NumericniPrimeri/NumericniPrimeri}
 
 \include{OpisPrograma/OpisPrograma}
 
