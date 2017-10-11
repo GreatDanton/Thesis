@@ -34,7 +34,7 @@ export function createMonthlyFlow(input_data) {
             }
 
             let date_arr = date.split('.');
-            let day = parseInt(date_arr[0]);
+            /*             let day = parseInt(date_arr[0]); */
             let month = parseInt(date_arr[1]);
             let year = parseInt(date_arr[2]);
 

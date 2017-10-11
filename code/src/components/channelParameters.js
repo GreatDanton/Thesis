@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // custom imports
-import { InputBox } from '../commonParts/inputBoxes.js';
-import { ScatterChart } from '../commonParts/charts.js';
+import { InputBox } from './commonParts/inputBoxes.js';
+import { ScatterChart } from './commonParts/charts.js';
 
-import GlobalStorage from '../../scripts/globalStorage';
+import GlobalStorage from '../scripts/globalStorage';
 
 
 class RectangularChannel extends React.Component {

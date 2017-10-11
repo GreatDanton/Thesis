@@ -50,5 +50,3 @@ export {
     trapezoid_circumference,
     ManningEquation
 }
-
-// TODO add custom channel functions
