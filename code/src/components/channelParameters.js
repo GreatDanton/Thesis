@@ -47,7 +47,6 @@ class RectangularChannel extends React.Component {
                 if (calculateIf.indexOf(id) > -1) {
                     this.storage.S = this.area();
                     this.storage.P = this.circumference();
-                    console.log(GlobalStorage);
                 }
             });
         this.storage[id] = value;
@@ -82,8 +81,6 @@ class RectangularChannel extends React.Component {
         )
     }
 }
-
-
 
 
 class TrapezoidChannel extends React.Component {
@@ -132,7 +129,6 @@ class TrapezoidChannel extends React.Component {
                 if (calculateIf.indexOf(id) > 0) {
                     this.storage.S = this.area();
                     this.storage.P = this.circumference();
-                    console.log(GlobalStorage);
                 }
             });
         this.storage[id] = value; // save value of input into global storage
@@ -206,9 +202,7 @@ class CustomChannel extends React.Component {
         this.storage.points = pointsArr; // save new array into global storage
     }
 
-
     render() {
-
         return (
             <div className="container-900">
                 <div className="row">
@@ -245,62 +239,8 @@ class CustomChannel extends React.Component {
 }
 
 
-// custom channel renders ng input for number of points -1
-class NgTable extends React.Component {
-    constructor(props) {
-        super(props);
-        this.onChange = this.onChange.bind(this);
-
-        if (this.props.type === 'ng') {
-            this.storage = GlobalStorage.channelTab.custom.ngInputs;
-        }
-        else if (this.props.type.indexOf('φ') > -1) {
-            this.storage = GlobalStorage.channelTab.custom.φ_inputs;
-        }
-        // state is present in order to change inputs later, otherwise we cannot change inputs after initial input
-        this.state = { inputValues: this.storage };
-    }
-
-    onChange(e) {
-        let id = e.target.id;
-        let value = e.target.value;
-        this.storage[id] = value;
-        this.setState({ inputValues: this.storage });
-    }
-
-    render() {
-        let points = this.props.displayInputs;
-        let numOfPoints = points.length - 1;
-        let displayInputs = [];
-
-        if (numOfPoints > 0) {
-            for (let i = 0; i < numOfPoints; i++) {
-                displayInputs.push(
-                    <tr key={i}>
-                        <td>
-                            <input id={i} type="text" className="ngInput" onChange={this.onChange} value={this.storage[i]} />
-                        </td>
-                    </tr>
-                )
-            }
-        }
-
-        return (
-            <table className="ngTable">
-                <thead>
-                    <tr>
-                        <th className="centered-text"> {this.props.type} </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {displayInputs}
-                </tbody>
-            </table>
-        )
-    }
-}
-
-
+// PointsTable component is used for displaying x,y points that define
+// custom river channel
 class PointsTable extends React.Component {
     constructor(props) {
         super(props);
@@ -331,6 +271,9 @@ class PointsTable extends React.Component {
     }
 }
 
+
+// TableRow is used to display one table row with x,y point coordinates
+// and x button that is used to delete the row.
 class TableRow extends React.Component {
     constructor(props) {
         super(props);
@@ -349,4 +292,3 @@ class TableRow extends React.Component {
 }
 
 export { RectangularChannel, TrapezoidChannel, CustomChannel };
-
